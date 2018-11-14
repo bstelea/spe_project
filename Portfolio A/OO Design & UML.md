@@ -6,15 +6,18 @@ Without even designing the architecture of our system, we already know that it w
 
 By referencing out requirements, we have come up with the following Database design.
 
+![alt text][logo]
+
+[logo]: img/database.png "Database"
 
 System Model
 At the highest level, our system will follow the Server-Client - it is the very nature of a web application:
 
-image goes here
+![alt text](img/client-server.png "Client server")
 
 However, only considering our system using this high-level model does not offer any useful insight to the architecture and design of the server. The tried-and-tested Model-View-Controller (MVC) Model is a common architecture for applications where there is some form of back-end processing of data that is then displayed visually. We can determine that using the MVC model,
 
-image goes here
+![alt text](img/mvc.png "MVC")
 
 where the components of our system will fall under one of the three categories:
 1. **Controller**: receives requests (e.g. HTTP requests) and controls the View and Model accordingly to formulate the response (e.g. queries the database and get the Model to update with the results, or gets the View to update a webpage to show some data).
@@ -41,7 +44,7 @@ Using these entities’ fields and their relationships in the database, as well 
  
 ## Static UML Modelling of the software system
 
-image goes here
+![alt text](img/static-uml.jpg "Static UML")
 
 The static UML diagram was created having the use-cases in mind; in order to fulfill the main goals of our project we will need to incorporate and link the following core components:
  * Item
@@ -70,7 +73,7 @@ The static UML diagram allows us to have a better vision over the whole structur
 
 ## Dynamic UML Modelling of the software system
 
-image goes here
+![alt text](img/dynamic-uml.jpg "Dynamic UML")
 
 The dynamic UML schema was made to represent a sequence diagram of the processes happening in the back end when the user of our website places an order and presses on the “Checkout” button on the checkout page. The diagram illustrates the transition between the request on the front end, the data transition to and from the database to keep track of the items ordered, the customer details, and creating a new order in the database.
 
