@@ -6,7 +6,6 @@ Without even designing the architecture of our system, we already know that it w
 
 By referencing out requirements, we have come up with the following Database design.
 
-image goes here
 
 System Model
 At the highest level, our system will follow the Server-Client - it is the very nature of a web application:
