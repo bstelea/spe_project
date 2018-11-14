@@ -27,5 +27,5 @@ As requested by our clients in an initial meeting, we will be creating a “wild
 	
 Our clients also informed us of a Home Page design idea which they would like: an interactive map of the world, where users can hover over countries/continents and see suggestions for/see all the beers on sale from that area. This functionality will be derived from the the original filter options that we put into our MVP, but will not be included in the MVP itself. 
 
-![Figure 1: A mockup design of our vision for what an MVP for the western themed website will look like.](
+![Prototype 1 - Home](img/prorotype-1-home.jpg "Prototype 1 - Home")
 
