@@ -1,3 +1,4 @@
+# Requirements
 ## Stakeholders, Actors and Goals
 
 Based on our project’s application domain, business sector and key problem; we can determine that the key stakeholders of our final product(s) will eventually be:
@@ -23,7 +24,7 @@ All of these actors interact together to accomplish “goals” (e.g. Customer o
 
 By considering the functionality our clients require from the final system, we can outline all the goals of our actors and their interactions in the following use-case diagram:
 
-[USE CASE DIAGRAM]
+![Use Case Diagram](img/UseCaseDiagram.jpg "Use Case Diagram")
 
 The most key goals, and the steps involved in achieving them are as follows:
 
@@ -137,7 +138,7 @@ Staying true to our agile approach, we will now consider the MVP our current “
 We will elicit the MVP’s requirements by considering an abstract e-commerce website and what we is the simplest set of features we’d expect it to have to allow us to purchase a product on it. 
 Using this, we can reduce the use-case goals we established earlier for final release into the optimal set required for just the MVP release:
 
-[MVP STRUCTURE]
+![MVP Structure](img/MVPStructure.jpg "MVP Structure")
 
 The diagram above represents the structure of the MVP and highlights the most key functionality (both in the front end and back end) that it should provide. Alongside our use-case flows and requirements given by our clients, we can use this MVP structure to finally elicit our MVP’s system requirements:
 
