@@ -10,7 +10,8 @@ By referencing out requirements, we have come up with the following Database des
 
 [logo]: img/database.png "Database"
 
-System Model
+**System Model**
+
 At the highest level, our system will follow the Server-Client - it is the very nature of a web application:
 
 ![Client server image](img/client-server.png "Client server")
