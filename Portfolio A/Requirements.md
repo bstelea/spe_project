@@ -27,7 +27,7 @@ By considering the functionality our clients require from the final system, we c
 ![Use Case Diagram](img/UseCaseDiagram.jpg "Use Case Diagram")
 
 The most key goals, and the steps involved in achieving them are as follows:
-
+---
 __ORDER BEER__
 
 _BASIC FLOW: user adds beer to basket_
@@ -56,7 +56,7 @@ _EXCEPTIONAL FLOW: not enough available stock of that beer_
 1) Server checks stock is available.
 1) Error message.
 1) Redirect customer back to beer catalogue.			
-
+---
 __PAY FOR BEER__
 
 _BASIC FLOW: payment goes through without issues_
@@ -71,7 +71,6 @@ _BASIC FLOW: payment goes through without issues_
 1) Customer purchases order.
 1) Server updates total stock to match available stock.
 1) Server redirects Customer to Order Completion page
-
 
 _ALTERNATIVE FLOW: customer cancels checkout_
 1) Customer goes to checkout.
@@ -100,7 +99,7 @@ _EXCEPTIONAL FLOW: customer payment is unsuccessful or details entered are inval
 1) Customer is shown error message.
 1) Server increases the available stock to previous amount.
 1) Server redirects Customer to Basket.
-
+---
 __LOG ORDER__
 
 _BASIC FLOW: order is logged into database_
@@ -114,7 +113,7 @@ _EXCEPTIONAL FLOW: server crashes_
 1) Server is returned to previous backup.
 1) Second attempt to log order to database.
 1) Email is sent to customer and GBS.
-
+---
 __DELIVER BEER__
 
 _BASIC FLOW: GBS sends beer to customer_
@@ -128,7 +127,7 @@ _EXCEPTIONAL FLOW: Order is canceled after ‘Log Order’_
 1) Client cancels order.
 1) Revert database.
 1) Send email to client and GBS to confirm cancellation of order.
-
+---
 ## MVP System Requirements
 
 As stated earlier, our project will follow an incremental, iterative approach; where we hope to deliver the applications over several releases of increasing functionality and quality. Our first release planned is that of our Minimum Viable Product (MVP), which the later Beta and Final releases will be built upon.
