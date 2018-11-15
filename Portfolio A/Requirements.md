@@ -15,7 +15,7 @@ Based on our project’s application domain, business sector and key problem; we
 
 However, in the scope of our project, we will not interact with a majority of these parties (e.g. they are stakeholders for Global Beer Shop as a business using our product, but our project is solely to develop the product for Global Beer Shop). As developers, we have to consider the System Actors - these are the stakeholders that will interact directly with our product- we have determined our actors to be:
 
-* __Customer:__  Visitors to the sight. They will be searching for and buying beer through the site.
+* __Customer:__  They will be searching for and buying beer through the site.
 * __Website:__ The frontend and User Interface of the system through which the Customer can interact with the system.
 * __Server:__ The dynamic backend software that responds to Customer interactions via the Website, provides a majority of the system functionality and manages the database.
 * __Global Beer Shop:__ our clients and their company.
@@ -197,7 +197,7 @@ _FUNCTIONAL_
 
 _NON-FUNCTIONAL_
 1) The Search Tool must be re-usable on various pages, including as a “filter” tool (functionally identical).
-1) The input options that the Search Tool offers must be only include those for available products (e.g. you can’t search for a product by an attribute that no product currently has).
+1) The input options that the Search Tool offers must only include those for available products (e.g. you can’t search for a product by an attribute that no product currently has).
 1) It should not take any longer than 15 seconds for the User to be displayed search results after using the Search Tool.
 ---
 <strong><ins>HOME PAGE</strong></ins>
@@ -221,7 +221,7 @@ _NON-FUNCTIONAL_
 
 _FUNCTIONAL_
 1) Products must be displayed with at least their name, price and image.
-1) Users can change the order that products are displayed in
+1) Users can change the order in which the products are displayed in
 1) Products must be displayed in the order specified by the user, if one has be specified.
 1) Users can choose to filter/re-search for products to be displayed.
 1) The only products displayed must be those that match the filter/search requirements of the user, if such requirements have been given.
@@ -256,7 +256,7 @@ _NON-FUNCTIONAL_
 <strong><ins>SHOPPING CART</strong></ins>
 
 _FUNCTIONAL_
-1) For each current user session, there be a Shopping Cart.
+1) For each current user session, there will be a Shopping Cart.
 1) The Shopping cart must display:
     1) All items that have been added to it and not removed
     1) These items’ quantities
@@ -282,7 +282,7 @@ _NON-FUNCTIONAL_
 1) The total of the Shopping Cart must be updated every time that:
     1) A user navigates to the Shopping Cart page.
     1) An item is added by the corresponding user to the Cart.
-1) If a user attempts to checkout items with insufficient Available Stock, the user must be told to either remove that item, reduce its quantity or try purchasing later when the items may be available again.
+1) The user cannot add to the shopping cart more items than the number of items available in stock.
 ---
 <strong><ins>CHECKOUT</strong></ins>
 
@@ -311,9 +311,9 @@ _NON-FUNCTIONAL_
 <strong><ins>ORDER COMPLETION</strong></ins>
 
 _FUNCTIONAL_
-1) Each order completed must be assigned some sort of unique reference number.
+1) Each order completed must be assigned a unique reference number.
 1) When an order is complete, the server must:
-    1) The Actual Stock of the products just ordered must be reduced by the corresponding quantities to reflect the purchase made.
+    1) Reduce the Actual Stock of the products just ordered by the corresponding quantities to reflect the purchase made.
     1) Email the customer to alert them that their order has been a success
     1) Email the Global Beer Shop to alter them that a customer has placed an order
     1) Log the order
