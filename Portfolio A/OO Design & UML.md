@@ -2,7 +2,7 @@
 ## System Architecture
 **Database**
 
-Without even designing the architecture of our system, we already know that it will require a Database - e-commerce applications highly depend on and require consistent access to some persistent store of data about the products on sale, the orders made and such. The most efficient and popular way to store such information is via a Database; which we will most likely implement using SQL and Spring inbuilt methods.
+Without even designing the architecture of our system, we already know that it will require a Database - e-commerce applications highly depend on and require consistent access to some persistent store of data about the products on sale, the orders made and such. The most efficient and popular way to store such information is via a Database; which we will most likely implement using MySQL and Spring inbuilt methods.
 
 By referencing out requirements, we have come up with the following Database design.
 
@@ -32,10 +32,10 @@ We know that we will build our system on the Spring framework, as it is recommen
 The Model encapsulates the state. In our case, the state is essentially the data from the database that is in use at a given time by the client. Therefore, we can create a class inside the Model for each entity in the database.
 
 The entities that exist in the database are:
- *A User
- *An Item (e.g. a beer)
- *A Shopping Cart
- *An Order
+ * A User
+ * An Item (e.g. a beer)
+ * A Shopping Cart
+ * An Order
 
 Using these entities’ fields and their relationships in the database, as well as functional requirements for the system components which interact with these entities, we can determine the attributes and methods their corresponding classes will have. For example:
 
