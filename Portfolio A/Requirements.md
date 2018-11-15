@@ -27,8 +27,9 @@ By considering the functionality our clients require from the final system, we c
 ![Use Case Diagram](img/UseCaseDiagram.jpg "Use Case Diagram")
 
 The most key goals, and the steps involved in achieving them are as follows:
+
 ---
-__ORDER BEER__
+<strong><ins> ORDER BEER </ins></strong>
 
 _BASIC FLOW: user adds beer to basket_
 1) Consider beer catalogue.
@@ -57,7 +58,7 @@ _EXCEPTIONAL FLOW: not enough available stock of that beer_
 1) Error message.
 1) Redirect customer back to beer catalogue.			
 ---
-__PAY FOR BEER__
+<strong><ins>PAY FOR BEER</strong></ins>
 
 _BASIC FLOW: payment goes through without issues_
 1) Customer goes to checkout.
@@ -100,7 +101,7 @@ _EXCEPTIONAL FLOW: customer payment is unsuccessful or details entered are inval
 1) Server increases the available stock to previous amount.
 1) Server redirects Customer to Basket.
 ---
-__LOG ORDER__
+<strong><ins>LOG ORDER</strong></ins>
 
 _BASIC FLOW: order is logged into database_
 1) Order is placed and paid for.
@@ -114,7 +115,7 @@ _EXCEPTIONAL FLOW: server crashes_
 1) Second attempt to log order to database.
 1) Email is sent to customer and GBS.
 ---
-__DELIVER BEER__
+<strong><ins>DELIVER BEER</strong></ins>
 
 _BASIC FLOW: GBS sends beer to customer_
 1) GBS view order email.
@@ -134,17 +135,25 @@ As stated earlier, our project will follow an incremental, iterative approach; w
 
 Staying true to our agile approach, we will now consider the MVP our current “sub-project” and will continue the planning and designing just for the MVP. The MVP will be the absolute minimal solution to the problem at hand, and must only include features deemed essential to providing e-commerce functionality.
 
-We will elicit the MVP’s requirements by considering an abstract e-commerce website and what we is the simplest set of features we’d expect it to have to allow us to purchase a product on it. 
-Using this, we can reduce the use-case goals we established earlier for final release into the optimal set required for just the MVP release:
+We will elicit the MVP’s requirements by considering an abstract e-commerce website and what we consider is the simplest set of features we’d expect it to have to allow us to purchase a product on it. 
+Using this, we can reduce the use-case goals we established earlier for the final release version into the optimal set required for just the MVP version:
 
 ![MVP Structure](img/MVPStructure.jpg "MVP Structure")
 
 The diagram above represents the structure of the MVP and highlights the most key functionality (both in the front end and back end) that it should provide. Alongside our use-case flows and requirements given by our clients, we can use this MVP structure to finally elicit our MVP’s system requirements:
 
-__GENERAL USER INTERFACE__
+---
+<strong><ins>GENERAL USER INTERFACE</strong></ins>
 
 _FUNCTIONAL_
 1) The website should have a Wild West inspired design
+1) The website must, at least, consist of:
+    1) a Home Page
+    1) a Product List page
+    1) an Individual Product page
+    1) a Shopping Cart page
+    1) a Checkout page
+    1) an Order Completion page
 1) All pages must have a Header and a Footer.
 1) The Header and Footer should include the Global Beer Shop logo and slogan(s).
 1) The Header should have links to:
@@ -160,8 +169,8 @@ _FUNCTIONAL_
 
 _NON-FUNCTIONAL_
 1) The style and theme of the website design must be consistent throughout all pages.
-
-__USER HTTP SESSIONS__
+---
+<strong><ins>USER HTTP SESSIONS</strong></ins>
 
 _FUNCTIONAL_
 1) When a new user accesses the website, the server must:
@@ -173,8 +182,8 @@ _FUNCTIONAL_
 
 _NON-FUNCTIONAL_
 1) Sessions must be given a maximum time limit of 1 hour, in case that a user’s browser does not automatically close their sessions after the page is closed.
-
-__SEARCH TOOL__
+---
+<strong><ins>SEARCH TOOL</strong></ins>
 
 _FUNCTIONAL_
 1) Users should be able to use the Search Tool to find products based on:
@@ -190,8 +199,8 @@ _NON-FUNCTIONAL_
 1) The Search Tool must be re-usable on various pages, including as a “filter” tool (functionally identical).
 1) The input options that the Search Tool offers must be only include those for available products (e.g. you can’t search for a product by an attribute that no product currently has).
 1) It should not take any longer than 15 seconds for the User to be displayed search results after using the Search Tool.
-
-__HOME PAGE__
+---
+<strong><ins>HOME PAGE</strong></ins>
 
 _FUNCTIONAL_
 1) The Home Page must:
@@ -207,8 +216,8 @@ _NON-FUNCTIONAL_
 1) The Home Page should:
     1) Avoid using excessive amounts of text
     1) Emphasise the use of images.
-
-__PRODUCT LIST__
+---
+<strong><ins>PRODUCT LIST</strong></ins>
 
 _FUNCTIONAL_
 1) Products must be displayed with at least their name, price and image.
@@ -225,8 +234,8 @@ _NON-FUNCTIONAL_
 1) Products should be clearly labelled if they are in or out of stock.
 1) Products and their details on display must be segregated from others so products can be easily distinguished from one another.
 1) Only a maximum of 12 products can be on display at once.
-
-__INDIVIDUAL PRODUCT__
+---
+<strong><ins>INDIVIDUAL PRODUCT</strong></ins>
 
 _FUNCTIONAL_
 1) For a given product, the page must display:
@@ -243,8 +252,8 @@ _FUNCTIONAL_
 _NON-FUNCTIONAL_
 1) If a product cannot be added to the Shopping Cart due to insufficient stock, the user must be alerted of this.
 1) The default quantity that products are added to the Shopping Cart is 1.
-
-__SHOPPING CART__
+---
+<strong><ins>SHOPPING CART</strong></ins>
 
 _FUNCTIONAL_
 1) For each current user session, there be a Shopping Cart.
@@ -274,8 +283,8 @@ _NON-FUNCTIONAL_
     1) A user navigates to the Shopping Cart page.
     1) An item is added by the corresponding user to the Cart.
 1) If a user attempts to checkout items with insufficient Available Stock, the user must be told to either remove that item, reduce its quantity or try purchasing later when the items may be available again.
-
-__CHECKOUT__
+---
+<strong><ins>CHECKOUT</strong></ins>
 
 _FUNCTIONAL_
 1) The Checkout page must display to the user:
@@ -286,9 +295,9 @@ _FUNCTIONAL_
 1) There must at least be a payment option for  “Cash On Delivery”
 1) There must be an option that allows the user to cancel the checkout process.
 1) When a customer enters the checkout stage, the available stock of each of the products in their Shopping Cart must be reduced by the corresponding quantity in the Shopping Cart.
-!) If a customer exits the checkout stage before fully completing it, the available stock of each of the products in their Shopping Cart must be increased by the corresponding quantity in the Shopping Cart.
+1) If a customer exits the checkout stage before fully completing it, the available stock of each of the products in their Shopping Cart must be increased by the corresponding quantity in the Shopping Cart.
 1) The user must enter their personal, delivery and payment details to complete the checkout. 
-1) Checkout can only be completed is all data given by the user is valid.
+1) Checkout can only be completed if all data given by the user is valid.
 1) Checkout can only be completed when the selected payment option has been fully processed.
 1) If a user’s session expires in the middle of checking out, they must be redirected to the Home Page.
 1) If a user chooses to cancel their checkout, they must be redirected to the Shopping Cart.
@@ -298,8 +307,8 @@ _NON-FUNCTIONAL_
 1) Users must be alerted of any input that is currently invalid.
 1) All user input must be processed for SQL injection and Cross-Site Scripting.
 1) The Checkout page(s) must use HTTPS (TLS encryption) to protect sensitive user information.
-
-__ORDER COMPLETION__
+---
+<strong><ins>ORDER COMPLETION</strong></ins>
 
 _FUNCTIONAL_
 1) Each order completed must be assigned some sort of unique reference number.
@@ -312,3 +321,4 @@ _FUNCTIONAL_
 
 _NON-FUNCTIONAL_
 1) The emails must be sent and received within 12 hours of the order completion.
+---
