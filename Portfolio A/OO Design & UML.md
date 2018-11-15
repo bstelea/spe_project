@@ -16,11 +16,11 @@ At the highest level, our system will follow the Server-Client model - it is the
 
 ![Client server image](img/client-server.png "Client server")
 
-However, only considering our system using this high-level model does not offer any useful insight to the architecture and design of the server. The tried-and-tested Model-View-Controller (MVC) Model is a common architecture for applications where there is some form of back-end processing of data that is then displayed visually. We can determine that using the MVC model,
+However, only considering our system using this high-level model does not offer any useful insight to the architecture and design of the server. The tried-and-tested Model-View-Controller (MVC) Model is a common architecture for applications where there is some form of back-end processing of data that is then displayed visually:
 
 ![MVC representation](img/mvc.png "MVC")
 
-where the components of our system will fall under one of the three categories:
+Using the MVC model, the components of our system will fall under one of the three following categories:
 1. **Controller**: receives requests (e.g. HTTP requests) and controls the View and Model accordingly to formulate the response (e.g. queries the database and get the Model to update with the results, or gets the View to update a webpage to show some data).
 1. **Model**: Encapsulates the state of the application (e.g. the different data, objects and entities). Practically, it holds all the data from the system database so it can be used by the Controller and View.
 1. **View**: Renders the Model of the application (e.g. generates pages of the website). The response made to the user comes from the View (e.g. returns the page they requested).
