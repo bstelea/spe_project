@@ -4,7 +4,7 @@ public class BeerStocked {
 
     private Long id;
     private String name;
-    private String origin;
+    private String country;
     private String brewer;
     private String type;
     private Double abv;
@@ -14,21 +14,21 @@ public class BeerStocked {
     }
 
     //takes id
-    public BeerStocked(Long id, String name, String origin, String brewer, String type, Double abv) {
+    public BeerStocked(Long id, String name, String country, String brewer, String type, Double abv) {
         super();
         this.id = id;
         this.name = name;
-        this.origin = origin;
+        this.country = country;
         this.brewer =brewer;
         this.type = type;
         this.abv = abv;
     }
 
     //doesnt take id
-    public BeerStocked(String name, String origin, String brewer, String type, Double abv) {
+    public BeerStocked(String name, String country, String brewer, String type, Double abv) {
         super();
         this.name = name;
-        this.origin = origin;
+        this.country = country;
         this.brewer =brewer;
         this.type = type;
         this.abv = abv;
@@ -50,12 +50,12 @@ public class BeerStocked {
         this.name = name;
     }
 
-    public String getOrigin() {
-        return origin;
+    public String getCountry() {
+        return country;
     }
 
-    public void setOrigin(String origin) {
-        this.origin = origin;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getBrewer() {
@@ -85,7 +85,7 @@ public class BeerStocked {
     @Override
     public String toString() {
         return String.format("BeerStocked [id=%d, name=%s, origin=%s, brewer=%s, type=%s, abv=%f]",
-                id, name, origin, brewer, type, abv);
+                id, name, country, brewer, type, abv);
     }
 
 }

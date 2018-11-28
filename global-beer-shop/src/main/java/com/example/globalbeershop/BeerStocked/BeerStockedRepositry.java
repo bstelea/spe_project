@@ -21,7 +21,7 @@ public class BeerStockedRepositry {
             BeerStocked beer = new BeerStocked();
             beer.setId(rs.getLong("id"));
             beer.setName(rs.getString("name"));
-            beer.setOrigin(rs.getString("origin"));
+            beer.setCountry(rs.getString("country"));
             beer.setBrewer(rs.getString("brewer"));
             beer.setType(rs.getString("type"));
             beer.setAbv(rs.getDouble("abv"));
@@ -40,18 +40,24 @@ public class BeerStockedRepositry {
                 new BeerStockedRowMapper());
     }
 
+    //searching by one column
+    public List<BeerStocked> findByColumn(String col, Object val){
+        return jdbcTemplate.query("select * from beerStocked where "+col+"=?", new Object[] { val },
+                new BeerStockedRowMapper());
+    }
+
     public int deleteById(long id) {
         return jdbcTemplate.update("delete from beerStocked where id=?", new Object[] { id });
     }
 
     public int insert(BeerStocked beer) {
-        return jdbcTemplate.update("insert into beerStocked (id, name, origin, brewer, type, abv) " + "values(?,  ?, ?)",
-                new Object[] { beer.getId(), beer.getName(), beer.getOrigin(), beer.getBrewer(), beer.getType(), beer.getAbv()});
+        return jdbcTemplate.update("insert into beerStocked (id, name, country, brewer, type, abv) " + "values(?,  ?, ?)",
+                new Object[] { beer.getId(), beer.getName(), beer.getCountry(), beer.getBrewer(), beer.getType(), beer.getAbv()});
     }
 
     public int update(BeerStocked beer) {
-        return jdbcTemplate.update("update beerStocked " + " set name = ?, origin = ? , brewer = ?, type = ?, abv = ?" + " where id = ?",
-                new Object[] { beer.getName(), beer.getOrigin(), beer.getBrewer(), beer.getType(), beer.getAbv(), beer.getId()});
+        return jdbcTemplate.update("update beerStocked " + " set name = ?, country = ? , brewer = ?, type = ?, abv = ?" + " where id = ?",
+                new Object[] { beer.getName(), beer.getCountry(), beer.getBrewer(), beer.getType(), beer.getAbv(), beer.getId()});
     }
 
 }
