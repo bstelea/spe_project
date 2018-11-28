@@ -38,9 +38,12 @@ public class GlobalBeerShopController {
                        @RequestParam(value = "type", required = false) String type)
     {
 
+
         List<BeerStocked> results = repo.findAll();
         String resultsString = "";
-        for(BeerStocked beer : results) resultsString.concat(beer.toString());
+        for(BeerStocked beer : results) {
+            resultsString+=("\n" + beer.toString());
+        }
 
         return "beers n tings:"+resultsString;
 
