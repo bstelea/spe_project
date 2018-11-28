@@ -40,10 +40,36 @@ public class BeerStockedRepositry {
                 new BeerStockedRowMapper());
     }
 
-    //searching by one column
-    public List<BeerStocked> findByColumn(String col, Object val){
-        return jdbcTemplate.query("select * from beerStocked where "+col+"=?", new Object[] { val },
-                new BeerStockedRowMapper());
+    //searching by column(s)
+    public List<BeerStocked> findByColumn(List<String> cols, List<Object> vals){
+
+        //if no cols/vals given, or diff numbers of them are given; return all results
+        if(cols.size() == 0 || vals.size() == 0 || vals.size() != cols.size()){
+            return findAll();
+        }
+
+        //the basic sql statement for at least 1 column
+        String sql = "select * from beerStocked where " + cols.get(0) + "=?";
+
+        //if only one column is specified
+        if(cols.size()==1){
+            return jdbcTemplate.query(sql, new Object[]{vals.get(0)}, new BeerStockedRowMapper());
+        }
+
+        //if multiple columns are specified
+        else{
+
+            Object[] queryVals = new Object[vals.size()];
+            queryVals[0] = vals.get(0);
+
+            //for the remaining column/value pairs, finishes the SQL query and collects up values to be used
+            for(int i = 1; i<cols.size(); i++){
+                sql+=", " + cols.get(i) + "=?";
+                queryVals[i] = vals.get(i);
+            }
+
+            return jdbcTemplate.query(sql, queryVals, new BeerStockedRowMapper());
+        }
     }
 
     public int deleteById(long id) {

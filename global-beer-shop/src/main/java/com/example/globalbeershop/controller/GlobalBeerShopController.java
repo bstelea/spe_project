@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.constraints.Null;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -47,9 +48,16 @@ public class GlobalBeerShopController {
             queryResults = BeerStockedrepo.findAll();
         }
 
+
         else if(country!=null && brewer==null && abv==null && type==null){
-            System.out.println("\nSearching by country");
-            queryResults = BeerStockedrepo.findByColumn("country", country);
+
+            List<String> cols = new ArrayList<>();
+            List<Object> vals = new ArrayList<>();
+
+            cols.add("country");
+            vals.add(country);
+
+            queryResults = BeerStockedrepo.findByColumn(cols, vals);
         }
 
         else{
