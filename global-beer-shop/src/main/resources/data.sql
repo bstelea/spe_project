@@ -4,25 +4,23 @@ values(1,'Guinness', 'Ireland', 'Diageo', 'Stout', 4.2, NULL, NULL, NULL, NULL, 
 insert into beerStocked
 values(2,'Hobgoblin ', 'England', 'Wychwood Brewery', 'Ale', 5.2, NULL, NULL, NULL, NULL, NULL  );
 
+insert into beerStocked
+values(3,'Guinness', 'Ireland', 'Diageo', 'Stout', 4.2, NULL, NULL, NULL, NULL, NULL);
 
 insert into beerStocked
-values(3, 'Carlsberg', 'Denmark', 'JD ltd.', 'Lager', 3.8, NULL, NULL, NULL, NULL, NUll);
+values(4,'Hobgoblin ', 'England', 'Wychwood Brewery', 'Ale', 5.2, NULL, NULL, NULL, NULL, NULL  );
 
 insert into beerStocked
-values (4, 'Fosters', 'Australia', 'Cuntingtons UTD', 50, null, null, null, null, null);
+values(5,'Guinness', 'Ireland', 'Diageo', 'Stout', 4.2, NULL, NULL, NULL, NULL, NULL);
 
 insert into beerStocked
-values (5, 'Devils Backbone', 'Australia', 'Cuntingtons UTD', 50, null, null, null, null, null);
+values(6,'Hobgoblin ', 'England', 'Wychwood Brewery', 'Ale', 5.2, NULL, NULL, NULL, NULL, NULL  );
 
 insert into beerStocked
-values (6, 'Abbot Ale', 'Australia', 'Cuntingtons UTD', 50, null, null, null, null, null);
+values(7,'Guinness', 'Ireland', 'Diageo', 'Stout', 4.2, NULL, NULL, NULL, NULL, NULL);
 
 insert into beerStocked
-values (7, 'Stella Artois', 'Australia', 'Cuntingtons UTD', 50, null, null, null, null, null);
-
-insert into beerStocked
-values (8, 'Peroni', 'Australia', 'Cuntingtons UTD', 50, null, null, null, null, null);
-
+values(8,'Hobgoblin ', 'England', 'Wychwood Brewery', 'Ale', 5.2, NULL, NULL, NULL, NULL, NULL  );
   -- id integer not null,
    --name varchar(255) not null,
   -- country varchar(255) not null,
