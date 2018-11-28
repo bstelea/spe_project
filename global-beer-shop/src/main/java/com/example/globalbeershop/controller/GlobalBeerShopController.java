@@ -35,7 +35,8 @@ public class GlobalBeerShopController {
     @GetMapping("/shop")
     @ResponseBody
     public String shop(Model model,
-                        @RequestParam(value = "country", required = false) String country,
+                       @RequestParam(value = "name", required = false) String name,
+                       @RequestParam(value = "country", required = false) String country,
                        @RequestParam(value = "brewer", required = false) String brewer,
                        @RequestParam(value = "abv", required = false) String abv,
                        @RequestParam(value = "type", required = false) String type)
@@ -43,25 +44,41 @@ public class GlobalBeerShopController {
 
         List<BeerStocked> queryResults;
 
+        List<String> cols = new ArrayList<>();
+        List<Object> vals = new ArrayList<>();
+
+        if(country!=null){
+            cols.add("name");
+            vals.add(name);
+        }
+
+        if(country!=null){
+            cols.add("country");
+            vals.add(country);
+        }
+
+        if(brewer!=null){
+            cols.add("brewer");
+            vals.add(brewer);
+        }
+
+        if(abv!=null){
+            cols.add("abv");
+            vals.add(abv);
+        }
+
+        if(type!=null){
+            cols.add("type");
+            vals.add(type);
+        }
+
         //If no search restraints were given
-        if(country==null && brewer==null && abv==null && type==null){
+        if(cols.isEmpty()){
             queryResults = BeerStockedrepo.findAll();
         }
 
-
-        else if(country!=null && brewer==null && abv==null && type==null){
-
-            List<String> cols = new ArrayList<>();
-            List<Object> vals = new ArrayList<>();
-
-            cols.add("country");
-            vals.add(country);
-
-            queryResults = BeerStockedrepo.findByColumn(cols, vals);
-        }
-
         else{
-            queryResults = null;
+            queryResults = BeerStockedrepo.findByColumn(cols, vals);
         }
 
         String resultsString = "";
