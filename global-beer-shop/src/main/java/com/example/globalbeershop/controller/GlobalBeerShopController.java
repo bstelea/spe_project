@@ -22,17 +22,12 @@ public class GlobalBeerShopController {
 
     @GetMapping("/shop")
     public String shop(Model model,
-                        @RequestParam(value = "country", required = false,
-                                defaultValue = Null) String country,
-                       @RequestParam(value = "brewer", required = false,
-                               defaultValue = Null) String brewer,
-                       @RequestParam(value = "abv", required = false,
-                               defaultValue = Null) String abv,
-                       @RequestParam(value = "type", required = false,
-                               defaultValue = Null) String type)
+                        @RequestParam(value = "country", required = false) String country,
+                       @RequestParam(value = "brewer", required = false) String brewer,
+                       @RequestParam(value = "abv", required = false) String abv,
+                       @RequestParam(value = "type", required = false) String type)
     {
-        model.addAttribute("name", name);
-        model.addAttribute("title", appName);
+
 
         return "shop";
 
