@@ -32,7 +32,22 @@ public class BeerStockedRepositry {
 
     }
 
-    public List<BeerStocked> findAll() {
+    public List<BeerStocked> findAll(List<String> sort) {
+
+        //checks sorting requirements have been given
+        if(sort.size() == 2){
+
+            List<String> validSortOrd = new ArrayList<String>() {{add("ASC"); add("DESC");}};
+            List<String> validSortCol = new ArrayList<String>() {{add("country"); add("type");add("abv"); add("brewer"); add("name");}};
+
+            //checks if the requirement args are valid
+            if (sort.size() == 2){
+                if (!validSortOrd.contains(sort.get(1)) || !validSortCol.contains(sort.get(0))) return null;
+            }
+            else{
+                return jdbcTemplate.query("select * from beerStocked ORDER BY "+sort.get(0)+ " " + sort.get(1), new BeerStockedRowMapper());
+            }
+        }
         return jdbcTemplate.query("select * from beerStocked", new BeerStockedRowMapper());
     }
 
@@ -42,47 +57,48 @@ public class BeerStockedRepositry {
     }
 
 
-    public List<BeerStocked> findByColumn(List<String> cols, List<Object> vals){
+    public List<BeerStocked> findByColumn(List<String> cols, List<Object> vals, List<String> sort){
 
-        //if no cols/vals given, or diff numbers of them are given; return null (invalid search).
-        if(cols.size() == 0 || vals.size() == 0 || vals.size() != cols.size()){
+        /*VALIDATES ARGS
+            - At least one col and one val must be given
+            - The the number of cols = number of vals
+            - If order has 2 items, second item is either "ASC" or "DESC" (respectively)
+            - If order has 2 items, the first item is only from an allowed set of columns
+         */
+
+        List<String> validSortOrd = new ArrayList<String>() {{add("ASC"); add("DESC");}};
+        List<String> validSortCol = new ArrayList<String>() {{add("country"); add("type");add("abv"); add("brewer"); add("name");}};
+
+        if(cols.size() < 1 || vals.size() < 1 || vals.size() != cols.size()){
             return null;
         }
-
-        List<BeerStocked> searchResults;
-
-        //the basic sql statement for at least 1 column
-        String sql = "select * from beerStocked where " + cols.get(0) + "=?";
-
-        //if only one column is specified
-        if(cols.size()==1){
-            searchResults = jdbcTemplate.query(sql, new Object[]{vals.get(0)}, new BeerStockedRowMapper());
+        else if (sort.size() == 2){
+            if (!validSortOrd.contains(sort.get(1)) || !validSortCol.contains(sort.get(0))) return null;
         }
 
-        //if multiple columns are specified
-        else{
 
-            Object[] queryVals = new Object[vals.size()];
-            queryVals[0] = vals.get(0);
+        //the basic sql statement and query values for a one specified column
+        String sql = "select * from beerStocked where " + cols.get(0) + "=?";
+        Object[] queryVals = new Object[vals.size()];
+        queryVals[0] = vals.get(0);
+
+        //if more than one columns are specified
+        if(cols.size()>1){
 
             //for the remaining column/value pairs, finishes the SQL query and collects up values to be used
             for(int i = 1; i<cols.size(); i++){
-                sql+=", " + cols.get(i) + "=?";
+                sql+=" AND " + cols.get(i) + "=?";
                 queryVals[i] = vals.get(i);
             }
-
-            searchResults = jdbcTemplate.query(sql, queryVals, new BeerStockedRowMapper());
         }
 
-        //if no results, return null
-        if(searchResults.isEmpty()){
-            return null;
-        }
+        //apply ordering on results, if specified
+        if(!sort.isEmpty()) sql = sql + " ORDER BY " + sort.get(0) +  " " + sort.get(1);
 
+        //execute sql query
+        List<BeerStocked> searchResults = jdbcTemplate.query(sql, queryVals, new BeerStockedRowMapper());
 
-
-        //return all results
-        else return searchResults;
+        return searchResults;
     }
 
     public int deleteById(long id) {

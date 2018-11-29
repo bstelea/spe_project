@@ -84,7 +84,7 @@ public class BeerStocked {
 
     @Override
     public String toString() {
-        return String.format("BeerStocked [id=%d, name=%s, origin=%s, brewer=%s, type=%s, abv=%f]",
+        return String.format("BeerStocked [id=%d, name=%s, country=%s, brewer=%s, type=%s, abv=%f]",
                 id, name, country, brewer, type, abv);
     }
 

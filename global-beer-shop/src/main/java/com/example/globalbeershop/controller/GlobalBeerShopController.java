@@ -39,13 +39,21 @@ public class GlobalBeerShopController {
                        @RequestParam(value = "country", required = false) String country,
                        @RequestParam(value = "brewer", required = false) String brewer,
                        @RequestParam(value = "abv", required = false) String abv,
-                       @RequestParam(value = "type", required = false) String type)
+                       @RequestParam(value = "type", required = false) String type,
+                       @RequestParam(value = "sortCol", required= false) String sortCol,
+                       @RequestParam(value = "sortOrd", required= false) String sortOrd)
     {
 
         List<BeerStocked> queryResults;
 
         List<String> cols = new ArrayList<>();
         List<Object> vals = new ArrayList<>();
+        List<String> sort = new ArrayList<>();
+
+        if(sortCol != null && sortOrd != null){
+            sort.add(0, sortCol);
+            sort.add(1, sortOrd);
+        }
 
         if(name!=null){
             cols.add("name");
@@ -73,17 +81,20 @@ public class GlobalBeerShopController {
         }
 
         //If no search restraints were given, just search for all
-        if(cols.isEmpty()) queryResults = BeerStockedrepo.findAll();
+        if(cols.isEmpty()) queryResults = BeerStockedrepo.findAll(sort);
 
-            //else, search by the cols and vals given
-        else queryResults = BeerStockedrepo.findByColumn(cols, vals);
+        //else, search by the cols and vals (and potentially an order restraint for the results) given
+        else queryResults = BeerStockedrepo.findByColumn(cols, vals, sort);
 
 
         //HTML Response
         String resultsString = "";
 
+        //if query was invalid
+        if(queryResults == null) return "INVALID QUERY ARGUMENTS!";
+
         //if there are no results
-        if(queryResults==null) return "NO RESULTS for Cols= "+cols.toString()+", "+vals.toString();
+        else if(queryResults.isEmpty()) return "NO RESULTS for Cols= "+cols.toString()+", Vals= "+vals.toString();
 
 
             //else (there are multiple results)
@@ -95,10 +106,10 @@ public class GlobalBeerShopController {
             }
 
             //if no search requirements were specified
-            if (cols.isEmpty() || vals.isEmpty()) return "All Beers in Stock= " + resultsString;
+            if (cols.isEmpty() || vals.isEmpty()) return "All Beers in Stock, Ordered by " + sort.toString()+ " = " + resultsString;
 
                 //else (requirements were given)
-            else return "Query Results for Cols= " + cols.toString() + ", " + vals.toString() + resultsString;
+            else return "Query Results , ordered by " + sort.toString() +", for Cols= " + cols.toString() + " and Vals= " + vals.toString() + resultsString;
 
         }
     }
