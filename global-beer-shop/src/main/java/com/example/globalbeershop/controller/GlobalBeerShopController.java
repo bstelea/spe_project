@@ -50,9 +50,15 @@ public class GlobalBeerShopController {
         List<Object> vals = new ArrayList<>();
         List<String> sort = new ArrayList<>();
 
+        //if sorting reqs are given
         if(sortCol != null && sortOrd != null){
             sort.add(0, sortCol);
             sort.add(1, sortOrd);
+        }
+        else{
+            //default sorting
+            sort.add(0, "name");
+            sort.add(1, "ASC");
         }
 
         if(name!=null){
