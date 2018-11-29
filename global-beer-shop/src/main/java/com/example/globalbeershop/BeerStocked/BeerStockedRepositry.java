@@ -67,7 +67,7 @@ public class BeerStockedRepositry {
 
             //for the remaining column/value pairs, finishes the SQL query and collects up values to be used
             for(int i = 1; i<cols.size(); i++){
-                sql+=" AND " + cols.get(i) + " = ?";
+                sql+=", " + cols.get(i) + "=?";
                 queryVals[i] = vals.get(i);
             }
 
