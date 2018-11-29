@@ -24,8 +24,8 @@ public class GlobalBeerShopController {
 
     @GetMapping("/")
     public String index(Model model,
-                       @RequestParam(value = "name", required = false,
-                               defaultValue = "Guest") String name) {
+                        @RequestParam(value = "name", required = false,
+                                defaultValue = "Guest") String name) {
         model.addAttribute("name", name);
         model.addAttribute("title", appName);
         return "index";
@@ -75,7 +75,7 @@ public class GlobalBeerShopController {
         //If no search restraints were given, just search for all
         if(cols.isEmpty()) queryResults = BeerStockedrepo.findAll();
 
-        //else, search by the cols and vals given
+            //else, search by the cols and vals given
         else queryResults = BeerStockedrepo.findByColumn(cols, vals);
 
 
@@ -86,7 +86,7 @@ public class GlobalBeerShopController {
         if(queryResults==null) return "NO RESULTS for Cols= "+cols.toString()+", "+vals.toString();
 
 
-        //else (there are multiple results)
+            //else (there are multiple results)
         else {
 
             //builds up html body
