@@ -47,7 +47,7 @@ public class GlobalBeerShopController {
         List<String> cols = new ArrayList<>();
         List<Object> vals = new ArrayList<>();
 
-        if(country!=null){
+        if(name!=null){
             cols.add("name");
             vals.add(name);
         }
@@ -72,21 +72,34 @@ public class GlobalBeerShopController {
             vals.add(type);
         }
 
-        //If no search restraints were given
-        if(cols.isEmpty()){
-            queryResults = BeerStockedrepo.findAll();
-        }
+        //If no search restraints were given, just search for all
+        if(cols.isEmpty()) queryResults = BeerStockedrepo.findAll();
 
-        else{
-            queryResults = BeerStockedrepo.findByColumn(cols, vals);
-        }
+        //else, search by the cols and vals given
+        else queryResults = BeerStockedrepo.findByColumn(cols, vals);
 
+
+        //HTML Response
         String resultsString = "";
-        for(BeerStocked beer : queryResults) {
-            resultsString+=("<br>" + beer.toString());
+
+        //if there are no results
+        if(queryResults==null) return "NO RESULTS for Cols= "+cols.toString()+", "+vals.toString();
+
+
+        //else (there are multiple results)
+        else {
+
+            //builds up html body
+            for (BeerStocked beer : queryResults) {
+                resultsString += ("<br>   -" + beer.toString());
+            }
+
+            //if no search requirements were specified
+            if (cols.isEmpty() || vals.isEmpty()) return "All Beers in Stock= " + resultsString;
+
+                //else (requirements were given)
+            else return "Query Results for Cols= " + cols.toString() + ", " + vals.toString() + resultsString;
+
         }
-
-        return "beers n tings: "+resultsString;
-
     }
 }

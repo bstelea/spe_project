@@ -2,7 +2,8 @@ package com.example.globalbeershop.BeerStocked;
 
 import java.sql.ResultSet;
         import java.sql.SQLException;
-        import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.jdbc.core.JdbcTemplate;
         import org.springframework.jdbc.core.RowMapper;
@@ -40,20 +41,22 @@ public class BeerStockedRepositry {
                 new BeerStockedRowMapper());
     }
 
-    //searching by column(s)
+
     public List<BeerStocked> findByColumn(List<String> cols, List<Object> vals){
 
-        //if no cols/vals given, or diff numbers of them are given; return all results
+        //if no cols/vals given, or diff numbers of them are given; return null (invalid search).
         if(cols.size() == 0 || vals.size() == 0 || vals.size() != cols.size()){
-            return findAll();
+            return null;
         }
+
+        List<BeerStocked> searchResults;
 
         //the basic sql statement for at least 1 column
         String sql = "select * from beerStocked where " + cols.get(0) + "=?";
 
         //if only one column is specified
         if(cols.size()==1){
-            return jdbcTemplate.query(sql, new Object[]{vals.get(0)}, new BeerStockedRowMapper());
+            searchResults = jdbcTemplate.query(sql, new Object[]{vals.get(0)}, new BeerStockedRowMapper());
         }
 
         //if multiple columns are specified
@@ -68,8 +71,18 @@ public class BeerStockedRepositry {
                 queryVals[i] = vals.get(i);
             }
 
-            return jdbcTemplate.query(sql, queryVals, new BeerStockedRowMapper());
+            searchResults = jdbcTemplate.query(sql, queryVals, new BeerStockedRowMapper());
         }
+
+        //if no results, return null
+        if(searchResults.isEmpty()){
+            return null;
+        }
+
+
+
+        //return all results
+        else return searchResults;
     }
 
     public int deleteById(long id) {
