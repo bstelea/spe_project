@@ -2,6 +2,8 @@ package com.example.globalbeershop.controller;
 
 import com.example.globalbeershop.BeerStocked.BeerStocked;
 import com.example.globalbeershop.BeerStocked.BeerStockedRepositry;
+import com.example.globalbeershop.ShoppingCart.ShoppingCart;
+import com.example.globalbeershop.ShoppingCart.ShoppingCartRepositry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.support.NullValue;
 import org.springframework.stereotype.Controller;
@@ -20,7 +22,8 @@ public class GlobalBeerShopController {
     private static final String appName = "Global Beer Shop";
 
     @Autowired
-    BeerStockedRepositry BeerStockedrepo;
+    BeerStockedRepositry BeerStockedRepo;
+    ShoppingCartRepositry ShoppingCartRepo;
 
     @GetMapping("/")
     public String index(Model model,
@@ -87,10 +90,10 @@ public class GlobalBeerShopController {
         }
 
         //If no search restraints were given, just search for all
-        if(cols.isEmpty()) queryResults = BeerStockedrepo.findAll(sort);
+        if(cols.isEmpty()) queryResults = BeerStockedRepo.findAll(sort);
 
         //else, search by the cols and vals (and potentially an order restraint for the results) given
-        else queryResults = BeerStockedrepo.findByColumn(cols, vals, sort);
+        else queryResults = BeerStockedRepo.findByColumn(cols, vals, sort);
 
 
         //HTML Response
@@ -119,4 +122,15 @@ public class GlobalBeerShopController {
 
         }
     }
+
+    @GetMapping("/cart")
+    @ResponseBody
+    public String cart (Model model,
+                        @RequestParam(value = "user", required = true) long userID){
+
+        ShoppingCart cart =  ShoppingCartRepo.findUserShoppingCart(userID);
+
+        return cart.toString();
+    }
+
 }
