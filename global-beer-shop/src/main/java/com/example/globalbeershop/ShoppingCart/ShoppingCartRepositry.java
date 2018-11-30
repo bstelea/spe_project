@@ -25,7 +25,7 @@ public class ShoppingCartRepositry {
     }
 
     public ShoppingCart findUserShoppingCart (long id) {
-        List<CartItem> results = jdbcTemplate.query("SELECT * FROM ShoppingCartItems WHERE id = ?", new ShoppingCartRowMapper());
+        List<CartItem> results = jdbcTemplate.query("SELECT * FROM ShoppingCartItems WHERE id = ?", new Object[]{id}, new ShoppingCartRowMapper());
 
         ShoppingCart cart = new ShoppingCart(id);
 

@@ -23,6 +23,7 @@ public class GlobalBeerShopController {
 
     @Autowired
     BeerStockedRepositry BeerStockedRepo;
+    @Autowired
     ShoppingCartRepositry ShoppingCartRepo;
 
     @GetMapping("/")
