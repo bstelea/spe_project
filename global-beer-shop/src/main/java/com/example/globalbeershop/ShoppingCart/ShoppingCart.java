@@ -9,12 +9,23 @@ public class ShoppingCart {
 
     private final long userID;
     private List<CartItem> items;
+    private double total;
 
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" +
+                "userID=" + userID +
+                ", items=" + items +
+                ", total=" + total +
+                '}';
+    }
 
     public ShoppingCart(long userID) {
 
         this.userID = userID;
         this.items = new ArrayList<>();
+        this.total = 0;
     }
 
     public long getUserID() {
@@ -47,11 +58,13 @@ public class ShoppingCart {
      * @param quantity The quantity of beer to add to cart
      * @throws IllegalArgumentException if quantity < 1
      */
-    public void addItem (long beerID, int quantity){
+    public void addItem (long beerID, double price, int quantity){
         if (quantity<1) throw new IllegalArgumentException("Can only add items by a quantity of 1 or more");
 
         if(itemAlreadyInCart(beerID)) getItem(beerID).editQuantity(quantity);
-        else items.add(new CartItem(beerID, quantity));
+        else items.add(new CartItem(beerID,price, quantity));
+
+        //total+= beerID * quantity;
     }
 
     public void setItemQuantity (BeerStocked beer, int quantity){
@@ -60,13 +73,7 @@ public class ShoppingCart {
     public void editItemQuantity (BeerStocked beer, int quantity){
     }
 
-    @Override
-    public String toString() {
-        return "ShoppingCart{" +
-                "userID=" + userID +
-                ", items=" + items +
-                '}';
-    }
+
 
 
 

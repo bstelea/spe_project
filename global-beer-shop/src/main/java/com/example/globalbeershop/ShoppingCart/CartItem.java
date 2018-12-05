@@ -8,8 +8,19 @@ public class CartItem {
     private final long itemID;
     private int quantity;
 
-    public CartItem(long id, int quantity) {
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    private double price;
+
+    public CartItem(long id, double price, int quantity) {
         this.itemID = id;
+        this.price = price;
         this.quantity = quantity;
     }
 

@@ -19,17 +19,19 @@ public class ShoppingCartRepositry {
 
         @Override
         public CartItem mapRow(ResultSet rs, int rowNum) throws SQLException {
-            return new CartItem(rs.getLong("id"), rs.getInt("quantity"));
+            return new CartItem(rs.getLong("id"), rs.getDouble("price"), rs.getInt("quantity"));
         }
 
     }
 
     public ShoppingCart findUserShoppingCart (long id) {
-        List<CartItem> results = jdbcTemplate.query("SELECT * FROM ShoppingCartItems WHERE id = ?", new Object[]{id}, new ShoppingCartRowMapper());
+        List<CartItem> results = jdbcTemplate.query(
+                "SELECT ShoppingCartItems.id AS id, ShoppingCartItems.quantity AS quantity, BeerStocked.price AS price FROM ShoppingCartItems JOIN BeerStocked ON ShoppingCartItems.beerId = BeerStocked.id WHERE ShoppingCartItems.id = ?",
+                new Object[]{id}, new ShoppingCartRowMapper());
 
         ShoppingCart cart = new ShoppingCart(id);
 
-        for(CartItem i : results) cart.addItem(i.getItemID(), i.getQuantity());
+        for(CartItem i : results) cart.addItem(i.getItemID(),i.getPrice(), i.getQuantity());
 
         return cart;
     }
