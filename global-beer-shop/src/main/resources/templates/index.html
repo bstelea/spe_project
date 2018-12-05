@@ -1,43 +1,197 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <title>Global Beer Shop</title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/css/main.css" />
-    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+
 </head>
 <body>
-<div class="bg-img">
-    <div id="topnav" class="overlay">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div class="overlay-content">
-            <a href="/shop">Shop</a>
-            <a href="#">Checkout</a>
-            <a href="#">Login</a>
-            <a href="#">Cart</a>
-            <a href="#">Search</a>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">SHOP</a></li>
+                <li><a href="#">CHECKOUT</a></li>
+                <li><a href="#">CART</a></li>
+                <li><a href="#">SEARCH</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <h1>Global Beer Shop</h1>
+    <p>Fancy a beer?</p>
+    <p class="lead">
+        <a class="btn btn-primary btn-lg" href="#" role="button">Click here</a>
+    </p>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-8">
+            <h2>About Us</h2>
+            <h4>Add short description of the company here</h4>
+            <p>Add more description here, also find a way to add a beer icon</p>
+            <button class="btn btn-default btn-lg">Get in Touch</button>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-glass logo"></span>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-grey">
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-globe logo"></span>
+        </div>
+        <div class="col-sm-8">
+            <h2>Our Values</h2>
+            <h4><strong>MISSION:</strong> Our mission is to bring beers from every corner of the world to your doorstep.</h4>
+            <p><strong>VISION:</strong> Our vision is driven by the dream of having beers from every country on the globe
+                in a single shop.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center">
+    <h2>GLOBAL BEER SHOP</h2>
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-ok logo-small"></span>
+            <h4>TOP QUALITY BEERS</h4>
+            <p>Simply the best beers from around the world.</p>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-lock logo-small"></span>
+            <h4>EASY AND SECURE PAYMENT</h4>
+            <p>Multiple ways to pay for your order, all at one click distance.</p>
+        </div>
+        <div class="col-sm-4">
+            <span class="glyphicon glyphicon-gift logo-small"></span>
+            <h4>HOME DELIVERY</h4>
+            <p>We deliver your beer at your doorstep, check the DELIVERY INFO page for more details regarding international
+                payments.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center bg-grey">
+    <h2>NEW IN STOCK</h2>
+    <h4>Fresh from Tiguana</h4>
+    <div class="row text-center">
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="img/clbeer.jpg" alt="clbeer">
+                <p><strong>Cameron's Captain's Log Lager</strong></p>
+                <p>£9.99</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Add to cart</a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="img/clbeer.jpg" alt="clbeer">
+                <p><strong>Cameron's Captain's Log Lager</strong></p>
+                <p>£9.99</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Add to cart</a>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="img/clbeer.jpg" alt="clbeer">
+                <p><strong>Cameron's Captain's Log Lager</strong></p>
+                <p>£9.99</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Add to cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h2 class="text-center">Testimonials</h2>
+<div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <h4>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">Michael Roe, Vice President, Heineken</span></h4>
+        </div>
+        <div class="item">
+            <h4>"The only place where you can get beers form EVERYWHERE!!"<br><span style="font-style:normal;">John Doe, Customer</span></h4>
+        </div>
+        <div class="item">
+            <h4>"Always delighted to try a new beer... and this is the place to find it!"<br><span style="font-style:normal;">Chandler Bing, Beer Enthusiast</span></h4>
         </div>
     </div>
 
-    <div class="container">
-        <a href="/" id="logo">Logo</a>
-        <span style="float:right;" onclick="openNav()">&#9776; menu</span>
-    </div>
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
 
-    <div class="text-container">
-        <div class="fancy">FANCY A BEER ?</div>
-        <div class="click-to-action" onclick="location.href='/shop'">Click here</div>
+<div class="container-fluid bg-grey">
+    <h2 class="text-center">CONTACT US</h2>
+    <div class="row">
+        <div class="col-sm-5">
+            <p>Contact us and we'll get back to you within 24 hours.</p>
+            <p><span class="glyphicon glyphicon-map-marker"></span> Bristol, UK</p>
+            <p><span class="glyphicon glyphicon-phone"></span> +44 1234567890</p>
+            <p><span class="glyphicon glyphicon-envelope"></span> contact@globalbeershop.co.uk</p>
+        </div>
+        <div class="col-sm-7">
+            <div class="row">
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                </div>
+            </div>
+            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+            <div class="row">
+                <div class="col-sm-12 form-group">
+                    <button class="btn btn-default pull-right" type="submit">Send</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="world-map">
-    <div>
-        <img class="world-img" src="../img/map.png" alt="world map" align="centre"/>
-    </div>
-</div>
+<footer class="container-fluid text-center">
+    <a href="#" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
 
-<script src="/javascript/index.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
