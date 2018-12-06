@@ -32,7 +32,10 @@ public class GlobalBeerShopController {
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
         model.addAttribute("title", appName);
-        if(session.isNew()) model.addAttribute("sessionID", session.getId());
+        if(session.isNew()){
+            model.addAttribute("sessionID", session.getId());
+            model.addAttribute("cart", new ShoppingCart(session.getId()));
+        }
         return "index";
 
     }
@@ -125,14 +128,31 @@ public class GlobalBeerShopController {
         }
     }
 
+
     @GetMapping("/cart")
     @ResponseBody
-    public String cart (Model model, HttpSession session, HttpServletResponse response) throws IOException {
-        System.out.printf("Session ID %s trying to access cart\n", session.getId());
-        if(session.isNew()) response.sendRedirect("/");
+    public String cart (Model model, HttpSession session, HttpServletResponse response,
+                        @RequestParam(value = "add", required = false) String beerId,
+                        @RequestParam(value = "quantity", required = false) String quantity) throws IOException {
+
+
+        if(session.isNew() || (beerId==null ^ quantity==null)) response.sendRedirect("/");
+
+        String sessionId = session.getId();
+        if(beerId!=null && quantity!=null){
+            if(ShoppingCartRepo.addItemToCart(sessionId, beerId, quantity)){
+                System.out.printf("added item to cart\n");
+                response.sendRedirect("/cart");
+            }
+            else{
+                System.out.printf("failed to add item to cart\n");
+                response.sendRedirect("/");
+            }
+            return null;
+        }
+        System.out.printf("opening cart\n");
         ShoppingCart cart = ShoppingCartRepo.findSessionShoppingCart(session.getId());
         return cart.toString();
-
     }
 
 }
