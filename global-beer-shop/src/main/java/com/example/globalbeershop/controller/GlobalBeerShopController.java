@@ -136,7 +136,10 @@ public class GlobalBeerShopController {
                         @RequestParam(value = "quantity", required = false) String quantity) throws IOException {
 
 
-        if(session.isNew() || (beerId==null ^ quantity==null)) response.sendRedirect("/");
+        if(session.isNew() || (beerId==null ^ quantity==null)){
+            response.sendRedirect("/");
+            return null;
+        }
 
         String sessionId = session.getId();
         if(beerId!=null && quantity!=null){
