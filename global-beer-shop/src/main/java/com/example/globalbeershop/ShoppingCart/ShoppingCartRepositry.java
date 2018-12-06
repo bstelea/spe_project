@@ -24,12 +24,12 @@ public class ShoppingCartRepositry {
 
     }
 
-    public ShoppingCart findUserShoppingCart (long id) {
+    public ShoppingCart findSessionShoppingCart (String sessionId) {
         List<CartItem> results = jdbcTemplate.query(
-                "SELECT ShoppingCartItems.id AS id, ShoppingCartItems.quantity AS quantity, BeerStocked.price AS price FROM ShoppingCartItems JOIN BeerStocked ON ShoppingCartItems.beerId = BeerStocked.id WHERE ShoppingCartItems.id = ?",
-                new Object[]{id}, new ShoppingCartRowMapper());
+                "SELECT ShoppingCartItems.sessionId AS id, ShoppingCartItems.quantity AS quantity, BeerStocked.price AS price FROM ShoppingCartItems JOIN BeerStocked ON ShoppingCartItems.beerId = BeerStocked.id WHERE ShoppingCartItems.sessionId = ?",
+                new Object[]{sessionId}, new ShoppingCartRowMapper());
 
-        ShoppingCart cart = new ShoppingCart(id);
+        ShoppingCart cart = new ShoppingCart(sessionId);
 
         for(CartItem i : results) cart.addItem(i.getItemID(),i.getPrice(), i.getQuantity());
 

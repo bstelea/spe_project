@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private final long userID;
+    private final String sessionId;
     private List<CartItem> items;
     private double total;
 
@@ -15,21 +15,21 @@ public class ShoppingCart {
     @Override
     public String toString() {
         return "ShoppingCart{" +
-                "userID=" + userID +
+                "sessionId=" + sessionId +
                 ", items=" + items +
                 ", total=" + total +
                 '}';
     }
 
-    public ShoppingCart(long userID) {
+    public ShoppingCart(String sessionId) {
 
-        this.userID = userID;
+        this.sessionId = sessionId;
         this.items = new ArrayList<>();
         this.total = 0;
     }
 
-    public long getUserID() {
-        return userID;
+    public String getUserID() {
+        return sessionId;
     }
 
     public List<CartItem> getItems(){
@@ -63,8 +63,7 @@ public class ShoppingCart {
 
         if(itemAlreadyInCart(beerID)) getItem(beerID).editQuantity(quantity);
         else items.add(new CartItem(beerID,price, quantity));
-
-        //total+= beerID * quantity;
+        total+= price * quantity;
     }
 
     public void setItemQuantity (BeerStocked beer, int quantity){

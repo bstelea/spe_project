@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,11 +30,9 @@ public class GlobalBeerShopController {
     ShoppingCartRepositry ShoppingCartRepo;
 
     @GetMapping("/")
-    public String index(Model model,
-                        @RequestParam(value = "name", required = false,
-                                defaultValue = "Guest") String name) {
-        model.addAttribute("name", name);
+    public String index(Model model, HttpSession session) {
         model.addAttribute("title", appName);
+        if(session.isNew()) model.addAttribute("sessionID", session.getId());
         return "index";
 
     }
@@ -126,12 +127,12 @@ public class GlobalBeerShopController {
 
     @GetMapping("/cart")
     @ResponseBody
-    public String cart (Model model,
-                        @RequestParam(value = "user", required = true) long userID){
-
-        ShoppingCart cart =  ShoppingCartRepo.findUserShoppingCart(userID);
-
+    public String cart (Model model, HttpSession session, HttpServletResponse response) throws IOException {
+        System.out.printf("Session ID %s trying to access cart\n", session.getId());
+        if(session.isNew()) response.sendRedirect("/");
+        ShoppingCart cart = ShoppingCartRepo.findSessionShoppingCart(session.getId());
         return cart.toString();
+
     }
 
 }
