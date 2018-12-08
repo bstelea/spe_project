@@ -59,10 +59,14 @@ public class ShoppingCart {
      * @throws IllegalArgumentException if quantity < 1
      */
     public void addItem (long beerID, double price, int quantity){
-        if (quantity<1) throw new IllegalArgumentException("Can only add items by a quantity of 1 or more");
 
-        if(itemAlreadyInCart(beerID)) getItem(beerID).editQuantity(quantity);
-        else items.add(new CartItem(beerID,price, quantity));
+        if(itemAlreadyInCart(beerID)){
+            getItem(beerID).editQuantity(quantity);
+        }
+        else{
+            if (quantity<1) throw new IllegalArgumentException("Can only add items by a quantity of 1 or more");
+            items.add(new CartItem(beerID,price, quantity));
+        }
         total+= price * quantity;
     }
 
@@ -70,6 +74,7 @@ public class ShoppingCart {
     }
 
     public void editItemQuantity (BeerStocked beer, int quantity){
+        getItem(beer.getId()).setQuantity(getItem(beer.getId()).getQuantity()+ quantity);
     }
 
 

@@ -19,7 +19,6 @@ create table shoppingCartItems
    sessionId varchar(255) not null,
    beerId integer not null,
    quantity integer not null,
-   primary key(sessionId),
+   primary key(sessionId, beerId),
    foreign key(beerId) references beerStocked(id),
-   unique (sessionId, beerId)
 );
