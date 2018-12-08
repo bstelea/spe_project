@@ -133,7 +133,7 @@ html, body {
 }
 
 .world-map {
-    height: 100vh;
+    height: 100vd;
 
     /* Center and scale the image nicely */
     background-position: center;
@@ -147,5 +147,7 @@ html, body {
     padding-top: 100px;
     width: 1200px;
     height: auto;
+
+
     vertical-align: middle;
 }
