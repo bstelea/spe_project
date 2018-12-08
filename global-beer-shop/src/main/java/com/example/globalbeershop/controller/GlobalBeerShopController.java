@@ -37,7 +37,6 @@ public class GlobalBeerShopController {
     }
 
     @GetMapping("/shop")
-    @ResponseBody
     public String shop(Model model,
                        @RequestParam(value = "name", required = false) String name,
                        @RequestParam(value = "country", required = false) String country,
@@ -48,90 +47,94 @@ public class GlobalBeerShopController {
                        @RequestParam(value = "sortOrd", required= false) String sortOrd)
     {
 
-        List<BeerStocked> queryResults;
-
-        List<String> cols = new ArrayList<>();
-        List<Object> vals = new ArrayList<>();
-        List<String> sort = new ArrayList<>();
-
-        //if sorting reqs are given
-        if(sortCol != null && sortOrd != null){
-            sort.add(0, sortCol);
-            sort.add(1, sortOrd);
-        }
-        else{
-            //default sorting
-            sort.add(0, "name");
-            sort.add(1, "ASC");
-        }
-
-        if(name!=null){
-            cols.add("name");
-            vals.add(name);
-        }
-
-        if(country!=null){
-            cols.add("country");
-            vals.add(country);
-        }
-
-        if(brewer!=null){
-            cols.add("brewer");
-            vals.add(brewer);
-        }
-
-        if(abv!=null){
-            cols.add("abv");
-            vals.add(abv);
-        }
-
-        if(type!=null){
-            cols.add("type");
-            vals.add(type);
-        }
-
-        //If no search restraints were given, just search for all
-        if(cols.isEmpty()) queryResults = BeerStockedRepo.findAll(sort);
-
-        //else, search by the cols and vals (and potentially an order restraint for the results) given
-        else queryResults = BeerStockedRepo.findByColumn(cols, vals, sort);
-
-
-        //HTML Response
-        String resultsString = "";
-
-        //if query was invalid
-        if(queryResults == null) return "INVALID QUERY ARGUMENTS!";
-
-        //if there are no results
-        else if(queryResults.isEmpty()) return "NO RESULTS for Cols= "+cols.toString()+", Vals= "+vals.toString();
-
-
-            //else (there are multiple results)
-        else {
-
-            //builds up html body
-            for (BeerStocked beer : queryResults) {
-                resultsString += ("<br>   -" + beer.toString());
-            }
-
-            //if no search requirements were specified
-            if (cols.isEmpty() || vals.isEmpty()) return "All Beers in Stock, Ordered by " + sort.toString()+ " = " + resultsString;
-
-                //else (requirements were given)
-            else return "Query Results , ordered by " + sort.toString() +", for Cols= " + cols.toString() + " and Vals= " + vals.toString() + resultsString;
-
-        }
+//        List<BeerStocked> queryResults;
+//
+//        List<String> cols = new ArrayList<>();
+//        List<Object> vals = new ArrayList<>();
+//        List<String> sort = new ArrayList<>();
+//
+//        //if sorting reqs are given
+//        if(sortCol != null && sortOrd != null){
+//            sort.add(0, sortCol);
+//            sort.add(1, sortOrd);
+//        }
+//        else{
+//            //default sorting
+//            sort.add(0, "name");
+//            sort.add(1, "ASC");
+//        }
+//
+//        if(name!=null){
+//            cols.add("name");
+//            vals.add(name);
+//        }
+//
+//        if(country!=null){
+//            cols.add("country");
+//            vals.add(country);
+//        }
+//
+//        if(brewer!=null){
+//            cols.add("brewer");
+//            vals.add(brewer);
+//        }
+//
+//        if(abv!=null){
+//            cols.add("abv");
+//            vals.add(abv);
+//        }
+//
+//        if(type!=null){
+//            cols.add("type");
+//            vals.add(type);
+//        }
+//
+//        //If no search restraints were given, just search for all
+//        if(cols.isEmpty()) queryResults = BeerStockedRepo.findAll(sort);
+//
+//        //else, search by the cols and vals (and potentially an order restraint for the results) given
+//        else queryResults = BeerStockedRepo.findByColumn(cols, vals, sort);
+//
+//
+//        //HTML Response
+//        String resultsString = "";
+//
+//        //if query was invalid
+//        if(queryResults == null) return "INVALID QUERY ARGUMENTS!";
+//
+//        //if there are no results
+//        else if(queryResults.isEmpty()) return "NO RESULTS for Cols= "+cols.toString()+", Vals= "+vals.toString();
+//
+//
+//            //else (there are multiple results)
+//        else {
+//
+//            //builds up html body
+//            for (BeerStocked beer : queryResults) {
+//                resultsString += ("<br>   -" + beer.toString());
+//            }
+//
+//            //if no search requirements were specified
+//            if (cols.isEmpty() || vals.isEmpty()) return "All Beers in Stock, Ordered by " + sort.toString()+ " = " + resultsString;
+//
+//                //else (requirements were given)
+//            else return "Query Results , ordered by " + sort.toString() +", for Cols= " + cols.toString() + " and Vals= " + vals.toString() + resultsString;
+//
+//        }
+        return "shop";
     }
 
     @GetMapping("/cart")
-    @ResponseBody
-    public String cart (Model model,
-                        @RequestParam(value = "user", required = true) long userID){
+    public String cart (Model model){
 
-        ShoppingCart cart =  ShoppingCartRepo.findUserShoppingCart(userID);
 
-        return cart.toString();
+        return "cart";
+    }
+
+    @GetMapping("/checkout")
+    public String checkout (Model model) {
+
+        return "checkout";
     }
 
 }
