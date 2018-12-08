@@ -6,13 +6,10 @@ html, body {
 
 .bg-img {
     /* The image used */
-    background-image: url("big.jpg");
-
     height: 100vh;
 
     /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
+    background: url("../img/big.jpg") no-repeat center;
     background-size: cover;
 
     /* Needed to position the navbar */
