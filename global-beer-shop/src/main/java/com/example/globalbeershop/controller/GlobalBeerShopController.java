@@ -171,6 +171,11 @@ public class GlobalBeerShopController {
         return cart.toString();
     }
 
+    @GetMapping("/checkout")
+    public String checkout (Model model) {
+
+        return "checkout";
+
 
 
 }
