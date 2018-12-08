@@ -33,6 +33,7 @@ public class GlobalBeerShopController {
     public String index(Model model, HttpSession session) {
         model.addAttribute("title", appName);
         if(session.isNew()){
+            System.out.printf("new session\n");
             model.addAttribute("sessionID", session.getId());
             model.addAttribute("cart", new ShoppingCart(session.getId()));
         }
@@ -133,10 +134,12 @@ public class GlobalBeerShopController {
     @ResponseBody
     public String cart (Model model, HttpSession session, HttpServletResponse response,
                         @RequestParam(value = "add", required = false) String beerId,
-                        @RequestParam(value = "quantity", required = false) String quantity) throws IOException {
+                        @RequestParam(value = "quantity", required = false) String quantity,
+                        @RequestParam(value = "delete", required = false) String deleteId) throws IOException {
 
+        System.out.printf("Add = %s, Quantity = %s, Delete = %s", beerId, quantity, deleteId);
 
-        if(session.isNew() || (beerId==null ^ quantity==null)){
+        if(session.isNew()){
             response.sendRedirect("/");
             return null;
         }
@@ -153,6 +156,18 @@ public class GlobalBeerShopController {
             }
             return null;
         }
+        else if(deleteId!=null){
+            if(ShoppingCartRepo.removeItemFromCart(sessionId, deleteId)) {
+                System.out.printf("removing item from cart\n");
+                response.sendRedirect("/cart");
+            }
+            else {
+                System.out.printf("ERROR removing item from cart\n");
+                response.sendRedirect("/");
+            }
+            return null;
+        }
+
         System.out.printf("opening cart\n");
         ShoppingCart cart = ShoppingCartRepo.findSessionShoppingCart(session.getId());
         return cart.toString();
