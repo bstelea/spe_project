@@ -16,9 +16,9 @@ create table beerStocked
 
 create table shoppingCartItems
 (
-   id integer not null AUTO_INCREMENT,
+   sessionId varchar(255) not null,
    beerId integer not null,
    quantity integer not null,
-   primary key(id),
-   foreign key(beerId) references beerStocked(id)
+   primary key(sessionId, beerId),
+   foreign key(beerId) references beerStocked(id),
 );

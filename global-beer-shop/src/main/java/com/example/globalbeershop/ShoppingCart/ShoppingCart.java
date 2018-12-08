@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ShoppingCart {
 
-    private final long userID;
+    private final String sessionId;
     private List<CartItem> items;
     private double total;
 
@@ -15,21 +15,21 @@ public class ShoppingCart {
     @Override
     public String toString() {
         return "ShoppingCart{" +
-                "userID=" + userID +
+                "sessionId=" + sessionId +
                 ", items=" + items +
                 ", total=" + total +
                 '}';
     }
 
-    public ShoppingCart(long userID) {
+    public ShoppingCart(String sessionId) {
 
-        this.userID = userID;
+        this.sessionId = sessionId;
         this.items = new ArrayList<>();
         this.total = 0;
     }
 
-    public long getUserID() {
-        return userID;
+    public String getUserID() {
+        return sessionId;
     }
 
     public List<CartItem> getItems(){
@@ -59,18 +59,22 @@ public class ShoppingCart {
      * @throws IllegalArgumentException if quantity < 1
      */
     public void addItem (long beerID, double price, int quantity){
-        if (quantity<1) throw new IllegalArgumentException("Can only add items by a quantity of 1 or more");
 
-        if(itemAlreadyInCart(beerID)) getItem(beerID).editQuantity(quantity);
-        else items.add(new CartItem(beerID,price, quantity));
-
-        //total+= beerID * quantity;
+        if(itemAlreadyInCart(beerID)){
+            getItem(beerID).editQuantity(quantity);
+        }
+        else{
+            if (quantity<1) throw new IllegalArgumentException("Can only add items by a quantity of 1 or more");
+            items.add(new CartItem(beerID,price, quantity));
+        }
+        total+= price * quantity;
     }
 
     public void setItemQuantity (BeerStocked beer, int quantity){
     }
 
     public void editItemQuantity (BeerStocked beer, int quantity){
+        getItem(beer.getId()).setQuantity(getItem(beer.getId()).getQuantity()+ quantity);
     }
 
 
