@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.Null;
@@ -30,12 +31,13 @@ public class GlobalBeerShopController {
     ShoppingCartRepositry ShoppingCartRepo;
 
     @GetMapping("/")
-    public String index(Model model, HttpSession session) {
+    public String index(Model model, HttpSession session, HttpServletRequest request) {
         model.addAttribute("title", appName);
         if(session.isNew()){
             System.out.printf("new session\n");
             model.addAttribute("sessionID", session.getId());
             model.addAttribute("cart", new ShoppingCart(session.getId()));
+            model.addAttribute("prevReq", request);
         }
         return "index";
 
@@ -50,7 +52,8 @@ public class GlobalBeerShopController {
                        @RequestParam(value = "abv", required = false) String abv,
                        @RequestParam(value = "type", required = false) String type,
                        @RequestParam(value = "sortCol", required= false) String sortCol,
-                       @RequestParam(value = "sortOrd", required= false) String sortOrd)
+                       @RequestParam(value = "sortOrd", required= false) String sortOrd,
+                       HttpServletRequest request    )
     {
 
         List<BeerStocked> queryResults;
@@ -135,9 +138,9 @@ public class GlobalBeerShopController {
     public String cart (Model model, HttpSession session, HttpServletResponse response,
                         @RequestParam(value = "add", required = false) String beerId,
                         @RequestParam(value = "quantity", required = false) String quantity,
-                        @RequestParam(value = "delete", required = false) String deleteId) throws IOException {
+                        @RequestParam(value = "delete", required = false) String deleteId,
+                        HttpServletRequest request) throws IOException {
 
-        System.out.printf("Add = %s, Quantity = %s, Delete = %s", beerId, quantity, deleteId);
 
         if(session.isNew()){
             response.sendRedirect("/");
@@ -146,31 +149,28 @@ public class GlobalBeerShopController {
 
         String sessionId = session.getId();
         if(beerId!=null && quantity!=null){
-            if(ShoppingCartRepo.addItemToCart(sessionId, beerId, quantity)){
-                System.out.printf("added item to cart\n");
-                response.sendRedirect("/cart");
+            if(Integer.parseInt(quantity) < 0){
+                if (ShoppingCartRepo.reduceItemInCart(sessionId, beerId, quantity)) response.sendRedirect("/cart");
+                else response.sendRedirect("/");
             }
-            else{
-                System.out.printf("failed to add item to cart\n");
-                response.sendRedirect("/");
+            else {
+                if (ShoppingCartRepo.addItemToCart(sessionId, beerId, quantity)) response.sendRedirect("/cart");
+                else response.sendRedirect("/");
             }
+
             return null;
         }
         else if(deleteId!=null){
-            if(ShoppingCartRepo.removeItemFromCart(sessionId, deleteId)) {
-                System.out.printf("removing item from cart\n");
-                response.sendRedirect("/cart");
-            }
-            else {
-                System.out.printf("ERROR removing item from cart\n");
-                response.sendRedirect("/");
-            }
+            if(ShoppingCartRepo.removeItemFromCart(sessionId, deleteId)) response.sendRedirect("/cart");
+            else response.sendRedirect("/");
+
             return null;
         }
 
-        System.out.printf("opening cart\n");
         ShoppingCart cart = ShoppingCartRepo.findSessionShoppingCart(session.getId());
         return cart.toString();
     }
+
+
 
 }

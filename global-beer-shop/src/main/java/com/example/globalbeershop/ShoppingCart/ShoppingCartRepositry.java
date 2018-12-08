@@ -120,7 +120,8 @@ public class ShoppingCartRepositry {
      * @throws IllegalArgumentException Invalid request
      */
     private boolean hasAvailableStock (String beerId, Integer quantityInCart, String quantityToAdd) throws IllegalArgumentException {
-        List<Integer> stock = jdbcTemplate.query("SELECT id, availableStock FROM BeerStocked WHERE id = ? and availableStock >= ?+?", new Object[]{beerId,quantityInCart, quantityToAdd}, new AvailableStockRowMapper());
+        List<Integer> stock = jdbcTemplate.query("SELECT id, availableStock FROM BeerStocked WHERE id = ? and availableStock >= ?+?",
+                new Object[]{beerId,quantityInCart, quantityToAdd}, new AvailableStockRowMapper());
 
         //if results empty, that means there isn't sufficient available stock
         if(stock.isEmpty()) return false;
@@ -143,6 +144,35 @@ public class ShoppingCartRepositry {
         }
 
         //if items was not in the cart in the first place/session does not have a cart yet
+        return false;
+    }
+
+    public boolean reduceItemInCart (String sessionId, String beerId, String quantity){
+        if(Integer.parseInt(quantity) >= 0) return false;
+
+        //checks if item already in the cart
+        List<Integer> alreadyInCart = jdbcTemplate.query("SELECT quantity FROM ShoppingCartItems WHERE sessionId = ? AND beerId = ?",
+                new Object[]{sessionId, beerId}, new alreadyInSessionCartChecker());
+
+
+        //if the results aren't empty (e.g. the item was in the cart)
+        if (!alreadyInCart.isEmpty()) {
+
+            //error check
+            if(alreadyInCart.get(0) + Integer.parseInt(quantity) < 0 ) return  false;
+
+            //if removing exact quantity already in cart
+            if(alreadyInCart.get(0) + Integer.parseInt(quantity) == 0) return removeItemFromCart(sessionId, beerId);
+
+            if(hasAvailableStock(beerId, alreadyInCart.get(0), quantity)){
+                //adds
+                jdbcTemplate.update("UPDATE ShoppingCartItems SET quantity = quantity + ? WHERE sessionId = ? AND beerId = ?",
+                        quantity, sessionId, beerId);
+                return true;
+            }
+
+        }
+
         return false;
     }
 }
