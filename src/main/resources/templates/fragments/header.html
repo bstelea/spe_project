@@ -1,0 +1,41 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--this is the header-->
+    <div th:fragment="header">
+        <title th:attr="data-custom=#{thymeleaf.app.title}">Shop</title>
+
+        <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <link rel="stylesheet" th:href="@{../css/main.css}" media="screen"/>
+
+    </div>
+</head>
+<body>
+
+<!-- navbar -->
+<div th:fragment="navbar">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="pull-left"><img src="/img/logo.png" alt="Logo" style="height: 50px;"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/shop">SHOP</a></li>
+                    <li><a href="/cart">CART</a></li>
+                    <li><a href="#search">SEARCH</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

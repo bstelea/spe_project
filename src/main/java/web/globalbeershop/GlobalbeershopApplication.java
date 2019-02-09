@@ -1,12 +1,14 @@
-package com.example.globalbeershop;
+package web.globalbeershop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GlobalBeerShopApplication {
+public class GlobalbeershopApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GlobalBeerShopApplication.class, args);
+		SpringApplication.run(GlobalbeershopApplication.class, args);
 	}
+
 }
+
