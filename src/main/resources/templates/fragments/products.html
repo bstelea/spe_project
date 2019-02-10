@@ -1,0 +1,24 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<div th:fragment="products">
+    <div class="panel-default well" th:each="beer : ${beers}">
+        <div class="panel-heading">
+            <h1 th:text="${beer.name}"></h1>
+        </div>
+        <h3 th:text="${beer.description}" class="panel-body">Description</h3>
+        <div class="row panel-footer">
+            <div th:inline="text" class="col-md-2">Price: [[${beer.price}]]</div>
+            <div th:inline="text" class="col-md-9">In Stock: [[${beer.quantity}]]</div>
+            <form action="/cart/add" method="post">
+                <input type="hidden" name="id" th:value="${beer.id}"/>
+                Quantity: <input type="number" name="quantity" value="1" min="1" th:max="${beer.quantity}"><br>
+                <input type="submit" value="Add to Cart">
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

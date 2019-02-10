@@ -115,3 +115,8 @@ footer .glyphicon {
     color: indianred;
 
 }
+
+.pagination {
+    display: block;
+    text-align: center;
+}
