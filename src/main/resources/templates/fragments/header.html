@@ -16,7 +16,7 @@
 
 <!-- navbar -->
 <div th:fragment="navbar">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -36,6 +36,13 @@
             </div>
         </div>
     </nav>
+</div>
+
+<div th:fragment="jumbotron">
+    <div class="jumbotron text-center">
+        <h1>Global Beer Shop</h1>
+        <p>Best beers from all around the world</p>
+    </div>
 </div>
 </body>
 </html>

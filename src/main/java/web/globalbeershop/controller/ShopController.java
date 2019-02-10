@@ -33,7 +33,7 @@ public class ShopController {
          param. decreased by 1.*/
         int evalPage = (page.orElse(0) < 1) ? INITIAL_PAGE : page.get() - 1;
 
-        Page<Beer> beers = beerService.findAllBeersPageable(new PageRequest(evalPage, 5));
+        Page<Beer> beers = beerService.findAllBeersPageable(new PageRequest(evalPage, 9));
         Pager pager = new Pager(beers);
 
         ModelAndView modelAndView = new ModelAndView();

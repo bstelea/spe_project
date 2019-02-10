@@ -4,19 +4,21 @@
 <body>
 
 <div th:fragment="products">
-    <div class="panel-default well" th:each="beer : ${beers}">
-        <div class="panel-heading">
-            <h1 th:text="${beer.name}"></h1>
+    <div class="col-sm-4" th:each="beer : ${beers}">
+        <div class="panel-primary">
+            <span th:text="${beer.name}"></span>
         </div>
-        <h3 th:text="${beer.description}" class="panel-body">Description</h3>
-        <div class="row panel-footer">
-            <div th:inline="text" class="col-md-2">Price: [[${beer.price}]]</div>
-            <div th:inline="text" class="col-md-9">In Stock: [[${beer.quantity}]]</div>
-            <form action="/cart/add" method="post">
-                <input type="hidden" name="id" th:value="${beer.id}"/>
-                Quantity: <input type="number" name="quantity" value="1" min="1" th:max="${beer.quantity}"><br>
-                <input type="submit" value="Add to Cart">
-            </form>
+        <div class="panel-body"><img th:src="${beer.image}" class="img-responsive" style="width:100%" th:alt="${beer.name}"></div>
+        <div class="panel-footer" th:inline="text">Price: [[${beer.price}]]</div>
+        <div class="panel-footer" th:inline="text">In Stock: [[${beer.quantity}]]</div>
+        <div class="row">
+            <div class="col-sm-6">
+                <form th:if="${beer.quantity}>0" action="/cart/add" method="post">
+                    <input type="hidden" name="id" th:value="${beer.id}"/>
+                    Quantity: <input type="number" name="quantity" value="1" min="1" th:max="${beer.quantity}"><br>
+                    <input type="submit" value="Add to Cart">
+                </form>
+            </div>
         </div>
     </div>
 </div>
