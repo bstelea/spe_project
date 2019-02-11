@@ -5,6 +5,23 @@ import web.globalbeershop.data.Beer;
 
 import java.util.Optional;
 
-public interface BeerRepository extends JpaRepository<Beer, Long>{
-    Optional<Beer> findById(Long id);
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+
+import java.util.List;
+
+public interface BeerRepository extends JpaRepository<Beer, Long>,
+        QuerydslPredicateExecutor<Beer> {
+
+    @Query("SELECT DISTINCT b.country FROM Beer b")
+    List<String> findAllDistinctCountry();
+
+    @Query("SELECT DISTINCT b.brewer FROM Beer b")
+    List<String> findAllDistinctBrewer();
+
+    @Query("SELECT DISTINCT b.abv FROM Beer b")
+    List<String> findAllDistinctAbv();
+
+    @Query("SELECT DISTINCT b.type FROM Beer b")
+    List<String> findAllDistinctType();
 }

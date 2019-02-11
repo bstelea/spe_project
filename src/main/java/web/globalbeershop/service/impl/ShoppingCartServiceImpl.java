@@ -34,6 +34,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     * Otherwise, add it to the map with quantity 1.*/
     @Override
     public void addBeer(Beer beer, Integer quantity) {
+
+
         if(beers.containsKey(beer)) {
             beers.replace(beer, beers.get(beer) + quantity);
         } else {
@@ -70,10 +72,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
             // Refresh quantity for every product before checking
             beer = beerRepository.findById(entry.getKey().getId()).get();
             if (beerRepository.findById(entry.getKey().getId()).isPresent()) {
-                if (beer.getQuantity() < entry.getValue()) {
+                if (beer.getStock() < entry.getValue()) {
                     throw new NotEnoughBeersInStockException(beer);
                 }
-                entry.getKey().setQuantity(beer.getQuantity() - entry.getValue());
+                entry.getKey().setStock(beer.getStock() - entry.getValue());
             }
         }
         beerRepository.saveAll(beers.keySet());
@@ -82,8 +84,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
+    public Double getTotal(){
+        Double total = 0.0;
+        for(Map.Entry<Beer, Integer> cartItem  : beers.entrySet()) total+= cartItem.getKey().getPrice() * cartItem.getValue();
+        return total;
+    }
+    /*
+    @Override
     public BigDecimal getTotal() {
         return beers.entrySet().stream().map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())))
                     .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
     }
+    */
 }

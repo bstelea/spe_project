@@ -21,12 +21,12 @@ public class Beer {
     private String name;
 
     @Column(name = "price", nullable = false)
-    @DecimalMin(value = "0.00", message = "*Price has to be a non negative value")
-    private BigDecimal price;
+    @DecimalMin(value = "0.0", message = "*Price has to be a non negative value")
+    private Double price;
 
-    @Column(name = "quantity", nullable = false)
-    @Min(value = 0, message = "*Quantity has to be a non negative value")
-    private Integer quantity;
+    @Column(name = "stock", nullable = false)
+    @Min(value = 0, message = "*Stock has to be a non negative value")
+    private Integer stock;
 
     @Column(name = "country", nullable = false)
     private String country;
@@ -39,7 +39,7 @@ public class Beer {
 
     @Column(name = "abv", nullable = false)
     @DecimalMin(value = "0.00", message = "*ABV has to be a non negative value")
-    private BigDecimal abv;
+    private Double abv;
 
     @Column(name = "image")
     private String image;
@@ -63,20 +63,20 @@ public class Beer {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public Integer getStock() {
+        return stock;
     }
 
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 
     public String getCountry() {
@@ -103,11 +103,11 @@ public class Beer {
         this.type = type;
     }
 
-    public BigDecimal getAbv() {
+    public Double getAbv() {
         return abv;
     }
 
-    public void setAbv(BigDecimal abv) {
+    public void setAbv(Double abv) {
         this.abv = abv;
     }
 

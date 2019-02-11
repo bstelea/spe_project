@@ -18,5 +18,5 @@ public interface ShoppingCartService {
 
     void checkout() throws NotEnoughBeersInStockException;
 
-    BigDecimal getTotal();
+    Double getTotal();
 }

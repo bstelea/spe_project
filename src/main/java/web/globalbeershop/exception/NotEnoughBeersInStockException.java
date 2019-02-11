@@ -11,6 +11,6 @@ public class NotEnoughBeersInStockException extends Exception {
     }
 
     public NotEnoughBeersInStockException(Beer beer) {
-        super(String.format("Not enough %s beers in stock. Only %d left", beer.getName(), beer.getQuantity()));
+        super(String.format("Not enough %s beers in stock. Only %d left", beer.getName(), beer.getStock()));
     }
 }
