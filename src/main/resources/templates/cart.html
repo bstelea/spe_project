@@ -21,7 +21,7 @@
             <div th:inline="text" class="col-md-9">Quantity: [[${beer.getValue()}]]</div>
             <form action="/cart/update" method="post">
                 <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
-                Update: <input type="number" name="quantity" value="1" min="1" th:max="${beer.getKey().quantity}"><br>
+                Update: <input type="number" name="quantity" value="1" min="1" th:max="${beer.getKey().stock}"><br>
                 <input type="submit" value="Update Quantity">
             </form>
             <form action="/cart/remove" method="post">
@@ -34,8 +34,8 @@
 
     <div class="row panel-body">
         <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
-        <a th:href="@{'/cart/checkout'}" class="col-md-1">
-            <button type="button" class="btn btn-danger" th:text="Checkout">Checkout</button>
+        <a th:href="@{'/cart/finish'}" class="col-md-1">
+            <button type="button" class="btn btn-danger" th:text="Finish">Finish</button>
         </a>
     </div>
 </div>

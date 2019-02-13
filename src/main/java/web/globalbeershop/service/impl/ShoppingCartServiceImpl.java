@@ -11,6 +11,7 @@ import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.BeerRepository;
 import web.globalbeershop.service.ShoppingCartService;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     private final BeerRepository beerRepository;
@@ -34,8 +36,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     * Otherwise, add it to the map with quantity 1.*/
     @Override
     public void addBeer(Beer beer, Integer quantity) {
-
-
         if(beers.containsKey(beer)) {
             beers.replace(beer, beers.get(beer) + quantity);
         } else {
@@ -66,7 +66,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void checkout() throws NotEnoughBeersInStockException {
+    public void finish() throws NotEnoughBeersInStockException {
         Beer beer;
         for (Map.Entry<Beer, Integer> entry : beers.entrySet()) {
             // Refresh quantity for every product before checking
@@ -89,11 +89,4 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         for(Map.Entry<Beer, Integer> cartItem  : beers.entrySet()) total+= cartItem.getKey().getPrice() * cartItem.getValue();
         return total;
     }
-    /*
-    @Override
-    public BigDecimal getTotal() {
-        return beers.entrySet().stream().map(entry -> entry.getKey().getPrice().multiply(BigDecimal.valueOf(entry.getValue())))
-                    .reduce(BigDecimal::add).orElse(BigDecimal.ZERO);
-    }
-    */
 }

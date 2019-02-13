@@ -27,9 +27,15 @@ public class CartController {
 
     @GetMapping("/cart")
     public String cart(Model model) {
+
         model.addAttribute("beers", shoppingCartService.getBeersInCart());
         model.addAttribute("total", shoppingCartService.getTotal().toString());
         return "cart";
+
+//        ModelAndView modelAndView = new ModelAndView("/cart");
+//        modelAndView.addObject("beers", shoppingCartService.getBeersInCart());
+//        modelAndView.addObject("total", shoppingCartService.getTotal().toString());
+//        return modelAndView;
     }
 
     @PostMapping("/cart/add")
@@ -54,12 +60,15 @@ public class CartController {
         return cart(model);
     }
 
-    @GetMapping("/cart/checkout")
-    public String checkout(Model model) {
+    @GetMapping("/cart/finish")
+    public String finish(Model model) {
         try {
-            shoppingCartService.checkout();
+            shoppingCartService.finish();
         } catch (NotEnoughBeersInStockException e) {
+
             model.addAttribute("outOfStockMessage", e.getMessage());
+
+//            return cart().addObject("outOfStockMessage", e.getMessage());
         }
         return cart(model);
     }

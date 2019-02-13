@@ -13,6 +13,8 @@ import java.util.List;
 public interface BeerRepository extends JpaRepository<Beer, Long>,
         QuerydslPredicateExecutor<Beer> {
 
+    Optional<Beer> findById(Long id);
+
     @Query("SELECT DISTINCT b.country FROM Beer b")
     List<String> findAllDistinctCountry();
 
