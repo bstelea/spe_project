@@ -12,10 +12,13 @@
 	<artifactId>globalbeershop</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>globalbeershop</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Global Beer Shop ting</description>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<spring-security-test.version>4.2.3.RELEASE</spring-security-test.version>
+		<spring-boot.version>2.1.0.RELEASE</spring-boot.version>
+
 	</properties>
 
 	<dependencies>
@@ -29,6 +32,24 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+			<version>${spring-security-test.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>3.0.4.RELEASE</version>
+		</dependency>
+
 
 		<!--Thymeleaf-->
 		<dependency>
@@ -102,6 +123,8 @@
 			<artifactId>querydsl-jpa</artifactId>
 			<version>4.2.1</version>
 		</dependency>
+
+
 
 	</dependencies>
 
