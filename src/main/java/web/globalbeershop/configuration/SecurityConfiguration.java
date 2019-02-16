@@ -32,16 +32,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
 //        for when using mySQL DB
-//        auth.
-//                jdbcAuthentication()
-//                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-//                .authoritiesByUsernameQuery("select username, role from users where username=?")
-//                .dataSource(dataSource)
-//                .passwordEncoder(bCryptPasswordEncoder);
-
-        //for when using H2 DB
-        auth.inMemoryAuthentication()
-                .withUser("admin").password(bCryptPasswordEncoder.encode("password")).roles("ADMIN");
+        auth.
+                jdbcAuthentication()
+                .usersByUsernameQuery("select username, password, enabled from users where username=?")
+                .authoritiesByUsernameQuery("select username, role from users where username=?")
+                .dataSource(dataSource)
+                .passwordEncoder(bCryptPasswordEncoder);
+//
+//        //for when using H2 DB
+//        auth.inMemoryAuthentication()
+//                .withUser("admin").password(bCryptPasswordEncoder.encode("password")).roles("ADMIN");
 
     }
 
