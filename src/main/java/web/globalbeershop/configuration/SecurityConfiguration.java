@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //all other pages can be accessed by anyone
                 .anyRequest().permitAll()
 
-                .antMatchers("/h2_console/**").permitAll()
+//                .antMatchers("/h2_console/**").permitAll()
 
 
 
