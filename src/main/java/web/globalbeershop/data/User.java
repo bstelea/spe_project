@@ -28,7 +28,8 @@ public class User {
     String username;
 
     @Column(name = "password")
-    @Size(min = 6, max = 60, message = "*Your password must have at least 6 characters")
+    @NotEmpty(message = "*Please provide an password")
+
     private String password;
 
     @Column(name = "forename")

@@ -24,7 +24,7 @@
 
                 <div class="form-group">
                     <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{password}" placeholder="Password" class="form-control input-lg"/>
+                    <input type="password" th:field="*{password}" placeholder="Password" class="form-control input-lg"/>
                 </div>
 
                 <input type="hidden" th:field="*{role}" value="USER"/>
