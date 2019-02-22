@@ -5,95 +5,86 @@
 
 <div th:fragment="searchtool">
 
-    <table class="table table-borderless" >
-        <thead>
+        <div class="container">
 
-        <tr>
-            <th> Filter </th>
-            <th> Sort </th>
-            <th> Items per Page</th>
-            <th> </th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <tr>
             <form action="/shop" method="get">
+             <table class="table table-borderless" >
 
-                <td style="width: 33%">
-                    <table class="table table-borderless" >
-                        <thead>
-                        <tr>
-                            <th> Country </th>
-                            <th> Brewer </th>
-                            <th> ABV </th>
-                            <th> Type </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
+                    <thead>
+                    <tr>
+                        <th> Name </th>
+                        <th> Country </th>
+                        <th> Brewer </th>
+                        <th> ABV </th>
+                        <th> Type </th>
+                        <th> Filter </th>
+                        <th> Sort </th>
+                        <th> Items per Page</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
 
-                            <td><select name="country">
-                                <option value=""></option>
-                                <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
-                            </select></td>
-                            <td><select name="brewer">
-                                <option value=""></option>
-                                <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
-                            </select></td>
-                            <td><select name="abv">
-                                <option value=""></option>
-                                <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
-                            </select></td>
-                            <td><select name="type">
-                                <option value=""></option>
-                                <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
-                            </select></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </td>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control search-slt" placeholder="" name="name">
+                        </td>
+                        <td><select name="country">
+                            <option value=""></option>
+                            <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
+                        </select></td>
+                        <td><select name="brewer">
+                            <option value=""></option>
+                            <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
+                        </select></td>
+                        <td><select name="abv">
+                            <option value=""></option>
+                            <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
+                        </select></td>
+                        <td><select name="type">
+                            <option value=""></option>
+                            <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                        </select></td>
 
+                        <td>
 
-                <td style="width: 33%">
+                            <select name="sortCol">
+                                <option value="name">Name</option>
+                                <option value="brewer">Brewer</option>
+                                <option value="country">Country of Origin</option>
+                                <option value="type">Beer Type</option>
+                                <option value="abv">ABV</option>
+                            </select>
 
-                    <select name="sortCol">
-                        <option value="name">Name</option>
-                        <option value="brewer">Brewer</option>
-                        <option value="country">Country of Origin</option>
-                        <option value="type">Beer Type</option>
-                        <option value="abv">ABV</option>
-                    </select>
-
-                    <select name="sortOrd">
-                        <option value="ASC">Ascending</option>
-                        <option value="DESC">Descending</option>
-                    </select>
-
-
-                </td>
-
-
-                <td style="width: 33%">
-                    <select name="size">
-                        <option value=9>9</option>
-                        <option value=27>27</option>
-                        <option value=45>45</option>
-                        <option value=99>99</option>
-                    </select>
-                </td>
-
-                <input type="submit" value="Apply">
-                <form action="/shop" method="get">
-                    <input type="submit" value="Clear">
-                </form>
-            </form>
+                            <select name="sortOrd">
+                                <option value="ASC">Ascending</option>
+                                <option value="DESC">Descending</option>
+                            </select>
 
 
-        </tr>
-        </tbody>
-    </table>
-</div>
+                        </td>
+
+                        <td>
+                            <select name="size">
+                                <option value=9>9</option>
+                                <option value=27>27</option>
+                                <option value=45>45</option>
+                                <option value=99>99</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <input type="submit" value="Apply">
+                            <form action="/shop" method="get">
+                                <input type="submit" value="Clear">
+                            </form>
+                        </td>
+                    </tr>
+            </tbody>
+            </table>
+        </form>
+
+    </div>
+    </div>
 </body>
 </html>

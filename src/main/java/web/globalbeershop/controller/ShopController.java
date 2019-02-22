@@ -81,7 +81,7 @@ public class ShopController {
 
 
         //checks all possible params user could provide, and constructs query predicate using given params
-        if(paramGiven(name)) predicate=predicate.and(QBeer.beer.name.eq(name));
+        if(paramGiven(name)) predicate=predicate.and(QBeer.beer.name.like( "%"+name+"%"));
         if(paramGiven(country)) predicate=predicate.and(QBeer.beer.country.eq(country));
         if(paramGiven(brewer)) predicate=predicate.and(QBeer.beer.brewer.eq(brewer));
         if(paramGiven(abv)) predicate=predicate.and(QBeer.beer.abv.eq(Double.parseDouble(abv)));
