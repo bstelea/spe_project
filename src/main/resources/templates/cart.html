@@ -34,8 +34,8 @@
 
     <div class="row panel-body">
         <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
-        <a th:href="@{'/cart/finish'}" class="col-md-1">
-            <button type="button" class="btn btn-danger" th:text="Finish">Finish</button>
+        <a th:if='${!beers.isEmpty()}' th:href="@{'/checkout'}" class="col-md-1">
+            <button type="button" class="btn btn-danger" th:text="Checkout">Checkout</button>
         </a>
     </div>
 </div>

@@ -2,6 +2,7 @@ package web.globalbeershop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,29 +19,37 @@ public class CheckoutController {
     OrderRepository orderRepository;
 
     @GetMapping("/checkout")
-    public ModelAndView checkout() {
-        ModelAndView modelAndView = new ModelAndView();
-        Order order = new Order();
-        modelAndView.addObject("order", order);
-        modelAndView.setViewName("/checkout");
-        return modelAndView;
+    public String getCheckoutPage(Model model) {
+        model.addAttribute("order", new Order());
+        return "checkout";
     }
 
-    @PostMapping("/checkout")
-    public ModelAndView logOrder(@Valid Order order, BindingResult bindingResult) {
+    @GetMapping("/checkout/payment")
+    public String getPaymentPage(Model model) {
+        return "payment";
+    }
 
-        ModelAndView modelAndView = new ModelAndView();
+    @PostMapping("/checkout/submitDelivery")
+    public String submitDeliveryDetails(Model model, @Valid Order order, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/checkout");
-        } else {
-            // Successful checkout
-            orderRepository.save(order);
-
-            modelAndView.addObject("successMessage", "User checkout successful");
-            modelAndView.addObject("order", new Order());
-            modelAndView.setViewName("/checkout");
+            return "redirect:/checkout";
         }
-        return modelAndView;
+
+        model.addAttribute("order", order);
+
+        return "redirect:/checkout/payment";
+    }
+
+    @PostMapping("/checkout/submitPayment")
+    public String submitPayment(Model model, @Valid Order order) {
+
+        // Successful checkout
+        orderRepository.save(order);
+
+        model.addAttribute("successMessage", "User checkout successful");
+        model.addAttribute("order", new Order());
+
+        return "redirect:/checkout";
     }
 }
