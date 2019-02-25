@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.service.BeerService;
 import web.globalbeershop.service.ShoppingCartService;
@@ -43,7 +44,7 @@ public class CartController {
         if(beerService.findById(id).isPresent()) {
             shoppingCartService.addBeer(beerService.findById(id).get(), quantity);
         }
-        return cart(model);
+        return "redirect:/shop";
     }
 
     @PostMapping("/cart/remove")
@@ -60,16 +61,20 @@ public class CartController {
         return cart(model);
     }
 
-    @GetMapping("/cart/finish")
-    public String finish(Model model) {
+    @GetMapping("/cart/checkout")
+    public String goToCheckout(Model model) {
         try {
-            shoppingCartService.finish();
+            shoppingCartService.goToCheckout();
         } catch (NotEnoughBeersInStockException e) {
 
             model.addAttribute("outOfStockMessage", e.getMessage());
+            return cart(model);
 
 //            return cart().addObject("outOfStockMessage", e.getMessage());
+        } catch (NoBeersInCartException b) {
+            model.addAttribute("emptyCartMessage", b.getMessage());
+            return cart(model);
         }
-        return cart(model);
+        return "redirect:/checkout";
     }
 }

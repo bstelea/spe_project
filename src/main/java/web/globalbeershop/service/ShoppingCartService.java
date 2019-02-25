@@ -1,6 +1,7 @@
 package web.globalbeershop.service;
 
 import web.globalbeershop.data.Beer;
+import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 
 import java.math.BigDecimal;
@@ -16,7 +17,9 @@ public interface ShoppingCartService {
 
     Map<Beer, Integer> getBeersInCart();
 
-    void finish() throws NotEnoughBeersInStockException;
+    void goToCheckout() throws NotEnoughBeersInStockException, NoBeersInCartException;
+
+    void finish() throws NotEnoughBeersInStockException, NoBeersInCartException;
 
     Double getTotal();
 }

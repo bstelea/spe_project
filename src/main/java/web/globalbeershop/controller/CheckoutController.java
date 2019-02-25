@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import web.globalbeershop.data.Order;
+import web.globalbeershop.exception.NoBeersInCartException;
+import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.OrderRepository;
+import web.globalbeershop.service.BeerService;
+import web.globalbeershop.service.ShoppingCartService;
 
 import javax.validation.Valid;
 
@@ -18,10 +22,23 @@ public class CheckoutController {
     @Autowired
     OrderRepository orderRepository;
 
+    private final ShoppingCartService shoppingCartService;
+
+    private final BeerService beerService;
+
+    @Autowired
+    public CheckoutController(ShoppingCartService shoppingCartService, BeerService beerService) {
+        this.shoppingCartService = shoppingCartService;
+        this.beerService = beerService;
+    }
+
     @GetMapping("/checkout")
-    public String getCheckoutPage(Model model) {
-        model.addAttribute("order", new Order());
-        return "checkout";
+    public ModelAndView checkout() {
+        ModelAndView modelAndView = new ModelAndView();
+        Order order = new Order();
+        modelAndView.addObject("order", order);
+        modelAndView.setViewName("/checkout");
+        return modelAndView;
     }
 
     @GetMapping("/checkout/payment")
@@ -41,15 +58,28 @@ public class CheckoutController {
         return "redirect:/checkout/payment";
     }
 
-    @PostMapping("/checkout/submitPayment")
-    public String submitPayment(Model model, @Valid Order order) {
+    @PostMapping("/checkout/complete")
+    public ModelAndView logOrder(@Valid Order order, BindingResult bindingResult) {
 
-        // Successful checkout
-        orderRepository.save(order);
+        ModelAndView modelAndView = new ModelAndView();
 
-        model.addAttribute("successMessage", "User checkout successful");
-        model.addAttribute("order", new Order());
+        try {
+            shoppingCartService.finish();
+        } catch (NotEnoughBeersInStockException e) {
+            return checkout().addObject("outOfStockMessage", e.getMessage());
+        } catch (NoBeersInCartException b) {
+            return checkout().addObject("emptyCartMessage", b.getMessage());
+        }
 
-        return "redirect:/checkout";
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("/checkout");
+        } else {
+            // Valid order delivery details
+
+            modelAndView.addObject("successMessage", "User checkout successful");
+            modelAndView.addObject("order", new Order());
+            modelAndView.setViewName("/payment");
+        }
+        return modelAndView;
     }
 }

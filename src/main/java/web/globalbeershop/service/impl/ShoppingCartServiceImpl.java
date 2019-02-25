@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.WebApplicationContext;
 import web.globalbeershop.data.Beer;
+import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.BeerRepository;
 import web.globalbeershop.service.ShoppingCartService;
@@ -33,7 +34,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
     /*If the beer is in the map just increment the quantity by 1.
-    * Otherwise, add it to the map with quantity 1.*/
+     * Otherwise, add it to the map with quantity 1.*/
     @Override
     public void addBeer(Beer beer, Integer quantity) {
         if(beers.containsKey(beer)) {
@@ -51,7 +52,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     /*If beer is in the map with quantity higher than 1, decrement the quantity by 1.
-    * Otherwise, if it has quantity = 1, remove the beer from the map.*/
+     * Otherwise, if it has quantity = 1, remove the beer from the map.*/
     @Override
     public void removeBeer(Beer beer) {
         if(beers.containsKey(beer)) {
@@ -66,8 +67,30 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void finish() throws NotEnoughBeersInStockException {
+    public void goToCheckout() throws NotEnoughBeersInStockException, NoBeersInCartException {
         Beer beer;
+        if (beers.entrySet().isEmpty()) {
+            throw new NoBeersInCartException();
+        } else {
+            for (Map.Entry<Beer, Integer> entry : beers.entrySet()) {
+                // Refresh quantity for every product before checking
+                beer = beerRepository.findById(entry.getKey().getId()).get();
+                if (beerRepository.findById(entry.getKey().getId()).isPresent()) {
+                    if (beer.getStock() < entry.getValue()) {
+                        throw new NotEnoughBeersInStockException(beer);
+                    }
+                }
+            }
+        }
+    }
+
+
+    @Override
+    public void finish() throws NotEnoughBeersInStockException, NoBeersInCartException {
+        Beer beer;
+        if (beers.entrySet().isEmpty()) {
+            throw new NoBeersInCartException();
+        }
         for (Map.Entry<Beer, Integer> entry : beers.entrySet()) {
             // Refresh quantity for every product before checking
             beer = beerRepository.findById(entry.getKey().getId()).get();

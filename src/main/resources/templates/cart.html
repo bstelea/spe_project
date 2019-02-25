@@ -9,6 +9,7 @@
 <div th:replace="/fragments/header :: jumbotron"></div>
 
 <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
+<div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
 
 <div class="container">
     <div class="panel-default well" th:each="beer : ${beers.entrySet()}">
@@ -34,8 +35,8 @@
 
     <div class="row panel-body">
         <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
-        <a th:if='${!beers.isEmpty()}' th:href="@{'/checkout'}" class="col-md-1">
-            <button type="button" class="btn btn-danger" th:text="Checkout">Checkout</button>
+        <a th:href="@{'/cart/checkout'}" class="col-md-1">
+            <button type="button" class="btn btn-danger">Go To Checkout</button>
         </a>
     </div>
 </div>
