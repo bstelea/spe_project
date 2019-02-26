@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
 
-<div th:replace="/fragments/header :: navbar"></div>
+<div th:replace="fragments/header :: navbar"></div>
 
-<div th:replace="/fragments/header :: jumbotron"></div>
+<div th:replace="fragments/header :: jumbotron"></div>
 
 <div class="container">
-    <div th:replace="/fragments/searchtool :: searchtool"></div>
+    <div th:replace="fragments/searchtool :: searchtool"></div>
 
-    <div th:replace="/fragments/products :: products"></div>
+    <div th:replace="fragments/products :: products"></div>
 
-    <div th:replace="/fragments/pagination :: pagination(URLparameter='/shop')"></div>
+    <div th:replace="fragments/pagination :: pagination(URLparameter='/shop')"></div>
 
 </div>
 
