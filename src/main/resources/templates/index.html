@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
-
-<div th:replace="/fragments/header :: navbar"></div>
+<p>This is the homepage</p>
+<div th:replace="fragments/header :: navbar"></div>
 
 <div class="jumbotron text-center">
     <h1>Global Beer Shop</h1>
@@ -15,50 +15,50 @@
     </p>
 </div>
 
-<!--<div class="container-fluid" id="search">-->
-    <!--<div class="row">-->
-        <!--<div class="col-sm-12">-->
-            <!--<h2>Search for a Beer!</h2>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<form action="/shop" method="get">-->
-        <!--<div class="row text-center">-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>Country</h4>-->
-                <!--<select name="country">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="c : ${country}" th:value="${c}" th:text="${c}"></option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>Brewer</h4>-->
-                <!--<select name="brewer">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="b : ${brewer}" th:value="${b}" th:text="${b}"></option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>ABV</h4>-->
-                <!--<select name="abv">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="a : ${abv}" th:value="${a}" th:text="${a} "></option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>Type</h4>-->
-                <!--<select name="type">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="t : ${type}" th:value="${t}" th:text="${t}"></option>-->
-                <!--</select>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row text-center">-->
-            <!--<div class="col-sm-12">-->
-                <!--<input type="submit" value="Search">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
+<!--&lt;!&ndash;<div class="container-fluid" id="search">&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="col-sm-12">&ndash;&gt;-->
+            <!--&lt;!&ndash;<h2>Search for a Beer!</h2>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<form action="/shop" method="get">&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="row text-center">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>Country</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;<select name="country">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value=""></option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option th:each="c : ${country}" th:value="${c}" th:text="${c}"></option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>Brewer</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;<select name="brewer">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value=""></option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option th:each="b : ${brewer}" th:value="${b}" th:text="${b}"></option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>ABV</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;<select name="abv">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value=""></option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option th:each="a : ${abv}" th:value="${a}" th:text="${a} "></option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-sm-3">&ndash;&gt;-->
+                <!--&lt;!&ndash;<h4>Type</h4>&ndash;&gt;-->
+                <!--&lt;!&ndash;<select name="type">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option value=""></option>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<option th:each="t : ${type}" th:value="${t}" th:text="${t}"></option>&ndash;&gt;-->
+                <!--&lt;!&ndash;</select>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;<div class="row text-center">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="col-sm-12">&ndash;&gt;-->
+                <!--&lt;!&ndash;<input type="submit" value="Search">&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
 
 <div class="container-fluid text-center">
     <h2>GLOBAL BEER SHOP</h2>
@@ -173,8 +173,5 @@
         });
     })
 </script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</body>
-</html>
 </body>
 </html>
