@@ -32,12 +32,11 @@ public class CheckoutController {
         this.beerService = beerService;
     }
 
-    @GetMapping("/checkout")
+    @GetMapping("/checkout/delivery")
     public ModelAndView checkout() {
         ModelAndView modelAndView = new ModelAndView();
-        Order order = new Order();
-        modelAndView.addObject("order", order);
-        modelAndView.setViewName("/checkout");
+        modelAndView.addObject("order", new Order());
+        modelAndView.setViewName("/delivery");
         return modelAndView;
     }
 
@@ -46,15 +45,12 @@ public class CheckoutController {
         return "payment";
     }
 
-    @PostMapping("/checkout/submitDelivery")
+    @PostMapping("/checkout/delivery/submit")
     public String submitDeliveryDetails(Model model, @Valid Order order, BindingResult bindingResult) {
 
-        if (bindingResult.hasErrors()) {
-            return "redirect:/checkout";
-        }
-
+        if (bindingResult.hasErrors())  return "redirect:/checkout/delivery";
+        
         model.addAttribute("order", order);
-
         return "redirect:/checkout/payment";
     }
 
