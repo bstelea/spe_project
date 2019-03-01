@@ -6,78 +6,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <script
-            src="https://www.paypal.com/sdk/js?client-id=Ae78DIropRMkaRCpVc6hcxdZD7OQKElC161vbIhBmqubyeh3CUNmolt6Et2-l23WXOx8fe5xRmD0jpCR">
-    </script>
+
 </head>
 <body>
+
 <div th:replace="fragments/header :: navbar"></div>
 
 <div th:replace="fragments/header :: jumbotron"></div>
 
-<div class="container">
 
+<header class="main">
+    <div class="container wide">
+        <div class="content slim">
+            <div class="set">
+                <div class="fill">
+                    <a class="pseudoshop" href="/">PSEUDO<strong>SHOP</strong></a>
+                </div>
 
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <h1>Payment</h1>
-                <div id="paypal-button-container"></div>
-
-                <script>
-                    paypal.Button.render({
-
-                        env: 'sandbox', // Or 'production' for when not testng
-
-                    // Set up the payment:
-
-                    // 1. Add a payment callback
-
-                    payment: function(data, actions) {
-
-                    // 2. Make a request to your server
-
-                    return actions.request.get('localhost:8080/create/payment')
-
-                    .then(function(res) {
-
-                    // 3. Return res.id from the response
-
-                            return res.id;
-
-                        });
-
-                    },
-
-                    // Execute the payment:
-
-                    // 1. Add an onAuthorize callback
-
-                    onAuthorize: function(data, actions) {
-
-// 2. Make a request to your server
-
-                        return actions.request.post('/complete/payment', {
-
-                            paymentID: data.paymentID,
-
-                                payerID: data.payerID
-
-                        })
-
-                    .then(function(res) {
-
-// 3. Show the buyer a confirmation message.
-
-                        });
-
-                    }
-
-                    }, '#paypal-button');
-                </script>
-
+                <div class="fit">
+                    <a class="braintree" href="https://developers.braintreepayments.com/guides/drop-in" target="_blank">Braintree</a>
+                </div>
+            </div>
         </div>
+    </div>
+    <div class="notice-wrapper">
+        <div class="show notice error notice-error" th:if="${paymentErrorMessage}">
+            <span class="notice-message" th:text="${paymentErrorMessage}"></span>
+        </div>
+    </div>
+</header>
+
+<div class="wrapper">
+    <div class="checkout container">
+
+        <header>
+            <h1>Hi, <br />Let's test a transaction</h1>
+            <p>
+                Make a test payment with Braintree using PayPal or a card
+            </p>
+        </header>
+
+        <form id="payment-form" method="post" action="/checkout/payment/submit">
+            <section>
+                <label for="amount">
+                    <span class="input-label">Amount</span>
+                    <div class="input-wrapper amount-wrapper">
+                        <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" th:value="${amount}" />
+                    </div>
+                </label>
+
+                <div class="bt-drop-in-wrapper">
+                    <div id="bt-dropin"></div>
+                </div>
+            </section>
+
+            <input type="hidden" id="nonce" name="payment_method_nonce" />
+            <button class="button" type="submit"><span>Test Transaction</span></button>
+        </form>
     </div>
 </div>
 
+<script src="https://js.braintreegateway.com/web/dropin/1.16.0/js/dropin.min.js"></script>
+<script th:inline="javascript">
+    var form = document.querySelector('#payment-form');
+    var client_token = [[${clientToken}]];
+    var total = [[${amount}]];
+
+    braintree.dropin.create({
+        authorization: client_token,
+        container: '#bt-dropin',
+        paypal: {
+            flow: 'vault',
+            amount: total,
+            currency: 'GBP'
+        }
+    }, function (createErr, instance) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                    console.log('Error', err);
+                    return;
+                }
+                // Add the nonce to the form and submit
+                document.querySelector('#nonce').value = payload.nonce;
+                form.submit();
+            });
+        });
+    });
+    /*]]>*/
+</script>
+
 </body>
 </html>
+
