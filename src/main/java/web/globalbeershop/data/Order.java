@@ -46,7 +46,6 @@ public class Order {
     private String zone;
 
     @Column(name = "payment_ref")
-    @NotEmpty
     private String paymentRef;
 
     @OneToMany(mappedBy = "order")

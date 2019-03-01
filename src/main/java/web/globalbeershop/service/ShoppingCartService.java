@@ -17,9 +17,9 @@ public interface ShoppingCartService {
 
     Map<Beer, Integer> getBeersInCart();
 
-    void goToCheckout() throws NotEnoughBeersInStockException, NoBeersInCartException;
+    void validateCart() throws NotEnoughBeersInStockException, NoBeersInCartException;
 
-    void finish() throws NotEnoughBeersInStockException, NoBeersInCartException;
+    void finish();
 
     Double getTotal();
 }

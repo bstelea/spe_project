@@ -1,72 +1,159 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="fragments/header :: header"></div>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Checkout</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="payment.css">
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
+<main class="page payment-page">
+    <section class="payment-form dark">
+        <div class="container">
 
-<div th:replace="fragments/header :: jumbotron"></div>
+            <div class="block-heading">
+                <h2>Checkout</h2>
+            </div>
+            <form id="payment-form" autocomplete="on" action="/checkout" th:object="${order}" method="post" role="form">
+                <div class="products">
+                    <h3 class="title">Items</h3>
 
-<div class="container">
 
-    <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
-    <div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
-    <div class="alert alert-info" th:if="${paymentErrorMessage}" th:utext="${paymentErrorMessage}"></div>
+                    <div class="item"  th:each="beer : ${beers.entrySet()}">
+                        <div th:inline="text">[[${beer.getKey().name}]]</div>
+                        <div th:inline="text">Price: £[[${beer.getKey().price}]]</div>
+                        <div th:inline="text">Quantity: [[${beer.getValue()}]]</div>
+                    </div>
 
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form autocomplete="on" action="/checkout/delivery/submit" th:object="${order}" method="post" role="form">
-                <h1>Delivery</h1>
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{name}" placeholder="Name" class="form-control input-lg"/>
+                    <div th:inline="text">Total: £[[${total}]]</div>
                 </div>
+                <div class="card-details">
+                    <h3 class="title">Delivery Details</h3>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control input-lg"/>
-                </div>
+                    <div class="notice-wrapper">
+                        <div class="show notice error notice-error" th:if="${outOfStockMessage}">
+                            <span class="notice-message" th:text="${outOfStockMessage}"></span>
+                        </div>
+                    </div>
+                    <div class="notice-wrapper">
+                        <div class="show notice error notice-error" th:if="${emptyCartMessage}">
+                            <span class="notice-message" th:text="${emptyCartMessage}"></span>
+                        </div>
+                    </div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{email}" placeholder="Email" class="form-control input-lg"/>
-                </div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{address}" placeholder="Address" class="form-control input-lg"/>
-                </div>
+                    <div class="row">
+                        <div class="form-group col-sm-7">
+                            <label for="first_name">Forename</label>
+                            <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label>
+                            <input id="first_name" type="text"  th:field="*{name}" class="form-control" placeholder="Foreame" aria-label="Foreame" aria-describedby="basic-addon1">
+                        </div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{city}" placeholder="City" class="form-control input-lg"/>
-                </div>
+                        <div class="form-group col-sm-7">
+                            <label for="last_name">Surname</label>
+                            <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></label>
+                            <input id="last_name" type="text"  th:field="*{lastName}" class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="basic-addon1">
+                        </div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('county')}" th:errors="*{county}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{county}" placeholder="County" class="form-control input-lg"/>
-                </div>
+                        <div class="form-group col-sm-7">
+                            <label for="email">Email Address</label>
+                            <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
+                            <input id="email" type="text"  th:field="*{email}" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon1">
+                        </div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('zone')}" th:errors="*{zone}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{zone}" placeholder="Postcode" class="form-control input-lg"/>
-                </div>
+                        <div class="form-group col-sm-7">
+                            <label for="address">Address</label>
+                            <label th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></label>
+                            <input id="address" type="text"  th:field="*{address}" class="form-control" placeholder="First Address Line" aria-label="First Address Line" aria-describedby="basic-addon1">
+                        </div>
 
-                <div class="row">
-                    <div class="col-sm-3" style="float: none; margin: 0 auto;">
-                        <input type="submit" class="btn btn-primary" value="Go to Payment"/>
+                        <div class="form-group col-sm-7">
+                            <label for="city">City/Town</label>
+                            <label th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></label>
+                            <input id="city" type="text"  th:field="*{city}" class="form-control" placeholder="City/Town" aria-label="City/Town" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="form-group col-sm-7">
+                            <label for="county">County</label>
+                            <label th:if="${#fields.hasErrors('county')}" th:errors="*{county}" class="alert alert-danger"></label>
+                            <input id="county" type="text"  th:field="*{county}" class="form-control" placeholder="County" aria-label="County" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="form-group col-sm-7">
+                            <label for="postcode">Postcode</label>
+                            <label th:if="${#fields.hasErrors('zone')}" th:errors="*{zone}" class="alert alert-danger"></label>
+                            <input id="postcode" type="text"  th:field="*{zone}" class="form-control" placeholder="Postcode" aria-label="Postcode" aria-describedby="basic-addon1">
+                        </div>
+
                     </div>
                 </div>
+
+                    <!--Paypal-->
+                    <div class="card-details">
+                        <h3 class="title">Payment</h3>
+                        <div class="row">
+
+                            <div class="notice-wrapper">
+                                <div class="show notice error notice-error" th:if="${paymentErrorMessage}">
+                                    <span class="notice-message" th:text="${paymentErrorMessage}"></span>
+                                </div>
+                            </div>
+
+                            <section>
+                                <input type="hidden" id="amount" name="amount" th:value="${total}" />
+                                <input type="hidden" id="nonce" name="payment_method_nonce" />
+
+                                <div class="bt-drop-in-wrapper">
+                                    <div id="bt-dropin"></div>
+                                </div>
+                            </section>
+
+                            <button class="button" type="submit"><span>Checkout</span></button>
+
+
+                        </div>
+                    </div>
+
             </form>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 
+<script src="https://js.braintreegateway.com/web/dropin/1.16.0/js/dropin.min.js"></script>
+<script th:inline="javascript">
+    var form = document.querySelector('#payment-form');
+    var client_token = [[${clientToken}]];
+    var total = [[${total}]];
+
+    braintree.dropin.create({
+        authorization: client_token,
+        container: '#bt-dropin',
+        paypal: {
+            flow: 'vault',
+            amount: total,
+            currency: 'GBP'
+        }
+    }, function (createErr, instance) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                    console.log('Error', err);
+                    return;
+                }
+                // Add the nonce to the form and submit
+                document.querySelector('#nonce').value = payload.nonce;
+                form.submit();
+            });
+        });
+    });
+    /*]]>*/
+</script>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

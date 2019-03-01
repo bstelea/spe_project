@@ -67,7 +67,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public void goToCheckout() throws NotEnoughBeersInStockException, NoBeersInCartException {
+    public void validateCart() throws NotEnoughBeersInStockException, NoBeersInCartException {
         Beer beer;
         if (beers.entrySet().isEmpty()) {
             throw new NoBeersInCartException();
@@ -86,18 +86,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
 
     @Override
-    public void finish() throws NotEnoughBeersInStockException, NoBeersInCartException {
-        Beer beer;
-        if (beers.entrySet().isEmpty()) {
-            throw new NoBeersInCartException();
-        }
+    public void finish(){
         for (Map.Entry<Beer, Integer> entry : beers.entrySet()) {
-            // Refresh quantity for every product before checking
-            beer = beerRepository.findById(entry.getKey().getId()).get();
+            Beer beer = beerRepository.findById(entry.getKey().getId()).get();
             if (beerRepository.findById(entry.getKey().getId()).isPresent()) {
-                if (beer.getStock() < entry.getValue()) {
-                    throw new NotEnoughBeersInStockException(beer);
-                }
                 entry.getKey().setStock(beer.getStock() - entry.getValue());
             }
         }

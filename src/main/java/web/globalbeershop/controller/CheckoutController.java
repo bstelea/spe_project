@@ -8,14 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import web.globalbeershop.GlobalbeershopApplication;
+import web.globalbeershop.data.Beer;
 import web.globalbeershop.data.Order;
+import web.globalbeershop.data.OrderItem;
 import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
+import web.globalbeershop.repository.OrderItemRepository;
 import web.globalbeershop.repository.OrderRepository;
 import web.globalbeershop.service.BeerService;
 import web.globalbeershop.service.ShoppingCartService;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.Map;
 
 import com.braintreegateway.BraintreeGateway;
 import com.braintreegateway.Result;
@@ -36,14 +40,12 @@ import javax.validation.Valid;
 public class CheckoutController {
 
 
-    @Autowired
-    OrderRepository orderRepository;
-
+    private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
     private final ShoppingCartService shoppingCartService;
-
     private final BeerService beerService;
 
-    private BraintreeGateway gateway = GlobalbeershopApplication.gateway;
+    private final BraintreeGateway gateway = GlobalbeershopApplication.gateway;
 
     private Status[] TRANSACTION_SUCCESS_STATUSES = new Status[] {
             Transaction.Status.AUTHORIZED,
@@ -56,63 +58,66 @@ public class CheckoutController {
     };
 
     @Autowired
-    public CheckoutController(ShoppingCartService shoppingCartService, BeerService beerService) {
+    public CheckoutController(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, BeerService beerService) {
+        this.orderRepository = orderRepository;
+        this.orderItemRepository = orderItemRepository;
         this.shoppingCartService = shoppingCartService;
         this.beerService = beerService;
     }
 
-    @ModelAttribute("order")
-    public Order order(){
-        return new Order();
-    }
 
-    @GetMapping("/checkout/delivery")
-    public String checkout(Model model) {
+    @GetMapping("/checkout")
+    public String getCheckoutPage(Model model) {
         model.addAttribute("order", new Order());
+        model.addAttribute("beers", shoppingCartService.getBeersInCart());
+        model.addAttribute("total", shoppingCartService.getTotal().toString());
+        model.addAttribute("clientToken", gateway.clientToken().generate());
         return "checkout";
     }
 
-    @GetMapping("/checkout/payment")
-    public String getPaymentPage(Model model) {
-        model.addAttribute("clientToken", gateway.clientToken().generate());
-        model.addAttribute("amount", shoppingCartService.getTotal());
-        return "payment";
-    }
+    @PostMapping("/checkout")
+    public String checkoutOrder(Model model, @RequestParam("amount") String amount, @RequestParam("payment_method_nonce") String nonce, @Valid Order order, BindingResult bindingResult, RedirectAttributes attributes) {
 
-    @PostMapping("/checkout/delivery/submit")
-    public String submitDeliveryDetails(@Valid Order order, BindingResult bindingResult, RedirectAttributes attributes) {
-        ModelAndView modelAndView =  new ModelAndView();
-
-        if (bindingResult.hasErrors()) return "checkout";
-
-        attributes.addFlashAttribute("order", order);
-        return "redirect:/checkout/payment";
-    }
-
-    @PostMapping("/checkout/payment/submit")
-    public RedirectView submitPayment(@RequestParam("amount") String amount, @RequestParam("payment_method_nonce") String nonce, RedirectAttributes attributes) {
-
-
-        //check stock before trying payment
+        //If delivery details not valid
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("beers", shoppingCartService.getBeersInCart());
+            model.addAttribute("total", shoppingCartService.getTotal().toString());
+            model.addAttribute("clientToken", gateway.clientToken().generate());
+            return "checkout";
+        }
+        //Check stock again, returning to checkout page if cart is empty or quantities requested are no longer available
         try {
-            shoppingCartService.finish();
+            shoppingCartService.validateCart();
         } catch (NotEnoughBeersInStockException e) {
+            attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("outOfStockMessage", e.getMessage());
-            return new RedirectView("/checkout/delivery");
+            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            return "redirect:/checkout";
         } catch (NoBeersInCartException b) {
+            attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("emptyCartMessage", b.getMessage());
-            return new RedirectView("/checkout/delivery");
+            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            return "redirect:/checkout";
         }
 
-
+        //attempt to parse param for total for transaction
         BigDecimal decimalAmount;
         try {
             decimalAmount = new BigDecimal(amount);
         } catch (NumberFormatException e) {
-            attributes.addFlashAttribute("paymentErrorMessage","Error: 81503: Amount is an invalid format.");
-            return new RedirectView("/checkout/delivery");
+            attributes.addFlashAttribute("order", order);
+            attributes.addFlashAttribute("paymentErrorMessage","Error: 81503: Total is an invalid format.");
+            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            return "redirect:/checkout";
         }
 
+        //build transaction request
         TransactionRequest request = new TransactionRequest()
                 .amount(decimalAmount)
                 .paymentMethodNonce(nonce)
@@ -120,34 +125,71 @@ public class CheckoutController {
                 .submitForSettlement(true)
                 .done();
 
-        //attempt payment
+        //attempt transaction request
         Result<Transaction> result = gateway.transaction().sale(request);
+        Transaction transaction;
 
-        if (result.isSuccess()) {
-
-            attributes.addFlashAttribute("transaction", result.getTarget());
-            return new RedirectView("/checkout/complete");
-        } else if (result.getTransaction() != null) {
-            attributes.addFlashAttribute("transaction", result.getTarget());
-            return new RedirectView("/checkout/complete");
-        } else {
+        if (result.isSuccess())transaction = result.getTarget();
+        else if(result!=null) transaction = result.getTransaction();
+        else {
             String errorString = "";
             for (ValidationError error : result.getErrors().getAllDeepValidationErrors()) {
                 errorString += "Error: " + error.getCode() + ": " + error.getMessage() + "\n";
             }
+            attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("paymentErrorMessage",errorString);
-            return new RedirectView("/checkout/delivery");
+            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            return "redirect:/checkout";
+            }
+
+
+        //attempt to contact service to check transaction
+        try {
+            transaction = gateway.transaction().find(transaction.getId());
+        } catch (Exception e) {
+            attributes.addFlashAttribute("order", order);
+            attributes.addFlashAttribute("paymentErrorMessage",e.toString());
+            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            return "redirect:/checkout";
         }
+
+        //if transaction was succesful
+        if(Arrays.asList(TRANSACTION_SUCCESS_STATUSES).contains(transaction.getStatus())){
+
+            //log order
+            order.setPaymentRef(transaction.getId());
+            orderRepository.save(order);
+
+            //save order items
+            for(Map.Entry<Beer, Integer> cartItem  : shoppingCartService.getBeersInCart().entrySet()) orderItemRepository.save(new OrderItem(order, cartItem.getKey(), cartItem.getValue()));
+
+            //clear cart and reduce beer stock
+            shoppingCartService.finish();
+
+        }
+
+        //if transaction was unsuccessful
+        else{
+            attributes.addFlashAttribute("paymentErrorMessage","Braintree Transaction Unsuccessful: "+transaction.getStatus().toString());
+            attributes.addFlashAttribute("order", order);
+            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            return "redirect:/checkout";
+        }
+
+        attributes.addFlashAttribute("orderId",order.getId().toString());
+        attributes.addFlashAttribute("transactionId",order.getPaymentRef());
+        return "redirect:/checkout/complete";
     }
 
+
     @GetMapping("/checkout/complete")
-    public String orderComplete(Model model, @ModelAttribute("order") Order order, @ModelAttribute("transaction") Transaction transaction) {
-
-        //LOG ORDER AND EMAIL SERVICE
-        orderRepository.save(order);
-
-        model.addAttribute("successMessage", "User checkout successful");
-        model.addAttribute("order", new Order());
-        return "checkout";
+    public String orderComplete(Model model) {
+        return "complete";
     }
 }
