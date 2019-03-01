@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "order_table")
@@ -43,6 +45,20 @@ public class Order {
     @NotEmpty(message = "*Please enter your postcode")
     private String zone;
 
+    @Column(name = "payment_ref")
+    @NotEmpty
+    private String paymentRef;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items = new ArrayList<>();
+
+    public String getPaymentRef() {
+        return paymentRef;
+    }
+
+    public void setPaymentRef(String paymentRef) {
+        this.paymentRef = paymentRef;
+    }
 
     public String getZone() {
         return zone;
