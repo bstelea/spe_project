@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import web.globalbeershop.data.Order;
 import web.globalbeershop.data.User;
+import web.globalbeershop.data.UserDTO;
+import web.globalbeershop.repository.UserRepository;
 import web.globalbeershop.service.UserService;
 
 import javax.validation.Valid;
@@ -22,6 +24,10 @@ public class WebController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    UserRepository userRepository;
+
+
     @GetMapping("/")
     public String index() {
         return "index";
@@ -29,56 +35,56 @@ public class WebController {
 
     @GetMapping("/login/error")
     public String loginError(Model model) {
-        model.addAttribute("loginError", true);
+        model.addAttribute("errorMessage", "Wrong Email or Password");
         return "login";
     }
 
     @GetMapping("/login")
     public String login(Model model) {
-        model.addAttribute("loginError", false);
         return "login";
     }
 
-    @GetMapping("/newuser")
+    @GetMapping("/register")
     public String newUser(Model model) {
-        User user = new User();
-        user.setRole("USER");
-        model.addAttribute("user", user);
-        return "newuser";
+        model.addAttribute("userDTO", new UserDTO());
+        return "register";
     }
 
-    @PostMapping("/newuser")
-    public ModelAndView createNewUser(@Valid User user, BindingResult bindingResult) {
+    @PostMapping("/register")
+    public ModelAndView createNewUser(@Valid UserDTO userDTO, BindingResult bindingResult) {
 
         ModelAndView modelAndView = new ModelAndView();
 
-
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/newuser");
-            return modelAndView;
-        }
-
-        if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
+        //check if password meets requirements
+        if (!userDTO.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$")) {
             bindingResult.rejectValue("password", "error.user", "The password must contain at least 8 characters, contain at least one digit, contain at least one lower and one upper case alphabetic characters, contain at least one special symbol (@#%$^ etc.) and does not contain space or a tab, etc.");
-            modelAndView.setViewName("/newuser");
-            return modelAndView;
         }
 
-        if(userService.findUserByUsername(user.getUsername()) != null){
-            bindingResult.rejectValue("username", "error.user", "This username is already taken");
-            modelAndView.setViewName("/newuser");
-            return modelAndView;
-
+        //check if email valid (standard spring Email valid annotation is not very good)
+        if (!userDTO.getEmail().matches(
+                "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@"+"[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$"
+        )) {
+            bindingResult.rejectValue("email", "error.user", "Please enter valid email address");
         }
 
-        // Successful checkout
-        userService.saveUser(user);
+        //checks if email already in use
+        if(userRepository.findByEmail(userDTO.getEmail()) != null){
+            bindingResult.rejectValue("email", "error.user", "This email is already used");
+        }
+        //checks if passwords match
+        if(!userDTO.getPassword().equals(userDTO.getMatchingPassword())){
+            bindingResult.rejectValue("matchingPassword", "error.user", "The passwords do not match");
+        }
 
-        modelAndView.addObject("successMessage", "User checkout successful");
-        user = new User();
-        user.setRole("USER");
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("/login");
+        //checks if any other invalid data given
+        if (bindingResult.hasErrors()) {
+            modelAndView.setViewName("/register");
+        }
+        else{
+            userService.save(userDTO);
+            modelAndView.setViewName("/login");
+            modelAndView.addObject("successMessage", "Account created, you can now login");
+        }
 
         return modelAndView;
     }

@@ -37,6 +37,8 @@ public class Order {
     @NotEmpty(message = "*Please enter your city")
     private String city;
 
+
+
     @Column(name = "county")
     @NotEmpty(message = "*Please enter your county")
     private String county;
@@ -47,6 +49,42 @@ public class Order {
 
     @Column(name = "payment_ref")
     private String paymentRef;
+
+    public Order(){
+
+    }
+    public Order(@NotEmpty(message = "*Please provide your name") String name, @NotEmpty(message = "*Please provide your last name") String lastName, @Email(message = "*Please provide a valid email") @NotEmpty(message = "*Please provide an email") String email, @NotEmpty(message = "*Please enter your address") String address, @NotEmpty(message = "*Please enter your city") String city, @NotEmpty(message = "*Please enter your county") String county, @NotEmpty(message = "*Please enter your postcode") String zone, String paymentRef, User user, List<OrderItem> items) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.address = address;
+        this.city = city;
+        this.county = county;
+        this.zone = zone;
+        this.paymentRef = paymentRef;
+        this.user = user;
+        this.items = items;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    public void setItems(List<OrderItem> items) {
+        this.items = items;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private User user;
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> items = new ArrayList<>();

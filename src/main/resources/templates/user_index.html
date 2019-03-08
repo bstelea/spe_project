@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Checkout</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+        <div class="container">
+
+            <div class="block-heading">
+                <h2>Welcome,  [[${user.forename}]]!</h2>
+            </div>
+
+            <div class="notice-wrapper">
+                <div th:if="${userError}">
+                    <span th:text="${usererror}"></span>
+                </div>
+            </div>
+
+            <form action="/user/orders" method="get" role="form">
+                        <button class="button" type="submit"><span>My Orders</span></button>
+            </form>
+
+            <form action="/user/details" method="get" role="form">
+                <button class="button" type="submit"><span>My Details</span></button>
+            </form>
+
+
+        </div>
+</body>
+</html>

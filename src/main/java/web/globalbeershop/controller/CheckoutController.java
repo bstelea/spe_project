@@ -160,6 +160,9 @@ public class CheckoutController {
         //if transaction was succesful
         if(Arrays.asList(TRANSACTION_SUCCESS_STATUSES).contains(transaction.getStatus())){
 
+            //if currently logged in, link order to user account
+
+
             //log order
             order.setPaymentRef(transaction.getId());
             orderRepository.save(order);
@@ -183,7 +186,7 @@ public class CheckoutController {
         }
 
         attributes.addFlashAttribute("orderId",order.getId().toString());
-        attributes.addFlashAttribute("transactionId",order.getPaymentRef());
+        attributes.addFlashAttribute("paymentRef",order.getPaymentRef());
         return "redirect:/checkout/complete";
     }
 
