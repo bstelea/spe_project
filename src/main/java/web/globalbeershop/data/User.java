@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -20,12 +21,20 @@ public class User {
 //    @Column(name= "user_id")
     private Long id;
 
+    @NotEmpty
+    @NotNull
     @Column(name= "first_name")
     private String firstName;
+    @NotEmpty
+    @NotNull
     @Column(name= "last_name")
     private String lastName;
+    @NotEmpty
+    @NotNull
     @Column(name= "email")
     private String email;
+    @NotEmpty
+    @NotNull
     @Column(name= "password")
     private String password;
 

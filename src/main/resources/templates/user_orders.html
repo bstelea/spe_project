@@ -7,8 +7,10 @@
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
+<br>
 
 <div class="container">
+    <br>
     <h2>My Orders</h2>
     <label th:if="${successMessage}" th:text="*{successMessage}" class="alert alert-danger"></label>
     <form action="/user/orders/" method="get">

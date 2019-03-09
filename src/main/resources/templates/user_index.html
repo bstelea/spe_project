@@ -6,6 +6,7 @@
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
+<br>
 
 <div class="container">
 
@@ -17,9 +18,13 @@
             <h3 th:text="${greeting}"/>
 
 
-
+            <br>
             <a th:href="@{/user/orders}">My Orders</a>
+            <br>
             <a th:href="@{/user/details}">My Details</a>
+            <br>
+            <a th:href="@{/user/reviews}">Write a Review</a>
+
 
 
         </div>
