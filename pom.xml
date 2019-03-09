@@ -22,6 +22,7 @@
 		<spring-security-test.version>4.2.3.RELEASE</spring-security-test.version>
 		<spring-boot.version>2.1.0.RELEASE</spring-boot.version>
 
+
 	</properties>
 
 	<dependencies>
@@ -41,16 +42,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 			<version>${spring-security-test.version}</version>
 		</dependency>
+
 
 		<!--Paypal-->
 		<dependency>
@@ -69,7 +68,7 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.3.RELEASE</version>
 		</dependency>
 
 		<!--JPA-->

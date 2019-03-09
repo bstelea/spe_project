@@ -13,11 +13,11 @@ public class OrderItem {
         private Long id;
 
         @ManyToOne
-        @JoinColumn(name = "orderId")
+        @JoinColumn(name = "order_id")
         private Order order;
 
         @ManyToOne
-        @JoinColumn(name = "beerId")
+        @JoinColumn(name = "beer_id")
         private Beer beer;
 
         @Column(name = "quantity")

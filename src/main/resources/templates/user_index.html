@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Checkout</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="payment.css">
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
-        <div class="container">
 
-            <div class="block-heading">
-                <h2>Welcome,  [[${user.forename}]]!</h2>
-            </div>
+<div class="container">
 
-            <div class="notice-wrapper">
-                <div th:if="${userError}">
-                    <span th:text="${usererror}"></span>
-                </div>
-            </div>
 
-            <form action="/user/orders" method="get" role="form">
-                        <button class="button" type="submit"><span>My Orders</span></button>
-            </form>
 
-            <form action="/user/details" method="get" role="form">
-                <button class="button" type="submit"><span>My Details</span></button>
-            </form>
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <h2>My Account</h2>
+            <h3 th:text="${greeting}"/>
+
+
+
+            <a th:href="@{/user/orders}">My Orders</a>
+            <a th:href="@{/user/details}">My Details</a>
 
 
         </div>
+    </div>
+</div>
+<footer class="container-fluid text-center">
+    <a href="/" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+
 </body>
 </html>

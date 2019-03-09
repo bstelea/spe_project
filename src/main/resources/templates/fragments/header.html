@@ -29,10 +29,22 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="/shop">SHOP</a></li>
-                    <li><a href="/cart">CART</a></li>
-                    <li><a href="/login">LOGIN</a></li>
-                    <li><a href="#search">SEARCH</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
+                    <li><a href="/cart">MY CART</a></li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/user}">MY ACCOUNT</a>
+                    </li>
+
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/logout}">LOG OUT</a>
+                    </li>
+
+
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}">LOG IN</a>
+                    </li>
+
                 </ul>
             </div>
         </div>

@@ -5,6 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -37,8 +38,6 @@ public class Order {
     @NotEmpty(message = "*Please enter your city")
     private String city;
 
-
-
     @Column(name = "county")
     @NotEmpty(message = "*Please enter your county")
     private String county;
@@ -49,6 +48,21 @@ public class Order {
 
     @Column(name = "payment_ref")
     private String paymentRef;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> items = new ArrayList<>();
+
+    @Column(name = "date")
+    private Date date;
+
+    @PrePersist
+    protected void onCreate() {
+        date = new Date();
+    }
 
     public Order(){
 
@@ -81,13 +95,6 @@ public class Order {
     public void setItems(List<OrderItem> items) {
         this.items = items;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private User user;
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderItem> items = new ArrayList<>();
 
     public String getPaymentRef() {
         return paymentRef;
@@ -159,5 +166,13 @@ public class Order {
 
     public void setCounty(String county) {
         this.county = county;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

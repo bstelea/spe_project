@@ -1,6 +1,7 @@
 package web.globalbeershop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import web.globalbeershop.data.Order;
 import web.globalbeershop.data.QBeer;
 import web.globalbeershop.data.QOrder;
 import web.globalbeershop.data.User;
+
 import web.globalbeershop.repository.BeerRepository;
 import web.globalbeershop.repository.OrderRepository;
 import web.globalbeershop.service.UserService;
@@ -32,33 +34,35 @@ public class UserController {
     OrderRepository orderRepository;
 
     @GetMapping("/user")
-    @ResponseBody
-    public String home(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public String home(Model model, Authentication auth){
         User user = userService.findByEmail(auth.getName());
-        return user.getEmail();
+        model.addAttribute("user", user);
+        model.addAttribute("greeting", "Welcome, " + user.getFirstName());
+        return "user_index";
     }
 
-
     @GetMapping("/user/orders")
-    public String getAllOrders (Model model, Authentication authentication){
+    public String getAllOrders (Model model, Authentication auth){
+        User user = userService.findByEmail(auth.getName());
+        model.addAttribute("user", user);
+        model.addAttribute("orders", orderRepository.findAll(QOrder.order.user.eq(user), new Sort(Sort.Direction.DESC, "date")));
         return "user_orders";
     }
 
     @GetMapping("/user/orders/{orderId}")
-    public String getOrder (Model model, Authentication authentication, @PathVariable Long orderId) {
-        User user = (User) authentication.getPrincipal();
+    public String getOrder (Model model, Authentication auth, @PathVariable Long orderId) {
+        User user = userService.findByEmail(auth.getName());
         for(Order order : orderRepository.findAll(QOrder.order.id.eq(orderId).and(QOrder.order.user.eq(user)))){
             model.addAttribute("order", order);
             return "user_order";
         }
-        model.addAttribute("userHasNoSuchOrder", true);
-        return "user_order";
+        return "redirect:/user/orders";
     }
 
-    @GetMapping("/details")
-    public String getDetails (Model model, Authentication authentication){
-        model.addAttribute ("user", (User) authentication.getPrincipal());
+    @GetMapping("/user/details")
+    public String getDetails (Model model,Authentication auth){
+        User user = userService.findByEmail(auth.getName());
+        model.addAttribute("user", user);
         return "user_details";
     }
 
