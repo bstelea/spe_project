@@ -24,7 +24,7 @@ public class Review {
     @Min(0)
     @Max(5)
     @Column(name = "rating")
-    private String rating;
+    private Integer rating;
 
     @Size(max = 500)
     @Column(name = "message")
@@ -33,7 +33,7 @@ public class Review {
     public Review() {
     }
 
-    public Review(User user, Beer beer, @Min(0) @Max(5) String rating, @Size(max = 500) String message) {
+    public Review(User user, Beer beer, @Min(0) @Max(5) Integer rating, @Size(max = 500) String message) {
         this.user = user;
         this.beer = beer;
         this.rating = rating;
@@ -64,11 +64,11 @@ public class Review {
         this.beer = beer;
     }
 
-    public String getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 

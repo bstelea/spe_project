@@ -39,6 +39,9 @@ public class UserController {
     @Autowired
     ReviewRepository reviewRepository;
 
+    @Autowired
+    BeerRepository beerRepository;
+
     @GetMapping("/user")
     public String home(Model model, Authentication auth){
         User user = userService.findByEmail(auth.getName());
@@ -133,7 +136,10 @@ public class UserController {
         if(result.hasErrors()) return "user_reviews";
 
         review.setUser(userService.findByEmail(auth.getName()));
+        Beer beer = review.getBeer();
+        beer.setRating((beer.getRating()==null) ? review.getRating() : (beer.getRating()+review.getRating())/2);
         reviewRepository.save(review);
+        beerRepository.save(review.getBeer());
         attributes.addFlashAttribute("successMessage", "Review submitted!");
         return "redirect:/user/reviews";
     }
