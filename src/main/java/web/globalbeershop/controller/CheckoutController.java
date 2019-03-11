@@ -184,7 +184,7 @@ public class CheckoutController {
 
             //Send notification
             try {
-                notificationService.sendNotification("globalbeershopmail@gmail.com");
+                notificationService.sendNotification(order.getEmail());
 //                notificationService.sendNotification(order.getEmail());
             } catch (MailException e){
                 //catch error

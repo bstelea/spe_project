@@ -6,8 +6,6 @@
 <body>
 <div th:replace="fragments/header :: navbar"></div>
 
-<div th:replace="fragments/header :: jumbotron"></div>
-
 <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
 <div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
 
