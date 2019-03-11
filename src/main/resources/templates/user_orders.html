@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<br>
+
+<div class="container">
+    <br>
+    <h2>My Orders</h2>
+
+    <label th:if="${errorMessage}" th:text="*{errorMessage}" class="alert alert-danger"></label>
+
+    <form action="/user/orders/" method="get">
+        <table class="table table-borderless" >
+            <thead>
+            <tr>
+                <th> Order ID </th>
+                <th> Payment Ref </th>
+                <th> Date </th>
+                <th> </th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="order : ${orders}">
+                <form th:action="@{/user/orders}" method="get">
+
+                <td>
+                    <h4 th:text="${order.getId()}"/>
+                    <input type="hidden" name="orderId" th:value="${order.getId()}">
+                </td>
+                <td>
+                    <h4 th:text="${order.getPaymentRef()}"/>
+                </td>
+                <td>
+                    <h4 th:text="${order.getDate()}"/>
+                </td>
+                <td>
+                    <input type="submit" value="View">
+                </td>
+
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+    <a href="/" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+
+</body>
+</html>

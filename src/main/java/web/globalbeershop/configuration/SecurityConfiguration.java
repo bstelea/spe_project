@@ -1,15 +1,18 @@
 package web.globalbeershop.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import web.globalbeershop.service.UserService;
 
 import javax.sql.DataSource;
 
@@ -17,73 +20,69 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-    //
+    UserService userService;
+
     @Autowired
     private DataSource dataSource;
-
-
-    //name of realm of accessible resources
-    public static final String REALM_NAME = "globalbeershop";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
-//        for when using mySQL DB
-        auth.
-                jdbcAuthentication()
-                .usersByUsernameQuery("select username, password, enabled from users where username=?")
-                .authoritiesByUsernameQuery("select username, role from users where username=?")
-                .dataSource(dataSource)
-                .passwordEncoder(bCryptPasswordEncoder);
-//
-//        //for when using H2 DB
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password(bCryptPasswordEncoder.encode("password")).roles("ADMIN");
-
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+//        http.
+//                authorizeRequests()
+//
+//                .antMatchers("/user/**").hasAuthority("USER")
+//                .anyRequest().permitAll()
+//
+//                .and()
+//
+//                .formLogin()
+//                .loginPage("/login").failureUrl("/login/error")
+//                .defaultSuccessUrl("/")
+//                .and().logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+//                .logoutSuccessUrl("/");
+//
+
         http
-                //PAGE ACCESS
                 .authorizeRequests()
-
-                //can only access user pages if logged in as user
-                .antMatchers("/user/**").hasRole("USER")
-
-                //can only access user pages if logged in as user
-                .antMatchers("/admin/**").hasRole("ADMIN")
-
-                //all other pages can be accessed by anyone
-                .anyRequest().permitAll()
-
-//                .antMatchers("/h2_console/**").permitAll()
-
-
-
-                .and()
-
-                //LOGIN
+                .antMatchers(
+                        "/user**",
+                        "/user/**",
+                        "/user").authenticated()
+                .and().csrf().disable()
                 .formLogin()
+                .defaultSuccessUrl("/user")
                 .loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
                 .failureUrl("/login/error")
-                .permitAll()
                 .and()
                 .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .permitAll();
-
-                http.csrf().disable();
-                http.headers().frameOptions().disable();
-
-
     }
-}
 
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(userService);
+        auth.setPasswordEncoder(passwordEncoder());
+        return auth;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+
+}

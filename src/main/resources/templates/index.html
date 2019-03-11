@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
 
-<div th:replace="/fragments/header :: navbar"></div>
+<div class="announcements">
+    <div class="announcement">
+        <p>Free delivery over £20!</p>
+    </div>
+    <div class="announcement">
+        <p>Call us now for an offer!</p>
+    </div>
+</div>
+
+<div class="container logo">
+    <h2>Global Beer Shop Logo here</h2>
+</div>
+
+<div th:replace="fragments/header :: navbar"></div>
 
 <div class="jumbotron text-center">
-    <h1>Global Beer Shop</h1>
-    <p>Fancy a beer?</p>
+    <h1>Fancy a beer?</h1>
     <p class="lead">
         <a class="btn btn-primary btn-lg" href="/shop" role="button"><span>Click here</span></a>
     </p>
@@ -19,75 +31,26 @@
         <div id="map"></div>
 </div>
 
-<!--<div class="container-fluid" id="search">-->
-    <!--<div class="row">-->
-        <!--<div class="col-sm-12">-->
-            <!--<h2>Search for a Beer!</h2>-->
-        <!--</div>-->
-    <!--</div>-->
-    <!--<form action="/shop" method="get">-->
-        <!--<div class="row text-center">-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>Country</h4>-->
-                <!--<select name="country">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="c : ${country}" th:value="${c}" th:text="${c}"></option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>Brewer</h4>-->
-                <!--<select name="brewer">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="b : ${brewer}" th:value="${b}" th:text="${b}"></option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>ABV</h4>-->
-                <!--<select name="abv">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="a : ${abv}" th:value="${a}" th:text="${a} "></option>-->
-                <!--</select>-->
-            <!--</div>-->
-            <!--<div class="col-sm-3">-->
-                <!--<h4>Type</h4>-->
-                <!--<select name="type">-->
-                    <!--<option value=""></option>-->
-                    <!--<option th:each="t : ${type}" th:value="${t}" th:text="${t}"></option>-->
-                <!--</select>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row text-center">-->
-            <!--<div class="col-sm-12">-->
-                <!--<input type="submit" value="Search">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</form>-->
-<!--</div>-->
-
 <div class="container-fluid text-center">
-    <h2>GLOBAL BEER SHOP</h2>
+    <div class="col-md-12 ribbon">
+        <img th:src="@{../img/ribbon.png}" >
+    </div>
     <br>
-    <div class="row">
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-ok logo-small"></span>
+    <div class="row about">
+        <div class="col-sm-6">
+            <span class="logo-small"><img th:src="@{../img/beer-star.png}" ></span>
             <h4>TOP QUALITY BEERS</h4>
-            <p>Simply the best beers from around the world.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-lock logo-small"></span>
-            <h4>EASY AND SECURE PAYMENT</h4>
-            <p>Multiple ways to pay for your order, all at one click distance.</p>
-        </div>
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-gift logo-small"></span>
+        <div class="col-sm-6">
+            <span class="logo-small"><img th:src="@{../img/delivery-star.png}" ></span>
             <h4>HOME DELIVERY</h4>
-            <p>We deliver your beer at your doorstep, check the DELIVERY INFO page for more details regarding international
-                payments.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
         </div>
     </div>
 </div>
 
-<h2 class="text-center">Testimonials</h2>
+<h2 class="text-center wild-font">TESTIMONIALS</h2>
 <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
@@ -121,7 +84,7 @@
 </div>
 
 <div id="contact" class="container-fluid bg-grey">
-    <h2 class="text-center">CONTACT US</h2>
+    <h2 class="text-center wild-font">CONTACT US</h2>
     <div class="row">
         <div class="col-sm-5">
             <p>Contact us and we'll get back to you within 24 hours.</p>
@@ -148,12 +111,14 @@
     </div>
 </div>
 
-<footer class="container-fluid text-center">
-    <a href="/" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>&copy; Global Beer Shop</p>
-</footer>
+<div th:replace="fragments/footer :: footer"></div>
+
+<!--<footer class="container-fluid text-center">-->
+    <!--<a href="/" title="To Top">-->
+        <!--<span class="glyphicon glyphicon-chevron-up"></span>-->
+    <!--</a>-->
+    <!--<p>&copy; Global Beer Shop</p>-->
+<!--</footer>-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
@@ -181,6 +146,5 @@
 <script type="text/javascript" src="javascript/mapdata.js"></script>
 <script type="text/javascript" src="javascript/continentmap.js"></script>
 </body>
-</html>
-</body>
+
 </html>

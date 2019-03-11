@@ -22,6 +22,7 @@
 		<spring-security-test.version>4.2.3.RELEASE</spring-security-test.version>
 		<spring-boot.version>2.1.0.RELEASE</spring-boot.version>
 
+
 	</properties>
 
 	<dependencies>
@@ -36,22 +37,27 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--Security-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>${spring-boot.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 			<version>${spring-security-test.version}</version>
 		</dependency>
+
+
+		<!--Paypal-->
 		<dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-			<version>3.0.4.RELEASE</version>
+			<groupId>com.braintreepayments.gateway</groupId>
+			<artifactId>braintree-java</artifactId>
+			<version>2.91.0</version>
 		</dependency>
+
 
 
 		<!--Thymeleaf-->
@@ -62,7 +68,7 @@
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
-			<version>3.0.1.RELEASE</version>
+			<version>3.0.3.RELEASE</version>
 		</dependency>
 
 		<!--JPA-->
@@ -146,6 +152,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<executable>true</executable>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>com.mysema.maven</groupId>
@@ -167,6 +176,4 @@
 
 
 	</build>
-
-
 </project>

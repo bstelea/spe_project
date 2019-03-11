@@ -64,7 +64,7 @@ public class CartController {
     @GetMapping("/cart/checkout")
     public String goToCheckout(Model model) {
         try {
-            shoppingCartService.goToCheckout();
+            shoppingCartService.validateCart();
         } catch (NotEnoughBeersInStockException e) {
 
             model.addAttribute("outOfStockMessage", e.getMessage());

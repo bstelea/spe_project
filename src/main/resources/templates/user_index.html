@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<br>
+
+<div class="container">
+
+
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <h2>My Account</h2>
+            <h3 th:text="${greeting}"/>
+
+
+            <br>
+            <a th:href="@{/user/orders}">My Orders</a>
+            <br>
+            <a th:href="@{/user/details}">My Details</a>
+            <br>
+            <a th:href="@{/user/reviews}">Write a Review</a>
+
+
+
+        </div>
+    </div>
+</div>
+<footer class="container-fluid text-center">
+    <a href="/" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+
+</body>
+</html>

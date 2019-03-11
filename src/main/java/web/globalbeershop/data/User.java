@@ -1,67 +1,71 @@
 package web.globalbeershop.data;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name= "user_id")
     private Long id;
 
-    @Column(name = "email")
-    @Email(message = "Please provide a valid Email")
+    @NotEmpty
+    @NotNull
+    @Column(name= "first_name")
+    private String firstName;
+    @NotEmpty
+    @NotNull
+    @Column(name= "last_name")
+    private String lastName;
+    @NotEmpty
+    @NotNull
+    @Column(name= "email")
     private String email;
-
-    @Column(unique=true)
-    @NotEmpty(message = "*Please provide an username")
-    String username;
-
-    @Column(name = "password")
-    @NotEmpty(message = "*Please provide an password")
-
+    @NotEmpty
+    @NotNull
+    @Column(name= "password")
     private String password;
 
-    @Column(name = "forename")
-    private String forename;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(
+                    name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
-    @Column(name = "surname")
-    private String surname;
-
-    @Column(name = "enabled")
-    private int enabled;
-
-    @Column(name = "role")
-    @NotEmpty(message = "*Please provide a role")
-    private String role;
-//
-//    @OneToMany(mappedBy = "user")
-//    private
-//    List<Order> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, @Email(message = "Please provide a valid Email") String email, @NotEmpty(message = "*Please provide an username") String username, @Length(min = 6, message = "*Your password must have at least 6 characters") @NotEmpty(message = "*Please provide your password") String password, String forename, String surname, int enabled, @NotEmpty(message = "*Please provide a role") String role){//, List<Order> orders) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
-        this.username = username;
         this.password = password;
-        this.forename = forename;
-        this.surname = surname;
-        this.enabled = enabled;
-        this.role = role;
-//        this.orders = orders;
+    }
+
+    public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -72,20 +76,28 @@ public class User {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -96,43 +108,23 @@ public class User {
         this.password = password;
     }
 
-    public String getForename() {
-        return forename;
+    public Collection<Role> getRoles() {
+        return roles;
     }
 
-    public void setForename(String forename) {
-        this.forename = forename;
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
     }
 
-    public String getSurname() {
-        return surname;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + "*********" + '\'' +
+                ", roles=" + roles +
+                '}';
     }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public int getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(int enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-//    public List<Order> getOrders() {
-//        return orders;
-//    }
-
-//    public void setOrders(List<Order> orders) {
-//        this.orders = orders;
-//    }
 }

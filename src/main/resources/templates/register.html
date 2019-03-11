@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<br>
+<div class="container">
+
+    <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${userDTO}" method="post" role="form">
+
+                <h3>Register new User</h3>
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
+                    <input type="text" th:field="*{email}" placeholder="Email Address" class="form-control input-lg"/>
+                </div>
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('forename')}" th:errors="*{forename}" class="alert alert-danger"></label>
+                    <input type="text" th:field="*{forename}" placeholder="Forename" class="form-control input-lg"/>
+                </div>
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger"></label>
+                    <input type="text" th:field="*{surname}" placeholder="Surname" class="form-control input-lg"/>
+                </div>
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></label>
+                    <input type="password" th:field="*{password}" placeholder="Password" class="form-control input-lg"/>
+                </div>
+
+                <div class="form-group">
+                    <label th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" class="alert alert-danger"></label>
+                    <input type="password" th:field="*{matchingPassword}" placeholder="Confirm Password" class="form-control input-lg"/>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-3" style="float: none; margin: 0 auto;">
+                        <input type="submit" class="btn btn-primary btn-block" value="Create User"/>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<footer class="container-fluid text-center">
+    <a href="/" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+
+</body>
+</html>

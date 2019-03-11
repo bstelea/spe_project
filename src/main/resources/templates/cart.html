@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="/fragments/header :: header"></div>
+    <div th:replace="fragments/header :: header"></div>
 </head>
 <body>
-<div th:replace="/fragments/header :: navbar"></div>
+<div th:replace="fragments/header :: navbar"></div>
 
-<div th:replace="/fragments/header :: jumbotron"></div>
+<div th:replace="fragments/header :: jumbotron"></div>
 
 <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
 <div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
@@ -35,7 +35,7 @@
 
     <div class="row panel-body">
         <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
-        <a th:href="@{'/cart/checkout'}" class="col-md-1">
+        <a th:href="@{'/checkout'}" class="col-md-1">
             <button type="button" class="btn btn-danger">Go To Checkout</button>
         </a>
     </div>
