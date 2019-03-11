@@ -13,7 +13,7 @@ var simplemaps_continentmap_mapdata={
         // state_hover_color: "#3B729F",
         state_color: "#1c388c",
         state_hover_color: "#3366FF",
-        state_url: "http://google.com",
+        state_url: "http://localhost:8080/",
         border_size: 1.5,
         all_states_inactive: "no",
         all_states_zoomable: "no",
@@ -80,7 +80,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#751d92",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=South%20America"
         },
         NA: {
             name: "North America",
@@ -89,7 +89,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#1c388c",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=North%20America"
         },
         EU: {
             name: "Europe",
@@ -98,7 +98,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#c0264d",
             color: "default",
             hover_color: "default",
-            url: "http://www.google.com"
+            url: "http://localhost:8080/shop?continent=Europe"
         },
         AF: {
             name: "Africa",
@@ -107,7 +107,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#1a8535",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=Africa"
         },
         NS: {
             name: "North Asia",
@@ -116,7 +116,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#23b28e",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=North%20Asia"
         },
         SS: {
             name: "South Asia",
@@ -125,7 +125,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#ac4422",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=South%20Asia"
         },
         ME: {
             name: "Middle East",
@@ -134,7 +134,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#bb9525",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=Middle%20East"
         },
         OC: {
             name: "Oceania",
@@ -143,7 +143,7 @@ var simplemaps_continentmap_mapdata={
             // hover_color: "#b1238d",
             color: "default",
             hover_color: "default",
-            url: "default"
+            url: "http://localhost:8080/shop?continent=Oceania"
         }
     },
     // locations: {
