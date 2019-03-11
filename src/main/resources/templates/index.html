@@ -2,21 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragments/header :: header"></div>
+    <link rel="stylesheet" th:href="@{../css/index.css}" media="screen"/>
 </head>
 <body>
-
-<div class="announcements">
-    <div class="announcement">
-        <p>Free delivery over £20!</p>
-    </div>
-    <div class="announcement">
-        <p>Call us now for an offer!</p>
-    </div>
-</div>
-
-<div class="container logo">
-    <h2>Global Beer Shop Logo here</h2>
-</div>
 
 <div th:replace="fragments/header :: navbar"></div>
 
@@ -27,8 +15,15 @@
     </p>
 </div>
 
-<div class="row">>
-        <div id="map"></div>
+<div class="container-fluid text-center map-holder">
+    <div class="row">
+        <h2 class="wild-font">WORLD BEER MAP</h2>
+        <p>Click to see beers from a continent</p>
+    </div>
+    <div class="row text-center map">
+        <div class="col-md-1"></div>
+        <div id="map" class="col-md-10"></div>
+    </div>
 </div>
 
 <div class="container-fluid text-center">
@@ -119,7 +114,6 @@
     <!--</a>-->
     <!--<p>&copy; Global Beer Shop</p>-->
 <!--</footer>-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         // Add smooth scrolling to all links in navbar + footer link
@@ -142,9 +136,23 @@
         });
     })
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="javascript/mapdata.js"></script>
 <script type="text/javascript" src="javascript/continentmap.js"></script>
-</body>
+<script>
+    window.onscroll = function() {myFunction()};
 
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("navbar-fixed-top")
+        } else {
+            navbar.classList.remove("navbar-fixed-top");
+        }
+    }
+</script>
+</body>
 </html>

@@ -2,7 +2,7 @@
 <head>
     <!--this is the header-->
     <div th:fragment="header">
-        <title th:attr="data-custom=#{thymeleaf.app.title}">Shop</title>
+        <title th:attr="data-custom=#{thymeleaf.app.title}">Global Beer Shop</title>
 
         <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
 
@@ -16,6 +16,19 @@
 
 <!-- navbar -->
 <div th:fragment="navbar">
+    <div class="announcements">
+        <div class="announcement">
+            <p>Free delivery over £20!</p>
+        </div>
+        <div class="announcement">
+            <p>Call us now for an offer!</p>
+        </div>
+    </div>
+
+    <div class="container logo">
+        <h2>Global Beer Shop Logo here</h2>
+    </div>
+
     <nav class="navbar navbar-default" id="navbar">
         <div class="container">
             <div class="navbar-header">
@@ -49,21 +62,5 @@
         </div>
     </nav>
 </div>
-
-<script>
-    window.onscroll = function() {myFunction()};
-
-    var myNavbar = document.getElementById("myNavbar");
-    var navbar = document.getElementById("navbar");
-    var sticky = myNavbar.offsetTop;
-
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("navbar-fixed-top")
-        } else {
-            navbar.classList.remove("navbar-fixed-top");
-        }
-    }
-</script>
 </body>
 </html>

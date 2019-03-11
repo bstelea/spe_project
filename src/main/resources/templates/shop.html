@@ -2,6 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragments/header :: header"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" th:href="@{../css/shop.css}" media="screen"/>
 </head>
 <body>
 
@@ -9,13 +14,118 @@
 
 
 <div class="container">
-    <div th:replace="fragments/searchtool :: searchtool"></div>
 
-    <div th:replace="fragments/products :: products"></div>
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <h3 class="wild-font">FILTERS</h3>
+            <form action="/shop" method="get">
+                <div class="row">
+                    <span>Name</span> <br>
+                    <input type="text" class="form-control search-slt" th:value="${paramsGiven.get(0)}" name="name">
+                </div>
+                <div class="row">
+                    <span>Country</span> <br>
+                    <select name="country" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(1)}"  th:text="${paramsGiven.get(1)}"></option>
+                        <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>Brewer</span> <br>
+                    <select name="brewer" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(2)}"  th:text="${paramsGiven.get(2)}"></option>
+                        <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>ABV</span> <br>
+                    <select name="abv" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(3)}"  th:text="${paramsGiven.get(3)}"></option>
+                        <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>Type</span> <br>
+                    <select name="type" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(4)}"  th:text="${paramsGiven.get(4)}"></option>
+                        <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>Sort by Column</span> <br>
+                    <select name="sortCol" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(5)}"  th:text="${paramsGiven.get(5)}"></option>
+                        <option value="name">Name</option>
+                        <option value="brewer">Brewer</option>
+                        <option value="country">Country of Origin</option>
+                        <option value="type">Beer Type</option>
+                        <option value="abv">ABV</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>Sort Order</span> <br>
+                    <select name="sortOrd" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(6)}"  th:text="${paramsGiven.get(6)}"></option>
+                        <option value="ASC">Ascending</option>
+                        <option value="DESC">Descending</option>
+                    </select>
+                </div>
+                <div class="row">
+                    <span>Items per Page</span> <br>
+                    <select name="size" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>
+                        <option value=9>9</option>
+                        <option value=27>27</option>
+                        <option value=45>45</option>
+                        <option value=99>99</option>
+                    </select>
+                </div> <br>
+                <input type="submit" class="btn btn-primary col-lg-6" value="Apply">
+            </form>
+            <form action="/shop" method="get">
+                <input type="submit" class="btn btn-secondary col-lg-6" value="Clear">
+            </form>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="row">
+                <div class="container-fluid text-center map-holder">
+                    <div class="row">
+                        <h2 class="wild-font">WORLD BEER MAP</h2>
+                        <p>Click to see beers from a continent</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div id="map" class="col-md-10"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div th:replace="fragments/products :: products"></div>
+
+            </div>
+            <!-- /.row -->
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+    </div>
+    <!-- /.row -->
 
     <div th:replace="fragments/pagination :: pagination(URLparameter='/shop')"></div>
 
 </div>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascript/mapdata.js"></script>
+<script type="text/javascript" src="javascript/continentmap.js"></script>
 </body>
 </html>

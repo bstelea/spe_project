@@ -1,58 +1,39 @@
-.jumbotron {
-    background-image: url("../img/header.jpg");
-    background-position: 0% 70%;
-    background-size: cover;
-    font-family: Rye, cursive;
-    color: #fff;
-    padding: 100px 25px;
+.map-holder {
+    padding-bottom: 0;
 }
 
-.navbar {
-    margin-bottom: 0;
-    background-color: indianred;
-    z-index: 9999;
-    border: 0;
-    font-size: 12px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    border-radius: 0;
-}
-
-.navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
-}
-
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    color: coral !important;
-    background-color: #fff !important;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
-}
-
-.panel {
+.card {
+    border-style: solid;
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
     text-align: center;
+    font-family: arial;
 }
 
-.btn-primary {
-    background-color: indianred;
-    border-color: indianred;
+.price {
+    color: grey;
+    font-size: 22px;
 }
 
-.btn-primary:hover {
-    background-color: coral;
-    border-color: coral;
+.card button {
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
 }
 
-footer .glyphicon {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: indianred;
-
+.card button:hover {
+    opacity: 0.7;
 }
 
-.searchtool {
-    margin-bottom: 70px;
+.beer-title {
+    font-family: Rye, cursive;
+    text-transform: uppercase;
 }
