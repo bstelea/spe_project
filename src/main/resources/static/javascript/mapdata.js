@@ -3,16 +3,16 @@ var simplemaps_continentmap_mapdata={
         //General settings
         width: 'responsive', //or 'responsive'
         background_color: "#FFFFFF",
-        background_transparent: "no",
-        border_color: "#ffffff",
+        background_transparent: "yes",
+        border_color: "#96c687",
         popups: "detect",
 
         //State defaults
         state_description: "",//"State description",
         // state_color: "#88A4BC",
         // state_hover_color: "#3B729F",
-        state_color: "#1c388c",
-        state_hover_color: "#3366FF",
+        state_color: "#96c687",
+        state_hover_color: "#abe29a",
         state_url: "http://localhost:8080/",
         border_size: 1.5,
         all_states_inactive: "no",
