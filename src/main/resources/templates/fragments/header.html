@@ -1,4 +1,4 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <!--this is the header-->
     <div th:fragment="header">
@@ -16,7 +16,7 @@
 
 <!-- navbar -->
 <div th:fragment="navbar">
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default" id="navbar">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -24,10 +24,9 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="/" class="pull-left"><img src="/img/logo.png" alt="Logo" style="height: 50px;"></a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav">
                     <li><a href="/shop">SHOP</a></li>
                     <li><a href="/cart">MY CART</a></li>
 
@@ -51,11 +50,20 @@
     </nav>
 </div>
 
-<div th:fragment="jumbotron">
-    <div class="jumbotron text-center">
-        <h1>Global Beer Shop</h1>
-        <p>Best beers from all around the world</p>
-    </div>
-</div>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var myNavbar = document.getElementById("myNavbar");
+    var navbar = document.getElementById("navbar");
+    var sticky = myNavbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("navbar-fixed-top")
+        } else {
+            navbar.classList.remove("navbar-fixed-top");
+        }
+    }
+</script>
 </body>
 </html>
