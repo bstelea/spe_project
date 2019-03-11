@@ -1,6 +1,8 @@
 package web.globalbeershop.controller;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,13 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import web.globalbeershop.data.Order;
+import web.globalbeershop.data.User;
 import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.OrderRepository;
 import web.globalbeershop.service.BeerService;
+import web.globalbeershop.service.NotificationService;
 import web.globalbeershop.service.ShoppingCartService;
 
+import javax.management.Notification;
 import javax.validation.Valid;
+import java.util.logging.Logger;
 
 @Controller
 public class CheckoutController {
@@ -22,18 +28,24 @@ public class CheckoutController {
     @Autowired
     OrderRepository orderRepository;
 
+    private NotificationService notificationService;
+
     private final ShoppingCartService shoppingCartService;
 
     private final BeerService beerService;
 
     @Autowired
-    public CheckoutController(ShoppingCartService shoppingCartService, BeerService beerService) {
+    public CheckoutController(ShoppingCartService shoppingCartService, BeerService beerService, NotificationService notificationService) {
         this.shoppingCartService = shoppingCartService;
         this.beerService = beerService;
+        this.notificationService = notificationService;
     }
+
+    private Logger logger = Logger.getLogger(String.valueOf(CheckoutController.class));
 
     @GetMapping("/checkout")
     public ModelAndView checkout() {
+
         ModelAndView modelAndView = new ModelAndView();
         Order order = new Order();
         modelAndView.addObject("order", order);
@@ -75,6 +87,15 @@ public class CheckoutController {
             modelAndView.setViewName("/checkout");
         } else {
             // Valid order delivery details
+
+            //Send notification
+            try {
+                notificationService.sendNotification("globalbeershopmail@gmail.com");
+//                notificationService.sendNotification(order.getEmail());
+            } catch (MailException e){
+                //catch error
+                logger.info("Email didn't send. Error: " + e.getMessage());
+            }
 
             modelAndView.addObject("successMessage", "User checkout successful");
             modelAndView.addObject("order", new Order());
