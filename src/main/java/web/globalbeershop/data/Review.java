@@ -21,6 +21,7 @@ public class Review {
     @JoinColumn(name = "beer_id")
     private Beer beer;
 
+
     @Min(0)
     @Max(5)
     @Column(name = "rating")

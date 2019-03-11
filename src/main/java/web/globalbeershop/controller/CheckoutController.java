@@ -185,7 +185,6 @@ public class CheckoutController {
             //Send notification
             try {
                 notificationService.sendNotification(order.getEmail());
-//                notificationService.sendNotification(order.getEmail());
             } catch (MailException e){
                 //catch error
                 System.out.println("Email didn't send. Error: " + e.getMessage());

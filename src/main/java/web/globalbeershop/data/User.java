@@ -50,6 +50,9 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
+    @Column(name = "enabled")
+    private Boolean enabled;
+
     public User() {
     }
 
@@ -66,6 +69,16 @@ public class User {
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public User(@NotEmpty @NotNull String firstName, @NotEmpty @NotNull String lastName, @NotEmpty @NotNull String email, @NotEmpty @NotNull String password, Collection<Role> roles, List<Order> orders, Boolean enabled) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+        this.orders = orders;
+        this.enabled = enabled;
     }
 
     public Long getId() {
@@ -126,5 +139,21 @@ public class User {
                 ", password='" + "*********" + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }

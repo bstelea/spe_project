@@ -35,6 +35,7 @@ public class UserService implements IUserService {
         user.setFirstName(userDTO.getForename());
         user.setLastName(userDTO.getSurname());
         user.setEmail(userDTO.getEmail());
+        user.setEnabled(false);
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
         return userRepository.save(user);
@@ -46,8 +47,14 @@ public class UserService implements IUserService {
         if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
+        Boolean isEnabled = false;
+        if(user.getEnabled() != null) isEnabled = user.getEnabled();
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),
+                isEnabled,
+                isEnabled,
+                isEnabled,
+                isEnabled,
                 mapRolesToAuthorities(user.getRoles()));
     }
 
@@ -57,4 +64,8 @@ public class UserService implements IUserService {
                 .collect(Collectors.toList());
     }
 
+    public void enableUser (User user){
+        user.setEnabled(true);
+        userRepository.save(user);
+    }
 }
