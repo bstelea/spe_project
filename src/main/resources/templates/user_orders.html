@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <div th:replace="fragments/header :: header"></div>
@@ -12,7 +12,9 @@
 <div class="container">
     <br>
     <h2>My Orders</h2>
-    <label th:if="${successMessage}" th:text="*{successMessage}" class="alert alert-danger"></label>
+
+    <label th:if="${errorMessage}" th:text="*{errorMessage}" class="alert alert-danger"></label>
+
     <form action="/user/orders/" method="get">
         <table class="table table-borderless" >
             <thead>
@@ -26,14 +28,14 @@
 
             <tbody>
             <tr th:each="order : ${orders}">
+                <form th:action="@{/user/orders}" method="get">
+
                 <td>
                     <h4 th:text="${order.getId()}"/>
-                    <input type="hidden" name="orderId" th:value="${order.getId()}"/>
+                    <input type="hidden" name="orderId" th:value="${order.getId()}">
                 </td>
                 <td>
                     <h4 th:text="${order.getPaymentRef()}"/>
-                </td>
-                <td>
                 </td>
                 <td>
                     <h4 th:text="${order.getDate()}"/>
@@ -41,6 +43,8 @@
                 <td>
                     <input type="submit" value="View">
                 </td>
+
+                </form>
             </tr>
             </tbody>
         </table>

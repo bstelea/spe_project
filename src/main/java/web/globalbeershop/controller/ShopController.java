@@ -23,6 +23,7 @@ import web.globalbeershop.util.Pager;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -55,12 +56,15 @@ public class ShopController {
                           @RequestParam(value = "size", required = false) Integer size){
 
 
+        List<Object> paramsGiven = Arrays.asList(name, country, brewer, abv, type, sortCol, sortOrd, size);
+
         //calculates filtering/sorting for query params specified by user
         BooleanExpression predicate = getQueryPredicate(name, country, brewer, abv, type);
         PageRequest paging = getOrderedPageable(page, size, sortCol, sortOrd);
 
-        //updates drop-down menu options in search tool on Shop page
+        //updates drop-down menu options and pre-selected values in search tool on Shop page
         updateSearchToolLists(model);
+        model.addAttribute("paramsGiven", paramsGiven);
 
         //performs query using predicate and ordering specified, and saves results in the user's model
         Page<Beer> beers = BeerRepo.findAll(predicate, paging);

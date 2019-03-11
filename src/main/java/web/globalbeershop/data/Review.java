@@ -17,7 +17,6 @@ public class Review {
     private User user;
 
     @NotNull
-    @NotEmpty
     @ManyToOne
     @JoinColumn(name = "beer_id")
     private Beer beer;

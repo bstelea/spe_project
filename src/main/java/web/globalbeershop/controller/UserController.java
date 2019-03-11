@@ -9,16 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.globalbeershop.data.*;
 
-import web.globalbeershop.repository.BeerRepository;
-import web.globalbeershop.repository.OrderRepository;
-import web.globalbeershop.repository.ReviewRepository;
-import web.globalbeershop.repository.UserRepository;
+import web.globalbeershop.repository.*;
 import web.globalbeershop.service.UserService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +34,9 @@ public class UserController {
     OrderRepository orderRepository;
 
     @Autowired
+    OrderItemRepository orderItemRepository;
+
+    @Autowired
     ReviewRepository reviewRepository;
 
     @GetMapping("/user")
@@ -46,21 +48,29 @@ public class UserController {
     }
 
     @GetMapping("/user/orders")
-    public String getAllOrders (Model model, Authentication auth){
+    public String getAllOrders (Model model, Authentication auth, @RequestParam(value = "orderId", required = false) Long orderId,
+                                RedirectAttributes attributes) {
         User user = userService.findByEmail(auth.getName());
-        model.addAttribute("user", user);
-        model.addAttribute("orders", orderRepository.findAll(QOrder.order.user.eq(user), new Sort(Sort.Direction.DESC, "date")));
-        return "user_orders";
-    }
 
-    @GetMapping("/user/orders/{orderId}")
-    public String getOrder (Model model, Authentication auth, @PathVariable Long orderId) {
-        User user = userService.findByEmail(auth.getName());
-        for(Order order : orderRepository.findAll(QOrder.order.id.eq(orderId).and(QOrder.order.user.eq(user)))){
-            model.addAttribute("order", order);
-            return "user_order";
+        //view all orders
+        if(orderId == null){
+            model.addAttribute("user", user);
+            model.addAttribute("orders", orderRepository.findAll(QOrder.order.user.eq(user), new Sort(Sort.Direction.DESC, "date")));
+            return "user_orders";
         }
-        return "redirect:/user/orders";
+        //view given order
+        else{
+            for(Order order : orderRepository.findAll(QOrder.order.id.eq(orderId).and(QOrder.order.user.eq(user)))){
+                Double total = 0.0;
+                for(OrderItem item : order.getItems()) total+=item.getBeer().getPrice()*item.getQuantity();
+                model.addAttribute("order", order);
+                model.addAttribute("total", total);
+                return "user_order";
+            }
+            attributes.addFlashAttribute("errorMessage", "You have no such order placed");
+            return "redirect:/user/orders";
+        }
+
     }
 
     @GetMapping("/user/details")
@@ -103,13 +113,13 @@ public class UserController {
         model.addAttribute("user", user);
 
         HashMap<Long, Beer> products = new HashMap<>();
-        for(Order order : orderRepository.findAll(QOrder.order.user.eq(user))){
-            for(OrderItem item : order.getItems()){
-                products.put(item.getBeer().getId(), item.getBeer());
-            }
+        //for all items user has ordered before
+        for(OrderItem item : orderItemRepository.findAll(QOrderItem.orderItem.order.user.eq(user))){
+            products.put(item.getBeer().getId(), item.getBeer());
         }
+
         model.addAttribute("products", products);
-        if(products.entrySet().isEmpty())  model.addAttribute("errorMessage", "You haven't purchased any beers yet to review!");
+        if(products.entrySet().isEmpty())  model.addAttribute("errorMessage", "You haven't purchased any beers recently to review!");
         model.addAttribute("review", new Review());
 
 
@@ -118,8 +128,14 @@ public class UserController {
     }
 
     @PostMapping("/user/reviews")
-    public String postReviews (Model model, Authentication auth, @Valid Review review, BindingResult result){
-        return "redirect:/user_reviews";
+    public String postReviews (Model model, Authentication auth, @Valid Review review, BindingResult result, RedirectAttributes attributes){
+
+        if(result.hasErrors()) return "user_reviews";
+
+        review.setUser(userService.findByEmail(auth.getName()));
+        reviewRepository.save(review);
+        attributes.addFlashAttribute("successMessage", "Review submitted!");
+        return "redirect:/user/reviews";
     }
 
 

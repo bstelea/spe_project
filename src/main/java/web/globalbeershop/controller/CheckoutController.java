@@ -1,6 +1,7 @@
 package web.globalbeershop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,7 @@ import web.globalbeershop.GlobalbeershopApplication;
 import web.globalbeershop.data.Beer;
 import web.globalbeershop.data.Order;
 import web.globalbeershop.data.OrderItem;
+import web.globalbeershop.data.User;
 import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.OrderItemRepository;
@@ -33,6 +35,7 @@ import com.braintreegateway.ValidationError;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import web.globalbeershop.service.UserService;
 
 import javax.validation.Valid;
 
@@ -44,6 +47,7 @@ public class CheckoutController {
     private final OrderItemRepository orderItemRepository;
     private final ShoppingCartService shoppingCartService;
     private final BeerService beerService;
+    private final UserService userService;
 
     private final BraintreeGateway gateway = GlobalbeershopApplication.gateway;
 
@@ -58,17 +62,32 @@ public class CheckoutController {
     };
 
     @Autowired
-    public CheckoutController(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, BeerService beerService) {
+    public CheckoutController(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, BeerService beerService, UserService userService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.shoppingCartService = shoppingCartService;
         this.beerService = beerService;
+        this.userService = userService;
     }
 
+    private void addCheckoutAttributes(RedirectAttributes attributes){
+        attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
+        attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
+        attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+    }
 
     @GetMapping("/checkout")
-    public String getCheckoutPage(Model model) {
-        model.addAttribute("order", new Order());
+    public String getCheckoutPage(Model model, Authentication auth){
+        User user = userService.findByEmail(auth.getName());
+        Order order = new Order();
+
+        if(user!=null){
+            order.setUser(user);
+            order.setName(user.getFirstName());
+            order.setLastName(user.getLastName());
+            order.setEmail(user.getEmail());
+        }
+        model.addAttribute("order", order);
         model.addAttribute("beers", shoppingCartService.getBeersInCart());
         model.addAttribute("total", shoppingCartService.getTotal().toString());
         model.addAttribute("clientToken", gateway.clientToken().generate());
@@ -76,7 +95,9 @@ public class CheckoutController {
     }
 
     @PostMapping("/checkout")
-    public String checkoutOrder(Model model, @RequestParam("amount") String amount, @RequestParam("payment_method_nonce") String nonce, @Valid Order order, BindingResult bindingResult, RedirectAttributes attributes) {
+    public String checkoutOrder(Model model, @RequestParam("amount") String amount, @RequestParam("payment_method_nonce") String nonce, @Valid Order order, BindingResult bindingResult, RedirectAttributes attributes, Authentication auth){
+        User user = userService.findByEmail(auth.getName());
+        model.addAttribute("user", user);
 
         //If delivery details not valid
         if (bindingResult.hasErrors()) {
@@ -91,16 +112,12 @@ public class CheckoutController {
         } catch (NotEnoughBeersInStockException e) {
             attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("outOfStockMessage", e.getMessage());
-            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
-            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
-            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            addCheckoutAttributes(attributes);
             return "redirect:/checkout";
         } catch (NoBeersInCartException b) {
             attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("emptyCartMessage", b.getMessage());
-            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
-            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
-            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            addCheckoutAttributes(attributes);
             return "redirect:/checkout";
         }
 
@@ -111,9 +128,7 @@ public class CheckoutController {
         } catch (NumberFormatException e) {
             attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("paymentErrorMessage","Error: 81503: Total is an invalid format.");
-            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
-            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
-            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            addCheckoutAttributes(attributes);
             return "redirect:/checkout";
         }
 
@@ -138,9 +153,7 @@ public class CheckoutController {
             }
             attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("paymentErrorMessage",errorString);
-            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
-            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
-            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            addCheckoutAttributes(attributes);
             return "redirect:/checkout";
             }
 
@@ -151,9 +164,7 @@ public class CheckoutController {
         } catch (Exception e) {
             attributes.addFlashAttribute("order", order);
             attributes.addFlashAttribute("paymentErrorMessage",e.toString());
-            attributes.addFlashAttribute("beers", shoppingCartService.getBeersInCart());
-            attributes.addFlashAttribute("total", shoppingCartService.getTotal().toString());
-            attributes.addFlashAttribute("clientToken", gateway.clientToken().generate());
+            addCheckoutAttributes(attributes);
             return "redirect:/checkout";
         }
 
@@ -161,7 +172,7 @@ public class CheckoutController {
         if(Arrays.asList(TRANSACTION_SUCCESS_STATUSES).contains(transaction.getStatus())){
 
             //if currently logged in, link order to user account
-
+            if(user!=null) order.setUser(user);
 
             //log order
             order.setPaymentRef(transaction.getId());

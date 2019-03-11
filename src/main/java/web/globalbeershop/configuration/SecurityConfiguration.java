@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/user/**").hasAuthority("USER")
 //                .anyRequest().permitAll()
 //
-//                .and().csrf().disable()
+//                .and()
 //
 //                .formLogin()
 //                .loginPage("/login").failureUrl("/login/error")
@@ -54,21 +54,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(
-                        "/register**",
-                        "/",
-                        "login/error",
-                        "/shop**",
-                        "/cart/**",
-                        "/checkout",
-                        "/js/**",
-                        "/css/**",
-                        "/img/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                        "/user**",
+                        "/user/**",
+                        "/user").authenticated()
+                .and().csrf().disable()
                 .formLogin()
                 .defaultSuccessUrl("/user")
                 .loginPage("/login")
-                .permitAll()
                 .failureUrl("/login/error")
                 .and()
                 .logout()

@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="payment.css">
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
@@ -49,43 +47,43 @@
                         <div class="form-group col-sm-7">
                             <label for="first_name">Forename</label>
                             <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label>
-                            <input id="first_name" type="text"  th:field="*{name}" class="form-control" placeholder="Foreame" aria-label="Foreame" aria-describedby="basic-addon1">
+                            <input id="first_name" type="text"  th:field="*{name}" class="form-control" th:value="${order.name}" aria-label="Foreame" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group col-sm-7">
                             <label for="last_name">Surname</label>
                             <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></label>
-                            <input id="last_name" type="text"  th:field="*{lastName}" class="form-control" placeholder="Surname" aria-label="Surname" aria-describedby="basic-addon1">
+                            <input id="last_name" type="text"  th:field="*{lastName}" class="form-control" th:value="${order.lastName}" aria-label="Surname" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group col-sm-7">
                             <label for="email">Email Address</label>
                             <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
-                            <input id="email" type="text"  th:field="*{email}" class="form-control" placeholder="Email Address" aria-label="Email Address" aria-describedby="basic-addon1">
+                            <input id="email" type="text"  th:field="*{email}" class="form-control" th:value="${order.email}" aria-label="Email Address" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group col-sm-7">
                             <label for="address">Address</label>
                             <label th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></label>
-                            <input id="address" type="text"  th:field="*{address}" class="form-control" placeholder="First Address Line" aria-label="First Address Line" aria-describedby="basic-addon1">
+                            <input id="address" type="text"  th:field="*{address}" class="form-control" th:value="${order.address}" aria-label="First Address Line" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group col-sm-7">
                             <label for="city">City/Town</label>
                             <label th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></label>
-                            <input id="city" type="text"  th:field="*{city}" class="form-control" placeholder="City/Town" aria-label="City/Town" aria-describedby="basic-addon1">
+                            <input id="city" type="text"  th:field="*{city}" class="form-control" th:value="${order.city}" aria-label="City/Town" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group col-sm-7">
                             <label for="county">County</label>
                             <label th:if="${#fields.hasErrors('county')}" th:errors="*{county}" class="alert alert-danger"></label>
-                            <input id="county" type="text"  th:field="*{county}" class="form-control" placeholder="County" aria-label="County" aria-describedby="basic-addon1">
+                            <input id="county" type="text"  th:field="*{county}" class="form-control" th:value="${order.county}" aria-label="County" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="form-group col-sm-7">
                             <label for="postcode">Postcode</label>
                             <label th:if="${#fields.hasErrors('zone')}" th:errors="*{zone}" class="alert alert-danger"></label>
-                            <input id="postcode" type="text"  th:field="*{zone}" class="form-control" placeholder="Postcode" aria-label="Postcode" aria-describedby="basic-addon1">
+                            <input id="postcode" type="text"  th:field="*{zone}" class="form-control" th:value="${order.zone}" aria-label="Postcode" aria-describedby="basic-addon1">
                         </div>
 
                     </div>
