@@ -10,7 +10,7 @@
                 <h3><span th:text="${beer.name}" class="beer-title"></span></h3>
                 <div class="panel-footer" th:inline="text">Price: £[[${beer.price}]]</div>
                 <div class="panel-footer"><p>Click to flip</p></div>
-                <div class="row">
+                <div class="row" style="padding-bottom: 10px">
                     <form th:if="${beer.stock}>0" action="/cart/add" method="post">
                         <input type="hidden" name="id" th:value="${beer.id}"/>
                         Quantity: <input type="number" name="quantity" class="form-group" value="1" min="1" th:max="${beer.stock}"><br>

@@ -21,39 +21,39 @@
 
             <h3 class="wild-font">FILTERS</h3>
             <form action="/shop" method="get">
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Name</span> <br>
                     <input type="text" class="form-control search-slt" th:value="${paramsGiven.get(0)}" name="name">
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Country</span> <br>
                     <select name="country" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(1)}"  th:text="${paramsGiven.get(1)}"></option>
                         <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
                     </select>
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Brewer</span> <br>
                     <select name="brewer" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(2)}"  th:text="${paramsGiven.get(2)}"></option>
                         <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
                     </select>
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>ABV</span> <br>
                     <select name="abv" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(3)}"  th:text="${paramsGiven.get(3)}"></option>
                         <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
                     </select>
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Type</span> <br>
                     <select name="type" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(4)}"  th:text="${paramsGiven.get(4)}"></option>
                         <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
                     </select>
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Sort by Column</span> <br>
                     <select name="sortCol" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(5)}"  th:text="${paramsGiven.get(5)}"></option>
@@ -64,7 +64,7 @@
                         <option value="abv">ABV</option>
                     </select>
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Sort Order</span> <br>
                     <select name="sortOrd" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(6)}"  th:text="${paramsGiven.get(6)}"></option>
@@ -72,7 +72,7 @@
                         <option value="DESC">Descending</option>
                     </select>
                 </div>
-                <div class="row">
+                <div class="row filter-atomic">
                     <span>Items per Page</span> <br>
                     <select name="size" class="btn btn-secondary dropdown-toggle">
                         <option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>
@@ -119,13 +119,31 @@
     </div>
     <!-- /.row -->
 
-    <div th:replace="fragments/pagination :: pagination(URLparameter='/shop')"></div>
+    <div class="text-center wild-font">
+        <div th:replace="fragments/pagination :: pagination(URLparameter='/shop')"></div>
+    </div>
 
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="javascript/mapdata.js"></script>
 <script type="text/javascript" src="javascript/continentmap.js"></script>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("navbar-fixed-top")
+        } else {
+            navbar.classList.remove("navbar-fixed-top");
+        }
+    }
+</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragments/header :: header"></div>
+    <link rel="stylesheet" th:href="@{../css/cart.css}" media="screen"/>
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
@@ -10,33 +11,74 @@
 <div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
 
 <div class="container">
-    <div class="panel-default well" th:each="beer : ${beers.entrySet()}">
-        <div class="panel-heading">
-            <h1><a th:text="${beer.getKey().name}">Title</a></h1>
-            <h3 th:text="${beer.getKey().description}">Description</h3>
+    <section class="shopping-cart">
+        <div class="container">
+            <div class="text-center wild-font">
+                <h2>SHOPPING CART</h2>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="items">
+                            <div class="product" th:each="beer : ${beers.entrySet()}">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img th:src="${beer.getKey().image}" class="img-responsive" style="width:100%" th:alt="${beer.getKey().image}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="info">
+                                            <div class="row">
+                                                <div class="col-md-5 product-name">
+                                                    <div class="product-name">
+                                                        <span class="wild-font" style="text-transform: uppercase;" th:text="${beer.getKey().name}"></span>
+                                                        <div class="product-info">
+                                                            <div>Country: <span class="value" th:inline="text">[[${beer.getKey().country}]]</span></div>
+                                                            <div>Brewer: <span class="value" th:inline="text">[[${beer.getKey().brewer}]]</span></div>
+                                                            <div>Type: <span class="value" th:inline="text">[[${beer.getKey().type}]]</span></div>
+                                                            <div>ABV: <span class="value" th:inline="text">[[${beer.getKey().abv}]]</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row" style="margin-left: 10px;">
+                                                        <label for="quantity">Quantity:</label></div>
+                                                    <div class="row">
+                                                        <div class="col-md-6"><input id="quantity" type="number" th:value ="${beer.getValue()}" class="form-control quantity-input"></div>
+                                                        <div class="col-md-6"><span> x £[[${beer.getKey().price}]]</span></div></div>
+                                                    <div class="row" style="margin-left: 10px;">
+                                                        <button type="button" class="btn btn-primary">Update</button></div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <button type="button" class="close" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <div class="summary">
+                            <div class="wild-font">
+                                <h3>SUMMARY</h3>
+                            </div>
+                            <div class="summary-item"><span class="text">Subtotal</span><span class="price" th:inline="text">£[[${total}]]</span></div>
+                            <div class="summary-item"><span class="text">Total</span><span class="price" th:inline="text">£[[${total}]]</span></div>
+                            <button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row panel-body">
-            <div th:inline="text" class="col-md-2">Price: [[${beer.getKey().price}]] £</div>
-            <div th:inline="text" class="col-md-9">Quantity: [[${beer.getValue()}]]</div>
-            <form action="/cart/update" method="post">
-                <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
-                Update: <input type="number" name="quantity" value="1" min="1" th:max="${beer.getKey().stock}"><br>
-                <input type="submit" value="Update Quantity">
-            </form>
-            <form action="/cart/remove" method="post">
-                <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
-                <input type="submit" value="Remove">
-            </form>
-        </div>
-        <br/>
-    </div>
-
-    <div class="row panel-body">
-        <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
-        <a th:href="@{'/checkout'}" class="col-md-1">
-            <button type="button" class="btn btn-danger">Go To Checkout</button>
-        </a>
-    </div>
+    </section>
 </div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

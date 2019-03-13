@@ -37,3 +37,12 @@
     font-family: Rye, cursive;
     text-transform: uppercase;
 }
+
+.filter-atomic {
+    padding: 15px 0;
+}
+
+.filter-atomic span{
+    text-transform: uppercase;
+    font-family: Rye, cursive;
+}
