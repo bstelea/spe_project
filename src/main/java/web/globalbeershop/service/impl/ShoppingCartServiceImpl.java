@@ -46,7 +46,7 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public void updateBeer(Beer beer, Integer quantity) {
-        if (beers.containsKey(beer)) {
+        if (beers.containsKey(beer) && quantity > 0) {
             beers.replace(beer, quantity);
         }
     }
