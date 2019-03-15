@@ -48,5 +48,11 @@
 }
 
 .map-holder {
+    background-image: url("../img/map-bg.jpg");
+    background-size: cover;
     padding-bottom: 0;
+}
+
+.map-title {
+    font-size: 40px;
 }
