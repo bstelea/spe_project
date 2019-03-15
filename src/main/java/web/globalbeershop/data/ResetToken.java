@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-public class ActivationToken {
+public class ResetToken {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,7 +26,7 @@ public class ActivationToken {
         return expiryDate.before(new Date ());
     }
 
-    public ActivationToken() {
+    public ResetToken() {
     }
 
     @PrePersist
