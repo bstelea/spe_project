@@ -53,13 +53,14 @@ public class ShopController {
                           @RequestParam(value = "sortCol", required= false) String sortCol,
                           @RequestParam(value = "sortOrd", required= false) String sortOrd,
                           @RequestParam(value = "page", required = false) Integer page,
-                          @RequestParam(value = "size", required = false) Integer size){
+                          @RequestParam(value = "size", required = false) Integer size,
+                          @RequestParam(value = "continent", required = false) String continent){
 
 
         List<Object> paramsGiven = Arrays.asList(name, country, brewer, abv, type, sortCol, sortOrd, size);
 
         //calculates filtering/sorting for query params specified by user
-        BooleanExpression predicate = getQueryPredicate(name, country, brewer, abv, type);
+        BooleanExpression predicate = getQueryPredicate(name, country, brewer, abv, type, continent);
         PageRequest paging = getOrderedPageable(page, size, sortCol, sortOrd);
 
         //updates drop-down menu options and pre-selected values in search tool on Shop page
@@ -78,7 +79,7 @@ public class ShopController {
 
 
     //Using params given by user, generates Boolean Expression to filter query results
-    private BooleanExpression getQueryPredicate(String name, String country, String brewer, String abv, String type){
+    private BooleanExpression getQueryPredicate(String name, String country, String brewer, String abv, String type, String continent){
 
         //Default filtering in all queries is for beers with stock > 0 (e.g. in stock)
         BooleanExpression predicate = QBeer.beer.stock.gt(0);
@@ -86,6 +87,7 @@ public class ShopController {
 
         //checks all possible params user could provide, and constructs query predicate using given params
         if(paramGiven(name)) predicate=predicate.and(QBeer.beer.name.like( "%"+name+"%"));
+        if(paramGiven(continent)) predicate=predicate.and(QBeer.beer.continent.eq(continent));
         if(paramGiven(country)) predicate=predicate.and(QBeer.beer.country.eq(country));
         if(paramGiven(brewer)) predicate=predicate.and(QBeer.beer.brewer.eq(brewer));
         if(paramGiven(abv)) predicate=predicate.and(QBeer.beer.abv.eq(Double.parseDouble(abv)));

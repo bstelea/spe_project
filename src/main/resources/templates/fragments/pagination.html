@@ -12,13 +12,13 @@
         </span>
 
         <span th:unless="${pager.indexOutOfBounds()}">
+            <h4 th:if="${pager.getTotalPages() != 1}"
+                th:text="'Page ' + ${pager.getPageIndex()} + ' of ' + ${pager.getTotalPages()} + '.'">
+            </h4>
+
             <span th:if="${pager.hasPrevious()}">
                 <a class="pageLink" th:href="@{${baseUrl}(page=1)}">&laquo; first</a>
                 <a class="pageLink" th:href="@{${baseUrl}(page=${pager.getPageIndex() - 1})}"> previous</a>
-            </span>
-
-            <span th:if="${pager.getTotalPages() != 1}"
-                  th:text="'Page ' + ${pager.getPageIndex()} + ' of ' + ${pager.getTotalPages()} + '.'">
             </span>
 
             <span th:if="${pager.hasNext()}">

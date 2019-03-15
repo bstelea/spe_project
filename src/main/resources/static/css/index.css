@@ -1,0 +1,52 @@
+.jumbotron {
+    background-image: url("../img/header.jpg");
+    background-position: 0% 70%;
+    background-size: cover;
+    font-family: Rye, cursive;
+    color: #fff;
+    padding-top: 15%;
+    padding-bottom: 15%;
+    margin-bottom: 0;
+}
+
+.btn-primary, .btn-primary:active {
+    background-color: transparent;
+    border-color: white;
+}
+
+.btn-primary:hover{
+    background-color: white;
+    color: #000;
+    border-color: white;
+}
+
+.interactive-map {
+    width: 100%;
+    text-align: center;
+    color: white;
+    background-color: grey;
+    padding-top: 15%;
+    padding-bottom: 15%;
+}
+
+.ribbon {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.ribbon img{
+    max-width:60%;
+    max-height:50%;
+}
+
+.about h4 {
+    font-family: Rye, cursive;
+}
+
+.logo-small img{
+    max-width: 30%;
+}
+
+.map-holder {
+    padding-bottom: 0;
+}

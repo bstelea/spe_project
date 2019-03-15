@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "beer")
@@ -59,6 +61,48 @@ public class Beer {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "continent")
+    private String continent;
+
+    @Column(name = "rating")
+    private Double rating;
+
+    @OneToMany(mappedBy = "beer")
+    private List<Review> reviews = new ArrayList<>();
+
+    public Beer(@Length(min = 3, message = "*Name must be at least 3 characters") String name, @DecimalMin(value = "0.0", message = "*Price has to be a non negative value") Double price, @Min(value = 0, message = "*Stock has to be a non negative value") Integer stock, String country, String brewer, String type, @DecimalMin(value = "0.00", message = "*ABV has to be a non negative value") Double abv, String image, String description, Double rating, List<Review> reviews) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.country = country;
+        this.brewer = brewer;
+        this.type = type;
+        this.abv = abv;
+        this.image = image;
+        this.description = description;
+        this.rating = rating;
+        this.reviews = reviews;
+    }
+
+    public Beer(@Length(min = 3, message = "*Name must be at least 3 characters") String name, @DecimalMin(value = "0.0", message = "*Price has to be a non negative value") Double price, @Min(value = 0, message = "*Stock has to be a non negative value") Integer stock, String country, String brewer, String type, @DecimalMin(value = "0.00", message = "*ABV has to be a non negative value") Double abv, String image, String description, String continent, Double rating, List<Review> reviews) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.country = country;
+        this.brewer = brewer;
+        this.type = type;
+        this.abv = abv;
+        this.image = image;
+        this.description = description;
+        this.continent = continent;
+        this.rating = rating;
+        this.reviews = reviews;
+    }
+
+    public Beer() {
+    }
+
 
     public Long getId() {
         return id;
@@ -153,5 +197,29 @@ public class Beer {
     @Override
     public int hashCode() {
         return id.hashCode();
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    public String getContinent() {
+        return continent;
+    }
+
+    public void setContinent(String continent) {
+        this.continent = continent;
     }
 }
