@@ -46,3 +46,21 @@
     text-transform: uppercase;
     font-family: Rye, cursive;
 }
+
+.products-holder {
+    margin-top: 10%;
+    margin-left: 10%;
+    background-image: url("../img/shop-wall.jpg");
+    background-repeat: repeat-y;
+}
+
+.shelf {
+    margin-top: -14px;
+    height: 50px;
+    background-image: url("../img/shelf-sm.png");
+    background-size: cover;
+}
+
+.hidden {
+    display: none;
+}

@@ -7,10 +7,10 @@ import web.globalbeershop.data.ActivationToken;
 import web.globalbeershop.data.ResetToken;
 import web.globalbeershop.data.User;
 
-public interface ActivationTokenRepository extends JpaRepository<ActivationToken, Long>,
-        QuerydslPredicateExecutor<ActivationToken> {
+public interface ResetTokenRepository extends JpaRepository<ResetToken, Long>,
+        QuerydslPredicateExecutor<ResetToken> {
 
-    ActivationToken findByToken(String token);
+    ResetToken findByToken(String token);
 
-    ActivationToken findByUser(User user);
+    ResetToken findByUser(User user);
 }
