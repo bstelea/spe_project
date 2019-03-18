@@ -4,10 +4,10 @@
 <body>
 
 <div th:fragment="products">
-    <div class="col-sm-4" th:each="beer : ${beers}" th:id="${beer.name}">
+    <div class="col-sm-4" th:each="beer : ${beers}">
         <div class="card" style="margin-bottom: 10px;">
             <img th:src="@{../img/beer-template.png}" class="img-responsive card-img-top" style="width:100%" th:alt="${beer.name}">
-            <h3><span th:text="${beer.name}" class="beer-title"></span></h3>
+            <h3><a th:href="/shop"><span th:text="${beer.name}" class="beer-title"></span></a></h3>
             <div class="panel-footer" th:inline="text">Price: £[[${beer.price}]]</div>
             <div class="row" style="padding-bottom: 10px">
                 <form th:if="${beer.stock}>0" action="/cart/add" method="post">

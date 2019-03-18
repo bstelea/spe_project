@@ -69,3 +69,9 @@
     border: none;
 }
 
+a:link, a:visited {
+    color: #000;
+    text-decoration: none;
+}
+
+
