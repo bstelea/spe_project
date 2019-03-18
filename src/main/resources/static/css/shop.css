@@ -1,11 +1,9 @@
 .card {
-    border-style: solid;
-    background-color: white;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-image: url("../img/beer-papyrus.png");
     max-width: 300px;
-    margin: auto;
     text-align: center;
-    font-family: arial;
+    padding: 10px 0;
+    margin-bottom: 30px;
 }
 
 .price {
@@ -32,6 +30,7 @@
 .beer-title {
     font-family: Rye, cursive;
     text-transform: uppercase;
+    font-size: 30px;
 }
 
 .filter-atomic {
@@ -41,19 +40,6 @@
 .filter-atomic span{
     text-transform: uppercase;
     font-family: Rye, cursive;
-}
-
-.products-holder {
-    margin-top: 5%;
-    background-image: url("../img/shop-wall.jpg");
-    background-repeat: repeat-y;
-}
-
-.shelf {
-    margin-top: -14px;
-    height: 60px;
-    background-image: url("../img/shelf-sm.png");
-    background-size: cover;
 }
 
 .hidden {

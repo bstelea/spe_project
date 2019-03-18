@@ -4,103 +4,50 @@
 <body>
 
 <div th:fragment="footer">
-    <!-- Footer -->
-    <footer class="page-footer">
-
-        <!-- Footer Links -->
-        <div class="container-fluid text-center text-md-left">
-
-            <!-- Grid row -->
-            <div class="row wild-font">
-
-                <!-- Grid column -->
-                <div class="col-md-6">
-
-                    <!-- Content -->
-                    <h2>Global Beer Shop</h2>
-                    <p>"Everybody needs to believe in something. We believe in having another beer."</p>
-
+    <footer id="myFooter">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <h2 class="logo"><a href="/"> BEER </a></h2>
                 </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-3">
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Home</a>
-                        </li>
-                        <li>
-                            <a href="#!">Shop</a>
-                        </li>
-                        <li>
-                            <a href="#!">Cart</a>
-                        </li>
-                        <li>
-                            <a href="#!">About</a>
-                        </li>
+                <div class="col-sm-2">
+                    <h5>Get started</h5>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/shop">Shop</a></li>
+                        <li><a href="/cart">My Cart</a></li>
                     </ul>
-
                 </div>
-                <!-- Grid column -->
-
-                <!-- Grid column -->
-                <div class="col-md-3">
-
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#!">Contact</a>
-                        </li>
-                        <li>
-                            <a href="#!">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="#!">Terms & Conditions</a>
-                        </li>
-                        <li>
-                            <a href="#!">Privacy</a>
-                        </li>
+                <div class="col-sm-2">
+                    <h5>About us</h5>
+                    <ul>
+                        <li><a href="#">Company Information</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">FAQ</a></li>
                     </ul>
-
                 </div>
-                <!-- Grid column -->
-
+                <div class="col-sm-2">
+                    <h5>Read more</h5>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">History of beer</a></li>
+                        <li><a href="#">Reviews</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <div class="social-networks">
+                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+                    </div>
+                    <button type="button" class="btn btn-default">Contact us</button>
+                </div>
             </div>
-            <!-- Grid row -->
-
         </div>
-        <!-- Footer Links -->
-
-        <hr>
-
-        <!-- Social buttons -->
-        <ul class="list-unstyled list-inline text-center social-icon">
-            <li class="list-inline-item">
-                <a class="btn-floating" href="#">
-                    <span class="social-icon"><img th:src="@{../img/facebook-icon.png}" ></span>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating" href="#">
-                    <span><img th:src="@{../img/instagram-icon.png}" ></span>
-                </a>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn-floating" href="#">
-                    <span><img th:src="@{../img/twitter-icon.png}" ></span>
-                </a>
-            </li>
-        </ul>
-        <!-- Social buttons -->
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Copyright:
-            <a href="/">GlobalBeerShop.co.uk</a>
+        <div class="footer-copyright">
+            <p>© 2019 Global Beer Shop </p>
         </div>
-        <!-- Copyright -->
-
     </footer>
-    <!-- Footer -->
 </div>
 
 </body>

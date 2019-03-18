@@ -4,6 +4,7 @@
     <div th:replace="fragments/header :: header"></div>
     <link rel="stylesheet" th:href="@{../css/index.css}" media="screen"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
     <title th:attr="data-custom=#{thymeleaf.app.title}">Global Beer Shop</title>
 </head>
 <body>
@@ -47,75 +48,43 @@
     </div>
 </div>
 
-<h2 class="text-center wild-font">TESTIMONIALS</h2>
-<div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
+<div class="testimonials">
+    <h2 class="text-center wild-font">TESTIMONIALS</h2>
+    <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <h4>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">Michael Roe, Vice President, Heineken</span></h4>
-        </div>
-        <div class="item">
-            <h4>"The only place where you can get beers form EVERYWHERE!!"<br><span style="font-style:normal;">John Doe, Customer</span></h4>
-        </div>
-        <div class="item">
-            <h4>"Always delighted to try a new beer... and this is the place to find it!"<br><span style="font-style:normal;">Chandler Bing, Beer Enthusiast</span></h4>
-        </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
-<div id="contact" class="container-fluid bg-grey">
-    <h2 class="text-center wild-font">CONTACT US</h2>
-    <div class="row">
-        <div class="col-sm-5">
-            <p>Contact us and we'll get back to you within 24 hours.</p>
-            <p><span class="glyphicon glyphicon-map-marker"></span> Bristol, UK</p>
-            <p><span class="glyphicon glyphicon-phone"></span> +44 1234567890</p>
-            <p><span class="glyphicon glyphicon-envelope"></span> contact@globalbeershop.co.uk</p>
-        </div>
-        <div class="col-sm-7">
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
-                </div>
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <h4>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">Michael Roe, Vice President, Heineken</span></h4>
             </div>
-            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-            <div class="row">
-                <div class="col-sm-12 form-group">
-                    <button class="btn btn-default pull-right" type="submit">Send</button>
-                </div>
+            <div class="item">
+                <h4>"The only place where you can get beers form EVERYWHERE!!"<br><span style="font-style:normal;">John Doe, Customer</span></h4>
+            </div>
+            <div class="item">
+                <h4>"Always delighted to try a new beer... and this is the place to find it!"<br><span style="font-style:normal;">Chandler Bing, Beer Enthusiast</span></h4>
             </div>
         </div>
+
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<!--<footer class="container-fluid text-center">-->
-    <!--<a href="/" title="To Top">-->
-        <!--<span class="glyphicon glyphicon-chevron-up"></span>-->
-    <!--</a>-->
-    <!--<p>&copy; Global Beer Shop</p>-->
-<!--</footer>-->
 <script>
     $(document).ready(function(){
         // Add smooth scrolling to all links in navbar + footer link
