@@ -15,3 +15,8 @@
 .leave-review {
     padding: 10px 0;
 }
+
+.btn-primary {
+    background: indianred;
+    border: none;
+}

@@ -20,6 +20,13 @@
         <img th:src="@{../img/beer-template.png}" class="img-responsive card-img-top" style="height:220px; margin-left: auto; margin-right: auto;" th:alt="${beer.name}">
         <div class="card-body">
             <h3 class="card-title text-center wild-font" style="text-transform: uppercase;" th:inline="text">[[${beer.name}]]</h3>
+            <div class="container text-center" style="padding: 10px 0;">
+                <form th:if="${beer.stock}>0" action="/cart/add" method="post">
+                    <input type="hidden" name="id" th:value="${beer.id}"/>
+                    Quantity: <input type="number" name="quantity" class="form-group" value="1" min="1" th:max="${beer.stock}"><br>
+                    <input type="submit" class="btn btn-primary" value="Add to Cart">
+                </form>
+            </div>
             <div class="panel-footer" th:inline="text"><h4>Price: £[[${beer.price}]]</h4></div>
             <div class="panel-footer" th:inline="text">Country: [[${beer.country}]]</div>
             <div class="panel-footer" th:inline="text">Type: [[${beer.type}]]</div>

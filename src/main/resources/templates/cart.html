@@ -2,8 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <div th:replace="fragments/header :: header"></div>
-    <link rel="stylesheet" th:href="@{../css/cart.css}" media="screen"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cart - Global Beer Shop</title>
+
+    <link rel="stylesheet" th:href="@{../css/cart.css}" media="screen"/>
 </head>
 <body>
 <div th:replace="fragments/header :: navbar"></div>
@@ -53,8 +55,11 @@
                                                 <div class="col-xs-1">
                                                     <form action="/cart/remove" method="post">
                                                         <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
-                                                        <button type="submit" class="close" aria-label="Close" title="Remove">
+                                                        <button type="submit" class="close remove-sym" aria-label="Close" title="Remove">
                                                             <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                        <button type="submit" class="btn btn-secondary remove-btn">
+                                                            Remove
                                                         </button>
                                                     </form>
                                                 </div>

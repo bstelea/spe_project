@@ -79,6 +79,27 @@
     border-style: none;
 }
 
+.btn {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: indianred;
+    border: none;
+}
+
+.items {
+    background: #fff;
+}
+
+.remove-btn {
+    display: block;
+}
+
+.remove-sym {
+    display: none;
+}
+
 @media (min-width: 768px) {
     .shopping-cart .items .product .info {
         padding-top: 25px;
@@ -98,13 +119,12 @@
         padding: 4px 10px;
         text-align: center;
     }
-}
 
-.btn {
-    margin-top: 10px;
-}
+    .remove-btn {
+        display: none;
+    }
 
-.btn-primary {
-    background: indianred;
-    border: none;
+    .remove-sym {
+        display: block;
+    }
 }
