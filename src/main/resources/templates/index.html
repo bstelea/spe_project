@@ -1,129 +1,222 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="fragments/header :: header"></div>
-    <link rel="stylesheet" th:href="@{../css/index.css}" media="screen"/>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-    <title th:attr="data-custom=#{thymeleaf.app.title}">Global Beer Shop</title>
+    <title>Global Beer Shop</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<div th:replace="fragments/header :: navbar"></div>
+<!-- START: header -->
 
-<div class="jumbotron text-center">
-    <h1>Fancy a beer?</h1>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="/shop" role="button"><span>Click here</span></a>
-    </p>
-</div>
+<div class="probootstrap-loader"></div>
 
-<div class="container-fluid text-center map-holder">
-    <div class="row">
-        <p class="wild-font map-title">WORLD BEER MAP</p>
-        <p>Click to see beers from a continent</p>
-    </div>
-    <div class="row text-center map">
-        <div class="col-md-1"></div>
-        <div id="map" class="col-md-10"></div>
-    </div>
-</div>
+<div th:replace="fragments/header :: header"></div>
 
-<div class="container-fluid text-center">
-    <div class="col-md-12 ribbon">
-        <img th:src="@{../img/ribbon.png}" >
-    </div>
-    <br>
-    <div class="row about">
-        <div class="col-sm-6">
-            <span class="logo-small"><img th:src="@{../img/beer-star.png}" ></span>
-            <h4>TOP QUALITY BEERS</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-sm-6">
-            <span class="logo-small"><img th:src="@{../img/delivery-star.png}" ></span>
-            <h4>HOME DELIVERY</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-    </div>
-</div>
-
-<div class="testimonials">
-    <h2 class="text-center wild-font">TESTIMONIALS</h2>
-    <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <h4>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">Michael Roe, Vice President, Heineken</span></h4>
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_1.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Fancy a beer?</h2>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="item">
-                <h4>"The only place where you can get beers form EVERYWHERE!!"<br><span style="font-style:normal;">John Doe, Customer</span></h4>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row overlap">
+            <div class="col-md-4">
+                <div class="service left-icon probootstrap-animate">
+
+                    <div class="icon">
+                        <i class="icon-earth"></i>
+                    </div>
+                    <div class="text">
+                        <h3 class="heading">Global Beer Shop</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        <p><a href="single-page.html">Learn more</a></p>
+                    </div>
+
+                </div>
             </div>
-            <div class="item">
-                <h4>"Always delighted to try a new beer... and this is the place to find it!"<br><span style="font-style:normal;">Chandler Bing, Beer Enthusiast</span></h4>
+            <div class="col-md-4">
+                <div class="service left-icon probootstrap-animate">
+                    <div class="icon">
+                        <i class="icon-credit-card"></i>
+                    </div>
+                    <div class="text">
+                        <h3 class="heading">Easy Pay</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        <p><a href="single-page.html">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service left-icon probootstrap-animate">
+                    <div class="icon">
+                        <i class="icon-truck"></i>
+                    </div>
+                    <div class="text">
+                        <h3 class="heading">Home Delivery</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        <p><a href="single-page.html">Learn more</a></p>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</section>
+<!-- END section -->
 
-        <!-- Left and right controls -->
-        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+<div class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center section-heading probootstrap-animate">
+                <h2>Our Story</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 probootstrap-animate" data-animate-effect="fadeInLeft">
+
+                <div class="panel-group probootstrap-panel" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h3 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    From Beer Lovers...
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h3 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    ...To Beer Enthusiasts...
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h3 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    ...To Beer Sellers.
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END panel-group -->
+            </div>
+            <div class="col-md-6 probootstrap-animate" data-animate-effect="fadeInRight">
+                <p><img src="img/slider_2.jpg" alt="Free HTML Bootstrap Theme by uicookies.com" class="img-responsive"></p>
+            </div>
+        </div>
     </div>
 </div>
+<!-- END section -->
+
+<!--<section class="probootstrap-section">-->
+    <!--<div class="container">-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-12 text-center section-heading probootstrap-animate">-->
+                <!--<h2>New On Sale</h2>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+            <!--<div class="col-md-4 probootstrap-animate">-->
+                <!--<div class="probootstrap-card with-hover">-->
+                    <!--<div class="probootstrap-card-media">-->
+                        <!--<a href="single-page.html"><img src="img/slider_1.jpg" class="img-responsive img-border" alt="Free HTML5 Template by uicookies.com"></a>-->
+                    <!--</div>-->
+                    <!--<div class="probootstrap-card-text">-->
+                        <!--<h2 class="probootstrap-card-heading mb0">Vokalia and Consonantia</h2>-->
+                        <!--<p class="category">Design</p>-->
+                        <!--<p><a href="single-page.html">View details</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 probootstrap-animate">-->
+                <!--<div class="probootstrap-card with-hover">-->
+                    <!--<div class="probootstrap-card-media">-->
+                        <!--<a href="single-page.html"><img src="img/slider_2.jpg" class="img-responsive img-border" alt="Free HTML5 Template by uicookies.com"></a>-->
+                    <!--</div>-->
+                    <!--<div class="probootstrap-card-text">-->
+                        <!--<h2 class="probootstrap-card-heading mb0">Live the Blind Texts</h2>-->
+                        <!--<p class="category">Model</p>-->
+                        <!--<p><a href="single-page.html">View details</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-4 probootstrap-animate">-->
+                <!--<div class="probootstrap-card with-hover">-->
+                    <!--<div class="probootstrap-card-media">-->
+                        <!--<a href="single-page.html"><img src="img/slider_3.jpg" class="img-responsive img-border" alt="Free HTML5 Template by uicookies.com"></a>-->
+                    <!--</div>-->
+                    <!--<div class="probootstrap-card-text">-->
+                        <!--<h2 class="probootstrap-card-heading mb0">Behind the Word Mountains</h2>-->
+                        <!--<p class="category">Website</p>-->
+                        <!--<p><a href="single-page.html">View details</a></p>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</section>-->
+<!-- END section -->
+
+<div th:replace="fragments/reviews :: reviews"></div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<script>
-    $(document).ready(function(){
-        // Add smooth scrolling to all links in navbar + footer link
-        $(".navbar a, footer a[href='/']").on('click', function(event) {
-            // Make sure this.hash has a value before overriding default behavior
-            if (this.hash !== ""){
-                // Prevent default anchor click behavior
-                event.preventDefault();
-                // Store hash
-                var hash = this.hash;
-                // Using jQuery's animate() method to add smooth page scroll
-                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top
-                }, 900, function(){
-                    // Add hash (#) to URL when done scrolling (default click behavior)
-                    window.location.hash = hash;
-                });
-            } // End if
-        });
-    })
-</script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="javascript/mapdata.js"></script>
-<script type="text/javascript" src="javascript/continentmap.js"></script>
-<script>
-    window.onscroll = function() {myFunction()};
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+</div>
 
-    var navbar = document.getElementById("navbar");
-    var sticky = navbar.offsetTop;
 
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("navbar-fixed-top")
-        } else {
-            navbar.classList.remove("navbar-fixed-top");
-        }
-    }
-</script>
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/custom.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
 </body>
 </html>

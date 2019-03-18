@@ -4,48 +4,60 @@
 <body>
 
 <div th:fragment="footer">
-    <footer id="myFooter">
+    <footer class="probootstrap-footer probootstrap-bg">
         <div class="container">
-            <div class="row">
-                <div class="col-sm-3">
-                    <h2 class="logo"><a href="/"> BEER </a></h2>
-                </div>
-                <div class="col-sm-2">
-                    <h5>Get started</h5>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li><a href="/shop">Shop</a></li>
-                        <li><a href="/cart">My Cart</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-2">
-                    <h5>About us</h5>
-                    <ul>
-                        <li><a href="#">Company Information</a></li>
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-2">
-                    <h5>Read more</h5>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">History of beer</a></li>
-                        <li><a href="#">Reviews</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <div class="social-networks">
-                        <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="google"><i class="fa fa-google-plus"></i></a>
+            <div class="row mb60">
+                <div class="col-md-3">
+                    <div class="probootstrap-footer-widget">
+                        <h4 class="heading">About Global Beer Shop.</h4>
+                        <p>Everybody needs to believe in something. We believe in having another beer.</p>
+                        <p><a href="#">Read more...</a></p>
                     </div>
-                    <button type="button" class="btn btn-default">Contact us</button>
+                </div>
+                <div class="col-md-3">
+                    <div class="probootstrap-footer-widget probootstrap-link-wrap">
+                        <h4 class="heading">Quick Links</h4>
+                        <ul class="stack-link">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Shop</a></li>
+                            <li><a href="#">My Cart</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Testimonial</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="probootstrap-footer-widget">
+                        <h4 class="heading">More Links</h4>
+                        <ul class="stack-link">
+                            <li><a href="#">Log In</a></li>
+                            <li><a href="#">Privacy</a></li>
+                            <li><a href="#">Terms &amp; Conditions</a></li>
+                            <li><a href="#">Career</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <a href="/contact"><button type="button" class="btn btn-default">Contact us</button></a>
                 </div>
             </div>
-        </div>
-        <div class="footer-copyright">
-            <p>© 2019 Global Beer Shop </p>
+            <div class="row copyright">
+                <div class="col-md-6">
+                    <div class="probootstrap-footer-widget">
+                        <p>&copy; 2019 <a href="/">Global Beer Shop</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="probootstrap-footer-widget right">
+                        <ul class="probootstrap-social">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-instagram2"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 </div>
