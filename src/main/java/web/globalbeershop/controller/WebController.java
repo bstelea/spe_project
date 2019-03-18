@@ -1,6 +1,7 @@
 package web.globalbeershop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,10 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import web.globalbeershop.data.ActivationToken;
-import web.globalbeershop.data.User;
-import web.globalbeershop.data.UserDTO;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import web.globalbeershop.data.*;
 import web.globalbeershop.repository.ActivationTokenRepository;
+import web.globalbeershop.repository.ResetTokenRepository;
 import web.globalbeershop.repository.UserRepository;
 import web.globalbeershop.service.NotificationService;
 import web.globalbeershop.service.UserService;
@@ -31,6 +32,11 @@ public class WebController {
 
     @Autowired
     ActivationTokenRepository activationTokenRepository;
+
+    @Autowired
+    ResetTokenRepository resetTokenRepository;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     NotificationService notificationService;
@@ -117,8 +123,7 @@ public class WebController {
         ActivationToken activationToken = activationTokenRepository.findByToken(token);
         if(activationToken!=null){
             User user = activationToken.getUser();
-            Date currentTime = new Date();
-            if(activationToken.getExpiryDate().after(currentTime)){
+            if(!activationToken.isExpired()){
                 user.setEnabled(true);
                 userRepository.save(user);
                 activationTokenRepository.delete(activationToken);
@@ -140,5 +145,88 @@ public class WebController {
             model.addAttribute("errorMessage", "Not valid request");
         }
         return "/login";
+    }
+
+    @GetMapping("/reset/get")
+    public String getResetPage(){
+        return "get_reset";
+    }
+
+    @PostMapping("/reset/get")
+    public String sendResetEmail (Model model, @RequestParam(value = "email", required = true) String email, RedirectAttributes attributes) {
+
+        User user = userRepository.findByEmail(email);
+        if(user!=null){
+            ResetToken token = new ResetToken();
+            token.setUser(user);
+            resetTokenRepository.save(token);
+
+            try {
+                notificationService.sendResetEmail(token);
+            } catch (MessagingException e) {
+                resetTokenRepository.delete(token);
+                attributes.addFlashAttribute("errorMessage", "An error occurred, please try again later");
+                return "redirect:/reset/get";
+            }
+        }
+
+        attributes.addFlashAttribute("successMessage", "If such account exists, we have sent that email a Password Reset link");
+        return "redirect:/reset/get";
+    }
+
+    @GetMapping("/reset/set")
+    public String resetPassword(Model model, @RequestParam(value = "token", required = true) String token, RedirectAttributes attributes) {
+        ResetToken resetToken = resetTokenRepository.findByToken(token);
+
+        if(resetToken!=null) {
+            User user = resetToken.getUser();
+            if (!resetToken.isExpired()) {
+                model.addAttribute("email", user.getEmail());
+                return "set_reset";
+
+            } else {
+                resetTokenRepository.delete(resetToken);
+                attributes.addFlashAttribute("errorMessage", "Invalid request");
+                return "redirect:/login";
+            }
+        }
+
+        else {
+            attributes.addFlashAttribute("errorMessage", "Invalid request");
+            resetTokenRepository.delete(resetToken);
+            return "redirect:/login";
+        }
+    }
+
+
+    @PostMapping("/reset/set")
+    public String setNewPassword (Model model, @RequestParam(value = "email", required = true) String email,
+                                  @RequestParam(value = "password", required = true) String password,
+                                  @RequestParam(value = "matchingPassword", required = true) String matchingPassword) {
+
+        //check if password meets requirements
+        if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?!#(){}])(?=\\S+$).{8,}$")) {
+            model.addAttribute("errorMessage", "The password must contain at least 8 characters, contain at least one digit, contain at least one lower and one upper case alphabetic characters, contain at least one special symbol (@#%$^ etc.) and does not contain space or a tab, etc.");
+            model.addAttribute("email", email);
+
+        }
+        //checks if passwords match
+        else if (!password.equals(matchingPassword) ){
+            model.addAttribute("errorMessage", "Passwords do not match");
+            model.addAttribute("email", email);
+        }
+
+        else {
+            User user = userRepository.findByEmail(email);
+            if (user != null) {
+                resetTokenRepository.deleteAll(resetTokenRepository.findAll(QResetToken.resetToken.user.eq(user)));
+                userService.enableUser(userService.setPassword(user, password));
+                model.addAttribute("successMessage", "Password Reset");
+
+            } else model.addAttribute("errorMessage", "Something went wrong, please try again later");
+
+            return "login";
+        }
+        return "set_reset";
     }
 }

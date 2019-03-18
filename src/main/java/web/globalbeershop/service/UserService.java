@@ -8,13 +8,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.globalbeershop.data.Role;
-import web.globalbeershop.data.User;
-import web.globalbeershop.data.UserDTO;
+import web.globalbeershop.data.*;
+import web.globalbeershop.repository.ActivationTokenRepository;
+import web.globalbeershop.repository.ResetTokenRepository;
 import web.globalbeershop.repository.UserRepository;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +25,12 @@ public class UserService implements IUserService {
     private UserRepository userRepository;
 
     @Autowired
+    private ActivationTokenRepository activationTokenRepository;
+
+    @Autowired
+    private ResetTokenRepository resetTokenRepository;
+
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public User findByEmail(String email) {
@@ -31,6 +38,7 @@ public class UserService implements IUserService {
     }
 
     public User save(UserDTO userDTO) {
+
         User user = new User();
         user.setFirstName(userDTO.getForename());
         user.setLastName(userDTO.getSurname());
@@ -38,6 +46,11 @@ public class UserService implements IUserService {
         user.setEnabled(false);
         user.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         user.setRoles(Arrays.asList(new Role("ROLE_USER")));
+        return userRepository.save(user);
+    }
+
+    public User setPassword(User user, String password) {
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         return userRepository.save(user);
     }
 
@@ -65,7 +78,9 @@ public class UserService implements IUserService {
     }
 
     public void enableUser (User user){
+
         user.setEnabled(true);
         userRepository.save(user);
     }
+
 }
