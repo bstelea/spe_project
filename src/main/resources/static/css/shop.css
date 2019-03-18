@@ -1,7 +1,3 @@
-.map-holder {
-    padding-bottom: 0;
-}
-
 .card {
     border-style: solid;
     background-color: white;
@@ -48,15 +44,14 @@
 }
 
 .products-holder {
-    margin-top: 10%;
-    margin-left: 10%;
+    margin-top: 5%;
     background-image: url("../img/shop-wall.jpg");
     background-repeat: repeat-y;
 }
 
 .shelf {
     margin-top: -14px;
-    height: 50px;
+    height: 60px;
     background-image: url("../img/shelf-sm.png");
     background-size: cover;
 }
@@ -64,3 +59,13 @@
 .hidden {
     display: none;
 }
+
+.btn {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: indianred;
+    border: none;
+}
+

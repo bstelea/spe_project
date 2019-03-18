@@ -35,8 +35,7 @@
 }
 
 .ribbon img{
-    max-width:60%;
-    max-height:50%;
+    max-width:100%;
 }
 
 .about h4 {
@@ -55,4 +54,11 @@
 
 .map-title {
     font-size: 40px;
+}
+
+@media (min-width: 768px) {
+    .ribbon img{
+        max-width:60%;
+        max-height:50%;
+    }
 }
