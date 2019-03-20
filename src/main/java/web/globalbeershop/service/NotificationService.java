@@ -76,4 +76,20 @@ public class NotificationService {
         javaMailSender.send(mimeMessage);
     }
 
+    public void sendFeedBackEmailToGBS(String name, String email, String comments) throws MessagingException {
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+
+        String activationUrl;
+
+        String htmlMsg = "<br><p>Name: "+ name +"</p>" +
+                "<br><p>Email: " + email + "</p>" +
+                "<br><p>Comments: " + comments + "</p>";
+        mimeMessage.setContent(htmlMsg, "text/html");
+        helper.setTo("globalbeershopmail@gmail.com");
+        helper.setSubject("Feedback Submission from " + email);
+        helper.setFrom("globalbeershopmail@gmail.com");
+        javaMailSender.send(mimeMessage);
+    }
+
 }

@@ -13,14 +13,17 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import web.globalbeershop.data.Beer;
+import web.globalbeershop.data.FormDTO;
 import web.globalbeershop.data.QBeer;
 import web.globalbeershop.repository.BeerRepository;
 import web.globalbeershop.service.BeerService;
 import web.globalbeershop.util.Pager;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -74,9 +77,6 @@ public class ShopController {
         model.addAttribute("pager", new Pager(beers));
         return "shop";
     }
-
-
-
 
     //Using params given by user, generates Boolean Expression to filter query results
     private BooleanExpression getQueryPredicate(String name, String country, String brewer, String abv, String type, String continent){

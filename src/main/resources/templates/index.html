@@ -78,7 +78,12 @@
     </a>
 </div>
 
-<div id="contact" class="container-fluid bg-grey">
+<!---->
+<!---->
+<!--th:field="*{email}"-->
+<!--th:field="*{comment}"-->
+
+<form th:object="${FormDTO}" method="post" action="#" th:action="@{/}" id="contact" class="container-fluid bg-grey" role="form">
     <h2 class="text-center wild-font">CONTACT US</h2>
     <div class="row">
         <div class="col-sm-5">
@@ -90,13 +95,13 @@
         <div class="col-sm-7">
             <div class="row">
                 <div class="col-sm-6 form-group">
-                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    <input th:field="*{name}" class="form-control" id="name" name="name" placeholder="Name" type="text" required>
                 </div>
                 <div class="col-sm-6 form-group">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    <input  th:field="*{email}" class="form-control" id="email" name="email" placeholder="Email" type="email" required>
                 </div>
             </div>
-            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+            <textarea  th:field="*{comments}" class="form-control" id="comments" name="comments" placeholder="Comments" rows="5"></textarea><br>
             <div class="row">
                 <div class="col-sm-12 form-group">
                     <button class="btn btn-default pull-right" type="submit">Send</button>
@@ -104,7 +109,16 @@
             </div>
         </div>
     </div>
-</div>
+</form>
+
+<!--<form autocomplete="off" action="#" th:action="@{/}" th:object="${FormDTO}" method="post" role="form">-->
+
+    <!--<h3>Register new User</h3>-->
+
+    <!--<div class="form-group">-->
+        <!--<input type="text" th:field="*{name}" placeholder="Name" class="form-control input-lg"/>-->
+    <!--</div>-->
+<!--</form>-->
 
 <div th:replace="fragments/footer :: footer"></div>
 

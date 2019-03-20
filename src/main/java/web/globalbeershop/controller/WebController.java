@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,8 +44,21 @@ public class WebController {
 
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("FormDTO", new FormDTO());
         return "index";
+    }
+
+    @PostMapping("/")
+    public String formHandler(@Valid FormDTO formDTO, @ModelAttribute FormDTO runnyBoi, BindingResult bindingResult) {
+
+        try {
+            notificationService.sendFeedBackEmailToGBS(runnyBoi.getName(), runnyBoi.getEmail(), runnyBoi.getComments());
+        } catch (MessagingException e) {
+            System.out.println("Feedback submission error " + e.getMessage());
+        }
+
+        return "redirect:/shop";
     }
 
     @GetMapping("/login/error")
