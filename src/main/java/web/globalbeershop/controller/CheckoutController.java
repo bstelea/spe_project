@@ -39,6 +39,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.globalbeershop.service.UserService;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 @Controller
@@ -96,6 +97,7 @@ public class CheckoutController {
         model.addAttribute("beers", shoppingCartService.getBeersInCart());
         model.addAttribute("total", shoppingCartService.getTotal().toString());
         model.addAttribute("clientToken", gateway.clientToken().generate());
+
         return "checkout";
     }
 
@@ -189,10 +191,12 @@ public class CheckoutController {
 
             //Send notification
             try {
-                notificationService.sendNotification(order.getEmail());
+                notificationService.sendNotification(order);
             } catch (MailException e){
                 //catch error
                 System.out.println("Email didn't send. Error: " + e.getMessage());
+            } catch (MessagingException e) {
+                System.out.println("Order not valid." + e.getMessage());
             }
 
             //save order items
