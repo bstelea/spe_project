@@ -82,14 +82,15 @@ public class CheckoutController {
 
     @GetMapping("/checkout")
     public String getCheckoutPage(Model model, Authentication auth){
-        User user = userService.findByEmail(auth.getName());
         Order order = new Order();
-
-        if(user!=null){
-            order.setUser(user);
-            order.setName(user.getFirstName());
-            order.setLastName(user.getLastName());
-            order.setEmail(user.getEmail());
+        if(auth!=null) {
+            User user = userService.findByEmail(auth.getName());
+            if (user != null) {
+                order.setUser(user);
+                order.setName(user.getFirstName());
+                order.setLastName(user.getLastName());
+                order.setEmail(user.getEmail());
+            }
         }
         model.addAttribute("order", order);
         model.addAttribute("beers", shoppingCartService.getBeersInCart());
@@ -100,8 +101,12 @@ public class CheckoutController {
 
     @PostMapping("/checkout")
     public String checkoutOrder(Model model, @RequestParam("amount") String amount, @RequestParam("payment_method_nonce") String nonce, @Valid Order order, BindingResult bindingResult, RedirectAttributes attributes, Authentication auth){
-        User user = userService.findByEmail(auth.getName());
-        model.addAttribute("user", user);
+        User user = null;
+        if(auth!=null){
+            user = userService.findByEmail(auth.getName());
+            model.addAttribute("user", user);
+        }
+
 
         //If delivery details not valid
         if (bindingResult.hasErrors()) {
