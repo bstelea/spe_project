@@ -1,96 +1,149 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <div th:replace="fragments/header :: header"></div>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shop - Global Beer Shop</title>
-    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
-    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-
-    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> -->
-    <link rel="stylesheet" href="css/styles-merged.css">
-    <link rel="stylesheet" href="css/style.min.css">
-    <link rel="stylesheet" href="css/custom.css">
-
-    <!--[if lt IE 9]>
-    <script src="js/vendor/html5shiv.min.js"></script>
-    <script src="js/vendor/respond.min.js"></script>
-    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" th:href="@{../css/shop.css}" media="screen"/>
 </head>
 <body>
 
-<!-- START: header -->
+<div th:replace="fragments/header :: navbar"></div>
 
-<div class="probootstrap-loader"></div>
 
-<div th:replace="fragments/header :: header"></div>
+<div class="container">
 
-<section class="probootstrap-slider flexslider">
-    <ul class="slides">
-        <li style="background-image: url(img/slider_2.jpg);" class="overlay2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
-                            <h2>Shop</h2>
-                            <p>Browse Beers or Filter Your Results</p>
-                        </div>
+    <div class="row">
+
+        <div class="col-lg-3">
+
+            <h3 class="wild-font">FILTERS</h3>
+            <form action="/shop" method="get">
+                <div class="row filter-atomic">
+                    <span>Name</span> <br>
+                    <input type="text" class="form-control search-slt" th:value="${paramsGiven.get(0)}" name="name">
+                </div>
+                <div class="row filter-atomic">
+                    <span>Country</span> <br>
+                    <select name="country" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(1)}"  th:text="${paramsGiven.get(1)}"></option>
+                        <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
+                    </select>
+                </div>
+                <div class="row filter-atomic">
+                    <span>Brewer</span> <br>
+                    <select name="brewer" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(2)}"  th:text="${paramsGiven.get(2)}"></option>
+                        <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
+                    </select>
+                </div>
+                <div class="row filter-atomic">
+                    <span>ABV</span> <br>
+                    <select name="abv" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(3)}"  th:text="${paramsGiven.get(3)}"></option>
+                        <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
+                    </select>
+                </div>
+                <div class="row filter-atomic">
+                    <span>Type</span> <br>
+                    <select name="type" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(4)}"  th:text="${paramsGiven.get(4)}"></option>
+                        <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                    </select>
+                </div>
+                <div class="row filter-atomic">
+                    <span>Sort by Column</span> <br>
+                    <select name="sortCol" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(5)}"  th:text="${paramsGiven.get(5)}"></option>
+                        <option value="name">Name</option>
+                        <option value="brewer">Brewer</option>
+                        <option value="country">Country of Origin</option>
+                        <option value="type">Beer Type</option>
+                        <option value="abv">ABV</option>
+                    </select>
+                </div>
+                <div class="row filter-atomic">
+                    <span>Sort Order</span> <br>
+                    <select name="sortOrd" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(6)}"  th:text="${paramsGiven.get(6)}"></option>
+                        <option value="ASC">Ascending</option>
+                        <option value="DESC">Descending</option>
+                    </select>
+                </div>
+                <div class="row filter-atomic">
+                    <span>Items per Page</span> <br>
+                    <select name="size" class="btn btn-secondary dropdown-toggle">
+                        <option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>
+                        <option value=9>9</option>
+                        <option value=27>27</option>
+                        <option value=45>45</option>
+                        <option value=99>99</option>
+                    </select>
+                </div> <br>
+                <input type="submit" class="btn btn-primary col-lg-6" value="Apply">
+            </form>
+            <form action="/shop" method="get">
+                <input type="submit" class="btn btn-secondary col-lg-6" value="Clear">
+            </form>
+
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+            <div class="row">
+                <div class="container-fluid text-center map-holder">
+                    <div class="row">
+                        <h2 class="wild-font">WORLD BEER MAP</h2>
+                        <p>Click to see beers from a continent</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div id="map" class="col-md-10"></div>
                     </div>
                 </div>
             </div>
-        </li>
-    </ul>
-</section>
-<!-- END: slider  -->
 
-<section class="probootstrap-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center section-heading probootstrap-animate">
-                <h2>Buy Beers From All Around the World</h2>
-            </div>
-        </div>
-        <div class="row">
+            <div class="row">
 
-            <div class="col-md-4 probootstrap-animate" th:each="beer : ${beers}">
-                <div class="probootstrap-card with-hover text-center">
-                    <div class="probootstrap-card-media">
-                        <a href="single-page.html"><img th:src="@{../img/beer-template.png}" class="img-responsive img-border" style="width:100%" th:alt="${beer.name}"></a>
-                    </div>
-                    <div class="probootstrap-card-text">
-                        <h2 class="probootstrap-card-heading mb0" th:inline="text">[[${beer.name}]]</h2>
-                        <p class="category" th:inline="text">Price: £[[${beer.price}]]</p>
-                        <form th:if="${beer.stock}>0" action="/cart/add" method="post">
-                            <input type="hidden" name="id" th:value="${beer.id}"/>
-                            <p>Quantity: <input type="number" name="quantity" class="quantity-modifier" value="1" min="1" th:max="${beer.stock}"></p>
-                            <input type="submit" class="btn btn-default" value="Add to Cart">
-                        </form>
-                        <p><a href="single-page.html">View details</a></p>
-                    </div>
-                </div>
+                <div th:replace="fragments/products :: products"></div>
+
             </div>
+            <!-- /.row -->
 
         </div>
+        <!-- /.col-lg-9 -->
+
     </div>
-</section>
-<!-- END section -->
+    <!-- /.row -->
 
-<div th:replace="fragments/reviews :: reviews"></div>
+    <div class="text-center wild-font">
+        <div th:replace="fragments/pagination :: pagination(URLparameter='/shop')"></div>
+    </div>
+
+</div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
-</div>
-
-
-<script src="js/scripts.min.js"></script>
-<script src="js/main.min.js"></script>
-<script src="js/custom.js"></script>
-<script src="./src/bootstrap-input-spinner.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="javascript/mapdata.js"></script>
+<script type="text/javascript" src="javascript/continentmap.js"></script>
 <script>
-    $("input[type='number']").inputSpinner()
-</script>
+    window.onscroll = function() {myFunction()};
 
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("navbar-fixed-top")
+        } else {
+            navbar.classList.remove("navbar-fixed-top");
+        }
+    }
+</script>
 </body>
 </html>

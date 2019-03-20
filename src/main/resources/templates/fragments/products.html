@@ -5,19 +5,20 @@
 
 <div th:fragment="products">
     <div class="col-sm-4" th:each="beer : ${beers}">
-        <div class="card" style="margin-bottom: 10px;">
-            <img th:src="@{../img/beer-template.png}" class="img-responsive card-img-top" style="width:100%" th:alt="${beer.name}">
-            <h3><a th:href="/shop"><span th:text="${beer.name}" class="beer-title"></span></a></h3>
-            <div class="panel-footer" th:inline="text">Price: £[[${beer.price}]]</div>
-            <div class="row" style="padding-bottom: 10px">
-                <form th:if="${beer.stock}>0" action="/cart/add" method="post">
-                <input type="hidden" name="id" th:value="${beer.id}"/>
-                Quantity: <input type="number" name="quantity" class="form-group" value="1" min="1" th:max="${beer.stock}"><br>
-                <input type="submit" class="btn btn-primary" value="Add to Cart">
-                </form>
+            <div class="card" style="margin-bottom: 10px;">
+                <img th:src="${beer.image}" class="img-responsive card-img-top" style="width:100%" th:alt="${beer.name}">
+                <h3><span th:text="${beer.name}" class="beer-title"></span></h3>
+                <div class="panel-footer" th:inline="text">Price: £[[${beer.price}]]</div>
+                <div class="panel-footer"><p>Click to flip</p></div>
+                <div class="row" style="padding-bottom: 10px">
+                    <form th:if="${beer.stock}>0" action="/cart/add" method="post">
+                        <input type="hidden" name="id" th:value="${beer.id}"/>
+                        Quantity: <input type="number" name="quantity" class="form-group" value="1" min="1" th:max="${beer.stock}"><br>
+                        <input type="submit" class="btn btn-primary" value="Add to Cart">
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="row shelf"></div>
     </div>
 </div>
 </body>
