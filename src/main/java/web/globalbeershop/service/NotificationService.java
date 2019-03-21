@@ -1,6 +1,7 @@
 package web.globalbeershop.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,6 +20,10 @@ import javax.validation.constraints.Email;
 public class NotificationService {
 
     private JavaMailSender javaMailSender;
+    @Value("${globalbeershop.email}")
+    private String gbs_email;
+    @Value("${globalbeershop.url}")
+    private String gbs_url;
 
     @Autowired
     public NotificationService(JavaMailSender javaMailSender){
@@ -38,7 +43,7 @@ public class NotificationService {
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(order.getEmail());
         helper.setSubject("Order Confirmation");
-        helper.setFrom("globalbeershopmail@gmail.com");
+        helper.setFrom(gbs_email);
         javaMailSender.send(mimeMessage);
     }
 
@@ -50,12 +55,12 @@ public class NotificationService {
         String activationUrl;
 
         String htmlMsg = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                        "<br><a href=\"http://localhost:8080/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
+                        "<br><a href=\""+gbs_url+"/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
                         "<br><h4>Global Beer Shop</h4>";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(token.getUser().getEmail());
         helper.setSubject("Activate your Global Beer Shop account");
-        helper.setFrom("globalbeershopmail@gmail.com");
+        helper.setFrom(gbs_email);
         javaMailSender.send(mimeMessage);
     }
 
@@ -67,12 +72,12 @@ public class NotificationService {
         String activationUrl;
 
         String htmlMsg = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                "<br><a href=\"http://localhost:8080/reset/set?token="+token.getToken()+"\">Click Here to reset your account password</a>" +
+                "<br><a href=\""+gbs_url+"/reset/set?token="+token.getToken()+"\">Click Here to reset your account password</a>" +
                 "<br><h4>Global Beer Shop</h4>";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(token.getUser().getEmail());
         helper.setSubject("Reset your Global Beer Shop password");
-        helper.setFrom("globalbeershopmail@gmail.com");
+        helper.setFrom(gbs_email);
         javaMailSender.send(mimeMessage);
     }
 
@@ -86,9 +91,9 @@ public class NotificationService {
                 "<br><p>Email: " + email + "</p>" +
                 "<br><p>Comments: " + comments + "</p>";
         mimeMessage.setContent(htmlMsg, "text/html");
-        helper.setTo("globalbeershopmail@gmail.com");
+        helper.setTo(gbs_email);
         helper.setSubject("Feedback Submission from " + email);
-        helper.setFrom("globalbeershopmail@gmail.com");
+        helper.setFrom(gbs_email);
         javaMailSender.send(mimeMessage);
     }
 
