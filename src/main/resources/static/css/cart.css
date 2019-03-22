@@ -1,12 +1,3 @@
-.shopping-cart{
-    padding-bottom: 50px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.shopping-cart .items{
-    margin: auto;
-}
-
 .shopping-cart .items .product{
     margin-bottom: 20px;
     padding-top: 20px;
@@ -31,61 +22,10 @@
     font-weight: 400;
 }
 
-.shopping-cart .items .product .info .quantity .quantity-input{
-    margin: auto;
-    width: 80px;
-}
-
 .shopping-cart .items .product .info .price{
     margin-top: 15px;
     font-weight: bold;
     font-size: 22px;
-}
-
-.shopping-cart .summary{
-    border-top: 2px solid #cd5c5c;
-    background-color: #ffcccc;
-    height: 100%;
-    padding: 30px;
-}
-
-.shopping-cart .summary h3{
-    text-align: center;
-    font-size: 1.3em;
-    font-weight: 600;
-    padding-top: 20px;
-    padding-bottom: 20px;
-}
-
-.shopping-cart .summary .summary-item:not(:last-of-type){
-    padding-bottom: 10px;
-    padding-top: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.shopping-cart .summary .text{
-    font-size: 1em;
-    font-weight: 600;
-}
-
-.shopping-cart .summary .price{
-    font-size: 1em;
-    float: right;
-}
-
-.shopping-cart .summary button{
-    margin-top: 20px;
-    background-color: indianred;
-    border-style: none;
-}
-
-.btn {
-    margin-top: 10px;
-}
-
-.btn-primary {
-    background: indianred;
-    border: none;
 }
 
 .items {
@@ -113,10 +53,6 @@
     }
 
     .shopping-cart .items .product .info .quantity {
-        text-align: center;
-    }
-    .shopping-cart .items .product .info .quantity .quantity-input {
-        padding: 4px 10px;
         text-align: center;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.service.BeerService;
@@ -50,7 +51,7 @@ public class CartController {
     @PostMapping("/cart/remove")
     public String removeBeerFromCart(@RequestParam("id") Long id, Model model) {
         beerService.findById(id).ifPresent(shoppingCartService::removeBeer);
-        return cart(model);
+        return "redirect:/cart";
     }
 
     @PostMapping("/cart/update")
@@ -58,22 +59,22 @@ public class CartController {
         if(beerService.findById(id).isPresent()) {
             shoppingCartService.updateBeer(beerService.findById(id).get(), quantity);
         }
-        return cart(model);
+        return "redirect:/cart";
     }
 
     @GetMapping("/cart/checkout")
-    public String goToCheckout(Model model) {
+    public String goToCheckout(Model model, RedirectAttributes attributes) {
         try {
             shoppingCartService.validateCart();
         } catch (NotEnoughBeersInStockException e) {
 
-            model.addAttribute("outOfStockMessage", e.getMessage());
-            return cart(model);
+            attributes.addFlashAttribute("outOfStockMessage", e.getMessage());
+            return "redirect:/cart";
 
 //            return cart().addObject("outOfStockMessage", e.getMessage());
         } catch (NoBeersInCartException b) {
-            model.addAttribute("emptyCartMessage", b.getMessage());
-            return cart(model);
+            attributes.addFlashAttribute("outOfStockMessage", b.getMessage());
+            return "redirect:/cart";
         }
         return "redirect:/checkout";
     }
