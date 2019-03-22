@@ -1,62 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <div th:replace="fragments/header :: header"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Log In - Global Beer Shop</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div th:replace="fragments/header :: navbar"></div>
-<br>
-<div class="container">
 
-    <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
+<!-- START: header -->
 
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${userDTO}" method="post" role="form">
+<div class="probootstrap-loader"></div>
 
-                <h3>Register new User</h3>
+<div th:replace="fragments/header :: header"></div>
 
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{email}" placeholder="Email Address" class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('forename')}" th:errors="*{forename}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{forename}" placeholder="Forename" class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger"></label>
-                    <input type="text" th:field="*{surname}" placeholder="Surname" class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></label>
-                    <input type="password" th:field="*{password}" placeholder="Password" class="form-control input-lg"/>
-                </div>
-
-                <div class="form-group">
-                    <label th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" class="alert alert-danger"></label>
-                    <input type="password" th:field="*{matchingPassword}" placeholder="Confirm Password" class="form-control input-lg"/>
-                </div>
-
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_1.jpg);" class="overlay2">
+            <div class="container">
                 <div class="row">
-                    <div class="col-sm-3" style="float: none; margin: 0 auto;">
-                        <input type="submit" class="btn btn-primary btn-block" value="Create User"/>
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Register</h2>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 probootstrap-animate overlap">
+                <form th:action="@{/register}" method="post" th:object="${userDTO}"  class="probootstrap-form probootstrap-form-box mb60">
+                    <label th:if="${successMessage}" th:text="*{successMessage}" class="alert alert-danger"></label>
+                    <label th:if="${errorMessage}" th:text="*{errorMessage}" class="alert alert-danger"></label>
+
+                    <div class="form-group">
+                        <label for="email">Email: </label>
+                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Email" th:field="*{email}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="forename">Forename: </label>
+                        <label th:if="${#fields.hasErrors('forename')}" th:errors="*{forename}" class="alert alert-danger"></label>
+                        <input type="text" class="form-control" id="forename" name="forname" placeholder="Forename" th:field="*{forename}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">Surname: </label>
+                        <label th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="alert alert-danger"></label>
+                        <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname" th:field="*{surname}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" th:field="*{password}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="matchingPassword">Confirm Password: </label>
+                        <label th:if="${#fields.hasErrors('matchingPassword')}" th:errors="*{matchingPassword}" class="alert alert-danger"></label>
+                        <input type="password" class="form-control" id="matchingPassword" name="matchingPassword" placeholder="Confirm Password" th:field="*{matchingPassword}">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</section>
+<!-- END section -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
 </div>
-<footer class="container-fluid text-center">
-    <a href="/" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>&copy; Global Beer Shop</p>
-</footer>
+
+
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+
+<script src="js/custom.js"></script>
 
 </body>
 </html>
