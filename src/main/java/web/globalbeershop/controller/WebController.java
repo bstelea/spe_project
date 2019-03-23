@@ -48,9 +48,9 @@ public class WebController {
     }
 
     @GetMapping("/login/error")
-    public String loginError(Model model) {
-        model.addAttribute("errorMessage", "Wrong Email or Password");
-        return "login";
+    public String loginError(Model model, RedirectAttributes attributes) {
+        attributes.addFlashAttribute("errorMessage", "Wrong Email or Password");
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -119,7 +119,7 @@ public class WebController {
     }
 
     @GetMapping("/register/activate")
-    public String newUser(Model model, @RequestParam(value = "token", required = true) String token) {
+    public String newUser(Model model, @RequestParam(value = "token", required = true) String token,  RedirectAttributes attributes) {
         ActivationToken activationToken = activationTokenRepository.findByToken(token);
         if(activationToken!=null){
             User user = activationToken.getUser();
@@ -127,24 +127,24 @@ public class WebController {
                 user.setEnabled(true);
                 userRepository.save(user);
                 activationTokenRepository.delete(activationToken);
-                model.addAttribute("successMessage", "Your account has been activated, you can now login");
+                attributes.addFlashAttribute("successMessage", "Your account has been activated, you can now login");
             }
             else {
-                model.addAttribute("errorMessage", "Your activation link has expired, we have sent a new one to the same e-mail address");
+                attributes.addFlashAttribute("errorMessage", "Your activation link has expired, we have sent a new one to the same e-mail address");
                 try {
                     notificationService.sendActivationEmail(activationToken);
                 } catch (MessagingException e) {
-                    model.addAttribute("errorMessage", "There is something wrong with the e-mail address for your account, please try creating your account again");
+                    attributes.addFlashAttribute("errorMessage", "There is something wrong with the e-mail address for your account, please try creating your account again");
                     userRepository.delete(user);
                     activationTokenRepository.delete(activationToken);
-                    return "/login";
+                    return "redirect:/login";
                 }
             }
 
         }else{
-            model.addAttribute("errorMessage", "Not valid request");
+            attributes.addFlashAttribute("errorMessage", "Not valid request");
         }
-        return "/login";
+        return "redirect:/login";
     }
 
     @GetMapping("/reset/get")

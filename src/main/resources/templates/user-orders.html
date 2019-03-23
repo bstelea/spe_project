@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Orders - Global Beer Shop</title>
+    <meta name="description" content="Free Bootstrap Theme by uicookies.com">
+    <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- START: header -->
+
+<div class="probootstrap-loader"></div>
+
+<div th:replace="fragments/header :: header"></div>
+
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_2.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>My Orders</h2>
+                            <p>Check your previous orders below</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<label th:if="${errorMessage}" th:text="*{errorMessage}" class="alert alert-danger"></label>
+
+<section class="probootstrap-section">
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="product probootstrap-animate" th:each="order : ${orders}">
+                    <form th:action="@{/user-orders}" method="get">
+                        <div class="col-md-3">
+                            <h2>Order ID: </h2>
+                            <h4 th:text="${order.getId()}"/>
+                            <input type="hidden" name="orderId" th:value="${order.getId()}">
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Payment Reference</h2>
+                            <h4 th:text="${order.getPaymentRef()}"/>
+                        </div>
+                        <div class="col-md-3">
+                            <h2>Date of Order: </h2>
+                            <h4 th:text="${order.getDate()}"/>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="submit" class="btn btn-default">View</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+</div>
+
+
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="./src/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
+
+</body>
+</html>

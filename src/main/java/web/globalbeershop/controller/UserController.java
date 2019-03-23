@@ -3,7 +3,6 @@ package web.globalbeershop.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
@@ -16,10 +15,7 @@ import web.globalbeershop.repository.*;
 import web.globalbeershop.service.UserService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 @Controller
 public class UserController {
@@ -47,10 +43,10 @@ public class UserController {
         User user = userService.findByEmail(auth.getName());
         model.addAttribute("user", user);
         model.addAttribute("greeting", "Welcome, " + user.getFirstName());
-        return "user_index";
+        return "user-index";
     }
 
-    @GetMapping("/user/orders")
+    @GetMapping("/user-orders")
     public String getAllOrders (Model model, Authentication auth, @RequestParam(value = "orderId", required = false) Long orderId,
                                 RedirectAttributes attributes) {
         User user = userService.findByEmail(auth.getName());
@@ -59,7 +55,7 @@ public class UserController {
         if(orderId == null){
             model.addAttribute("user", user);
             model.addAttribute("orders", orderRepository.findAll(QOrder.order.user.eq(user), new Sort(Sort.Direction.DESC, "date")));
-            return "user_orders";
+            return "user-orders";
         }
         //view given order
         else{
@@ -68,50 +64,50 @@ public class UserController {
                 for(OrderItem item : order.getItems()) total+=item.getBeer().getPrice()*item.getQuantity();
                 model.addAttribute("order", order);
                 model.addAttribute("total", total);
-                return "user_order";
+                return "user-order";
             }
             attributes.addFlashAttribute("errorMessage", "You have no such order placed");
-            return "redirect:/user/orders";
+            return "redirect:/user-orders";
         }
 
     }
 
-    @GetMapping("/user/details")
-    public String getDetails (Model model,Authentication auth){
+    @GetMapping("/user-details")
+    public String getDetails (Model model, Authentication auth){
         User user = userService.findByEmail(auth.getName());
         model.addAttribute("user", user);
-        return "user_details";
+        return "user-details";
     }
 
-    @PostMapping("/user/details")
+    @PostMapping("/user-details/set")
     public String setDetails (Model model, @RequestParam(value = "firstName", required = false) String firstName,
                                             @RequestParam(value = "lastName", required = false) String lastName,
-                                             Authentication auth)
+                                             Authentication auth, RedirectAttributes attributes)
     {
         User user = userService.findByEmail(auth.getName());
         if(firstName != "" && firstName!=null) user.setFirstName(firstName);
         else{
-            model.addAttribute("errorMessage", "Invalid details");
-            model.addAttribute("user", user);
-            return "user_details";
+            attributes.addFlashAttribute("errorMessage", "Invalid details");
+            attributes.addFlashAttribute("user", user);
+            return "redirect:/user-details";
 
         }
         if(lastName !=  "" && lastName!=null) user.setLastName(lastName);
         else{
-            model.addAttribute("errorMessage", "Invalid details");
-            model.addAttribute("user", user);
-            return "user_details";
+            attributes.addFlashAttribute("errorMessage", "Invalid details");
+            attributes.addFlashAttribute("user", user);
+            return "redirect:/user-details";
 
         }
 
         userRepository.save(user);
-        model.addAttribute("successMessage", "Your details have been updated");
-        model.addAttribute("user", user);
-        return "user_details";
+        attributes.addFlashAttribute("successMessage", "Your details have been updated");
+        attributes.addFlashAttribute("user", user);
+        return "redirect:/user-details";
     }
 
-    @GetMapping("/user/reviews")
-    public String getReviews (Model model,Authentication auth){
+    @GetMapping("/user-reviews")
+    public String getReviews (Model model, Authentication auth){
         User user = userService.findByEmail(auth.getName());
         model.addAttribute("user", user);
 
@@ -125,15 +121,13 @@ public class UserController {
         if(products.entrySet().isEmpty())  model.addAttribute("errorMessage", "You haven't purchased any beers recently to review!");
         model.addAttribute("review", new Review());
 
-
-
-        return "user_reviews";
+        return "user-reviews";
     }
 
-    @PostMapping("/user/reviews")
+    @PostMapping("/user-reviews/submit")
     public String postReviews (Model model, Authentication auth, @Valid Review review, BindingResult result, RedirectAttributes attributes){
 
-        if(result.hasErrors()) return "user_reviews";
+        if(result.hasErrors()) return "redirect:/user-reviews";
 
         review.setUser(userService.findByEmail(auth.getName()));
         Beer beer = review.getBeer();
@@ -141,7 +135,7 @@ public class UserController {
         reviewRepository.save(review);
         beerRepository.save(review.getBeer());
         attributes.addFlashAttribute("successMessage", "Review submitted!");
-        return "redirect:/user/reviews";
+        return "redirect:/user-reviews";
     }
 
 
