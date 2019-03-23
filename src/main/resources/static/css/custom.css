@@ -30,3 +30,26 @@ a.probootstrap-logo {
 h2 {
     font-family: Rye, cursive;
 }
+
+.btn-to-action {
+    background: transparent;
+    border: solid white;
+    color: white;
+    -webkit-border-radius: 80px;
+    -moz-border-radius: 80px;
+    border-radius: 80px;
+}
+
+.btn-to-action:hover {
+    color: lightgray;
+}
+
+.interactive-map {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .interactive-map {
+        display: block;
+    }
+}

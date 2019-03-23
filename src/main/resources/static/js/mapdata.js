@@ -11,8 +11,8 @@ var simplemaps_continentmap_mapdata={
         state_description: "",//"State description",
         // state_color: "#88A4BC",
         // state_hover_color: "#3B729F",
-        state_color: "#c9b47f",
-        state_hover_color: "#f7e0a5",
+        state_color: "#75bfca",
+        state_hover_color: "#66a6af",
         state_url: "http://localhost:8080/",
         border_size: 1.5,
         all_states_inactive: "no",
@@ -65,7 +65,7 @@ var simplemaps_continentmap_mapdata={
         popup_nocss: "no",
 
         //Advanced settings
-        div: "map",
+        div: "intmap",
         auto_load: "yes",
         url_new_tab: "no",
         images_directory: "default",

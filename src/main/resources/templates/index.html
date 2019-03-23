@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -22,7 +22,53 @@
 
 <div class="probootstrap-loader"></div>
 
-<div th:replace="fragments/header :: header"></div>
+<header role="banner" class="probootstrap-header">
+    <div class="container">
+        <a href="/" class="probootstrap-logo">Beer</a>
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </div>
+            </ul>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- END: header -->
 
 <section class="probootstrap-slider flexslider">
     <ul class="slides">
@@ -32,6 +78,7 @@
                     <div class="col-md-12 text-center">
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>Fancy a beer?</h2>
+                            <a href="/shop"><button type="button" class="btn btn-outline-secondary btn-to-action">Click here</button></a>
                         </div>
                     </div>
                 </div>
@@ -81,6 +128,19 @@
                         <p><a href="single-page.html">Learn more</a></p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END section -->
+
+<section class="interactive-map">
+    <div class="container text-center probootstrap-animate">
+        <div class="container">
+            <h2 style="font-size: 40px;">World Beer Map</h2>
+            <p>Click to see beers from a continent</p>
+            <div class="col-xs-offset-1 col-xs-10">
+                <div id="intmap"></div>
             </div>
         </div>
     </div>
@@ -154,55 +214,6 @@
 </div>
 <!-- END section -->
 
-<!--<section class="probootstrap-section">-->
-    <!--<div class="container">-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-12 text-center section-heading probootstrap-animate">-->
-                <!--<h2>New On Sale</h2>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-md-4 probootstrap-animate">-->
-                <!--<div class="probootstrap-card with-hover">-->
-                    <!--<div class="probootstrap-card-media">-->
-                        <!--<a href="single-page.html"><img src="img/slider_1.jpg" class="img-responsive img-border" alt="Free HTML5 Template by uicookies.com"></a>-->
-                    <!--</div>-->
-                    <!--<div class="probootstrap-card-text">-->
-                        <!--<h2 class="probootstrap-card-heading mb0">Vokalia and Consonantia</h2>-->
-                        <!--<p class="category">Design</p>-->
-                        <!--<p><a href="single-page.html">View details</a></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-4 probootstrap-animate">-->
-                <!--<div class="probootstrap-card with-hover">-->
-                    <!--<div class="probootstrap-card-media">-->
-                        <!--<a href="single-page.html"><img src="img/slider_2.jpg" class="img-responsive img-border" alt="Free HTML5 Template by uicookies.com"></a>-->
-                    <!--</div>-->
-                    <!--<div class="probootstrap-card-text">-->
-                        <!--<h2 class="probootstrap-card-heading mb0">Live the Blind Texts</h2>-->
-                        <!--<p class="category">Model</p>-->
-                        <!--<p><a href="single-page.html">View details</a></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-md-4 probootstrap-animate">-->
-                <!--<div class="probootstrap-card with-hover">-->
-                    <!--<div class="probootstrap-card-media">-->
-                        <!--<a href="single-page.html"><img src="img/slider_3.jpg" class="img-responsive img-border" alt="Free HTML5 Template by uicookies.com"></a>-->
-                    <!--</div>-->
-                    <!--<div class="probootstrap-card-text">-->
-                        <!--<h2 class="probootstrap-card-heading mb0">Behind the Word Mountains</h2>-->
-                        <!--<p class="category">Website</p>-->
-                        <!--<p><a href="single-page.html">View details</a></p>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</section>-->
-<!-- END section -->
-
 <div th:replace="fragments/reviews :: reviews"></div>
 
 <div th:replace="fragments/footer :: footer"></div>
@@ -211,7 +222,11 @@
     <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
 </div>
 
-
+<script type="text/javascript" src="js/mapdata.js"></script>
+<script type='text/javascript'>
+    var intmap=simplemaps_usmap.create();
+</script>
+<script type="text/javascript" src="js/continentmap.js"></script>
 <script src="js/scripts.min.js"></script>
 <script src="js/main.min.js"></script>
 <script src="js/custom.js"></script>
