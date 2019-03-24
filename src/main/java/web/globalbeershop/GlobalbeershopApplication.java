@@ -11,7 +11,7 @@ import java.io.File;
 
 @PropertySources({
 		@PropertySource(value = "classpath:secret.properties", ignoreResourceNotFound = true),
-		@PropertySource(value = "file:${user.home}/.secret.properties", ignoreResourceNotFound = true)
+		@PropertySource(value = "file:${ubuntu.home}/.secret.properties", ignoreResourceNotFound = true)
 })
 @SpringBootApplication
 public class GlobalbeershopApplication {
