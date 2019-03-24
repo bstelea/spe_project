@@ -2,10 +2,17 @@ package web.globalbeershop;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import web.globalbeershop.service.BraintreeGatewayService;
 import com.braintreegateway.BraintreeGateway;
 
 import java.io.File;
+
+@PropertySources({
+		@PropertySource(value = "classpath:secret.properties", ignoreResourceNotFound = true),
+		@PropertySource(value = "file:${user.home}/.secret.properties", ignoreResourceNotFound = true)
+})
 @SpringBootApplication
 public class GlobalbeershopApplication {
 
