@@ -16,15 +16,11 @@ import java.io.File;
 @SpringBootApplication
 public class GlobalbeershopApplication {
 
-	public static String DEFAULT_CONFIG_FILENAME = "classpath:secret.properties";
-	public static String DEFAULT_CONFIG_FILENAME_DEPLOY = "file:${user.home}/.secret.properties";
+	public static String DEFAULT_CONFIG_FILENAME = "../config.properties";
 	public static BraintreeGateway gateway;
 
 	public static void main(String[] args) {
 		File configFile = new File(DEFAULT_CONFIG_FILENAME);
-		if (!(configFile.exists() && !configFile.isDirectory())) {
-			configFile = new File(DEFAULT_CONFIG_FILENAME_DEPLOY);
-		}
 		try {
 			if(configFile.exists() && !configFile.isDirectory()) {
 				gateway = BraintreeGatewayService.fromConfigFile(configFile);
