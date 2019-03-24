@@ -16,7 +16,7 @@ import java.io.File;
 @SpringBootApplication
 public class GlobalbeershopApplication {
 
-	public static String DEFAULT_CONFIG_FILENAME = "../config.properties";
+	public static String DEFAULT_CONFIG_FILENAME = "config.properties";
 	public static BraintreeGateway gateway;
 
 	public static void main(String[] args) {
