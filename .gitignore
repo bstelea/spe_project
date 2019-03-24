@@ -24,5 +24,6 @@
 /.nb-gradle/
 /build/
 
-### Secret properties file ###
+### Secret properties file & Braintree config file ###
 secret.properties
+config.properties
