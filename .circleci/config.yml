@@ -38,7 +38,7 @@ jobs:
           key: v1-dependencies-{{ checksum "pom.xml" }}
 
       # run tests!
-      - run: mvn test -Dtest=CartTest
+      - run: SPRING_PROFILES_ACTIVE=test mvn test -Dtest=CartTest
 
     deploy:
       machine:
