@@ -40,18 +40,18 @@ jobs:
       # run tests!
       - run: SPRING_PROFILES_ACTIVE=test mvn test -Dtest=CartTest,IntegrationTest
 
-    deploy:
-      machine:
-        enabled: true
-      steps:
-        - add_ssh_keys:
-            fingerprints:
-              - "bb:5d:1c:77:73:94:c7:cd:eb:cd:75:7f:0a:64:90:c1"
+  deploy:
+    machine:
+      enabled: true
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "bb:5d:1c:77:73:94:c7:cd:eb:cd:75:7f:0a:64:90:c1"
 
-        - run:
-            name: Deploy Over SSH
-            command: |
-              ssh $SSH_USER@$SSH_HOST "cd spe_project && git pull && cp ~/config.properties . && mvn clean package -DskipTests=True && cd target && sudo chown gbs:gbs globalbeershop-0.0.1-SNAPSHOT.jar && sudo chmod 500 globalbeershop-0.0.1-SNAPSHOT.jar && sudo service gbs restart"
+      - run:
+          name: Deploy Over SSH
+          command: |
+            ssh $SSH_USER@$SSH_HOST "cd spe_project && git pull && cp ~/config.properties . && mvn clean package -DskipTests=True && cd target && sudo chown gbs:gbs globalbeershop-0.0.1-SNAPSHOT.jar && sudo chmod 500 globalbeershop-0.0.1-SNAPSHOT.jar && sudo service gbs restart"
 
 
 workflows:
