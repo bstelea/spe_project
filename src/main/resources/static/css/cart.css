@@ -1,0 +1,27 @@
+.product-id-name {
+    font-size: 20px;
+}
+
+.remove-btn {
+    display: none;
+}
+
+.remove-sym {
+    display: block;
+}
+
+@media (max-width: 768px) {
+
+    .product-id-name {
+        font-size: 12px;
+    }
+
+    .remove-btn {
+        display: block;
+    }
+
+    .remove-sym {
+        display: none;
+    }
+
+}

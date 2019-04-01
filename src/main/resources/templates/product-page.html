@@ -1,97 +1,156 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <div th:replace="fragments/header :: header"></div>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title th:text="${beer.name} + ' Beer'"></title>
-    <link rel="stylesheet" th:href="@{../css/product.css}" media="screen"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact - Global Beer Shop</title>
+    <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
+    <meta name="keywords" content="global beer shop, global, beer, shop, beers">
+
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<div th:replace="fragments/header :: navbar"></div>
+<!-- START: header -->
 
-<!-- Page Content -->
-<div class="container">
+<div class="probootstrap-loader"></div>
 
-    <div class="card">
-        <img th:src="@{../img/beer-template.png}" class="img-responsive card-img-top" style="height:220px; margin-left: auto; margin-right: auto;" th:alt="${beer.name}">
-        <div class="card-body">
-            <h3 class="card-title text-center wild-font" style="text-transform: uppercase;" th:inline="text">[[${beer.name}]]</h3>
-            <div class="container text-center" style="padding: 10px 0;">
-                <form th:if="${beer.stock}>0" action="/cart/add" method="post">
-                    <input type="hidden" name="id" th:value="${beer.id}"/>
-                    Quantity: <input type="number" name="quantity" class="form-group" value="1" min="1" th:max="${beer.stock}"><br>
-                    <input type="submit" class="btn btn-primary" value="Add to Cart">
+<header role="banner" class="probootstrap-header">
+    <div class="container">
+        <a href="/" class="probootstrap-logo">Beer</a>
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li class="active"><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </div>
+            </ul>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- END: header -->
+
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_1.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Contact Us</h2>
+                            <p>Want to get in touch with us? Send us a message by completing the form.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 probootstrap-animate overlap">
+                <form action="#" method="post" class="probootstrap-form probootstrap-form-box mb60">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" id="lname" name="lname">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea cols="30" rows="10" class="form-control" id="message" name="message"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Send Message">
+                    </div>
                 </form>
             </div>
-            <div class="panel-footer" th:inline="text"><h4>Price: £[[${beer.price}]]</h4></div>
-            <div class="panel-footer" th:inline="text">Country: [[${beer.country}]]</div>
-            <div class="panel-footer" th:inline="text">Type: [[${beer.type}]]</div>
-            <div class="panel-footer" th:inline="text">Brewer: [[${beer.brewer}]]</div>
-            <div class="panel-footer" th:inline="text">ABV: [[${beer.abv}]]</div>
-            <div class="panel-footer" th:inline="text">
-                <h3>Story of the beer:</h3> <br>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            </div>
-            <div class="panel-footer text-center" th:inline="text">
-                <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-                4.0 stars
+            <div class="col-md-3 col-md-push-1 probootstrap-animate">
+                <h4>Contact Details</h4>
+                <ul class="with-icon colored">
+                    <li><i class="icon-location2"></i> <span>198 West 21th Street, Suite 721 New York NY 10016</span></li>
+                    <li><i class="icon-mail"></i><span>contact@globalbeershop.com</span></li>
+                    <li><i class="icon-phone2"></i><span>+123 456 7890</span></li>
+                </ul>
+
+                <h4>Feedback</h4>
+                <p>Want to tell us about what you feel about our beers? Use the product page and leave a review!</p>
+                <p><a href="#">Go Back To Shop</a></p>
             </div>
         </div>
     </div>
-    <!-- /.card -->
+</section>
+<!-- END section -->
 
-    <div class="card reviews">
-        <div class="card-body">
-            <div class="card-title wild-font text-center">
-                Product Reviews
-            </div>
-            <div class="panel-footer" th:inline="text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-            </div>
-            <div class="panel-footer" th:inline="text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-            </div>
-            <div class="panel-footer" th:inline="text">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-                <hr>
-            </div>
-
-            <div class="container text-center leave-review">
-                <a href="#" class="btn btn-success">Leave a Review</a>
-            </div>
-        </div>
-    </div>
-    <!-- /.card -->
-
-</div>
-<!-- /.container -->
+<div th:replace="fragments/reviews :: reviews"></div>
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script>
-    window.onscroll = function() {myFunction()};
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+</div>
 
-    var navbar = document.getElementById("navbar");
-    var sticky = navbar.offsetTop;
 
-    function myFunction() {
-        if (window.pageYOffset >= sticky) {
-            navbar.classList.add("navbar-fixed-top")
-        } else {
-            navbar.classList.remove("navbar-fixed-top");
-        }
-    }
-</script>
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+
+<script src="js/custom.js"></script>
+
 </body>
 </html>
