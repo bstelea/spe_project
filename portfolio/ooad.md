@@ -26,7 +26,7 @@ As these Entities need to correspond to the tables in our database, we can deter
 
 Having modelled our database and entities in the previous diagrams will prove very benefitial to us in early development, as it will allow us to implement our data source and the object we use to iteract with it early on - a crucial prerequesit for most of our requirements. The database schema can be directly expressed in SQL dialect, while we only need to add Getter and Setter methods on top of the attributes listed for the entities when we come to implement them - making these diagrams essentially complete models of what they represent.
 
-Unfortunately, these only represent static elements our our system. Based on our research into the Spring framework, however, has revealed that user interactions with the web application result in the following basic pattern:
+Unfortunately, these only represent static elements our our system. Based on our research into the Spring framework, however, has revealed that user requests to the application cause the following basic sequence of interactions between the statice elements designed previously:
 
 ![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/sequence_diagram.png "Dynamic UML Diagram")
 
