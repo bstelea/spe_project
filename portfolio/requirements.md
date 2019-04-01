@@ -82,17 +82,6 @@ _EXCEPTIONAL FLOW: not enough available stock of that beer at checkout_
 
 ### MVP System Requirements
 
-As stated earlier, our project will follow an incremental, iterative approach; where we hope to deliver the applications over several releases of increasing functionality and quality. Our first release planned is that of our Minimum Viable Product (MVP), which the later Beta and Final releases will be built upon.
-
-Staying true to our agile approach, we will now consider the MVP our current “sub-project” and will continue the planning and designing just for the MVP. The MVP will be the absolute minimal solution to the problem at hand, and must only include features deemed essential to providing e-commerce functionality.
-
-We will elicit the MVP’s requirements by considering an abstract e-commerce website and what we consider is the simplest set of features we’d expect it to have to allow us to purchase a product on it. 
-Using this, we can reduce the use-case goals we established earlier for the final release version into the optimal set required for just the MVP version:
-
-The diagram above represents the structure of the MVP and highlights the most key functionality (both in the front end and back end) that it should provide. Alongside our use-case flows and requirements given by our clients, we can use this MVP structure to finally elicit our MVP’s system requirements:
-
-
----
 <strong><ins>GENERAL USER INTERFACE</strong></ins>
 
 _FUNCTIONAL_
