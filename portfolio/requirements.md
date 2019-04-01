@@ -1,134 +1,86 @@
 # Requirements
 ### Stakeholders, Actors and Goals
 
-Based on our project’s application domain, business sector and key problem; we can determine that the key stakeholders of our final product(s) will eventually be:
+Based on our project’s application domain, business sector and key problem; we can determine that the key stakeholders and the goals that they have:
 
-* __Global Beer Shop (our Clients):__ Will own, run and profit from the website we create for them.
-* __Customers:__ Will use our system to browse and purchase the beers that Global Beer Shop are selling.
-* __Delivery Services:__ Will be contracted by Global Beer Shop to deliver orders placed on the system
-* __Beer Distributors:__ The system provide them another medium in which to sell their product.
-* __Server Company:__ They will be contracted to host our system and any other external systems required.
-* __Payment Service:__  Services, like PayPal, will process transactions from our system and charge Global Beer Shop a fee.
-* __Competitors:__ Will have a new competitor to their business which could affect sales and/or website traffic.
+* __Global Beer Shop (our Clients):__ Will own, run and profit from the system we create for them.
+* __Customers:__ Will use our system to browse and purchase the beers that GBS are selling.
+* __Delivery Services:__ Will be contracted by Global Beer Shop to deliver orders placed on the system, charging GBS a fee.
+* __Beer Distributors:__ Will profit from their product being sold on the system.
+* __Server Company:__ Will be contracted to host our system and database, charging GBS a fee.
+* __Payment Service:__  Will process transactions for our system, charging GBS a fee.
+* __Competitors:__ Will have a new competitor to their business which could affect their sales and/or website traffic.
 
-However, in the scope of our project, we will not interact with a majority of these parties (e.g. they are stakeholders for Global Beer Shop as a business using our product, but our project is solely to develop the product for Global Beer Shop). As developers, we have to consider the System Actors - these are the stakeholders that will interact directly with our product- we have determined our actors to be:
+However, in the scope of our project, we will not interact with a majority of these stakeholders (e.g. they are stakeholders for Global Beer Shop as a business using our product, but our project is solely to develop the product for Global Beer Shop). As the developers of the system, we only will consider the following stakeholders and their goals as our System Actors: Global Beer Shop, Users (Customers), the Payment Service and the Database.
 
-* __Customer:__  They will be searching for and buying beer through the site.
-* __Website:__ The frontend and User Interface of the system through which the Customer can interact with the system.
-* __Database:__ The dynamic backend software that responds to Customer interactions via the Website, provides a majority of the system functionality and manages the database.
-* __Payment Service:__ The dynamic backend software that responds to Customer interactions via the Website, provides a majority of the system functionality and manages the database.
-* __Global Beer Shop:__ our clients as mentioned previously
+(We can consider the database being hosted by the Server Company as its own actor as the system interacts with it)
 
-All of these actors interact together to accomplish “goals” (e.g. Customer orders a beer on the Website) and they perform different tasks to do this. 
-
-By considering the functionality our clients require from the final system, we can outline all the goals of our actors and their interactions in the following use-case diagram:
+The following use-case diagram highlights how these actors interact with each other to achieve their goals:
 
 ![Use Case Goals](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/use_case.png "Use Case Goals")
 
-The most key goals, and the steps involved in achieving them are as follows:
+The most core goal in our system is for Global Beer Shop to sell beers (equivelantly, users buying beers). These are some of the different flow in steps that could occur on our system when a user attempts to purchase a beer:
 
----
-<strong><ins> ORDER BEER </ins></strong>
+_BASIC FLOW: user purchases a single beer_
+1) User searches for a beer on System
+1) User adds beer to shopping cart.
+1) System updates cart items in database.
+1) User goes to checkout on System.
+1) System checks stock in Databse.
+1) There is enough of stock for all items in the Database.
+1) User enters delivery details.
+1) User enters payment details.
+1) System contacts Payment Service
+1) Payment Service succesfully processes payment.
+1) GBS receives payment from Payment Service.
+1) System logs order in Database.
+1) System emails GBS and User about order.
 
-_BASIC FLOW: user adds beer to basket_
-1) Consider beer catalogue.
-2) Filter beers/ search for beer.
-3) Try to add quantity of beer to basket.
-4) Server checks stock is available.
-5) Add quantity of beer to basket.
-6) Redirect user to beer catalogue.
+_ALTERNATIVE FLOW: user adds and removes various beers from cart before purchasing_
+1) User searches for some beer on System
+1) User adds beer to shopping cart.
+1) System updates cart items in database.
+1) User searches for another beer on System
+1) User adds beer to shopping cart.
+1) System updates cart items in database.
+1) User searches for yet another beer on System
+1) User adds beer to shopping cart.
+1) System updates cart items in database.
+1) User inspects shopping cart.
+1) User removes one beer completely from shopping cart.
+1) System updates cart items in database.
+1) User edits another beer's quantity in the cart shopping cart.
+1) System updates cart items in database.
+1) User goes to checkout on System.
+1) System checks stock in Databse.
+1) There is enough of stock for all items in the Database.
+1) User enters delivery details.
+1) User enters payment details.
+1) System contacts Payment Service
+1) Payment Service succesfully processes payment.
+1) GBS receives payment from Payment Service.
+1) System logs order in Database.
+1) System emails GBS and User about order.
 
-_ALTERNATIVE FLOW: user removes beer from basket_
-1) User inspects basket.
-2) User removes beer from basket (assuming beer is in basket).
-3) Beer is cleared from basket.
+_EXCEPTIONAL FLOW: payment transaction fails at checkout_
+1) User goes to checkout on System.
+1) System checks stock in Databse.
+1) There is enough of stock for all items in the Database.
+1) User enters delivery details.
+1) User enters payment details.
+1) System contacts Payment Service
+1) Payment Service fails to processes payment.
+1) GBS receives error message from Payment Service.
+1) System alerts User of failed payment.
 
-_ALTERNATIVE FLOW: user increases quantity of beer in basket_
-1) User inspects basket.
-1) User tries to change quantity of beer in basket.
-1) Server checks if requested amount of beer is available.
-1) Server updates quantity of that beer in the User’s basket
+_EXCEPTIONAL FLOW: not enough available stock of that beer at checkout_
+1) User goes to checkout on System.
+1) System checks stock in Databse.
+1) There is not enough of stock for one item in the Database.
+1) System redirects User back to the shopping cart.
+1) System alerts User of lack of stock.
 
-_EXCEPTIONAL FLOW: not enough available stock of that beer_
-1) Consider beer catalogue.
-1) Filter beer/ search for beer.
-1) Try to add beer to basket.
-1) Server checks stock is available.
-1) Error message.
-1) Redirect customer back to beer catalogue.			
----
-<strong><ins>PAY FOR BEER</strong></ins>
-
-_BASIC FLOW: payment goes through without issues_
-1) Customer goes to checkout.
-1) Server re-checks if there is still enough available stock.
-1) Server reduces the available stock.
-1) Customer puts in details.
-1) Customer views delivery options
-1) Customer chooses delivery option.
-1) Customer views payment options.
-1) Customer chooses payment option. 
-1) Customer purchases order.
-1) Server updates total stock to match available stock.
-1) Server redirects Customer to Order Completion page
-
-_ALTERNATIVE FLOW: customer cancels checkout_
-1) Customer goes to checkout.
-1) Server re-checks if there is still enough available stock.
-1) Server reduces the available stock.
-1) Customer puts in details.
-1) Customer views delivery options
-1) Customer chooses delivery option.
-1) Customer views payment options.
-1) Customer chooses payment option. 
-1) Customer cancels checkout.
-1) Server increases the available stock to previous amount.
-1) Customer is redirected to basket.
-
-
-_EXCEPTIONAL FLOW: customer payment is unsuccessful or details entered are invalid_
-1) Customer goes to checkout.
-1) Server re-checks if there is still enough available stock.
-1) Server reduces the available stock.
-1) Customer puts in details.
-1) Customer views delivery options
-1) Customer chooses delivery option.
-1) Customer views payment options.
-1) Customer chooses payment option. 
-1) Checkout fails due to unsuccessful payment or invalid details.
-1) Customer is shown error message.
-1) Server increases the available stock to previous amount.
-1) Server redirects Customer to Basket.
----
-<strong><ins>LOG ORDER</strong></ins>
-
-_BASIC FLOW: order is logged into database_
-1) Order is placed and paid for.
-1) Order is logged into database.
-1) Email is sent to customer and GBS.
-
-_EXCEPTIONAL FLOW: server crashes_
-1) Order is placed and paid for.
-1) Attempt to log order to database, but it is down.
-1) Server is returned to previous backup.
-1) Second attempt to log order to database.
-1) Email is sent to customer and GBS.
----
-<strong><ins>DELIVER BEER</strong></ins>
-
-_BASIC FLOW: GBS sends beer to customer_
-1) GBS view order email.
-1) GBS arrange for beer delivery.
-1) Beer is successfully delivered by courier.
-
-_EXCEPTIONAL FLOW: Order is canceled after ‘Log Order’_
-1) GBS view order email.
-1) GBS arrange for beer delivery.
-1) Client cancels order.
-1) Revert database.
-1) Send email to client and GBS to confirm cancellation of order.
----
-## MVP System Requirements
+### MVP System Requirements
 
 As stated earlier, our project will follow an incremental, iterative approach; where we hope to deliver the applications over several releases of increasing functionality and quality. Our first release planned is that of our Minimum Viable Product (MVP), which the later Beta and Final releases will be built upon.
 
