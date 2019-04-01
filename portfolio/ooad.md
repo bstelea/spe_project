@@ -4,7 +4,7 @@ Irregardless of how we design the system, we know that it will use a database to
 
 By reading our system requirements, you can determine that our database will be required to store data of the beers and their stock; user shopping carts and their contents; and customer orders and items. To achieve this, we have create the following schema, following good pracitce, to be used in our datbases:
 
-![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/schema.png "Database Schema Diagram")
+![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/db_schema.png "Database Schema Diagram")
 
 It's common practice for Web Applications, like our project, to be designed to follow the Model-View-Controller (MVC) architecture, where the components of the system play one of three roles:
 1. **Controller**: receives requests (e.g. HTTP requests) and controls the View and Model accordingly to formulate the response (e.g. queries the database and get the Model to update with the results, or gets the View to update a webpage to show some data).
