@@ -88,6 +88,8 @@ Based on information specified by our clients; the interactions of our system ac
 
 (We have chosen to only design the requirements for the MVP at this stage because it is the first version we implement and it will provide the basis that all future releases will be built upon)
 
+
+
 1) GENERAL USER INTERFACE
     1) The website should have a Wild West inspired design
     1) The website must, at least, consist of:
@@ -110,74 +112,48 @@ Based on information specified by our clients; the interactions of our system ac
         1) Terms and Conditions
         1) Privacy.
     1) The style and theme of the website design must be consistent throughout all pages.
-
-1) SESSIONS
-    1) When a new user accesses the website, the server must:
-        1) Assign that user an unique session ID
-        1) Log that session
-    1) When a session expires, the server must:
-        1) Unlog that session
-        1) Remove any temporary data stored during that session.
-    1) Sessions must be given a maximum time limit of 1 hour, in case that a user’s browser does not automatically close their  sessions after the page is closed.
-
-1) SEARCHING AND FILTERING
-    1) Users should be able to use the Search Tool to find products based on:
-        1) Country of Origin
-        1) Brewer
-        1) ABV
-        1) Beer Type
-    1) Using the Search Tool must redirect the user to the Product List page, where the products displayed are either:
-        1) The products that meet the query requirements inputted by the user.
-        1) All the products in stock, if no query requirements were given.
-    1) The Search Tool must be re-usable on various pages, including as a “filter” tool (functionally identical).
-    1) The input options that the Search Tool offers must only include those for available products (e.g. you can’t search for a product by an attribute that no product currently has).
-    1) It should not take any longer than 15 seconds for the User to be displayed search results after using the Search Tool.
+    1) Our clients must approve the final UI design.
 
 1) HOME PAGE
     1) The Home Page must:
         1) Publicize the services offered by the Global Beer Shop
-        1) Encourage users to view products on sale
-        1) Provide a Search Tool that allows users to find certain product(s)
+        1) Encourage users to view beers on sale
         1) Include the company slogan
+        1) Provide some way for users to contact GBS
     1) The Home Page should:
         1) Include an interactive map of the world that allows users to view all products in stock that originate from a specific country.
         1) Recommend certain products
     1) The Home Page should:
         1) Avoid using excessive amounts of text
         1) Emphasise the use of images.
-
-1) SHOP
-    1) Products must be displayed with at least their name, price and image.
-    1) Users can change the order in which the products are displayed in
-    1) Products must be displayed in the order specified by the user, if one has be specified.
-    1) Users can choose to filter/re-search for products to be displayed.
-    1) The only products displayed must be those that match the filter/search requirements of the user, if such requirements have been given.
-    1) If a User clicks on the image or name of a product on display, they must be redirected to that product’s corresponding Product page.
-    1) As not all products can be on display at once, the User must be able to navigate through the various display sets of the products.
-    1) Returning to a given display set of products must display the same products as before, if the filter/sort requirements are unchanged.
-
-    1) By default, the products should be sorted in ascending alphabetical order.
-    1) Products should be clearly labelled if they are in or out of stock.
-    1) Products and their details on display must be segregated from others so products can be easily distinguished from one another.
-    1) Only a maximum of 12 products can be on display at once.
-
-1) PRODUCT
-    1) For a given product, the page must display:
-        1) The name
-        1) The price
-        1) At least one image
-        1) The type of the product
-        1) The product’s ABV
+        
+1) SEARCHING fOR BEERS
+    1) Users must be able to search for beers by:
+        1) Name
         1) Country of Origin
-        1) A short description of the product
-    1) The product can be added to the user’s Shopping Cart, in varying quantity.
-    1) A product can only be added to a Shopping Cart if, at the time of the attempt, the quantity being added is less than or equal to the available stock of that product.
-    1) If a product cannot be added to the Shopping Cart due to insufficient stock, the user must be alerted of this.
-    1) The default quantity that products are added to the Shopping Cart is 1.
+        1) Brewer
+        1) ABV
+        1) Beer Type
+    1) There must be a filtering and sorting tool.
+    1) Using the searching tool must return all beers such that:
+        1) They all meet onstraint(s) set by the user.
+        1) They are all in stock.
+    1) Users must be able to also sort the beers the search by the same columns that they can search by.
+    1) Using the sorting tool must return all beers such that:
+        1) They are all in the specified order.
+        1) They are all in stock.    
+    1) Default settings for filter/sort tools is no filtering and sorting by beer name in ascending order.
+    1) It should not take any longer than 15 seconds for the User to be displayed search results after using the Search Tool.
+    1) Beers must be displayed at least with their:
+        1) Name
+        1) Country of Origin
+        1) Price
+        1) Type
+        1) Image
 
 1) SHOPPING CART
-    1) For each current user session, there will be a Shopping Cart.
-    1) The Shopping cart must display:
+    1) For each non-expired user session, there must be a Shopping Cart for that user.
+    1) The Shopping Cart page must display:
         1) All items that have been added to it and not removed
         1) These items’ quantities
         1) The subtotal for these items
@@ -185,8 +161,8 @@ Based on information specified by our clients; the interactions of our system ac
     1) Unless modified by the user, the contents of the shopping cart must stay consistent until either:
         1) The order checkout is complete
         1) The user’s HTTP session expires.
-    1) While in the Shopping Cart, Users must be able to:
-        1) Remove items from their basket
+    1) Users must somehow be able to:
+        1) Remove items from their Cart
         1) Edit the quantities of items in the Cart
         1) Checkout their order as a guest (e.g. doesn’t need to create an account to purchase).
     1) For the user to be able to checkout their order:
@@ -222,7 +198,9 @@ Based on information specified by our clients; the interactions of our system ac
     1) Users must be alerted of any input that is currently invalid.
     1) All user input must be processed for SQL injection and Cross-Site Scripting.
     1) The Checkout page(s) must use HTTPS (TLS encryption) to protect sensitive user information.
----
+    1) Processing an ordering should not take longer than 30 seconds.
+
+
 1) ORDER COMPLETION
     1) Each order completed must be assigned a unique reference number.
     1) When an order is complete, the server must:
@@ -232,5 +210,7 @@ Based on information specified by our clients; the interactions of our system ac
         1) Log the order
         1) Clear the contents of that user’s Shopping Cart.
     1) The emails must be sent and received within 12 hours of the order completion.
-
+    1) The stock of items being purchased in a order must be decremented accordingly before the order is complete.
+    1) Orders must be logged in the database for at least one month.
+    
 
