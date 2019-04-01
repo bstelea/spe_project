@@ -20,7 +20,7 @@ We will implement our MVC web application using Spring, which models the differe
 
 As these Entities need to correspond to the tables in our database, we can determine from the schema defined earlier that our Spring application will require the following beans with the following relationships:
 
-STATIC DIAGRAM
+![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/entity_uml.png "Static UML Diagram")
 
 Having modelled our database and entities in the previous diagrams will prove very benefitial to us in early development, as it will allow us to implement our data source and the object we use to iteract with it early on - a crucial prerequesit for most of our requirements. The database schema can be directly expressed in SQL dialect, while we only need to add Getter and Setter methods on top of the attributes listed for the entities when we come to implement them - making these diagrams essentially complete models of what they represent.
 
