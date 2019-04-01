@@ -21,7 +21,7 @@ The following use-case diagram highlights how these actors interact with each ot
 
 The most core goal in our system is for Global Beer Shop to sell beers (equivelantly, users buying beers). These are some of the different flow in steps that could occur on our system when a user attempts to purchase a beer:
 
-_BASIC FLOW: user purchases a single beer_
+BASIC FLOW (_user purchases a single beer_):
 1) User searches for a beer on System
 1) User adds beer to shopping cart.
 1) System updates cart items in database.
@@ -36,7 +36,7 @@ _BASIC FLOW: user purchases a single beer_
 1) System logs order in Database.
 1) System emails GBS and User about order.
 
-_ALTERNATIVE FLOW: user adds and removes various beers from cart before purchasing_
+ALTERNATIVE FLOW (_user adds and removes various beers from cart before purchasing_):
 1) User searches for some beer on System
 1) User adds beer to shopping cart.
 1) System updates cart items in database.
@@ -62,7 +62,7 @@ _ALTERNATIVE FLOW: user adds and removes various beers from cart before purchasi
 1) System logs order in Database.
 1) System emails GBS and User about order.
 
-_EXCEPTIONAL FLOW: payment transaction fails at checkout_
+EXCEPTIONAL FLOW (_payment transaction fails at checkout_):
 1) User goes to checkout on System.
 1) System checks stock in Databse.
 1) There is enough of stock for all items in the Database.
@@ -73,7 +73,7 @@ _EXCEPTIONAL FLOW: payment transaction fails at checkout_
 1) GBS receives error message from Payment Service.
 1) System alerts User of failed payment.
 
-_EXCEPTIONAL FLOW: not enough available stock of that beer at checkout_
+EXCEPTIONAL FLOW (_not enough available stock of that beer at checkout_):
 1) User goes to checkout on System.
 1) System checks stock in Databse.
 1) There is not enough of stock for one item in the Database.
