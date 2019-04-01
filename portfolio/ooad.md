@@ -18,6 +18,8 @@ We will implement our MVC web application using Spring, which models the differe
 1. **Entities**: objects that represent an entity modelled in our database, e.g. a Java object with correspoding attributes to some row in a table in the databass and their fields. The controllers never actually interact with the data in the database directly, but manipulates it using their respective entities.
 1. **Repositories**: objects that can directly query our system's database, and generate Entity beans based on the results to be used by the Controllers.
 
+The Entities fetched by the Controller can be rendered onto a HTML page dynamically using the Thymeleaf template engine.
+
 As these Entities need to correspond to the tables in our database, we can determine from the schema defined earlier that our Spring application will require the following beans with the following relationships:
 
 ![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/entity_uml.png "Static UML Diagram")
@@ -27,5 +29,9 @@ Having modelled our database and entities in the previous diagrams will prove ve
 Unfortunately, these only represent static elements our our system. Based on our research into the Spring framework, however, has revealed that user interactions with the web application result in the following basic pattern:
 
 ![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/sequence_diagram.png "Dynamic UML Diagram")
+
+This diagram is incredibly useful as it is a template for a lot of the code we will write. Anytime a page a user requests requires certain data, it will require functions that roughly follow the diagrams sequence of events. It is also applicable for HTTP POST requests, where the Controller would instead receive data in the request which it can process and store into the Databse using Entities and Repositories.
+
+Unfortunately, neither the static or dynamic diagrams actually model the actual logic required to achieve such interactions and functinality. Fortunately, as we are doing Test-Driven Development, we can set out more specific guidelines or our code by writing unit tests for it before we implement.
 
 
