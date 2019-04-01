@@ -23,7 +23,7 @@ All of these actors interact together to accomplish “goals” (e.g. Customer o
 
 By considering the functionality our clients require from the final system, we can outline all the goals of our actors and their interactions in the following use-case diagram:
 
-
+![Use Case Goals](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/use_case.png "Use Case Goals")
 
 The most key goals, and the steps involved in achieving them are as follows:
 
@@ -136,9 +136,6 @@ Staying true to our agile approach, we will now consider the MVP our current “
 
 We will elicit the MVP’s requirements by considering an abstract e-commerce website and what we consider is the simplest set of features we’d expect it to have to allow us to purchase a product on it. 
 Using this, we can reduce the use-case goals we established earlier for the final release version into the optimal set required for just the MVP version:
-
-![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/use_case.png "Static UML Diagram")
-
 
 The diagram above represents the structure of the MVP and highlights the most key functionality (both in the front end and back end) that it should provide. Alongside our use-case flows and requirements given by our clients, we can use this MVP structure to finally elicit our MVP’s system requirements:
 
