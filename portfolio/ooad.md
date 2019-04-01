@@ -39,8 +39,8 @@ Unfortunately, these only represent static elements our our system. Based on our
 The interactions described are as follow:
 1. Server receives a HTTP GET request for some page, triggering the method in the Controller that maps to that request.
 1. If this request requires data from the database, the Controller will call a method in a Repository to get it.
-1. The Repository queries the external database, converting the resulting set of rows into a list of Entities and returns it to the Controller.
-1. The Controller renders the View as a HTML page with the data stored in the model.
+1. The Repository queries the external database, converting the resulting set of rows into a list of Entities and returning it to the Controller.
+1. The Controller renders the View as a HTML page with the Entities and other data stored in the model.
 1. The Controller responds to the User with the rendered View.
 
 This diagram is incredibly useful as it is a template for a lot of the code we will write. Anytime a page a user requests requires certain data, it will require functions that roughly follow the diagrams sequence of events. It is also applicable for HTTP POST requests, where the Controller would instead receive data in the request which it can process and store into the Databse using Entities and Repositories.
