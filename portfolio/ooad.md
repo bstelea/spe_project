@@ -1,6 +1,6 @@
 # Object Oriented Architecture Design
 
-Irregardless of how we design the system, we know that it will use a database to store all the data it uses - as is the case for most e-commerce websites. We are not required in this project to create the final database that our clients will deploy with, it will be an external system created and provided by our clients and we just need to setup our system to connect to it. However, during development, we will require our own database to test our system. The final product is requried to be able to connect to a MySQL database being hosted on the cloud; however for now we will use a tempoary, in-memory database while we still have not completed the MVP.
+Irregardless of how we design the system, we know that it will use a database to store all the data it uses - as is the case for most e-commerce websites. We are not required in this project to create the final database that our clients will deploy with, it will be an external system created and provided by our clients and we just need to setup our system to connect to it. However, during development, we will require our own database to test our system. The final product is required to be able to connect to a MySQL database being hosted on the cloud; however for now we will use a tempoary, in-memory database while we still have not completed the MVP.
 
 By reading our system requirements, you can determine that our database will be required to store data of the beers and their stock; user shopping carts and their contents; and customer orders and items. To achieve this, we have create the following schema, following good pracitce, to be used in our datbases:
 
@@ -11,7 +11,7 @@ It's common practice for Web Applications, like our project, to be designed to f
 1. **Model**: Encapsulates the state of the application (e.g. the different data, objects and entities). Practically, it holds all the data from the system database so it can be used by the Controller and View.
 1. **View**: Renders the Model of the application (e.g. generates pages of the website). The response made to the user comes from the View (e.g. returns the page they requested).
 
-The Spring Boot and Spring MVC frameworks are very powerful tools that allows one to quickly and easily create Java-based Web Applications that you can "just run". Spring makes a lot of development more convinient, by automatically handling and setting-up more complex components in the background.
+The Spring Boot and Spring MVC frameworks are very powerful tools that allows one to quickly and easily create Java-based Web Applications based on this architecture that you can "just run". Spring makes a lot of development more convinient, by automatically handling and setting-up more complex components in the background.
 
 We will implement our MVC web application using Spring, which models the different parts of the MVC architecture as "beans" - objects created and managed by the Spring container. We will use, at least, the following types of beans:
 1. **Controllers**: objects that receive and respond to HTTP requests from the user. They have "request mapping" methods that are automatically triggered to provide a response for a given user request. The Controllers manage the majority of backend logic in the server, and they create the model and views to be returned to the user.
