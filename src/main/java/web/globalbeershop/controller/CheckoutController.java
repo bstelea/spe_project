@@ -1,6 +1,7 @@
 package web.globalbeershop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.OrderItemRepository;
 import web.globalbeershop.repository.OrderRepository;
 import web.globalbeershop.service.BeerService;
+import web.globalbeershop.service.NotificationService;
 import web.globalbeershop.service.ShoppingCartService;
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -48,6 +50,7 @@ public class CheckoutController {
     private final ShoppingCartService shoppingCartService;
     private final BeerService beerService;
     private final UserService userService;
+    private final NotificationService notificationService;
 
     private final BraintreeGateway gateway = GlobalbeershopApplication.gateway;
 
@@ -62,12 +65,13 @@ public class CheckoutController {
     };
 
     @Autowired
-    public CheckoutController(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, BeerService beerService, UserService userService) {
+    public CheckoutController(OrderRepository orderRepository, OrderItemRepository orderItemRepository, ShoppingCartService shoppingCartService, BeerService beerService, UserService userService, NotificationService notificationService) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.shoppingCartService = shoppingCartService;
         this.beerService = beerService;
         this.userService = userService;
+        this.notificationService = notificationService;
     }
 
     private void addCheckoutAttributes(RedirectAttributes attributes){
@@ -78,14 +82,16 @@ public class CheckoutController {
 
     @GetMapping("/checkout")
     public String getCheckoutPage(Model model, Authentication auth){
-        User user = userService.findByEmail(auth.getName());
         Order order = new Order();
 
-        if (user != null) {
-            order.setUser(user);
-            order.setName(user.getFirstName());
-            order.setLastName(user.getLastName());
-            order.setEmail(user.getEmail());
+        if(auth!=null) {
+            User user = userService.findByEmail(auth.getName());
+            if (user != null) {
+                order.setUser(user);
+                order.setName(user.getFirstName());
+                order.setLastName(user.getLastName());
+                order.setEmail(user.getEmail());
+            }
         }
         model.addAttribute("order", order);
         model.addAttribute("beers", shoppingCartService.getBeersInCart());
@@ -96,9 +102,11 @@ public class CheckoutController {
 
     @PostMapping("/checkout")
     public String checkoutOrder(Model model, @RequestParam("amount") String amount, @RequestParam("payment_method_nonce") String nonce, @Valid Order order, BindingResult bindingResult, RedirectAttributes attributes, Authentication auth){
-        User user = userService.findByEmail(auth.getName());
-        model.addAttribute("user", user);
-
+        User user = null;
+        if(auth!=null){
+            user = userService.findByEmail(auth.getName());
+            model.addAttribute("user", user);
+        }
         //If delivery details not valid
         if (bindingResult.hasErrors()) {
             model.addAttribute("beers", shoppingCartService.getBeersInCart());
@@ -177,6 +185,14 @@ public class CheckoutController {
             //log order
             order.setPaymentRef(transaction.getId());
             orderRepository.save(order);
+
+            //Send notification
+            try {
+                notificationService.sendNotification(order.getEmail());
+            } catch (MailException e){
+                //catch error
+                System.out.println("Email didn't send. Error: " + e.getMessage());
+            }
 
             //save order items
             for(Map.Entry<Beer, Integer> cartItem  : shoppingCartService.getBeersInCart().entrySet()) orderItemRepository.save(new OrderItem(order, cartItem.getKey(), cartItem.getValue()));
