@@ -212,14 +212,9 @@ public class CheckoutController {
             return "redirect:/checkout";
         }
 
-        attributes.addFlashAttribute("orderId",order.getId().toString());
-        attributes.addFlashAttribute("paymentRef",order.getPaymentRef());
-        return "redirect:/checkout/complete";
-    }
-
-
-    @GetMapping("/checkout/complete")
-    public String orderComplete(Model model) {
+        model.addAttribute("orderId",order.getId().toString());
+        model.addAttribute("paymentRef",order.getPaymentRef());
         return "complete";
     }
+
 }
