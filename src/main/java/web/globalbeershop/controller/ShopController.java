@@ -76,8 +76,6 @@ public class ShopController {
     }
 
 
-
-
     //Using params given by user, generates Boolean Expression to filter query results
     private BooleanExpression getQueryPredicate(String name, String country, String brewer, String abv, String type, String continent){
 

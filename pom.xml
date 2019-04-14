@@ -152,7 +152,7 @@
 			<version>2.0.1.RELEASE</version>
 		</dependency>
 
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>
