@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+<br>
+
+<div class="container">
+    <br>
+    <h2>My Orders</h2>
+    <br>
+    <table class="table table-borderless" >
+        <thead>
+        <tr>
+            <th> Order ID </th>
+            <th> Payment Ref </th>
+            <th> Date </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+                <td>
+                    <h4 th:text="${order.getId()}"/>
+                </td>
+                <td>
+                    <h4 th:text="${order.getPaymentRef()}"/>
+                </td>
+                <td>
+                    <h4 th:text="${order.getDate()}"/>
+                </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Items Purchased</h3>
+    <br>
+    <table class="table table-borderless" >
+        <thead>
+        <tr>
+            <th> Item ID </th>
+            <th> Item </th>
+            <th> Quantity </th>
+            <th> Price </th>
+            <th> Total </th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="item : ${order.getItems()}">
+            <td>
+                <h4 th:text="${item.getId()}"/>
+            </td>
+            <td>
+                <h4 th:text="${item.getBeer().getName()}"/>
+            </td>
+            <td>
+                <h4 th:text="${item.getQuantity()}"/>
+
+            </td>
+            <td>
+                <h4  th:inline="text">£ [[${#numbers.formatDecimal(item.getBeer().getPrice(), 0, 'COMMA', 2, 'POINT')}]]</h4>
+            </td>
+            <td>
+                <h4  th:inline="text">£ [[${#numbers.formatDecimal(item.getBeer().getPrice() * item.getQuantity(), 0, 'COMMA', 2, 'POINT')}]]</h4>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+                <h4  th:inline="text">£ [[${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}]]</h4>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Delivery Details</h3>
+    <br>
+    <h4  th:inline="text">[[${order.getName()}]] [[${order.getLastName()}]]</h4>
+    <h4 th:text="${order.getAddress()}"/>
+    <h4  th:inline="text">[[${order.getCity()}]], [[${order.getCounty()}]]</h4>
+    <h4 th:text="${order.getZone()}"/>
+
+
+
+
+
+</div>
+</div>
+
+<footer class="container-fluid text-center">
+    <a href="/" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+
+</body>
+</html>

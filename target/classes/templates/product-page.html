@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header"></div>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title th:text="${beer.name} + ' Beer'"></title>
+    <link rel="stylesheet" th:href="@{../css/product.css}" media="screen"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: navbar"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="card">
+        <img th:src="@{../img/beer-template.png}" class="img-responsive card-img-top" style="height:220px; margin-left: auto; margin-right: auto;" th:alt="${beer.name}">
+        <div class="card-body">
+            <h3 class="card-title text-center wild-font" style="text-transform: uppercase;" th:inline="text">[[${beer.name}]]</h3>
+            <div class="container text-center" style="padding: 10px 0;">
+                <form th:if="${beer.stock}>0" action="/cart/add" method="post">
+                    <input type="hidden" name="id" th:value="${beer.id}"/>
+                    Quantity: <input type="number" name="quantity" class="form-group" value="1" min="1" th:max="${beer.stock}"><br>
+                    <input type="submit" class="btn btn-primary" value="Add to Cart">
+                </form>
+            </div>
+            <div class="panel-footer" th:inline="text"><h4>Price: £[[${beer.price}]]</h4></div>
+            <div class="panel-footer" th:inline="text">Country: [[${beer.country}]]</div>
+            <div class="panel-footer" th:inline="text">Type: [[${beer.type}]]</div>
+            <div class="panel-footer" th:inline="text">Brewer: [[${beer.brewer}]]</div>
+            <div class="panel-footer" th:inline="text">ABV: [[${beer.abv}]]</div>
+            <div class="panel-footer" th:inline="text">
+                <h3>Story of the beer:</h3> <br>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="panel-footer text-center" th:inline="text">
+                <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+                4.0 stars
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+
+    <div class="card reviews">
+        <div class="card-body">
+            <div class="card-title wild-font text-center">
+                Product Reviews
+            </div>
+            <div class="panel-footer" th:inline="text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                <hr>
+            </div>
+            <div class="panel-footer" th:inline="text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                <hr>
+            </div>
+            <div class="panel-footer" th:inline="text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
+                <small class="text-muted">Posted by Anonymous on 3/1/17</small>
+                <hr>
+            </div>
+
+            <div class="container text-center leave-review">
+                <a href="#" class="btn btn-success">Leave a Review</a>
+            </div>
+        </div>
+    </div>
+    <!-- /.card -->
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+    window.onscroll = function() {myFunction()};
+
+    var navbar = document.getElementById("navbar");
+    var sticky = navbar.offsetTop;
+
+    function myFunction() {
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("navbar-fixed-top")
+        } else {
+            navbar.classList.remove("navbar-fixed-top");
+        }
+    }
+</script>
+</body>
+</html>

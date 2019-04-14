@@ -1,0 +1,94 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<div th:fragment="searchtool">
+
+        <div class="container">
+
+             <table class="table table-borderless" >
+                 <form action="/shop" method="get">
+
+                    <thead>
+                    <tr>
+                        <th> Name </th>
+                        <th> Country </th>
+                        <th> Brewer </th>
+                        <th> ABV </th>
+                        <th> Type </th>
+                        <th> Filter </th>
+                        <th> Sort </th>
+                        <th> Items per Page</th>
+                        <th> </th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control search-slt" th:value="${paramsGiven.get(0)}" name="name">
+                        </td>
+                        <td><select name="country">
+                            <option th:value="${paramsGiven.get(1)}"  th:text="${paramsGiven.get(1)}"></option>
+                            <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
+                        </select></td>
+                        <td><select name="brewer">
+                            <option th:value="${paramsGiven.get(2)}"  th:text="${paramsGiven.get(2)}"></option>
+                            <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
+                        </select></td>
+                        <td><select name="abv">
+                            <option th:value="${paramsGiven.get(3)}"  th:text="${paramsGiven.get(3)}"></option>
+                            <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
+                        </select></td>
+                        <td><select name="type">
+                            <option th:value="${paramsGiven.get(4)}"  th:text="${paramsGiven.get(4)}"></option>
+                            <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                        </select></td>
+
+                        <td>
+
+                            <select name="sortCol">
+                                <option th:value="${paramsGiven.get(5)}"  th:text="${paramsGiven.get(5)}"></option>
+                                <option value="name">Name</option>
+                                <option value="brewer">Brewer</option>
+                                <option value="country">Country of Origin</option>
+                                <option value="type">Beer Type</option>
+                                <option value="abv">ABV</option>
+                            </select>
+
+                            <select name="sortOrd">
+                                <option th:value="${paramsGiven.get(6)}"  th:text="${paramsGiven.get(6)}"></option>
+                                <option value="ASC">Ascending</option>
+                                <option value="DESC">Descending</option>
+                            </select>
+
+
+                        </td>
+
+                        <td>
+                            <select name="size">
+                                <option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>
+                                <option value=9>9</option>
+                                <option value=27>27</option>
+                                <option value=45>45</option>
+                                <option value=99>99</option>
+                            </select>
+                        </td>
+
+                        <td>
+                            <input type="submit" value="Apply">
+                                </form>
+
+                                <form action="/shop" method="get">
+                                <input type="submit" value="Clear">
+                            </form>
+                        </td>
+                    </tr>
+            </tbody>
+            </table>
+
+    </div>
+    </div>
+</body>
+</html>

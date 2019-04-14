@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header"></div>
+</head>
+<body>
+<div th:replace="fragments/header :: navbar"></div>
+
+<h1>Order Complete!</h1>
+<h2>Order ID: [[${orderId}]]</h2>
+<h2>Payment Ref: £[[${paymentRef}]]</h2>
+
+
+<footer class="container-fluid text-center">
+    <a href="/" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+
+</body>
+</html>

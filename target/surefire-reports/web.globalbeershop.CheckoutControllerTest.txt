@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: web.globalbeershop.CheckoutControllerTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.758 s - in web.globalbeershop.CheckoutControllerTest

@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: web.globalbeershop.CartTest
+-------------------------------------------------------------------------------
+Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.319 s - in web.globalbeershop.CartTest
