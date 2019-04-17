@@ -1,219 +1,237 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Global Beer Shop</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/main.css">
+    <title>Global Beer Shop</title>
+    <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
+    <meta name="keywords" content="global beer shop, global, beer, shop, beers">
+
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+<body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<!-- START: header -->
+
+<div class="probootstrap-loader"></div>
+
+<header role="banner" class="probootstrap-header">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/checkout">CHECKOUT</a></li>
-                <li><a href="/cart">CART</a></li>
-                <li><a href="#">SEARCH</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+        <a href="/" class="probootstrap-logo">Beer</a>
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </div>
             </ul>
-        </div>
-    </div>
-</nav>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
 
-<div class="jumbotron text-center">
-    <h1>Global Beer Shop</h1>
-    <p>Fancy a beer?</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="/shop" role="button">Click here</a>
-    </p>
-</div>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-8">
-            <h2>About Us</h2>
-            <h4>Add short description of the company here</h4>
-            <p>Add more description here, also find a way to add a beer icon</p>
-            <button class="btn btn-default btn-lg">Get in Touch</button>
-        </div>
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-glass logo"></span>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid bg-grey">
-    <div class="row">
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-globe logo"></span>
-        </div>
-        <div class="col-sm-8">
-            <h2>Our Values</h2>
-            <h4><strong>MISSION:</strong> Our mission is to bring beers from every corner of the world to your doorstep.</h4>
-            <p><strong>VISION:</strong> Our vision is driven by the dream of having beers from every country on the globe
-                in a single shop.</p>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid text-center">
-    <h2>GLOBAL BEER SHOP</h2>
-    <br>
-    <div class="row">
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-ok logo-small"></span>
-            <h4>TOP QUALITY BEERS</h4>
-            <p>Simply the best beers from around the world.</p>
-        </div>
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-lock logo-small"></span>
-            <h4>EASY AND SECURE PAYMENT</h4>
-            <p>Multiple ways to pay for your order, all at one click distance.</p>
-        </div>
-        <div class="col-sm-4">
-            <span class="glyphicon glyphicon-gift logo-small"></span>
-            <h4>HOME DELIVERY</h4>
-            <p>We deliver your beer at your doorstep, check the DELIVERY INFO page for more details regarding international
-                payments.</p>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid text-center bg-grey">
-    <h2>NEW IN STOCK</h2>
-    <h4>Fresh from Tiguana</h4>
-    <div class="row text-center">
-        <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="img/clbeer.jpg" alt="clbeer">
-                <p><strong>Cameron's Captain's Log Lager</strong></p>
-                <p>£9.99</p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Add to cart</a>
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
             </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="img/clbeer.jpg" alt="clbeer">
-                <p><strong>Cameron's Captain's Log Lager</strong></p>
-                <p>£9.99</p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Add to cart</a>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="thumbnail">
-                <img src="img/clbeer.jpg" alt="clbeer">
-                <p><strong>Cameron's Captain's Log Lager</strong></p>
-                <p>£9.99</p>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Add to cart</a>
-            </div>
-        </div>
+        </nav>
     </div>
-</div>
+</header>
+<!-- END: header -->
 
-<h2 class="text-center">Testimonials</h2>
-<div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <h4>"This company is the best. I am so happy with the result!"<br><span style="font-style:normal;">Michael Roe, Vice President, Heineken</span></h4>
-        </div>
-        <div class="item">
-            <h4>"The only place where you can get beers form EVERYWHERE!!"<br><span style="font-style:normal;">John Doe, Customer</span></h4>
-        </div>
-        <div class="item">
-            <h4>"Always delighted to try a new beer... and this is the place to find it!"<br><span style="font-style:normal;">Chandler Bing, Beer Enthusiast</span></h4>
-        </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
-
-<div id="contact" class="container-fluid bg-grey">
-    <h2 class="text-center">CONTACT US</h2>
-    <div class="row">
-        <div class="col-sm-5">
-            <p>Contact us and we'll get back to you within 24 hours.</p>
-            <p><span class="glyphicon glyphicon-map-marker"></span> Bristol, UK</p>
-            <p><span class="glyphicon glyphicon-phone"></span> +44 1234567890</p>
-            <p><span class="glyphicon glyphicon-envelope"></span> contact@globalbeershop.co.uk</p>
-        </div>
-        <div class="col-sm-7">
-            <div class="row">
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
-                </div>
-                <div class="col-sm-6 form-group">
-                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_1.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Fancy a beer?</h2>
+                            <a href="/shop"><button type="button" class="btn btn-outline-secondary btn-to-action">Click here</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-            <div class="row">
-                <div class="col-sm-12 form-group">
-                    <button class="btn btn-default pull-right" type="submit">Send</button>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row overlap">
+            <div class="col-md-4">
+                <div class="service left-icon probootstrap-animate">
+
+                    <div class="icon">
+                        <i class="icon-earth"></i>
+                    </div>
+                    <div class="text">
+                        <h3 class="heading">Global Beer Shop</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        <p><a href="single-page.html">Learn more</a></p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service left-icon probootstrap-animate">
+                    <div class="icon">
+                        <i class="icon-credit-card"></i>
+                    </div>
+                    <div class="text">
+                        <h3 class="heading">Easy Pay</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        <p><a href="single-page.html">Learn more</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service left-icon probootstrap-animate">
+                    <div class="icon">
+                        <i class="icon-truck"></i>
+                    </div>
+                    <div class="text">
+                        <h3 class="heading">Home Delivery</h3>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+                        <p><a href="single-page.html">Learn more</a></p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+<!-- END section -->
+
+<section class="interactive-map">
+    <div class="container text-center probootstrap-animate">
+        <div class="container">
+            <h2 style="font-size: 40px;">World Beer Map</h2>
+            <p>Click to see beers from a continent</p>
+            <div class="col-xs-offset-1 col-xs-10">
+                <div id="intmap"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END section -->
+
+<div class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center section-heading probootstrap-animate">
+                <h2>Our Story</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 probootstrap-animate" data-animate-effect="fadeInLeft">
+
+                <div class="panel-group probootstrap-panel" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h3 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    From Beer Lovers...
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h3 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    ...To Beer Enthusiasts...
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingThree">
+                            <h3 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    ...To Beer Sellers.
+                                </a>
+                            </h3>
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                            <div class="panel-body">
+                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END panel-group -->
+            </div>
+            <div class="col-md-6 probootstrap-animate" data-animate-effect="fadeInRight">
+                <p><img src="img/slider_2.jpg" alt="Free HTML Bootstrap Theme by uicookies.com" class="img-responsive"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END section -->
+
+<div th:replace="fragments/reviews :: reviews"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
 </div>
 
-<footer class="container-fluid text-center">
-    <a href="/" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>&copy; Global Beer Shop</p>
-</footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>
-    $(document).ready(function(){
-        // Add smooth scrolling to all links in navbar + footer link
-        $(".navbar a, footer a[href='/']").on('click', function(event) {
-            // Make sure this.hash has a value before overriding default behavior
-            if (this.hash !== ""){
-                // Prevent default anchor click behavior
-                event.preventDefault();
-
-                // Store hash
-                var hash = this.hash;
-
-                // Using jQuery's animate() method to add smooth page scroll
-                // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top
-                }, 900, function(){
-
-                    // Add hash (#) to URL when done scrolling (default click behavior)
-                    window.location.hash = hash;
-                });
-            } // End if
-        });
-    })
+<script type="text/javascript" src="js/mapdata.js"></script>
+<script type='text/javascript'>
+    var intmap=simplemaps_usmap.create();
 </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/continentmap.js"></script>
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/custom.js"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+
 </body>
 </html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Account - Global Beer Shop</title>
+    <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
+    <meta name="keywords" content="global beer shop, global, beer, shop, beers">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+<!-- START: header -->
+
+<div class="probootstrap-loader"></div>
+
+<header role="banner" class="probootstrap-header">
+    <div class="container">
+        <a href="/" class="probootstrap-logo">Beer</a>
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </div>
+            </ul>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- END: header -->
+
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_2.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>My Account</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center section-heading probootstrap-animate">
+                <h2 th:text="${greeting}"></h2>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-4 probootstrap-animate">
+                <div class="probootstrap-card text-center">
+                    <div class="probootstrap-card-text">
+                        <h2 class="probootstrap-card-heading mb0">My Orders</h2>
+                        <p><a th:href="@{/user-orders}">View more</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 probootstrap-animate">
+                <div class="probootstrap-card text-center">
+                    <div class="probootstrap-card-text">
+                        <h2 class="probootstrap-card-heading mb0">My Details</h2>
+                        <p><a th:href="@{/user-details}">View more</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 probootstrap-animate">
+                <div class="probootstrap-card text-center">
+                    <div class="probootstrap-card-text">
+                        <h2 class="probootstrap-card-heading mb0">Write a Review</h2>
+                        <p><a th:href="@{/user-reviews}">View more</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END section -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+</div>
+
+
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="./src/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
+
+</body>
+</html>

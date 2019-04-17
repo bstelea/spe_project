@@ -1,62 +1,210 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Global Beer Shop</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/cart.css">
+    <title>Cart - Global Beer Shop</title>
+    <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
+    <meta name="keywords" content="global beer shop, global, beer, shop, beers">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-default navbar-fixed-top">
+
+<!-- START: header -->
+
+<div class="probootstrap-loader"></div>
+
+<header role="banner" class="probootstrap-header">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/checkout">CHECKOUT</a></li>
-                <li><a href="/cart">CART</a></li>
-                <li><a href="#">SEARCH</a></li>
-                <li><a href="/#contact">CONTACT</a></li>
+        <a href="/" class="probootstrap-logo">Beer</a>
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li class="active"><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </div>
             </ul>
-        </div>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
-</nav>
+</header>
+<!-- END: header -->
 
-<div class="jumbotron text-center">
-    <h1>Global Beer Shop</h1>
-    <p>Fancy a beer?</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="/shop" role="button">Click here</a>
-    </p>
-</div>
+<section class="probootstrap-slider flexslider" th:if="${total} == 0">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_2.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Cart</h2>
+                            <p>Your cart is empty. Go to <a href="/shop">Global Beer Shop</a> and pick a beer!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="page-header">
-                <h1>Your Beer Cart <small>Please check your selection</small></h1>
+
+<section class="probootstrap-slider flexslider" th:if="${total} != 0">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_2.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Cart</h2>
+                            <p>Check your products below and go to checkout</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
+<div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
+
+<section class="probootstrap-section" th:if="${total} != 0">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="items">
+                    <div class="product probootstrap-animate" th:each="beer : ${beers.entrySet()}">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <img th:src="${beer.getKey().image}" class="img-responsive" style="width:100%; max-width: 150px;" th:alt="${beer.getKey().image}">
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="info">
+                                    <div class="row">
+                                        <div class="col-xs-5 product-name">
+                                            <div class="product-name">
+                                                <span class="wild-font product-id-name" style="text-transform: uppercase;" th:text="${beer.getKey().name}"></span>
+                                                <div class="product-info">
+                                                    <div>Country: <span class="value" th:inline="text">[[${beer.getKey().country}]]</span></div>
+                                                    <div>Brewer: <span class="value" th:inline="text">[[${beer.getKey().brewer}]]</span></div>
+                                                    <div>Type: <span class="value" th:inline="text">[[${beer.getKey().type}]]</span></div>
+                                                    <div>ABV: <span class="value" th:inline="text">[[${beer.getKey().abv}]]</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <form action="/cart/update" method="post">
+                                                <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
+                                                Update: <br>
+                                                <input type="number" name="quantity" th:value="${beer.getValue()}" min="1" th:max="${beer.getKey().stock}"><span th:inline="text"> x £[[${#numbers.formatDecimal(beer.getKey().price, 0, 'COMMA', 2, 'POINT')}]]</span><br>
+                                                <button type="submit" class="btn btn-primary btns">
+                                                    Update
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <form action="/cart/remove" method="post">
+                                                <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
+                                                <button type="submit" class="close remove-sym" aria-label="Close" title="Remove">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <button type="submit" class="btn btn-secondary remove-btn btns">
+                                                    Remove
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-offset-1 col-md-10" style="margin-top: 50px; margin-bottom: 50px;">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div><!-- end .row -->
-</div><!-- end .container-fluid -->
+        <div class="row">
+            <div class="col-xs-offset-3 col-xs-6 probootstrap-animate">
+                <div class="probootstrap-card text-center">
+                    <div class="probootstrap-card-text">
+                        <div class="probootstrap-card-heading mb0 wild-font">
+                            <h3>SUMMARY</h3>
+                        </div>
+                        <div class="summary-item"><span class="text">Subtotal: </span><span class="price" th:inline="text">£[[${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}]]</span></div>
+                        <div class="summary-item"><span class="text">Total: </span><span class="price" th:inline="text">£[[${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}]]</span></div>
+                        <form action="/cart/checkout" method="get">
+                            <button type="submit" class="btn btn-default">Checkout</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+</div>
 
 
-<footer class="container-fluid text-center">
-    <a href="/cart" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>&copy; Global Beer Shop</p>
-</footer>
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="./src/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

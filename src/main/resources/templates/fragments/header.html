@@ -1,0 +1,106 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+
+<div th:fragment="header">
+    <header role="banner" class="probootstrap-header">
+        <div class="container">
+            <a href="/" class="probootstrap-logo">Beer</a>
+
+            <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+            <div class="mobile-menu-overlay"></div>
+
+            <nav role="navigation" class="probootstrap-nav hidden-xs">
+                <ul class="probootstrap-main-nav">
+                    <li class="active"><a href="/">Home</a></li>
+                    <li><a href="/shop">Shop</a></li>
+                    <li><a href="/cart">Cart</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    <div class="extra-text visible-xs">
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                        <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                        <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                        <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                    </div>
+                </ul>
+                <ul class="probootstrap-right-nav hidden-xs">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </ul>
+                <div class="extra-text visible-xs">
+                    <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                    <h5>Address</h5>
+                    <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                    <h5>Connect</h5>
+                    <ul class="social-buttons">
+                        <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                        <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- END: header -->
+</div>
+
+<!-- navbar -->
+<div th:fragment="navbar">
+    <div class="announcements">
+        <div class="announcement">
+            <p>Free delivery over £20!</p>
+        </div>
+        <div class="announcement">
+            <p>Call us now for an offer!</p>
+        </div>
+    </div>
+
+    <div class="container logo">
+        <span>Global Beer Shop</span>
+    </div>
+
+    <nav class="navbar navbar-default" id="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/">HOME</a></li>
+                    <li><a href="/shop">SHOP</a></li>
+                    <li><a href="/cart">MY CART</a></li>
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/user}">MY ACCOUNT</a>
+                    </li>
+
+
+                    <li sec:authorize="isAuthenticated()">
+                        <a th:href="@{/logout}">LOG OUT</a>
+                    </li>
+
+
+                    <li sec:authorize="isAnonymous()">
+                        <a th:href="@{/login}">LOG IN</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>

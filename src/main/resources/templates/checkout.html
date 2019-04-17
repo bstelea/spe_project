@@ -1,135 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Global Beer Shop</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/checkout.css">
+    <title>Checkout - Global Beer Shop</title>
+    <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
+    <meta name="keywords" content="global beer shop, global, beer, shop, beers">
+
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<!-- START: header -->
+
+<div class="probootstrap-loader"></div>
+
+<header role="banner" class="probootstrap-header">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/checkout">CHECKOUT</a></li>
-                <li><a href="/cart">CART</a></li>
-                <li><a href="#">SEARCH</a></li>
-                <li><a href="/#contact">CONTACT</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+        <a href="/" class="probootstrap-logo">Beer</a>
 
-<div class="jumbotron text-center">
-    <h1>Global Beer Shop</h1>
-    <p>Fancy a beer?</p>
-    <p class="lead">
-        <a class="btn btn-primary btn-lg" href="/shop" role="button">Click here</a>
-    </p>
-</div>
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
 
-<div class="row">
-    <div class="col-75">
-        <div class="checkout-container">
-            <form action="get">
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
 
-                <div class="row">
-                    <div class="col-50">
-                        <h3>Billing Address</h3>
-                        <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Full Name">
-                        <label for="email"><i class="fa fa-envelope"></i> Email</label>
-                        <input type="text" id="email" name="email" placeholder="email@example.com">
-                        <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-                        <input type="text" id="adr" name="address" placeholder="Address">
-                        <label for="city"><i class="fa fa-institution"></i> City</label>
-                        <input type="text" id="city" name="city" placeholder="City">
-
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="state">State</label>
-                                <input type="text" id="state" name="state" placeholder="State">
-                            </div>
-                            <div class="col-50">
-                                <label for="zip">Postcode</label>
-                                <input type="text" id="zip" name="zip" placeholder="Postcode">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-50">
-                        <h3>Payment</h3>
-                        <label for="fname">Accepted Cards</label>
-                        <div class="icon-container">
-                            <i class="fa fa-cc-visa" style="color:navy;"></i>
-                            <i class="fa fa-cc-amex" style="color:blue;"></i>
-                            <i class="fa fa-cc-mastercard" style="color:red;"></i>
-                            <i class="fa fa-cc-discover" style="color:orange;"></i>
-                        </div>
-                        <label for="cname">Name on Card</label>
-                        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
-                        <label for="ccnum">Credit card number</label>
-                        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-                        <label for="expmonth">Exp Month</label>
-                        <input type="text" id="expmonth" name="expmonth" placeholder="September">
-
-                        <div class="row">
-                            <div class="col-50">
-                                <label for="expyear">Exp Year</label>
-                                <input type="text" id="expyear" name="expyear" placeholder="2018">
-                            </div>
-                            <div class="col-50">
-                                <label for="cvv">CVV</label>
-                                <input type="text" id="cvv" name="cvv" placeholder="352">
-                            </div>
-                        </div>
-                    </div>
-
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
                 </div>
-                <label>
-                    <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-                </label>
-                <input type="submit" value="Continue to checkout" class="checkout-btn">
-            </form>
-        </div>
-    </div>
+            </ul>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
 
-    <div class="col-25">
-        <div class="checkout-container">
-            <h4>Cart
-                <span class="price" style="color:black">
-          <i class="fa fa-shopping-cart"></i>
-          <b>4</b>
-        </span>
-            </h4>
-            <p><a href="#">Product 1</a> <span class="price">$15</span></p>
-            <p><a href="#">Product 2</a> <span class="price">$5</span></p>
-            <p><a href="#">Product 3</a> <span class="price">$8</span></p>
-            <p><a href="#">Product 4</a> <span class="price">$2</span></p>
-            <hr>
-            <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- END: header -->
+
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_1.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Checkout</h2>
+                            <p>Fill in the form below to complete your order</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 probootstrap-animate overlap">
+                <form id="payment-form" autocomplete="on" action="/checkout" th:object="${order}" method="post" role="form" class="probootstrap-form probootstrap-form-box mb60">
+                    <div class="notice-wrapper">
+                        <div class="show notice error notice-error" th:if="${outOfStockMessage}">
+                            <span class="notice-message" th:text="${outOfStockMessage}"></span>
+                        </div>
+                    </div>
+                    <div class="notice-wrapper">
+                        <div class="show notice error notice-error" th:if="${emptyCartMessage}">
+                            <span class="notice-message" th:text="${emptyCartMessage}"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group col-sm-7">
+                                <label for="first_name">Forename</label>
+                                <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label>
+                                <input id="first_name" type="text"  th:field="*{name}" class="form-control" th:value="${order.name}" aria-label="Foreame" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="last_name">Surname</label>
+                                <label th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="alert alert-danger"></label>
+                                <input id="last_name" type="text"  th:field="*{lastName}" class="form-control" th:value="${order.lastName}" aria-label="Surname" aria-describedby="basic-addon1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></label>
+                        <input id="email" type="text"  th:field="*{email}" class="form-control" th:value="${order.email}" aria-label="Email Address" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <label th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"></label>
+                        <input id="address" type="text"  th:field="*{address}" class="form-control" th:value="${order.address}" aria-label="First Address Line" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City/Town</label>
+                        <label th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="alert alert-danger"></label>
+                        <input id="city" type="text"  th:field="*{city}" class="form-control" th:value="${order.city}" aria-label="City/Town" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-group">
+                        <label for="county">County</label>
+                        <label th:if="${#fields.hasErrors('county')}" th:errors="*{county}" class="alert alert-danger"></label>
+                        <input id="county" type="text"  th:field="*{county}" class="form-control" th:value="${order.county}" aria-label="County" aria-describedby="basic-addon1">
+                    </div>
+                    <div class="form-group">
+                        <label for="postcode">Postcode</label>
+                        <label th:if="${#fields.hasErrors('zone')}" th:errors="*{zone}" class="alert alert-danger"></label>
+                        <input id="postcode" type="text"  th:field="*{zone}" class="form-control" th:value="${order.zone}" aria-label="Postcode" aria-describedby="basic-addon1">
+                    </div>
+
+
+                    <!--Paypal-->
+                    <div class="card-details">
+                        <h3 class="title">Payment</h3>
+                        <div class="row">
+                            <div class="notice-wrapper">
+                                <div class="show notice error notice-error" th:if="${paymentErrorMessage}">
+                                    <span class="notice-message" th:text="${paymentErrorMessage}"></span>
+                                </div>
+                            </div>
+
+                            <section>
+                                <input type="hidden" id="amount" name="amount" th:value="${total}" />
+                                <input type="hidden" id="nonce" name="payment_method_nonce" />
+
+                                <div class="bt-drop-in-wrapper">
+                                    <div id="bt-dropin"></div>
+                                </div>
+                            </section>
+
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Checkout</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-3 col-md-push-1 probootstrap-animate">
+                <h4>Contact Details</h4>
+                <ul class="with-icon colored">
+                    <li><i class="icon-location2"></i> <span>198 West 21th Street, Suite 721 New York NY 10016</span></li>
+                    <li><i class="icon-mail"></i><span>contact@globalbeershop.com</span></li>
+                    <li><i class="icon-phone2"></i><span>+123 456 7890</span></li>
+                </ul>
+
+                <h4>Got any queries?</h4>
+                <p>Got any questions about delivery and pickup or payment? Visit our FAQ page.</p>
+                <p><a href="#">Go Back To Shop</a></p>
+            </div>
         </div>
     </div>
+</section>
+<!-- END section -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
 </div>
 
-<footer class="container-fluid text-center">
-    <a href="/checkout" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>&copy; Global Beer Shop</p>
-</footer>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://js.braintreegateway.com/web/dropin/1.16.0/js/dropin.min.js"></script>
+<script th:inline="javascript">
+    var form = document.querySelector('#payment-form');
+    var client_token = [[${clientToken}]];
+    var total = [[${total}]];
+    braintree.dropin.create({
+        authorization: client_token,
+        container: '#bt-dropin',
+        paypal: {
+            flow: 'vault',
+            amount: total,
+            currency: 'GBP'
+        }
+    }, function (createErr, instance) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            instance.requestPaymentMethod(function (err, payload) {
+                if (err) {
+                    console.log('Error', err);
+                    return;
+                }
+                // Add the nonce to the form and submit
+                document.querySelector('#nonce').value = payload.nonce;
+                form.submit();
+            });
+        });
+    });
+    /*]]>*/
+</script>
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+
+<script src="js/custom.js"></script>
 </body>
 </html>
