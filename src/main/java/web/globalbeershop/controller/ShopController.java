@@ -122,12 +122,16 @@ public class ShopController {
         Sort sort = new Sort(Sort.Direction.ASC, "name");
 
         //constructs order specifier based on given params (if valid)
-        if(paramGiven(sortCol) && paramGiven(sortOrd)){
+        if(paramGiven(sortCol)){
 
             //if col and sort valid, update Sort object
             if(Arrays.asList("name", "country", "brewer", "abv", "type").contains(sortCol.toLowerCase())){
-                if(sortOrd.toUpperCase() == "ASC") sort = new Sort(Sort.Direction.ASC, sortCol);
-                else if (sortOrd.toUpperCase() == "DESC") sort = new Sort(Sort.Direction.DESC, sortCol);
+                if(paramGiven(sortOrd)){
+                    if(sortOrd.toUpperCase() == "ASC") sort = new Sort(Sort.Direction.ASC, sortCol);
+                    else if (sortOrd.toUpperCase() == "DESC") sort = new Sort(Sort.Direction.DESC, sortCol);
+                }
+                else sort = new Sort(Sort.Direction.ASC, sortCol);
+
             }
 
         }
