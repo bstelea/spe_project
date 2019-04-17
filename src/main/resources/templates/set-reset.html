@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Order Complete - Global Beer Shop</title>
+    <title>Reset your password - Global Beer Shop</title>
     <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
     <meta name="keywords" content="global beer shop, global, beer, shop, beers">
 
@@ -25,7 +25,7 @@
 
 <header role="banner" class="probootstrap-header">
     <div class="container">
-        <a href="/" class="probootstrap-logo"><img src="https://globalbeershop.spe.cs.bris.ac.uk/img/logo.png" style="max-width: 70px;" alt="Global Beer Shop"></a>
+        <a href="/" class="probootstrap-logo"><img src="http://localhost:8080/img/logo.png" style="max-width: 70px;" alt="Global Beer Shop"></a>
 
         <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
         <div class="mobile-menu-overlay"></div>
@@ -71,15 +71,14 @@
 </header>
 <!-- END: header -->
 
-<section class="probootstrap-slider flexslider" th:if="${orderId} == null">
+<section class="probootstrap-slider flexslider">
     <ul class="slides">
         <li style="background-image: url(https://globalbeershop.spe.cs.bris.ac.uk/img/slider_1.jpg);" class="overlay2">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
-                            <h2>You haven't placed an order yet</h2>
-                            <p>Go back to the <a href="/shop">Global Beer Shop</a> and place one!</p>
+                            <h2>Reset your password</h2>
                         </div>
                     </div>
                 </div>
@@ -89,44 +88,35 @@
 </section>
 <!-- END: slider  -->
 
-<section class="probootstrap-slider flexslider" th:if="${orderId} != null">
-    <ul class="slides">
-        <li style="background-image: url(https://globalbeershop.spe.cs.bris.ac.uk/img/slider_1.jpg);" class="overlay2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
-                            <h2>Order Complete</h2>
-                            <p>Thank you for placing your order. Please find your order details below</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </li>
-    </ul>
-</section>
-<!-- END: slider  -->
-
-<section class="probootstrap-section" th:if="${orderId}!= null">
+<section class="probootstrap-section">
     <div class="container">
-        <div class="row text-center probootstrap-animate">
-            <h2>Order Details:</h2>
-        </div>
-        <div class="row text-center probootstrap-animate">
-            <p th:inline="text">Order ID: [[${orderId}]]</p>
-        </div>
-        <div class="row text-center probootstrap-animate">
-            <p th:inline="text">Payment Reference: [[${paymentRef}]]</p>
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8 probootstrap-animate overlap">
+                <form th:action="@{/reset/set}" method="post" class="probootstrap-form probootstrap-form-box mb60">
+                    <input type="hidden" name="email" th:value="${email}"/>
+                    <div class="form-group">
+                        <label for="password"> New Password: </label>
+                        <input id="password" class="form-control" type="password" name="password"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="retypePassword"> Confirm New Password: </label>
+                        <input id="retypePassword" class="form-control" type="password" name="retypePassword"/>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Set New Password</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </section>
+<!-- END section -->
 
 <div th:replace="fragments/footer :: footer"></div>
 
 <div class="gototop js-top">
     <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
 </div>
-
 
 <script src="https://globalbeershop.spe.cs.bris.ac.uk/js/scripts.min.js"></script>
 <script src="https://globalbeershop.spe.cs.bris.ac.uk/js/main.min.js"></script>

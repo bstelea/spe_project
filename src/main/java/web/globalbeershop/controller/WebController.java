@@ -149,7 +149,7 @@ public class WebController {
 
     @GetMapping("/reset/get")
     public String getResetPage(){
-        return "get_reset";
+        return "get-reset";
     }
 
     @PostMapping("/reset/get")
@@ -182,7 +182,7 @@ public class WebController {
             User user = resetToken.getUser();
             if (!resetToken.isExpired()) {
                 model.addAttribute("email", user.getEmail());
-                return "set_reset";
+                return "set-reset";
 
             } else {
                 resetTokenRepository.delete(resetToken);
@@ -227,6 +227,6 @@ public class WebController {
 
             return "login";
         }
-        return "set_reset";
+        return "set-reset";
     }
 }
