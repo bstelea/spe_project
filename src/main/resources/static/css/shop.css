@@ -1,30 +1,19 @@
-.jumbotron {
-    background-color: #f4511e; /* Orange */
-    color: #fff;
-    padding: 100px 25px;
+.beer-holder {
+    width: 70%;
 }
 
-.navbar {
-    margin-bottom: 0;
-    background-color: #f4511e;
-    z-index: 9999;
-    border: 0;
-    font-size: 12px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    border-radius: 0;
+.probootstrap-sidebar {
+    max-width: 80%;
 }
 
-.navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
+.btn-clear {
+    background: gray;
+    margin-top: -5px;
 }
 
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #f4511e !important;
-    background-color: #fff !important;
+@media (max-width: 768px) {
+    .beer-holder {
+        width: 100%;
+    }
 }
 
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
-}

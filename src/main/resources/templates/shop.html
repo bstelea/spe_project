@@ -1,107 +1,233 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Global Beer Shop</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/shop.css">
+    <title>Shop - Global Beer Shop</title>
+    <meta name="description" content="Global Beer Shop - Best Beers From Around The World. Get your special beer now.">
+    <meta name="keywords" content="global beer shop, global, beer, shop, beers">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/styles-merged.css">
+    <link rel="stylesheet" href="css/style.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/vendor/html5shiv.min.js"></script>
+    <script src="js/vendor/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
+<!-- START: header -->
+
+<div class="probootstrap-loader"></div>
+
+<header role="banner" class="probootstrap-header">
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Logo</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/shop">SHOP</a></li>
-                <li><a href="/checkout">CHECKOUT</a></li>
-                <li><a href="/cart">CART</a></li>
-                <li><a href="#">SEARCH</a></li>
-                <li><a href="/#contact">CONTACT</a></li>
+        <a href="/" class="probootstrap-logo">Beer</a>
+
+        <a href="#" class="probootstrap-burger-menu visible-xs" ><i>Menu</i></a>
+        <div class="mobile-menu-overlay"></div>
+
+        <nav role="navigation" class="probootstrap-nav hidden-xs">
+            <ul class="probootstrap-main-nav">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/shop">Shop</a></li>
+                <li><a href="/cart">Cart</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <div class="extra-text visible-xs">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                    <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                    <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+                </div>
             </ul>
+            <ul class="probootstrap-right-nav hidden-xs">
+                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+
+                <li sec:authorize="isAnonymous()"><a href="/login">Log in</a></li>
+                <li sec:authorize="isAnonymous()"><a href="/register">Register</a></li>
+            </ul>
+            <div class="extra-text visible-xs">
+                <a href="#" class="probootstrap-burger-menu"><i>Menu</i></a>
+                <h5>Address</h5>
+                <p>198 West 21th Street, Suite 721 New York NY 10016</p>
+                <h5>Connect</h5>
+                <ul class="social-buttons">
+                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- END: header -->
+
+<section class="probootstrap-slider flexslider">
+    <ul class="slides">
+        <li style="background-image: url(img/slider_2.jpg);" class="overlay2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
+                            <h2>Shop</h2>
+                            <p>Browse Beers or Filter Your Results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<!-- END: slider  -->
+
+<section class="probootstrap-section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center section-heading probootstrap-animate">
+                <h2>Buy Beers From All Around the World</h2>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="probootstrap-sidebar probootstrap-animate">
+                    <form action="/shop" method="get">
+                        <div class="container-fluid">
+                            <h2>View</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortCol">Order by:</label>
+                            <select id="sortCol" name="sortCol" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(5)}"  th:text="${paramsGiven.get(5)}"></option>
+                                <option value="name">Name</option>
+                                <option value="brewer">Brewer</option>
+                                <option value="country">Country of Origin</option>
+                                <option value="type">Beer Type</option>
+                                <option value="abv">ABV</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortOrd">Sort:</label>
+                            <select id="sortOrd" name="sortOrd" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(6)}"  th:text="${paramsGiven.get(6)}"></option>
+                                <option value="ASC">Ascending</option>
+                                <option value="DESC">Descending</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="size">Items per page:</label>
+                            <select id="size" name="size" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>
+                                <option value =  9>9</option>
+                                <option value = 27>27</option>
+                                <option value = 45>45</option>
+                                <option value = 99>99</option>
+                            </select>
+                        </div>
+
+                        <div class="container-fluid">
+                            <h2>Filters</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Beer Name</label>
+                            <input type="text" class="form-control" th:value="${paramsGiven.get(0)}" id="name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country</label>
+                            <select id="country" name="country" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(1)}"  th:text="${paramsGiven.get(1)}"></option>
+                                <option th:each="c : ${countries}" th:value="${c}" th:text="${c}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="brewer">Brewer</label>
+                            <select id="brewer" name="brewer" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(2)}"  th:text="${paramsGiven.get(2)}"></option>
+                                <option th:each="b : ${brewers}" th:value="${b}" th:text="${b}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="abv">ABV</label>
+                            <select id="abv" name="abv" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(3)}"  th:text="${paramsGiven.get(3)}"></option>
+                                <option th:each="a : ${abvs}" th:value="${a}" th:text="${a} "></option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <select id="type" name="type" class="form-select-button form-control">
+                                <option th:value="${paramsGiven.get(4)}"  th:text="${paramsGiven.get(4)}"></option>
+                                <option th:each="t : ${types}" th:value="${t}" th:text="${t}"></option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                            <input type="submit" class="btn btn-default" value="Apply">
+                        </div>
+                    </form>
+                    <form action="/shop" method="get">
+                        <div class="form-group col-md-12">
+                            <input type="submit" class="btn btn-default btn-clear" value="Clear">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="col-md-4 probootstrap-animate" th:each="beer : ${beers}">
+                    <div class="probootstrap-card with-hover text-center beer-holder">
+                        <div class="probootstrap-card-media">
+                            <a th:href="@{'/products/' + ${beer.id}}"><img th:src="@{../img/beer-template.png}" class="img-responsive img-border" style="width:100%" th:alt="${beer.name}"></a>
+                        </div>
+                        <div class="probootstrap-card-text">
+                            <h2 class="probootstrap-card-heading mb0" th:inline="text">[[${beer.name}]]</h2>
+                            <p class="category" th:inline="text">Price: £[[${#numbers.formatDecimal(beer.price, 0, 'COMMA', 2, 'POINT')}]]</p>
+                            <form th:if="${beer.stock}>0" action="/cart/add" method="post">
+                                <input type="hidden" name="id" th:value="${beer.id}"/>
+                                <p>Quantity: <input type="number" name="quantity" class="quantity-modifier" value="1" min="1" th:max="${beer.stock}"></p>
+                                <input type="submit" class="btn btn-default" value="Add to Cart">
+                            </form>
+                            <p><a th:href="@{'/products/' + ${beer.id}}">View details</a></p>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="col-md-12 text-center wild-font probootstrap-animate">
+                    <div th:replace="fragments/pagination :: pagination(URLparameter='/shop')"></div>
+                </div>
+            </div>
+
         </div>
     </div>
-</nav>
+</section>
+<!-- END section -->
 
-<div class="jumbotron text-center">
-    <h1>Global Beer Shop</h1>
+<div th:replace="fragments/reviews :: reviews"></div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<div class="gototop js-top">
+    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-danger">
-                <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-success">
-                <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-            </div>
-        </div>
-    </div>
-</div><br>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">BLACK FRIDAY DEAL</div>
-                <div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>
-                <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
-            </div>
-        </div>
-    </div>
-</div><br><br>
+<script src="js/scripts.min.js"></script>
+<script src="js/main.min.js"></script>
+<script src="js/custom.js"></script>
+<script src="./src/bootstrap-input-spinner.js"></script>
+<script>
+    $("input[type='number']").inputSpinner()
+</script>
 
-<footer class="container-fluid text-center">
-    <a href="/shop" title="To Top">
-        <span class="glyphicon glyphicon-chevron-up"></span>
-    </a>
-    <p>&copy; Global Beer Shop</p>
-</footer>
-
-<!--<footer class="container-fluid text-center">-->
-    <!--<p>Online Store Copyright</p>-->
-    <!--<form class="form-inline">Get deals:-->
-        <!--<input type="email" class="form-control" size="50" placeholder="Email Address">-->
-        <!--<button type="button" class="btn btn-danger">Sign Up</button>-->
-    <!--</form>-->
-<!--</footer>-->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
