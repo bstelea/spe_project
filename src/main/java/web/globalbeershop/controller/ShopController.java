@@ -125,7 +125,7 @@ public class ShopController {
         if(paramGiven(sortCol)){
 
             //if col and sort valid, update Sort object
-            if(Arrays.asList("name", "country", "brewer", "abv", "type").contains(sortCol.toLowerCase())){
+            if(Arrays.asList("name", "country", "brewer", "abv", "type", "price").contains(sortCol.toLowerCase())){
                 if(paramGiven(sortOrd)){
                     if(sortOrd.toUpperCase() == "ASC") sort = new Sort(Sort.Direction.ASC, sortCol);
                     else if (sortOrd.toUpperCase() == "DESC") sort = new Sort(Sort.Direction.DESC, sortCol);
