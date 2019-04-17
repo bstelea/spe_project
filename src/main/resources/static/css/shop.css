@@ -8,6 +8,7 @@
 
 .btn-clear {
     background: gray;
+    margin-top: -5px;
 }
 
 @media (max-width: 768px) {
