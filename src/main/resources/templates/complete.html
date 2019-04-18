@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://globalbeershop.spe.cs.bris.ac.uk/css/custom.css">
     <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
 
+    <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <!--[if lt IE 9]>
     <script src="https://globalbeershop.spe.cs.bris.ac.uk/js/vendor/html5shiv.min.js"></script>
     <script src="https://globalbeershop.spe.cs.bris.ac.uk/js/vendor/respond.min.js"></script>
@@ -46,9 +47,9 @@
                 </div>
             </ul>
             <ul class="probootstrap-right-nav hidden-xs">
-                <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
-                <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
-                <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/user}">My Account</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
 
@@ -61,9 +62,9 @@
                 <p>198 West 21th Street, Suite 721 New York NY 10016</p>
                 <h5>Connect</h5>
                 <ul class="social-buttons">
-                    <li><a href="https://twitter.com/"><i class="icon-twitter"></i></a></li>
-                    <li><a href="https://www.facebook.com/"><i class="icon-facebook2"></i></a></li>
-                    <li><a href="https://www.instagram.com/"><i class="icon-instagram2"></i></a></li>
+                    <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
+                    <li><a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
                 </ul>
             </div>
         </nav>
@@ -123,8 +124,8 @@
 
 <div th:replace="fragments/footer :: footer"></div>
 
-<div class="gototop js-top">
-    <a href="#" class="js-gotop"><i class="icon-chevron-thin-up"></i></a>
+<div class="gototop js-top" style="display: table;">
+    <a href="#" class="js-gotop" style="display: table-cell; vertical-align: middle;"><i class="fas fa-chevron-up"></i></a>
 </div>
 
 

@@ -202,7 +202,8 @@ public class WebController {
     @PostMapping("/reset/set")
     public String setNewPassword (Model model, @RequestParam(value = "email", required = true) String email,
                                   @RequestParam(value = "password", required = true) String password,
-                                  @RequestParam(value = "matchingPassword", required = true) String matchingPassword) {
+                                  @RequestParam(value = "matchingPassword", required = true) String matchingPassword,
+                                  RedirectAttributes attributes) {
 
         //check if password meets requirements
         if (!password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=?!#(){}])(?=\\S+$).{8,}$")) {
@@ -221,11 +222,13 @@ public class WebController {
             if (user != null) {
                 resetTokenRepository.deleteAll(resetTokenRepository.findAll(QResetToken.resetToken.user.eq(user)));
                 userService.enableUser(userService.setPassword(user, password));
-                model.addAttribute("successMessage", "Password Reset");
+                attributes.addFlashAttribute("successMessage", "Password Reset");
 
-            } else model.addAttribute("errorMessage", "Something went wrong, please try again later");
+            } else {
+                attributes.addFlashAttribute("errorMessage", "Something went wrong, please try again later");
+            }
 
-            return "login";
+            return "redirect:/login";
         }
         return "set-reset";
     }

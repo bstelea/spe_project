@@ -8,8 +8,8 @@
  */
 @font-face {
   font-family: 'icomoon';
-  src: url("../fonts/icomoon/icomoon.eot?1z9v6x");
-  src: url("../fonts/icomoon/icomoon.eot?1z9v6x#iefix") format("embedded-opentype"), url("../fonts/icomoon/icomoon.ttf?1z9v6x") format("truetype"), url("../fonts/icomoon/icomoon.woff?1z9v6x") format("woff"), url("../fonts/icomoon/icomoon.svg?1z9v6x#icomoon") format("svg");
+  src: url("https://globalbeershop.spe.cs.bris.ac.uk/fonts/icomoon/icomoon.eot?1z9v6x");
+  src: url("https://globalbeershop.spe.cs.bris.ac.uk/fonts/icomoon/icomoon.eot?1z9v6x#iefix") format("embedded-opentype"), url("https://globalbeershop.spe.cs.bris.ac.uk/fonts/icomoon/icomoon.ttf?1z9v6x") format("truetype"), url("../fonts/icomoon/icomoon.woff?1z9v6x") format("woff"), url("https://globalbeershop.spe.cs.bris.ac.uk/fonts/icomoon/icomoon.svg?1z9v6x#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -2598,6 +2598,7 @@ figure:hover figcaption, figure:focus figcaption {
   visibility: hidden;
   -webkit-transition: .3s all;
   transition: .3s all;
+  display: table;
 }
 
 .gototop.active {
@@ -2614,6 +2615,8 @@ figure:hover figcaption, figure:focus figcaption {
   color: #ffffff;
   text-align: center;
   border-radius: 4px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .gototop a i {
