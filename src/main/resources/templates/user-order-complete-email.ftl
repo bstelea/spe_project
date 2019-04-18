@@ -391,7 +391,7 @@
                                         <span data-key="1468267_greeting_text" style="text-align: center; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363;">
                                           Hey
                                         </span>
-                                                        first_name last_name,
+                                                        ${firstName} ${lastName},
                                                     </p>
 
 
@@ -406,9 +406,9 @@
                                             <tr id="section-1468270" class="section order_number_and_date">
                                                 <th style="mso-line-height-rule: exactly; padding: 13px 52px;" bgcolor="#ffffff">
                                                     <h2 style="font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; color: #4b4b4b; font-size: 20px; line-height: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin: 0;" align="center">
-                                                        <span data-key="1468270_order_number">Order No.</span> GBSUK-reference_number
+                                                        <span data-key="1468270_order_number">Order No.</span> GBSUK-${reference}
                                                     </h2>
-                                                    <p class="muted" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 14px; line-height: 26px; font-weight: normal; color: #bdbdbd; margin: 0;" align="center">get_date</p>
+                                                    <p class="muted" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 14px; line-height: 26px; font-weight: normal; color: #bdbdbd; margin: 0;" align="center">${date}</p>
                                                 </th>
                                             </tr>
                                             <!-- END SECTION: Order Number And Date -->
@@ -532,26 +532,11 @@
                                                             <th class="pricing-table" style="mso-line-height-rule: exactly; padding: 13px 0;" bgcolor="#ffffff" valign="top">
                                                                 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">
 
-                                                                    <tbody><tr>
-                                                                        <th class="table-title" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; width: 65%; padding: 6px 0;" align="left" bgcolor="#ffffff" valign="top">
-                                                                            <span data-key="1468271_discount" style="font-weight: bold;">Discount</span> (JUSTINCASE)</th>
-                                                                        <th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 6px 0;" align="right" bgcolor="#ffffff" valign="middle">-$18.00</th>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <th class="table-title" data-key="1468271_subtotal" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; width: 65%; padding: 6px 0;" align="left" bgcolor="#ffffff" valign="top">Subtotal</th>
-                                                                        <th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 6px 0;" align="right" bgcolor="#ffffff" valign="middle">$89.00</th>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <th class="table-title" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; width: 65%; padding: 6px 0;" align="left" bgcolor="#ffffff" valign="top">Royal Mail Tracked &amp; Signed (4-9 days)</th>
-                                                                        <th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 6px 0;" align="right" bgcolor="#ffffff" valign="middle">$0.00</th>
-                                                                    </tr>
-
+                                                                    <tbody>
 
                                                                     <tr class="pricing-table-total-row">
                                                                         <th class="table-title" data-key="1468271_total" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; width: 65%; padding: 6px 0;" align="left" bgcolor="#ffffff" valign="top">Total</th>
-                                                                        <th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 6px 0;" align="right" bgcolor="#ffffff" valign="middle">$89.00</th>
+                                                                        <th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 6px 0;" align="right" bgcolor="#ffffff" valign="middle">£${total}</th>
                                                                     </tr>
 
 
@@ -567,10 +552,10 @@
                                             </tr>
                                             <!-- END SECTION: Products With Pricing -->
                                             <!-- BEGIN SECTION: Payment Info -->
-                                            <tr id="section-1468272" class="section payment_info">
-                                                <th style="mso-line-height-rule: exactly; padding: 13px 52px;" bgcolor="#ffffff">
-                                                    <table class="table-inner" cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">
-                                                        <!-- PAYMENT INFO -->
+                                            <#--<tr id="section-1468272" class="section payment_info">-->
+                                                <#--<th style="mso-line-height-rule: exactly; padding: 13px 52px;" bgcolor="#ffffff">-->
+                                                    <#--<table class="table-inner" cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">-->
+                                                        <#--<!-- PAYMENT INFO &ndash;&gt;-->
 
 
 
@@ -578,11 +563,11 @@
 
 
 
-                                                        <tbody><tr>
-                                                            <th colspan="2" style="mso-line-height-rule: exactly;" bgcolor="#ffffff" valign="top">
-                                                                <h3 data-key="1468272_payment_info" style="font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; color: #bdbdbd; font-size: 16px; line-height: 52px; font-weight: 700; text-transform: uppercase; border-bottom-width: 0; border-bottom-color: #dadada; border-bottom-style: solid; letter-spacing: 1px; margin: 0;" align="left">Payment Info</h3>
-                                                            </th>
-                                                        </tr>
+                                                        <#--<tbody><tr>-->
+                                                            <#--<th colspan="2" style="mso-line-height-rule: exactly;" bgcolor="#ffffff" valign="top">-->
+                                                                <#--<h3 data-key="1468272_payment_info" style="font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; color: #bdbdbd; font-size: 16px; line-height: 52px; font-weight: 700; text-transform: uppercase; border-bottom-width: 0; border-bottom-color: #dadada; border-bottom-style: solid; letter-spacing: 1px; margin: 0;" align="left">Payment Info</h3>-->
+                                                            <#--</th>-->
+                                                        <#--</tr>-->
 
 
 
@@ -591,37 +576,37 @@
 
 
 
-                                                        <!-- PAYMENT METHOD IMAGE -->
+                                                        <#--<!-- PAYMENT METHOD IMAGE &ndash;&gt;-->
 
 
 
-                                                        <tr>
-                                                            <th class="table-title" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; width: 65%; padding: 6px 0;" align="left" bgcolor="#ffffff" valign="top">
-                                                                <table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%; font-weight: bold;" role="presentation">
-                                                                    <tbody><tr style="font-weight: bold;">
-                                                                        <th width="40" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; padding: 8px 10px 8px 0;" align="left" bgcolor="#ffffff" valign="middle">
-                                                                            <img width="40" style="width: 40px; vertical-align: middle; height: auto !important; font-weight: bold;" alt="Mastercard Icon" src="https://orderlyemails.com/mobile-receipt-mastercard.png">
-                                                                        </th>
-                                                                        <th style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; padding: 8px 0;" align="left" bgcolor="#ffffff" valign="middle">
+                                                        <#--<tr>-->
+                                                            <#--<th class="table-title" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; width: 65%; padding: 6px 0;" align="left" bgcolor="#ffffff" valign="top">-->
+                                                                <#--<table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%; font-weight: bold;" role="presentation">-->
+                                                                    <#--<tbody><tr style="font-weight: bold;">-->
+                                                                        <#--<th width="40" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; padding: 8px 10px 8px 0;" align="left" bgcolor="#ffffff" valign="middle">-->
+                                                                            <#--<img width="40" style="width: 40px; vertical-align: middle; height: auto !important; font-weight: bold;" alt="Mastercard Icon" src="https://orderlyemails.com/mobile-receipt-mastercard.png">-->
+                                                                        <#--</th>-->
+                                                                        <#--<th style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: bold; color: #666363; padding: 8px 0;" align="left" bgcolor="#ffffff" valign="middle">-->
 
-                                                                            Mastercard
-
-
-                                                                            <span class="table-muted" style="font-size: 14px; font-weight: bold; color: #bdbdbd; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla';"> (••••••••••••6500)</span>
-
-                                                                        </th>
-                                                                    </tr>
-                                                                    </tbody></table>
-                                                            </th>
-                                                            <th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 13px 0;" align="right" bgcolor="#ffffff" valign="middle">
-                                                                $89.00
-                                                            </th>
-                                                        </tr>
+                                                                            <#--Mastercard-->
 
 
-                                                        </tbody></table>
-                                                </th>
-                                            </tr>
+                                                                            <#--<span class="table-muted" style="font-size: 14px; font-weight: bold; color: #bdbdbd; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla';"> (••••••••••••6500)</span>-->
+
+                                                                        <#--</th>-->
+                                                                    <#--</tr>-->
+                                                                    <#--</tbody></table>-->
+                                                            <#--</th>-->
+                                                            <#--<th class="table-text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; width: 35%; padding: 13px 0;" align="right" bgcolor="#ffffff" valign="middle">-->
+                                                                <#--$89.00-->
+                                                            <#--</th>-->
+                                                        <#--</tr>-->
+
+
+                                                        <#--</tbody></table>-->
+                                                <#--</th>-->
+                                            <#--</tr>-->
                                             <!-- END SECTION: Payment Info -->
                                             <!-- BEGIN SECTION: Customer And Shipping Address -->
                                             <tr id="section-1468273" class="section customer_and_shipping_address">
@@ -639,12 +624,12 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <th class="billing_address " style="mso-line-height-rule: exactly; padding-right: 5%;" align="left" bgcolor="#ffffff" valign="top">
-                                                                            <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="left">Smiles Davis<br>
-                                                                                600 Montgomery St <br>
-                                                                                San Francisco CA<br>
-                                                                                94111<br>
-                                                                                United States<br>
-                                                                                <a href="mailto:" style="color: #ecba78; text-decoration: none !important; text-underline: none; word-wrap: break-word;" target="_blank">hello@SmilesDavis.yeah</a></p>
+                                                                            <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="left">${firstName} ${lastName}<br>
+                                                                                ${address} <br>
+                                                                                ${city}<br>
+                                                                                ${postcode}<br>
+                                                                                ${county}<br>
+                                                                                <a href="mailto:" style="color: #ecba78; text-decoration: none !important; text-underline: none; word-wrap: break-word;" target="_blank">${email}</a></p>
                                                                         </th>
                                                                     </tr>
                                                                     </tbody></table>
@@ -662,11 +647,11 @@
 
                                                                     <tr>
                                                                         <th class="shipping_address " style="mso-line-height-rule: exactly; padding-left: 5%;" align="right" bgcolor="#ffffff" valign="top">
-                                                                            <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">Smiles Davis<br>
-                                                                                600 Montgomery St <br>
-                                                                                San Francisco CA<br>
-                                                                                94111<br>
-                                                                                United States<br>
+                                                                            <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">${firstName} ${lastName}<br>
+                                                                                ${address} <br>
+                                                                                ${city}<br>
+                                                                                ${postcode}<br>
+                                                                                ${county}<br>
 
                                                                             </p>
                                                                         </th>
@@ -695,7 +680,7 @@
                                             <!-- BEGIN SECTION: Closing Text -->
                                             <tr id="section-1468276" class="section closing_text">
                                                 <th data-key="1468276_closing_text" class="text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; padding: 13px 52px 52px;" align="center" bgcolor="#ffffff">
-                                                    <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="center">If you need help with anything please don't hesitate to drop us an email: care@tens.co :)</p>
+                                                    <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="center">If you need help with anything please don't hesitate to drop us an email: globalbeershopmail@gmail.com</p>
                                                 </th>
                                             </tr>
                                             <!-- END SECTION: Closing Text -->
@@ -704,17 +689,17 @@
                                                     <table class="table_menu_bar" border="0" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                         <tbody><tr>
                                                             <th class="menu_bar_item first" style="width: 33%; mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; color: #bdbdbd; border-right-color: #dadada; border-right-style: solid; border-left-color: #dadada; border-left-style: none; letter-spacing: 1px; border: 0;" align="center" bgcolor="#ffffff">
-                                                                <a href="https://us.tens.co/tools/emails/click/order-confirmation/1/site-link/shop?url=https%3A%2F%2Fus.tens.co%2Fcollections%2Fsunglasses" target="_blank" style="color: #bdbdbd; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; letter-spacing: 1px;">
+                                                                <a href="https://globalbeershop.spe.cs.bris.ac.uk/shop" target="_blank" style="color: #bdbdbd; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; letter-spacing: 1px;">
                                                                     Shop
                                                                 </a>
                                                             </th>
                                                             <th class="menu_bar_item" style="width: 33%; mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; color: #bdbdbd; border-right-color: #dadada; border-right-style: solid; border-left-color: #dadada; border-left-style: solid; letter-spacing: 1px; border: 0;" align="center" bgcolor="#ffffff">
-                                                                <a href="https://us.tens.co/tools/emails/click/order-confirmation/1/site-link/about-us?url=https%3A%2F%2Fus.tens.co%2Fpages%2Fabout-us" target="_blank" style="color: #bdbdbd; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; letter-spacing: 1px;">
+                                                                <a href="https://globalbeershop.spe.cs.bris.ac.uk/about" target="_blank" style="color: #bdbdbd; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; letter-spacing: 1px;">
                                                                     About Us
                                                                 </a>
                                                             </th>
                                                             <th class="menu_bar_item last" style="width: 33%; mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; color: #bdbdbd; border-right-color: #dadada; border-right-style: none; border-left-color: #dadada; border-left-style: solid; letter-spacing: 1px; border: 0;" align="center" bgcolor="#ffffff">
-                                                                <a href="https://us.tens.co/tools/emails/click/order-confirmation/1/site-link/contact?url=https%3A%2F%2Fus.tens.co%2Fpages%2Fcontact-us" target="_blank" style="color: #bdbdbd; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; letter-spacing: 1px;">
+                                                                <a href="https://globalbeershop.spe.cs.bris.ac.uk/contact" target="_blank" style="color: #bdbdbd; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: center !important; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; font-weight: 400; line-height: 26px; text-transform: uppercase; letter-spacing: 1px;">
                                                                     Contact
                                                                 </a>
                                                             </th>
@@ -749,16 +734,16 @@
                                                                     <!-- Store Address : BEGIN -->
                                                                     <tr style="" align="center">
                                                                         <th class="column_shop_social_icons " width="100%" style="mso-line-height-rule: exactly; padding-right: 5%;" align="center" bgcolor="#ffffff" valign="top">
-                                                                            <a class="social-link" href="https://www.facebook.com/tens" target="_blank" title="Facebook" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
+                                                                            <a class="social-link" href="https://www.facebook.com/" target="_blank" title="Facebook" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
                                                                                 <img width="32" class="social-icons" alt="Facebook" src="https://orderlyemails.com/facebook_3.png" style="width: 32px; height: auto !important; vertical-align: middle; text-align: center; padding: 6px 6px 0 0px;">
                                                                             </a>
-                                                                            <a class="social-link" href="https://twitter.com/tens" target="_blank" title="Twitter" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
+                                                                            <a class="social-link" href="https://twitter.com/" target="_blank" title="Twitter" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
                                                                                 <img width="32" class="social-icons" alt="Twitter" src="https://orderlyemails.com/twitter_3.png" style="width: 32px; height: auto !important; vertical-align: middle; text-align: center; padding: 6px 6px 0;">
                                                                             </a>
-                                                                            <a class="social-link" href="https://instagram.com/tens/" target="_blank" title="Instagram" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
+                                                                            <a class="social-link" href="https://instagram.com/" target="_blank" title="Instagram" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
                                                                                 <img width="32" class="social-icons" alt="Instagram" src="https://orderlyemails.com/instagram_3.png" style="width: 32px; height: auto !important; vertical-align: middle; text-align: center; padding: 6px 6px 0;">
                                                                             </a>
-                                                                            <a class="social-link" href="https://www.youtube.com/c/tens-co" target="_blank" title="YouTube" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
+                                                                            <a class="social-link" href="https://www.youtube.com/" target="_blank" title="YouTube" style="color: #ecba78; text-decoration: none !important; text-underline: none; font-size: 14px; text-align: center;">
                                                                                 <img width="32" class="social-icons" alt="YouTube" src="https://orderlyemails.com/youtube_3.png" style="width: 32px; height: auto !important; vertical-align: middle; text-align: center; padding: 6px 0px 0 6px;">
                                                                             </a>
                                                                         </th>
@@ -772,11 +757,11 @@
                                                                     <!-- Store Address : BEGIN -->
                                                                     <tbody><tr style="" align="center">
                                                                         <th class="column_shop_block2 " data-key="section_shop_block2" width="100%" style="mso-line-height-rule: exactly; padding-left: 5%; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 14px; line-height: 24px; font-weight: 400; color: #a3a1a1; text-transform: none;" align="center" bgcolor="#ffffff" valign="top">
-                                                                            Tens<br style="text-align: center;">
-                                                                            84 Miller Street<br style="text-align: center;">
-                                                                            Glasgow,  G11DT<br style="text-align: center;">
+                                                                            Global Beer Shop<br style="text-align: center;">
+                                                                            198 West 21th Street, Suite 721<br style="text-align: center;">
+                                                                            New York, NY, 10016<br style="text-align: center;">
                                                                             <br style="text-align: center;">
-                                                                            Copyright © 2018
+                                                                            Copyright © 2019
                                                                         </th>
                                                                     </tr>
                                                                     <!-- Store Address : END -->

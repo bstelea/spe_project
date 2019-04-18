@@ -107,7 +107,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-group col-sm-7">
+                            <div class="form-group">
                                 <label for="first_name">Forename</label>
                                 <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></label>
                                 <input id="first_name" type="text"  th:field="*{name}" class="form-control" th:value="${order.name}" aria-label="Foreame" aria-describedby="basic-addon1">

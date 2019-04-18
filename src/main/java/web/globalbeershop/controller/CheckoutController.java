@@ -1,5 +1,6 @@
 package web.globalbeershop.controller;
 
+import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.security.core.Authentication;
@@ -10,10 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import web.globalbeershop.GlobalbeershopApplication;
-import web.globalbeershop.data.Beer;
-import web.globalbeershop.data.Order;
-import web.globalbeershop.data.OrderItem;
-import web.globalbeershop.data.User;
+import web.globalbeershop.data.*;
 import web.globalbeershop.exception.NoBeersInCartException;
 import web.globalbeershop.exception.NotEnoughBeersInStockException;
 import web.globalbeershop.repository.OrderItemRepository;
@@ -21,8 +19,11 @@ import web.globalbeershop.repository.OrderRepository;
 import web.globalbeershop.service.BeerService;
 import web.globalbeershop.service.NotificationService;
 import web.globalbeershop.service.ShoppingCartService;
+
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.braintreegateway.BraintreeGateway;
@@ -39,6 +40,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import web.globalbeershop.service.UserService;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 @Controller
@@ -193,6 +195,39 @@ public class CheckoutController {
                 //catch error
                 System.out.println("Email didn't send. Error: " + e.getMessage());
             }
+
+            // transaction was successful, send email to user to say that order was placed
+            Mail mail_to_user = new Mail();
+            mail_to_user.setFrom("globalbeershopmail@gmail.com");
+            mail_to_user.setTo(order.getEmail());
+            mail_to_user.setSubject("Global Beer Shop - Thank you for your order!");
+
+            Map model_to_user = new HashMap();
+            model_to_user.put("firstName", order.getName());
+            model_to_user.put("lastName", order.getLastName());
+            model_to_user.put("reference", order.getId().toString());
+            model_to_user.put("email", order.getEmail());
+            model_to_user.put("address", order.getAddress());
+            model_to_user.put("city", order.getCounty());
+            model_to_user.put("county", order.getCounty());
+            model_to_user.put("postcode", order.getZone());
+            model_to_user.put("date", order.getDate().toString());
+            model_to_user.put("beers", shoppingCartService.getBeersInCart());
+            model_to_user.put("total", shoppingCartService.getTotal().toString());
+            mail_to_user.setModel(model_to_user);
+
+            try {
+                notificationService.sendBeautifulMail(mail_to_user);
+            } catch (MessagingException e) {
+                System.out.println("Messaging exception error " + e.getMessage());
+            } catch (IOException io) {
+                System.out.println("IO exception error " + io.getMessage());
+            } catch (TemplateException t) {
+                System.out.println("Template exception error " + t.getMessage());
+            }
+
+            // send email to Global Beer Shop to inform order was placed
+            Mail mail_to_gbs = new Mail();
 
             //save order items
             for(Map.Entry<Beer, Integer> cartItem  : shoppingCartService.getBeersInCart().entrySet()) orderItemRepository.save(new OrderItem(order, cartItem.getKey(), cartItem.getValue()));

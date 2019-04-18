@@ -95,7 +95,7 @@ public class NotificationService {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
 
-        Template t = freemarkerConfig.getTemplate("email-template.ftl");
+        Template t = freemarkerConfig.getTemplate("user-order-complete-email.ftl");
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, mail.getModel());
 
         helper.setTo(mail.getTo());
