@@ -65,7 +65,7 @@ public class NotificationService {
         String activationUrl;
 
         String htmlMsg = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                        "<br><a href=\"http://localhost:8080/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
+                        "<br><a href=\"https://globalbeershop.spe.cs.bris.ac.uk/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
                         "<br><h4>Global Beer Shop</h4>";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(token.getUser().getEmail());
