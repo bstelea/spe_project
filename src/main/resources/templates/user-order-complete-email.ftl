@@ -355,7 +355,7 @@
                                                 <th class="column_logo" style="mso-line-height-rule: exactly; padding-top: 13px; padding-bottom: 13px;" align="center" bgcolor="#ffffff">
                                                     <!-- Logo : BEGIN -->
                                                     <a href="https://globalbeershop.spe.cs.bris.ac.uk/" target="_blank" style="color: #c3c3c3; text-decoration: none !important; text-underline: none;">
-                                                        <img src="https://globalbeershop.spe.cs.bris.ac.uk/img/logo.png" class="logo " width="96" border="0" style="width: 96px; height: auto !important; display: block; text-align: center; margin: auto;">
+                                                        <img src="https://globalbeershop.spe.cs.bris.ac.uk/img/email-logo.png" class="logo " width="96" border="0" style="width: 96px; height: auto !important; display: block; text-align: center; margin: auto;">
                                                     </a>
                                                     <!-- Logo : END -->
                                                 </th>
@@ -422,7 +422,8 @@
                                                 <!-- end Bold 1 -->
                                                 <th style="mso-line-height-rule: exactly; padding: 13px 52px;" bgcolor="#ffffff">
                                                     <table class="table-inner" cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">
-                                                        <tbody><tr>
+                                                        <tbody>
+                                                        <tr th:each="beer:${beers}">
                                                             <th class="product-table" style="mso-line-height-rule: exactly;" bgcolor="#ffffff" valign="top">
                                                                 <table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">
                                                                     <tbody><tr>
@@ -439,7 +440,7 @@
                                                                     <!-- end Bold 2 -->
                                                                     <tr class="row-border-bottom">
                                                                         <th class="table-stack product-image-wrapper stack-column-center" width="1" style="mso-line-height-rule: exactly; border-bottom-width: 2px; border-bottom-color: #dadada; border-bottom-style: solid; padding: 13px 13px 13px 0;" bgcolor="#ffffff" valign="middle">
-                                                                            <span>product_img here</span>
+                                                                            <img th:src="${beer.getKey().image}" class="img-responsive" style="width:100%; max-width: 150px;" th:alt="${beer.getKey().image}">
                                                                         </th>
                                                                         <th class="product-details-wrapper table-stack stack-column" style="mso-line-height-rule: exactly; padding-top: 13px; padding-bottom: 13px; border-bottom-width: 2px; border-bottom-color: #dadada; border-bottom-style: solid;" bgcolor="#ffffff" valign="middle">
                                                                             <table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">
@@ -447,14 +448,11 @@
 
                                                                                     <th class="line-item-description" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; padding: 13px 6px 13px 0;" align="left" bgcolor="#ffffff" valign="top">
                                                                                         <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="left">
-                                                                                            <a href="https://us.tens.co/tools/emails/click/order-confirmation/1/product/link?url=https%3A%2F%2Fus.tens.co%2Fproducts%2Ftravel-case" target="_blank" style="color: #666363; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: left !important; font-weight: bold;">
-                                                                                                Travel Case
+                                                                                            <a th:href="@{'https://globalbeershop.spe.cs.bris.ac.uk/products/' + ${beer.id}}" target="_blank" style="color: #666363; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: left !important; font-weight: bold;">
+                                                                                                ${beer.getKey().name}
                                                                                             </a>
                                                                                             <br>
-                                                                                            <span class="muted" style="text-align: center; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 14px; line-height: 26px; font-weight: normal; color: #bdbdbd; word-break: break-all;">
 
-                                                                Black
-                                                                  </span>
                                                                                         </p>
                                                                                     </th>
 
@@ -462,12 +460,12 @@
 
                                                                                     <th class="right line-item-qty" width="1" style="mso-line-height-rule: exactly; white-space: nowrap; padding: 13px 0 13px 13px;" align="right" bgcolor="#ffffff" valign="top">
                                                                                         <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">
-                                                                                            ×&nbsp;1
+                                                                                            ×&nbsp;${beer.getValue()}
                                                                                         </p>
                                                                                     </th>
                                                                                     <th class="right line-item-line-price" width="1" style="mso-line-height-rule: exactly; white-space: nowrap; padding: 13px 0 13px 26px;" align="right" bgcolor="#ffffff" valign="top">
                                                                                         <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">
-                                                                                            $18.00
+                                                                                            £${beer.getKey().price}
                                                                                         </p>
                                                                                     </th>
                                                                                 </tr>
@@ -486,43 +484,43 @@
 
 
                                                                     <!-- end Bold 2 -->
-                                                                    <tr class="row-border-bottom">
-                                                                        <th class="table-stack product-image-wrapper stack-column-center" width="1" style="mso-line-height-rule: exactly; border-bottom-width: 2px; border-bottom-color: #dadada; border-bottom-style: solid; padding: 13px 13px 13px 0;" bgcolor="#ffffff" valign="middle">
-                                                                            <img width="140" class="product-image" src="https://cdn.shopify.com/s/files/1/1070/9630/products/Classic-Black-1_140x140_cropped@2x.jpg?v=1527156339" alt="Product Image" style="vertical-align: middle; text-align: center; width: 140px; max-width: 140px; height: auto !important; border-radius: 1px; padding: 0px;">
-                                                                        </th>
-                                                                        <th class="product-details-wrapper table-stack stack-column" style="mso-line-height-rule: exactly; padding-top: 13px; padding-bottom: 13px; border-bottom-width: 2px; border-bottom-color: #dadada; border-bottom-style: solid;" bgcolor="#ffffff" valign="middle">
-                                                                            <table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">
-                                                                                <tbody><tr>
+                                                                    <#--<tr class="row-border-bottom">-->
+                                                                        <#--<th class="table-stack product-image-wrapper stack-column-center" width="1" style="mso-line-height-rule: exactly; border-bottom-width: 2px; border-bottom-color: #dadada; border-bottom-style: solid; padding: 13px 13px 13px 0;" bgcolor="#ffffff" valign="middle">-->
+                                                                            <#--<img width="140" class="product-image" src="https://cdn.shopify.com/s/files/1/1070/9630/products/Classic-Black-1_140x140_cropped@2x.jpg?v=1527156339" alt="Product Image" style="vertical-align: middle; text-align: center; width: 140px; max-width: 140px; height: auto !important; border-radius: 1px; padding: 0px;">-->
+                                                                        <#--</th>-->
+                                                                        <#--<th class="product-details-wrapper table-stack stack-column" style="mso-line-height-rule: exactly; padding-top: 13px; padding-bottom: 13px; border-bottom-width: 2px; border-bottom-color: #dadada; border-bottom-style: solid;" bgcolor="#ffffff" valign="middle">-->
+                                                                            <#--<table cellspacing="0" cellpadding="0" border="0" width="100%" style="min-width: 100%;" role="presentation">-->
+                                                                                <#--<tbody><tr>-->
 
-                                                                                    <th class="line-item-description" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; padding: 13px 6px 13px 0;" align="left" bgcolor="#ffffff" valign="top">
-                                                                                        <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="left">
-                                                                                            <a href="https://us.tens.co/tools/emails/click/order-confirmation/1/product/link?url=https%3A%2F%2Fus.tens.co%2Fproducts%2Fclassic-sunglasses" target="_blank" style="color: #666363; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: left !important; font-weight: bold;">
-                                                                                                Classic
-                                                                                            </a>
-                                                                                            <br>
-                                                                                            <span class="muted" style="text-align: center; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 14px; line-height: 26px; font-weight: normal; color: #bdbdbd; word-break: break-all;">
+                                                                                    <#--<th class="line-item-description" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; padding: 13px 6px 13px 0;" align="left" bgcolor="#ffffff" valign="top">-->
+                                                                                        <#--<p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="left">-->
+                                                                                            <#--<a href="https://us.tens.co/tools/emails/click/order-confirmation/1/product/link?url=https%3A%2F%2Fus.tens.co%2Fproducts%2Fclassic-sunglasses" target="_blank" style="color: #666363; text-decoration: none !important; text-underline: none; word-wrap: break-word; text-align: left !important; font-weight: bold;">-->
+                                                                                                <#--Classic-->
+                                                                                            <#--</a>-->
+                                                                                            <#--<br>-->
+                                                                                            <#--<span class="muted" style="text-align: center; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 14px; line-height: 26px; font-weight: normal; color: #bdbdbd; word-break: break-all;">-->
 
-                                                                Black
-                                                                  </span>
-                                                                                        </p>
-                                                                                    </th>
+                                                                <#--Black-->
+                                                                  <#--</span>-->
+                                                                                        <#--</p>-->
+                                                                                    <#--</th>-->
 
-                                                                                    <th style="mso-line-height-rule: exactly;" bgcolor="#ffffff" valign="top"></th>
+                                                                                    <#--<th style="mso-line-height-rule: exactly;" bgcolor="#ffffff" valign="top"></th>-->
 
-                                                                                    <th class="right line-item-qty" width="1" style="mso-line-height-rule: exactly; white-space: nowrap; padding: 13px 0 13px 13px;" align="right" bgcolor="#ffffff" valign="top">
-                                                                                        <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">
-                                                                                            ×&nbsp;1
-                                                                                        </p>
-                                                                                    </th>
-                                                                                    <th class="right line-item-line-price" width="1" style="mso-line-height-rule: exactly; white-space: nowrap; padding: 13px 0 13px 26px;" align="right" bgcolor="#ffffff" valign="top">
-                                                                                        <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">
-                                                                                            $89.00
-                                                                                        </p>
-                                                                                    </th>
-                                                                                </tr>
-                                                                                </tbody></table>
-                                                                        </th>
-                                                                    </tr>
+                                                                                    <#--<th class="right line-item-qty" width="1" style="mso-line-height-rule: exactly; white-space: nowrap; padding: 13px 0 13px 13px;" align="right" bgcolor="#ffffff" valign="top">-->
+                                                                                        <#--<p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">-->
+                                                                                            <#--×&nbsp;1-->
+                                                                                        <#--</p>-->
+                                                                                    <#--</th>-->
+                                                                                    <#--<th class="right line-item-line-price" width="1" style="mso-line-height-rule: exactly; white-space: nowrap; padding: 13px 0 13px 26px;" align="right" bgcolor="#ffffff" valign="top">-->
+                                                                                        <#--<p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="right">-->
+                                                                                            <#--$89.00-->
+                                                                                        <#--</p>-->
+                                                                                    <#--</th>-->
+                                                                                <#--</tr>-->
+                                                                                <#--</tbody></table>-->
+                                                                        <#--</th>-->
+                                                                    <#--</tr>-->
 
 
                                                                     </tbody></table>
@@ -629,7 +627,7 @@
                                                                                 ${city}<br>
                                                                                 ${postcode}<br>
                                                                                 ${county}<br>
-                                                                                <a href="mailto:" style="color: #ecba78; text-decoration: none !important; text-underline: none; word-wrap: break-word;" target="_blank">${email}</a></p>
+                                                                                <a th:href="@{'mailto:' + ${email}" style="color: #ecba78; text-decoration: none !important; text-underline: none; word-wrap: break-word;" target="_blank">${email}</a></p>
                                                                         </th>
                                                                     </tr>
                                                                     </tbody></table>
@@ -680,7 +678,7 @@
                                             <!-- BEGIN SECTION: Closing Text -->
                                             <tr id="section-1468276" class="section closing_text">
                                                 <th data-key="1468276_closing_text" class="text" style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; padding: 13px 52px 52px;" align="center" bgcolor="#ffffff">
-                                                    <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="center">If you need help with anything please don't hesitate to drop us an email: globalbeershopmail@gmail.com</p>
+                                                    <p style="mso-line-height-rule: exactly; font-family: -apple-system,BlinkMacSystemFont,'Segoe UI',Arial,'Karla'; font-size: 16px; line-height: 26px; font-weight: 400; color: #666363; margin: 0;" align="center">If you need help with anything please don't hesitate to drop us an email: <a href="mailto:globalbeershop@gmail.com">globalbeershopmail@gmail.com</a></p>
                                                 </th>
                                             </tr>
                                             <!-- END SECTION: Closing Text -->

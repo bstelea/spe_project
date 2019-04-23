@@ -196,39 +196,6 @@ public class CheckoutController {
                 System.out.println("Email didn't send. Error: " + e.getMessage());
             }
 
-            // transaction was successful, send email to user to say that order was placed
-            Mail mail_to_user = new Mail();
-            mail_to_user.setFrom("globalbeershopmail@gmail.com");
-            mail_to_user.setTo(order.getEmail());
-            mail_to_user.setSubject("Global Beer Shop - Thank you for your order!");
-
-            Map model_to_user = new HashMap();
-            model_to_user.put("firstName", order.getName());
-            model_to_user.put("lastName", order.getLastName());
-            model_to_user.put("reference", order.getId().toString());
-            model_to_user.put("email", order.getEmail());
-            model_to_user.put("address", order.getAddress());
-            model_to_user.put("city", order.getCounty());
-            model_to_user.put("county", order.getCounty());
-            model_to_user.put("postcode", order.getZone());
-            model_to_user.put("date", order.getDate().toString());
-            model_to_user.put("beers", shoppingCartService.getBeersInCart());
-            model_to_user.put("total", shoppingCartService.getTotal().toString());
-            mail_to_user.setModel(model_to_user);
-
-            try {
-                notificationService.sendBeautifulMail(mail_to_user);
-            } catch (MessagingException e) {
-                System.out.println("Messaging exception error " + e.getMessage());
-            } catch (IOException io) {
-                System.out.println("IO exception error " + io.getMessage());
-            } catch (TemplateException t) {
-                System.out.println("Template exception error " + t.getMessage());
-            }
-
-            // send email to Global Beer Shop to inform order was placed
-            Mail mail_to_gbs = new Mail();
-
             //save order items
             for(Map.Entry<Beer, Integer> cartItem  : shoppingCartService.getBeersInCart().entrySet()) orderItemRepository.save(new OrderItem(order, cartItem.getKey(), cartItem.getValue()));
 
