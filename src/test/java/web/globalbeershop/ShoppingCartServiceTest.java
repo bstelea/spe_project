@@ -21,13 +21,13 @@ import web.globalbeershop.service.impl.ShoppingCartServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ShoppingCartTest {
+public class ShoppingCartServiceTest {
     @Mock
     BeerRepository beerRepository;
     @InjectMocks
     private ShoppingCartServiceImpl shoppingCartService;
 
-    public ShoppingCartTest() {
+    public ShoppingCartServiceTest() {
     }
 
     @Test
