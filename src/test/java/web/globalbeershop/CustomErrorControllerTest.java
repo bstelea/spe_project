@@ -47,7 +47,7 @@ public class CustomErrorControllerTest {
 
     @Test
     public void handleErrorForbiddenValueTest() {
-        
+
     }
 
 }

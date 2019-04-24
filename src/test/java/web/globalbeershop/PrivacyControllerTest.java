@@ -54,7 +54,7 @@ public class PrivacyControllerTest {
 
     @Test
     public void showsCorrectViewName() throws Exception{
-        mockMvc.perform( MockMvcRequestBuilders
+        this.mockMvc.perform( MockMvcRequestBuilders
                 .get("/privacy")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -63,7 +63,7 @@ public class PrivacyControllerTest {
 
     @Test
     public void checkContentTypeOfResponseIsCorrectTest() throws Exception{
-        MvcResult mvcResult= mockMvc.perform( MockMvcRequestBuilders
+        MvcResult mvcResult= this.mockMvc.perform( MockMvcRequestBuilders
                 .get("/privacy", 1)
                 .accept(MediaType.APPLICATION_JSON)).andReturn();
 

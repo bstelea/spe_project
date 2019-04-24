@@ -52,7 +52,7 @@ public class CheckoutControllerTest {
 
     @Test
     public void checkoutReturnsOK() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/checkout", new Object[0])).andExpect(MockMvcResultMatchers.status().isOk());
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/checkout", 0)).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
