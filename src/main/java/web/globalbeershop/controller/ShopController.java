@@ -20,7 +20,6 @@ import web.globalbeershop.data.QBeer;
 import web.globalbeershop.repository.BeerRepository;
 import web.globalbeershop.service.BeerService;
 import web.globalbeershop.util.Pager;
-
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -115,28 +114,23 @@ public class ShopController {
             if(!Arrays.asList(9, 27, 45, 99).contains(size)) size = 9;
         }
 
-
-
-
-        //default sorting (e.g. when user doesn't specify an order) is by name ascending
-        Sort sort = new Sort(Sort.Direction.ASC, "name");
-
         //constructs order specifier based on given params (if valid)
         if(paramGiven(sortCol)){
-
             //if col and sort valid, update Sort object
             if(Arrays.asList("name", "country", "brewer", "abv", "type", "price").contains(sortCol.toLowerCase())){
                 if(paramGiven(sortOrd)){
-                    if(sortOrd.toUpperCase() == "ASC") sort = new Sort(Sort.Direction.ASC, sortCol);
-                    else if (sortOrd.toUpperCase() == "DESC") sort = new Sort(Sort.Direction.DESC, sortCol);
+
+                    if(sortOrd.toUpperCase() == "ASC") return PageRequest.of(index, size, Sort.Direction.ASC, sortCol);
+                    else return PageRequest.of(index, size, Sort.Direction.DESC, sortCol);
                 }
-                else sort = new Sort(Sort.Direction.ASC, sortCol);
+                return PageRequest.of(index, size, Sort.Direction.ASC, sortCol);
 
             }
 
         }
 
-        return new PageRequest(index, size, sort);
+        //default sorting (e.g. when us er doesn't specify an order) is by name ascending
+        return PageRequest.of(index, size, Sort.Direction.ASC, "name");
     }
 
 

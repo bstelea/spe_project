@@ -15,15 +15,15 @@ public interface BeerRepository extends JpaRepository<Beer, Long>,
 
     Optional<Beer> findById(Long id);
 
-    @Query("SELECT DISTINCT b.country FROM Beer b")
+    @Query("SELECT DISTINCT b.country FROM Beer b WHERE b.stock > 0")
     List<String> findAllDistinctCountry();
 
-    @Query("SELECT DISTINCT b.brewer FROM Beer b")
+    @Query("SELECT DISTINCT b.brewer FROM Beer b WHERE b.stock > 0")
     List<String> findAllDistinctBrewer();
 
-    @Query("SELECT DISTINCT b.abv FROM Beer b")
+    @Query("SELECT DISTINCT b.abv FROM Beer b WHERE b.stock > 0")
     List<String> findAllDistinctAbv();
 
-    @Query("SELECT DISTINCT b.type FROM Beer b")
+    @Query("SELECT DISTINCT b.type FROM Beer b WHERE b.stock > 0")
     List<String> findAllDistinctType();
 }
