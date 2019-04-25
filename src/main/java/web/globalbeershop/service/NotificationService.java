@@ -58,20 +58,20 @@ public class NotificationService {
     }
 
     public void sendActivationEmail(ActivationToken token) throws MessagingException {
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, false, "utf-8");
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
         User user = token.getUser();
 
-        String activationUrl;
+        String html = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
+                      "<br><a href=\"https://globalbeershop.spe.cs.bris.ac.uk/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
+                      "<br><h4>Global Beer Shop</h4>";
 
-        String htmlMsg = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                        "<br><a href=\"https://globalbeershop.spe.cs.bris.ac.uk/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
-                        "<br><h4>Global Beer Shop</h4>";
-        mimeMessage.setContent(htmlMsg, "text/html");
-        helper.setTo(token.getUser().getEmail());
-        helper.setSubject("Activate your Global Beer Shop account");
+        helper.setTo(user.getEmail());
+        helper.setText(html, true);
+        helper.setSubject("Global Beer Shop - Activate your account");
         helper.setFrom("globalbeershopmail@gmail.com");
-        javaMailSender.send(mimeMessage);
+
+        javaMailSender.send(message);
     }
 
     public void sendResetEmail (ResetToken token) throws MessagingException {
