@@ -119,11 +119,10 @@ public class ShopController {
             //if col and sort valid, update Sort object
             if(Arrays.asList("name", "country", "brewer", "abv", "type", "price").contains(sortCol.toLowerCase())){
                 if(paramGiven(sortOrd)){
-
-                    if(sortOrd.toUpperCase() == "ASC") return PageRequest.of(index, size, Sort.Direction.ASC, sortCol);
-                    else return PageRequest.of(index, size, Sort.Direction.DESC, sortCol);
+                    if(Arrays.asList("ascending").contains(sortOrd.toLowerCase())) return PageRequest.of(index, size, Sort.Direction.ASC, sortCol.toLowerCase());
+                    else return PageRequest.of(index, size, Sort.Direction.DESC, sortCol.toLowerCase());
                 }
-                return PageRequest.of(index, size, Sort.Direction.ASC, sortCol);
+                return PageRequest.of(index, size, Sort.Direction.ASC, sortCol.toLowerCase());
 
             }
 
