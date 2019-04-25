@@ -51,7 +51,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh $SSH_USER@$SSH_HOST "cd spe_project && git pull && cp ~/config.properties . && mvn clean package -DskipTests=True && cd target && sudo chown gbs:gbs globalbeershop-0.0.1-SNAPSHOT.jar && sudo chmod 500 globalbeershop-0.0.1-SNAPSHOT.jar && sudo service gbs restart"
+            ssh $SSH_USER@$SSH_HOST "cd spe_project && git pull && cp ~/config.properties . && cp ~/secret.properties ./src/main/resources && mvn clean package -DskipTests=True && cd target && sudo chown gbs:gbs globalbeershop-0.0.1-SNAPSHOT.jar && sudo chmod 500 globalbeershop-0.0.1-SNAPSHOT.jar && sudo service gbs restart"
 
 
 workflows:
