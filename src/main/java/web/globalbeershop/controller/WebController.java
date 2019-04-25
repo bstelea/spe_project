@@ -92,7 +92,7 @@ public class WebController {
 
         //checks if any other invalid data given
         if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("/register");
+            modelAndView.setViewName("register");
         }
         else{
             User user = userService.save(userDTO);
@@ -107,11 +107,11 @@ public class WebController {
                 modelAndView.addObject("errorMessage", "There is something wrong with the e-mail address for your account, please try creating your account again");
                 userRepository.delete(user);
                 activationTokenRepository.delete(token);
-                modelAndView.setViewName("/login");
+                modelAndView.setViewName("login");
                 return modelAndView;
             }
 
-            modelAndView.setViewName("/login");
+            modelAndView.setViewName("login");
             modelAndView.addObject("successMessage", "We have sent you an e-mail with a link to activate your account");
             modelAndView.addObject("errorMessage", "You cannot login until you have activated your account");
         }
