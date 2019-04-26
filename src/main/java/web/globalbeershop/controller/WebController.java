@@ -71,7 +71,7 @@ public class WebController {
 
         //check if password meets requirements
         if (!userDTO.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$")) {
-            bindingResult.rejectValue("password", "error.user", "MUST have at least contain one number, one upper-case letter and 8 characters in total. MUST NOT contain any spaces or tabs.");
+            bindingResult.rejectValue("password", "error.user", "MUST contain at least one number, one upper-case letter and 8 characters in total. MUST NOT contain any spaces or tabs.");
         }
 
         //check if email valid (standard spring Email valid annotation is not very good)
