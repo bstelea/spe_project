@@ -127,16 +127,16 @@
                                 <option value="Descending">Descending</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="size">Items per page:</label>
-                            <select id="size" name="size" class="form-select-button form-control">
-                                <option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>
-                                <option value =  9>9</option>
-                                <option value = 27>27</option>
-                                <option value = 45>45</option>
-                                <option value = 99>99</option>
-                            </select>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label for="size">Items per page:</label>-->
+                            <!--<select id="size" name="size" class="form-select-button form-control">-->
+                                <!--<option th:value="${paramsGiven.get(7)}"  th:text="${paramsGiven.get(7)}"></option>-->
+                                <!--<option value =  9>9</option>-->
+                                <!--<option value = 27>27</option>-->
+                                <!--<option value = 45>45</option>-->
+                                <!--<option value = 99>99</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
 
                         <div class="container-fluid">
                             <h2>Filters</h2>
@@ -193,7 +193,7 @@
                         </div>
                         <div class="probootstrap-card-text">
                             <h2 class="probootstrap-card-heading mb0" th:inline="text">[[${beer.name}]]</h2>
-                            <p class="category" th:inline="text">Price: £[[${#numbers.formatDecimal(beer.price, 0, 'COMMA', 2, 'POINT')}]]</p>
+                            <p class="category" th:inline="text">Price: £[[${#numbers.formatDecimal(beer.price, 1, 'COMMA', 2, 'POINT')}]]</p>
                             <form th:if="${beer.stock}>0" action="/cart/add" method="post">
                                 <input type="hidden" name="id" th:value="${beer.id}"/>
                                 <p>Quantity: <input type="number" name="quantity" class="quantity-modifier" value="1" min="1" th:max="${beer.stock}"></p>
