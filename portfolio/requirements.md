@@ -1,7 +1,7 @@
 # Requirements
 ### Stakeholders, Actors and Goals
 
-Based on our project’s application domain, business sector and key problem; we can determine that the key stakeholders and the goals that they have:
+Based on our project’s application domain, business sector and key problem; we can determine the key stakeholders and the goals that they have:
 
 * __Global Beer Shop (our Clients):__ Will own, run and profit from the system we create for them.
 * __Customers:__ Will use our system to browse and purchase the beers that GBS are selling.
@@ -11,7 +11,7 @@ Based on our project’s application domain, business sector and key problem; we
 * __Payment Service:__  Will process transactions for our system, charging GBS a fee.
 * __Competitors:__ Will have a new competitor to their business which could affect their sales and/or website traffic.
 
-However, in the scope of our project, we will not interact with a majority of these stakeholders (e.g. they are stakeholders for Global Beer Shop as a business using our product, but our project is solely to develop the product for Global Beer Shop). As the developers of the system, we only will consider the following stakeholders and their goals as our System Actors: Global Beer Shop, Users (Customers), the Payment Service and the Database.
+However, in the scope of our project, we will not interact with a majority of these stakeholders (e.g. they are stakeholders for Global Beer Shop as a business using our product, but our project is solely to develop the product for Global Beer Shop). As the developers of the system, we will only consider the following stakeholders and their goals as our System Actors: Global Beer Shop, Users (Customers), the Payment Service and the Database.
 
 (We can consider the database being hosted by the Server Company as its own actor as the system interacts with it)
 
@@ -19,19 +19,19 @@ The following use-case diagram highlights how these actors interact with each ot
 
 ![Use Case Goals](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/use_case.png "Use Case Goals")
 
-The most core goal in our system is for Global Beer Shop to sell beers (equivelantly, users buying beers). These are some of the different flow in steps that could occur on our system when a user attempts to purchase a beer:
+The core goal in our system is for Global Beer Shop to sell beers (equivalently, users buying beers). These are some of the different flows broken down into steps that could occur on our system when a user attempts to purchase a beer:
 
 BASIC FLOW (_user purchases a single beer_):
 1) User searches for a beer on System
 1) User adds beer to shopping cart.
 1) System updates cart items in database.
 1) User goes to checkout on System.
-1) System checks stock in Databse.
-1) There is enough of stock for all items in the Database.
+1) System checks stock in Database.
+1) There is enough stock for all items in the Database.
 1) User enters delivery details.
 1) User enters payment details.
 1) System contacts Payment Service
-1) Payment Service succesfully processes payment.
+1) Payment Service successfully processes payment.
 1) GBS receives payment from Payment Service.
 1) System logs order in Database.
 1) System emails GBS and User about order.
@@ -52,20 +52,20 @@ ALTERNATIVE FLOW (_user adds and removes various beers from cart before purchasi
 1) User edits another beer's quantity in the cart shopping cart.
 1) System updates cart items in database.
 1) User goes to checkout on System.
-1) System checks stock in Databse.
-1) There is enough of stock for all items in the Database.
+1) System checks stock in Database.
+1) There is enough stock for all items in the Database.
 1) User enters delivery details.
 1) User enters payment details.
 1) System contacts Payment Service
-1) Payment Service succesfully processes payment.
+1) Payment Service successfully processes payment.
 1) GBS receives payment from Payment Service.
 1) System logs order in Database.
 1) System emails GBS and User about order.
 
 EXCEPTIONAL FLOW (_payment transaction fails at checkout_):
 1) User goes to checkout on System.
-1) System checks stock in Databse.
-1) There is enough of stock for all items in the Database.
+1) System checks stock in Database.
+1) There is enough stock for all items in the Database.
 1) User enters delivery details.
 1) User enters payment details.
 1) System contacts Payment Service
@@ -75,30 +75,24 @@ EXCEPTIONAL FLOW (_payment transaction fails at checkout_):
 
 EXCEPTIONAL FLOW (_not enough available stock of that beer at checkout_):
 1) User goes to checkout on System.
-1) System checks stock in Databse.
-1) There is not enough of stock for one item in the Database.
+1) System checks stock in Database.
+1) There is not enough stock for one item in the Database.
 1) System redirects User back to the shopping cart.
 1) System alerts User of lack of stock.
 
-### MVP System Requirements
+### System Requirements
 
-The first release we will develop will be the Minimum Viable Product (MVP) which is the simplest version of our product that provides the bare necessity of functionality to achieve what the final system will - in our case, it will be a very basic e-commerce website without any fancy features.
-
-Based on information specified by our clients; the interactions of our system actors and their goals; and existing examples of e-commerce websites, we can determine the following functional and non-functional requirements for all aspects of our MVP:
-
-(We have chosen to only design the requirements for the MVP at this stage because it is the first version we implement and it will provide the basis that all future releases will be built upon)
-
-
+Based on information specified by our clients; the interactions of our system actors and their goals; and existing examples of e-commerce websites, we can determine the following functional and non-functional requirements for all aspects of our product:
 
 1) GENERAL USER INTERFACE
     1) The website should have a Wild West inspired design
     1) The website must, at least, consist of:
         1) a Home Page
         1) a Shop page
-        1) an Product page
+        1) a Product page
         1) a Shopping Cart page
         1) a Checkout page
-        1) an Order Completion page
+        1) an Order Complete page
     1) All pages must have the same Header and a Footer.
     1) The Header and Footer should include the Global Beer Shop logo and slogan(s).
     1) The Header should have links to:
@@ -123,11 +117,10 @@ Based on information specified by our clients; the interactions of our system ac
     1) The Home Page should:
         1) Include an interactive map of the world that allows users to view all products in stock that originate from a specific country.
         1) Recommend certain products
-    1) The Home Page should:
         1) Avoid using excessive amounts of text
         1) Emphasise the use of images.
         
-1) SEARCHING fOR BEERS
+1) SEARCHING FOR BEERS
     1) Users must be able to search for beers by:
         1) Name
         1) Country of Origin
@@ -135,20 +128,16 @@ Based on information specified by our clients; the interactions of our system ac
         1) ABV
         1) Beer Type
     1) There must be a filtering and sorting tool.
-    1) Using the searching tool must return all beers such that:
-        1) They all meet onstraint(s) set by the user.
+    1) Using the search tool must return all beers such that:
+        1) They all meet constraint(s) set by the user.
         1) They are all in stock.
-    1) Users must be able to also sort the beers the search by the same columns that they can search by.
     1) Using the sorting tool must return all beers such that:
-        1) They are all in the specified order.
-        1) They are all in stock.    
-    1) Default settings for filter/sort tools is no filtering and sorting by beer name in ascending order.
+    1) Users must be able to also sort the beers they search by the same columns that they can search by an set a sorting order (ascending or descending).    
+    1) Default settings for filter/sort tools are no filtering and sorting by beer name in ascending order.
     1) It should not take any longer than 15 seconds for the User to be displayed search results after using the Search Tool.
     1) Beers must be displayed at least with their:
         1) Name
-        1) Country of Origin
         1) Price
-        1) Type
         1) Image
 
 1) SHOPPING CART
@@ -161,7 +150,7 @@ Based on information specified by our clients; the interactions of our system ac
     1) Unless modified by the user, the contents of the shopping cart must stay consistent until either:
         1) The order checkout is complete
         1) The user’s HTTP session expires.
-    1) Users must somehow be able to:
+    1) Users must be able to:
         1) Remove items from their Cart
         1) Edit the quantities of items in the Cart
         1) Checkout their order as a guest (e.g. doesn’t need to create an account to purchase).
@@ -173,7 +162,7 @@ Based on information specified by our clients; the interactions of our system ac
     1) If the Shopping Cart is empty:
         1) It should not display any items
         1) It should encourage the user to browse the beers on offer.
-    1) The maximum net amount of stock (regardless of which product) that can be added to the Shopping Cart is 100 units.
+    1) The maximum net amount of stock (regardless of which product) that can be added to the Shopping Cart is the total number of units available in stock.
     1) The total of the Shopping Cart must be updated every time that:
         1) A user navigates to the Shopping Cart page.
         1) An item is added by the corresponding user to the Cart.
@@ -192,7 +181,6 @@ Based on information specified by our clients; the interactions of our system ac
     1) The user must enter their personal, delivery and payment details to complete the checkout. 
     1) Checkout can only be completed if all data given by the user is valid.
     1) Checkout can only be completed when the selected payment option has been fully processed.
-    1) If a user’s session expires in the middle of checking out, they must be redirected to the Home Page.
     1) If a user chooses to cancel their checkout, they must be redirected to the Shopping Cart.
     1) All user input must be validated to be of correct form for that personal/payment/delivery detail being collected.
     1) Users must be alerted of any input that is currently invalid.
@@ -206,11 +194,9 @@ Based on information specified by our clients; the interactions of our system ac
     1) When an order is complete, the server must:
         1) Reduce the Actual Stock of the products just ordered by the corresponding quantities to reflect the purchase made.
         1) Email the customer to alert them that their order has been a success
-        1) Email the Global Beer Shop to alter them that a customer has placed an order
+        1) Email the Global Beer Shop to alert them that a customer has placed an order
         1) Log the order
         1) Clear the contents of that user’s Shopping Cart.
     1) The emails must be sent and received within 12 hours of the order completion.
-    1) The stock of items being purchased in a order must be decremented accordingly before the order is complete.
-    1) Orders must be logged in the database for at least one month.
-    
+    1) The stock of items being purchased in a order must be decremented accordingly before the order is complete.    
 
