@@ -5,6 +5,7 @@ import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -27,6 +28,12 @@ public class NotificationService {
 
     private JavaMailSender javaMailSender;
 
+    @Value("${web.url}")
+    String url;
+
+    @Value("${spring.mail.username}")
+    String gbs_email;
+
     @Qualifier("freeMarkerConfiguration")
     @Autowired
     private Configuration freemarkerConfig;
@@ -36,40 +43,19 @@ public class NotificationService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendNotification(String email) throws MailException {
-        //send email
-        SimpleMailMessage mail = new SimpleMailMessage();
-        mail.setTo(email);
-        mail.setFrom("globalbeershopmail@gmail.com");
-        mail.setSubject("WARNING");
-//        mail.setText("Dear Mr Raf, \n" +
-//                "Error: Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.\n\n\n\n" +
-//                "JK it worked\n\n" +
-//                "The email you are reading at this present moment in time is not just a test but a celebration of the great work achieved over the last 3 months. " +
-//                "Although you may simply see words on a screen, please believe me when I say this message hides unbounded levels of complexity and programming skill." +
-//                "In fact the greatest minds of our generation have sometimes described this email service as a symphony of placid beauty.\n \n" +
-//                "It is my greatest hope that this item of mail does reach you, however one can argue the true genius of this sacred work is that you won't know if it doesn't work.\n\n" +
-//                "Your's truly,\n" +
-//                "Charles Lewis Figuero, Architect and Friend.");
-        mail.setText("Order Complete.");
-
-
-        javaMailSender.send(mail);
-    }
-
     public void sendActivationEmail(ActivationToken token) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
         User user = token.getUser();
 
         String html = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                      "<br><a href=\"https://globalbeershop.spe.cs.bris.ac.uk/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
+                      "<br><a href=\"https://"+url+ "/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
                       "<br><h4>Global Beer Shop</h4>";
 
         helper.setTo(user.getEmail());
         helper.setText(html, true);
         helper.setSubject("Global Beer Shop - Activate your account");
-        helper.setFrom("globalbeershopmail@gmail.com");
+        helper.setFrom(gbs_email);
 
         javaMailSender.send(message);
     }
@@ -82,12 +68,12 @@ public class NotificationService {
         String activationUrl;
 
         String htmlMsg = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                "<br><a href=\"http://localhost:8080/reset/set?token="+token.getToken()+"\">Click Here to reset your account password</a>" +
+                "<br><a href=\"http://"+url+ "/reset/set?token="+token.getToken()+"\">Click Here to reset your account password</a>" +
                 "<br><h4>Global Beer Shop</h4>";
         mimeMessage.setContent(htmlMsg, "text/html");
         helper.setTo(token.getUser().getEmail());
         helper.setSubject("Reset your Global Beer Shop password");
-        helper.setFrom("globalbeershopmail@gmail.com");
+        helper.setFrom(gbs_email);
         javaMailSender.send(mimeMessage);
     }
 
