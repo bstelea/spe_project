@@ -3,10 +3,13 @@ package web.globalbeershop;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -35,15 +38,69 @@ public class UserServiceTest {
     @Autowired
     private UserService userService;
 
-    @Test
-    @DatabaseSetup("/user_test.xml") // read dataset from file
-    public void basic_test() {
-        Optional<User> user = userRepository.findById(1L);
+    @Before
+    public void setupDatabase() {
+        User user = new User("John", "Smith", "johnsmith@test.com", "Password1!");
+        user.setEnabled(true);
+        userRepository.save(user);
+        user = new User("Bill", "Johnson", "billjohnson@test.com", "Password1!");
+        user.setEnabled(true);
+        userRepository.save(user);
+        user = new User("Sam", "Barclay", "sambarclay@test.com", "Password1!");
+        user.setEnabled(true);
+        userRepository.save(user);
+        user = new User("Charlie", "Figuero", "charliefiguero@test.com", "Password1!");
+        user.setEnabled(true);
+        userRepository.save(user);
+    }
 
-        System.out.println(userRepository.count());
-        Assert.assertTrue(userRepository.count() == 1);
-//        if (user.isPresent()) {
-//            Assert.assertTrue(userRepository.count() == 1L);
-//        }
+    @Test
+    public void userRepositoryCountIsCorrectTest() {
+        Assert.assertTrue(userRepository.count() == 4);
+    }
+
+    @Test
+    public void addingAndRemovingAnotherUserTest() {
+
+        User user = new User("John", "Jackson", "Email@test.com", "Password1!");
+        userRepository.save(user);
+
+        User user2 = userRepository.findByEmail("Email@test.com");
+        Assert.assertEquals("John", user2.getFirstName());
+        Assert.assertTrue(userRepository.count() == 5);
+        userRepository.delete(user);
+        Assert.assertTrue(userRepository.count() == 4);
+    }
+
+    @Test
+    public void findByEmailTest() {
+        User user = userRepository.findByEmail("billjohnson@test.com");
+
+        Assert.assertEquals("Bill", user.getFirstName());
+
+        user = userService.findByEmail("billjohnson@test.com");
+
+        Assert.assertEquals("Bill", user.getFirstName());
+    }
+
+    @Test
+    public void loadByIncorrectUsernameThrowsExceptionTest() throws UsernameNotFoundException {
+        try {
+            UserDetails user = userService.loadUserByUsername("bijohnson@test.com");
+        }
+        catch (UsernameNotFoundException err) {
+            Assert.assertEquals("Bill", userRepository.findByEmail("billjohnson@test.com").getFirstName());
+        }
+    }
+
+    @Test
+    public void checkUsersAreEnabledTest() {
+        Assert.assertTrue(userRepository.findByEmail("charliefiguero@test.com").getEnabled());
+    }
+
+    @Test
+    public void userCanBeDisabledTest() {
+        userRepository.findByEmail("charliefiguero@test.com").setEnabled(false);
+        Assert.assertFalse(userRepository.findByEmail("charliefiguero@test.com").getEnabled());
     }
 }
