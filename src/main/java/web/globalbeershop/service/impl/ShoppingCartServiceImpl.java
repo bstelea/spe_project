@@ -37,10 +37,12 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
      * Otherwise, add it to the map with quantity 1.*/
     @Override
     public void addBeer(Beer beer, Integer quantity) {
-        if(beers.containsKey(beer)) {
-            beers.replace(beer, beers.get(beer) + quantity);
-        } else {
-            beers.put(beer, quantity);
+        if (quantity > 0) {
+            if(beers.containsKey(beer)) {
+                beers.replace(beer, beers.get(beer) + quantity);
+            } else {
+                beers.put(beer, quantity);
+            }
         }
     }
 

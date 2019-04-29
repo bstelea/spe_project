@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <beer id="1" name="Heineken" price="5.0" stock="50" country="Netherlands" brewer="Heineken brewer" type="Lager" abv="3.5" />
+    <beer id="2" name="Corona" price="10.0" stock="50" country="Mexico" brewer="Corona brewer" type="Lager" abv="4.0" />
+    <beer id="3" name="Guinness" price="9.0" stock="50" country="Ireland" brewer="Guinness brewer" type="Stout" abv="3.0" />
+    <beer id="4" name="Budweiser" price="6.0" stock="50" country="United States" brewer="Budweiser brewer" type="Lager" abv="5.0" />
+    <beer id="5" name="Becks" price="4.0" stock="30" country="Germany" brewer="Becks brewer" type="Lager" abv="5.0" />
+    <beer id="6" name="Staropramen" price="5.0" stock="20" country="Czech Republic" brewer="Staropramen brewer" type="Lager" abv="4.0" />
+    <beer id="7" name="Stella Artois" price="3.0" stock="110" country="Belgium" brewer="Stella Artois brewer" type="Lager" abv="3.5" />
+    <beer id="8" name="Amstel" price="2.0" stock="40" country="Belgium" brewer="Amstel brewer" type="Lager" abv="5.0" />
+    <beer id="9" name="Grolsch" price="3.5" stock="60" country="Netherlands" brewer="Grolsch brewer" type="Lager" abv="3.0" />
+    <beer id="10" name="Pilsner" price="2.5" stock="70" country="Netherlands" brewer="Pilsner brewer" type="Malt" abv="6.0" />
+    <beer id="11" name="Coors" price="1.5" stock="80" country="United Kingdom" brewer="Coors brewer" type="Ale" abv="2.0" />
+    <beer id="12" name="Paulaner" price="3.0" stock="30" country="Belgium" brewer="Paulaner brewer" type="Ale" abv="5.0" />
+    <beer id="13" name="Red Stripe" price="4.0" stock="70" country="Jamaica" brewer="Red Stripe brewer" type="Ale" abv="6.0" />
+    <beer id="14" name="Carlsberg" price="3.0" stock="90" country="Netherlands" brewer="Carlsberg brewer" type="Stout" abv="3.0" />
+    <beer id="15" name="San Miguel" price="3.5" stock="20" country="Mexico" brewer="San Miguel brewer" type="Lager" abv="4.0" />
+    <beer id="16" name="BrewDog" price="4.0" stock="101" country="United Kingdom" brewer="BrewDog brewer" type="Lager" abv="2.0" />
+    <beer id="17" name="Carling" price="2.0" stock="50" country="United Kingdom" brewer="Carling brewer" type="Malt" abv="7.0" />
+    <beer id="18" name="Efes" price="3.0" stock="70" country="Greece" brewer="Efes brewer" type="Lager" abv="5.0" />
+    <beer id="19" name="Ursus" price="1.0" stock="100" country="Romania" brewer="Ursus brewer" type="Lager" abv="3.5" />
+    <beer id="20" name="Tuborg" price="2.0" stock="90" country="Netherlands" brewer="Tuborg brewer" type="Lager" abv="2.0" />
+    <beer id="21" name="Timisoreana" price="10.0" stock="102" country="Romania" brewer="Timisoreana brewer" type="Lager" abv="3.0" />
+    <beer id="22" name="Albacher" price="0.5" stock="15" country="Romania" brewer="Albacher brewer" type="Lager" abv="3.0" />
+    <beer id="23" name="Neumarkt" price="0.2" stock="99" country="Romania" brewer="Neumarkt brewer" type="Ale" abv="6.0" />
+    <beer id="24" name="Bergenbier" price="0.5" stock="79" country="Romania" brewer="Bergenbier brewer" type="Lager" abv="3.0" />
+    <beer id="25" name="Berliner" price="1.9" stock="30" country="Germany" brewer="Berliner brewer" type="Lager" abv="2.0" />
+    <beer id="26" name="Paddock" price="4.0" stock="50" country="United Kingdom" brewer="Paddock brewer" type="Lager" abv="3.0" />
+    <beer id="27" name="Baltika" price="4.0" stock="70" country="Albania" brewer="Baltika brewer" type="Stout" abv="3.0" />
+    <beer id="28" name="Fire Rock" price="3.5" stock="20" country="United States" brewer="Fire Rock brewer" type="Lager" abv="5.0" />
+    <beer id="29" name="Pyramid" price="2.0" stock="50" country="United States" brewer="Pyramid brewer" type="Lager" abv="3.0" />
+    <beer id="30" name="Sierra Nevada" price="4.0" stock="10" country="United States" brewer="Sierra Nevada brewer" type="Lager" abv="4.0" />
+</dataset>

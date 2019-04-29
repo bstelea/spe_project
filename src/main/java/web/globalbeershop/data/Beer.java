@@ -86,6 +86,22 @@ public class Beer {
         this.reviews = reviews;
     }
 
+    public Beer(Long id, @Length(min = 3, message = "*Name must be at least 3 characters") String name, @DecimalMin(value = "0.0", message = "*Price has to be a non negative value") Double price, @Min(value = 0, message = "*Stock has to be a non negative value") Integer stock, String country, String brewer, String type, @DecimalMin(value = "0.00", message = "*ABV has to be a non negative value") Double abv, String image, String description, String continent, Double rating, List<Review> reviews) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
+        this.country = country;
+        this.brewer = brewer;
+        this.type = type;
+        this.abv = abv;
+        this.image = image;
+        this.description = description;
+        this.continent = continent;
+        this.rating = rating;
+        this.reviews = reviews;
+    }
+
     public Beer() {
     }
 
