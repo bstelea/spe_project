@@ -84,7 +84,7 @@ EXCEPTIONAL FLOW (_not enough available stock of that beer at checkout_):
 
 Based on information specified by our clients; the interactions of our system actors and their goals; and existing examples of e-commerce websites, we can determine the following functional and non-functional requirements for all aspects of our product:
 
-1) GENERAL USER INTERFACE
+1) GENERAL
     1) The website should have a Wild West inspired design
     1) The website must, at least, consist of:
         1) a Home Page
@@ -107,6 +107,7 @@ Based on information specified by our clients; the interactions of our system ac
         1) Privacy.
     1) The style and theme of the website design must be consistent throughout all pages.
     1) Our clients must approve the final UI design.
+    1) The website must be able serve at least 25 users at the same time.
 
 1) HOME PAGE
     1) The Home Page must:
