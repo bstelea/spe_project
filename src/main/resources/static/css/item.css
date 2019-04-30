@@ -23,7 +23,7 @@
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: coral !important;
+    color: indianred !important;
     background-color: #fff !important;
 }
 
@@ -36,39 +36,14 @@ footer .glyphicon {
     font-size: 20px;
     margin-bottom: 20px;
     color: indianred;
-}
-
-/*Small displays, smartphones, tablets under 768px*/
-@media (max-width: 768px) {
-
-    .page-header {
-        text-align: center;
-    }
-
-    .page-header small {
-        display: block;
-    }
 
 }
 
-.cart-row {
-    margin: 10px 0;
-    padding: 10px 0;
-    border-bottom: 1px solid #e1e1e1;
-}
-.cart-row div {
-    text-align: center;
-}
-.cart-row img.img-responsive {
-    margin: 0 auto;
+.monospaced { font-family: 'Ubuntu Mono', monospaced ; }
+
+.add-to-cart .btn-qty {
+    width: 52px;
+    height: 46px;
 }
 
-.btn-primary {
-    background-color: indianred;
-    border-color: indianred;
-}
-
-.btn-primary:hover {
-    background-color: coral;
-    border-color: coral;
-}
+.add-to-cart .btn { border-radius: 0; }

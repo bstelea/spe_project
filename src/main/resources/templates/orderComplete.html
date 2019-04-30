@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="icon" href="/img/icon.ico">
 </head>
 <body>
@@ -22,6 +22,9 @@
             </button>
             <a href="/" class="pull-left"><img src="/img/logo.png" alt="Logo" style="height: 50px;"></a>
         </div>
+
+
+
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/shop">SHOP</a></li>
@@ -35,68 +38,39 @@
 
 <div class="jumbotron text-center">
     <h1>Global Beer Shop</h1>
-    <p class="lead">
-        <a th:if="${not #lists.isEmpty(cart.items)}" class="btn btn-primary btn-lg" href="/checkout" role="button">Go to checkout</a>
-    </p>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="page-header">
-                <h1>Your Beer Cart <small>Please check your selection</small></h1>
-            </div>
+<div class="container-fluid text-center">
+    <div class="row content">
+        <div class="col-sm-2">
         </div>
-    </div><!-- end .row -->
-</div><!-- end .container-fluid -->
+        <div class="col-sm-8 text-center">
+            <h1>Order Complete</h1>
+            <img src="/img/greenTick.png" alt="Logo" style="height: 50px;">
+            <h4>Cheers!</h4>
+            <!--<hr>-->
+            <!--<p>True cowboys are the ones who aren’t afraid to get dirty.</p>-->
+            <!--<hr>-->
+            <!--<p>The only good reason to ride a bull is to meet a nurse.</p>-->
+            <!--<hr>-->
+            <!--<p>Cowboys are gentlemen who treat women with respect and work hard. They use their manners more than any other man would and ride horse and bulls like their is no tomorrow.</p>-->
+            <!--<hr>-->
+            <!--<p>Ain’t nuthin’ like ridin’ a fine horse in new country.</p>-->
+            <!--<hr>-->
+            <!--<p>Ride E’m Cowboy, don’t let them throw ya down.. You can’t make no money if ya hit the ground, Ride E’m Cowboy, don’t let them throw ya down, You’re the toughest Cowboy in town.</p>-->
+            <!--<hr>-->
+            <!--<p>Cowboys don’t cry!! Maybe just a little bit when the dust gets in their eyes. A cowboy is a person who loves his horse, and being out on the ranch doing the hard and dirty work, and is loyal to his girl. I love my cowboy.</p>-->
+        </div>
+    </div>
+</div>
 
-<table class="table table-borderless">
-
-    <thead>
-
-    <tr>
-        <th> Item </th>
-        <th> Price </th>
-        <th> Quantity </th>
-        <th> Totals </th>
-    </tr>
-    </thead>
-
-    <tbody>
-    <tr th:if="${cart.items.empty}">
-        <td colspan="2"> No items in cart </td>
-    </tr>
-
-    <tr th:each="cartItem : ${cart.items}">
-        <td><span th:text="${cartItem.item.name}">Item</span></td>
-        <td><span th:text="${cartItem.item.price}">Price</span></td>
-        <td>
-        <form action="/cart" method="post">
-            <input type="hidden" name="add", th:value="${cartItem.item.id}">
-            <input type="number" name="quantity", th:value="${cartItem.quantity}" min="1" max="100">
-            <input type="submit" value="Update Quantity">
-        </form>
-        <form action="/cart" method="post">
-            <input type="hidden" name="delete", th:value="${cartItem.item.id}">
-            <input type="submit" value="Remove from Cart">
-        </form></td>
-    </tr>
-    <tr>
-        <td><span text=" "/></td>
-        <td><span text=" "></span></td>
-        <td><span text=" "></span></td>
-        <td>£<span th:text="${cart.total}"></span></td>
-    </tr>
-    </tbody>
-</table>
 
 <footer class="container-fluid text-center">
-    <a href="/cart" title="To Top">
+    <a href="#" title="To Top">
         <span class="glyphicon glyphicon-chevron-up"></span>
     </a>
     <p>&copy; Global Beer Shop</p>
 </footer>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

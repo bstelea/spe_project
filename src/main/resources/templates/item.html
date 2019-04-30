@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <title>Global Beer Shop</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Rye" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+            crossorigin="anonymous"
+    >
+    <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/css/item.css">
+    <link rel="icon" href="/img/icon.ico">
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="/" class="pull-left"><img src="/img/logo.png" alt="Logo" style="height: 50px;"></a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/shop">SHOP</a></li>
+                <li><a href="/cart">CART</a></li>
+                <li><a href="/#search">SEARCH</a></li>
+                <li><a href="/#contact">CONTACT</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="jumbotron text-center">
+    <h1>Global Beer Shop</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <img th:src="${displayItem.image}" alt="Beer product image" class="image-responsive" style="width: 100%"/>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 th:text="${displayItem.name}">Title 1</h1>
+                </div>
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="label label-primary" th:text="${'from ' + displayItem.country}">Country</span>
+                    <span class="label label-primary" th:text="${'brewed by ' + displayItem.brewer}">Brewer</span>
+                    <span class="label label-primary" th:text="${displayItem.type}">Type</span>
+                    <span class="label label-primary" th:text="${displayItem.abv + '%'}">ABV</span>
+                </div>
+            </div><!-- end row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="description" th:text="${displayItem.description}">
+                        Description of the product... Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
+                </div>
+            </div><!-- end row -->
+
+            <div class="row">
+                <div class="col-md-12 bottom-rule">
+                    <h2 class="product-price" th:text="${'£'+ displayItem.price}">$129.00</h2>
+                </div>
+            </div><!-- end row -->
+
+            <div class="row">
+                <div class="col-md-12">
+                    <form action="/cart" method="post">
+                        <input type="hidden" name="add" th:value="${displayItem.id}"/>
+                        Quantity: <input type="number" name="quantity" value="1" min="1" max="100"><br>
+                        <input type="submit" value="Add to Cart">
+                    </form>
+                </div>
+            </div><!-- end row -->
+        </div>
+    </div><!-- end row -->
+</div><!-- end container -->
+
+<footer class="container-fluid text-center">
+    <a href="#" title="To Top">
+        <span class="glyphicon glyphicon-chevron-up"></span>
+    </a>
+    <p>&copy; Global Beer Shop</p>
+</footer>
+<script
+        src="https://code.jquery.com/jquery-2.2.2.min.js"
+        integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+        crossorigin="anonymous"></script>
+<script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

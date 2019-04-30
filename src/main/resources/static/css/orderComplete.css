@@ -7,9 +7,19 @@
     padding: 100px 25px;
 }
 
+.btn-primary {
+    background-color: chocolate;
+    border-color: chocolate;
+}
+
+.btn-primary:hover {
+    background-color: coral;
+    border-color: coral;
+}
+
 .navbar {
     margin-bottom: 0;
-    background-color: indianred;
+    background-color: chocolate;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -23,7 +33,7 @@
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: coral !important;
+    color: chocolate !important;
     background-color: #fff !important;
 }
 
@@ -35,40 +45,6 @@
 footer .glyphicon {
     font-size: 20px;
     margin-bottom: 20px;
-    color: indianred;
-}
+    color: chocolate;
 
-/*Small displays, smartphones, tablets under 768px*/
-@media (max-width: 768px) {
-
-    .page-header {
-        text-align: center;
-    }
-
-    .page-header small {
-        display: block;
-    }
-
-}
-
-.cart-row {
-    margin: 10px 0;
-    padding: 10px 0;
-    border-bottom: 1px solid #e1e1e1;
-}
-.cart-row div {
-    text-align: center;
-}
-.cart-row img.img-responsive {
-    margin: 0 auto;
-}
-
-.btn-primary {
-    background-color: indianred;
-    border-color: indianred;
-}
-
-.btn-primary:hover {
-    background-color: coral;
-    border-color: coral;
 }

@@ -1,19 +1,58 @@
-.beer-holder {
-    width: 70%;
+.jumbotron {
+    background-image: url("../img/header.jpg");
+    background-position: 0% 70%;
+    background-size: cover;
+    font-family: Rye, cursive;
+    color: #fff;
+    padding: 100px 25px;
 }
 
-.probootstrap-sidebar {
-    max-width: 80%;
+.navbar {
+    margin-bottom: 0;
+    background-color: indianred;
+    z-index: 9999;
+    border: 0;
+    font-size: 12px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    border-radius: 0;
 }
 
-.btn-clear {
-    background: gray;
-    margin-top: -5px;
+.navbar li a, .navbar .navbar-brand {
+    color: #fff !important;
 }
 
-@media (max-width: 768px) {
-    .beer-holder {
-        width: 100%;
-    }
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: coral !important;
+    background-color: #fff !important;
 }
 
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.panel {
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: indianred;
+    border-color: indianred;
+}
+
+.btn-primary:hover {
+    background-color: coral;
+    border-color: coral;
+}
+
+footer .glyphicon {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: indianred;
+
+}
+
+.searchtool {
+    margin-bottom: 70px;
+}
