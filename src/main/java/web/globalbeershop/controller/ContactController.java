@@ -28,7 +28,7 @@ public class ContactController {
         return "contact";
     }
 
-    @PostMapping("/")
+    @PostMapping("/contact")
     public String formHandler(@Valid FormDTO formDTO) {
 
         try {
