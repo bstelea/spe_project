@@ -50,9 +50,45 @@ public class NotificationService {
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
 
         String html = "<h1>New order as been placed</h1>" +
-                "       <p>A new order from " + order.getName() + " " + order;
+                "       <p>A new order from " + order.getName() + " " + order.getLastName() + " has placed a new order.</p>";
 
         helper.setTo("globalbeershopmail@gmail.com");
+        helper.setText(html, true);
+        helper.setSubject("Global Beer Shop - New Order");
+        helper.setFrom("globalbeershopmail@gmail.com");
+
+        javaMailSender.send(message);
+    }
+
+    public void sendRegistrationSuccessfullToUser(String email) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        String html = "<h1>Welcome to Global Beer Shop!</h1>" +
+                "       <p>Thank you for creating an account on our website!</p>";
+
+        helper.setTo(email);
+        helper.setText(html, true);
+        helper.setSubject("Global Beer Shop - New Order");
+        helper.setFrom("globalbeershopmail@gmail.com");
+
+        javaMailSender.send(message);
+    }
+
+    public void sendRegistrationSuccessfullToGBS(User user) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        String html = "<h1>New user on Global Beer Shop</h1>" +
+                "       <p>A new user has created an account on Global Beer Shop.</p>" +
+                "       <p>His details are:</p>" +
+                "<ul>" +
+                "<li> First Name: " + user.getFirstName() + "</li>" +
+                "<li> Last Name: " + user.getLastName() + "</li>" +
+                "<li> Email Address: " + user.getEmail() + "</li>" +
+                "</ul>";
+
+        helper.setTo(user.getEmail());
         helper.setText(html, true);
         helper.setSubject("Global Beer Shop - New Order");
         helper.setFrom("globalbeershopmail@gmail.com");

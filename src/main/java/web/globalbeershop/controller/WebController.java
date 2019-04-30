@@ -128,6 +128,13 @@ public class WebController {
                 userRepository.save(user);
                 activationTokenRepository.delete(activationToken);
                 attributes.addFlashAttribute("successMessage", "Your account has been activated, you can now login");
+
+                try {
+                    notificationService.sendRegistrationSuccessfullToUser(user.getEmail());
+                    notificationService.sendRegistrationSuccessfullToGBS(user);
+                } catch (MessagingException m) {
+                    System.out.println("Confirmation email failed to be sent " + m.getMessage());
+                }
             }
             else {
                 attributes.addFlashAttribute("errorMessage", "Your activation link has expired, we have sent a new one to the same e-mail address");
