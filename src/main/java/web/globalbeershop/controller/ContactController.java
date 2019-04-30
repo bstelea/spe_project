@@ -31,25 +31,13 @@ public class ContactController {
     @PostMapping("/")
     public String formHandler(@Valid FormDTO formDTO) {
 
-        Mail mail = new Mail();
-        mail.setFrom("globalbeershopmail@gmail.com");
-        mail.setTo("globalbeershopmail@gmail.com");
-        mail.setSubject("New contact form message");
-
-        Map model = new HashMap();
-        model.put("name", formDTO.getFirstName());
-        mail.setModel(model);
-
         try {
-            notificationService.sendBeautifulMail(mail);
-        } catch (MessagingException e) {
-            System.out.println("Messaging exception error " + e.getMessage());
-        } catch (IOException io) {
-            System.out.println("IO exception error " + io.getMessage());
-        } catch (TemplateException t) {
-            System.out.println("Template exception error " + t.getMessage());
+            notificationService.sendContactToUser(formDTO);
+            notificationService.sendContactToGBS(formDTO);
+        } catch (MessagingException m) {
+            System.out.println("Error in sending contact mail " + m.getMessage());
         }
 
-        return "redirect:/shop";
+        return "redirect:/";
     }
 }

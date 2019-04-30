@@ -69,7 +69,7 @@ public class NotificationService {
 
         helper.setTo(email);
         helper.setText(html, true);
-        helper.setSubject("Global Beer Shop - New Order");
+        helper.setSubject("Welcome to Global Beer Shop!");
         helper.setFrom("globalbeershopmail@gmail.com");
 
         javaMailSender.send(message);
@@ -88,9 +88,46 @@ public class NotificationService {
                 "<li> Email Address: " + user.getEmail() + "</li>" +
                 "</ul>";
 
-        helper.setTo(user.getEmail());
+        helper.setTo("globalbeershopmail@gmail.com");
         helper.setText(html, true);
-        helper.setSubject("Global Beer Shop - New Order");
+        helper.setSubject("Global Beer Shop - New User");
+        helper.setFrom("globalbeershopmail@gmail.com");
+
+        javaMailSender.send(message);
+    }
+
+    public void sendContactToUser(FormDTO form) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        String html = "<h1>Thank you for your feedback!</h1>" +
+                "<p>We are going to reply to you ASAP!</p>";
+
+        helper.setTo(form.getEmail());
+        helper.setText(html, true);
+        helper.setSubject("Global Beer Shop - Contact Form Submitted");
+        helper.setFrom("globalbeershopmail@gmail.com");
+
+        javaMailSender.send(message);
+    }
+
+    public void sendContactToGBS(FormDTO form) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        String html = "<h1>New Contact Form Submitted</h1>" +
+                "       <p>A new contact form has been submitted on Global Beer Shop.</p>" +
+                "       <p>Contents of the message:</p>" +
+                "<ul>" +
+                "<li> First Name: " + form.getFirstName() + "</li>" +
+                "<li> Last Name: " + form.getLastName() + "</li>" +
+                "<li> Email Address: " + form.getEmail() + "</li>" +
+                "<li> Message: " + form.getComments() + "</li>" +
+                "</ul>";
+
+        helper.setTo("globalbeershopmail@gmail.com");
+        helper.setText(html, true);
+        helper.setSubject("Global Beer Shop - New Contact Form");
         helper.setFrom("globalbeershopmail@gmail.com");
 
         javaMailSender.send(message);
