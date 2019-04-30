@@ -83,6 +83,13 @@
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>My Orders</h2>
                             <p>Check your previous orders below</p>
+                            <div class="scroll-downs js-under">
+                                <a href="#under-slider" class="js-gounder">
+                                    <div class="mousey">
+                                        <div class="scroller"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +101,7 @@
 
 <label th:if="${errorMessage}" th:text="*{errorMessage}" class="alert alert-danger"></label>
 
-<section class="probootstrap-section">
+<section class="probootstrap-section" id="under-slider">
     <div class="container">
         <div class="row" th:each="order : ${orders}">
             <div class="product probootstrap-animate">

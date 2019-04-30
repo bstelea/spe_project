@@ -102,6 +102,13 @@
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>Cart</h2>
                             <p>Check your products below and go to checkout</p>
+                            <div class="scroll-downs js-under">
+                                <a href="#under-slider" class="js-gounder">
+                                    <div class="mousey">
+                                        <div class="scroller"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -114,7 +121,7 @@
 <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
 <div class="alert alert-info" th:if="${emptyCartMessage}" th:utext="${emptyCartMessage}"></div>
 
-<section class="probootstrap-section" th:if="${total} != 0">
+<section class="probootstrap-section" th:if="${total} != 0" id="under-slider">
     <div class="container">
         <div class="row">
             <div class="col-xs-12">

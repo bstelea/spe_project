@@ -99,6 +99,13 @@
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>Order Complete</h2>
                             <p>Thank you for placing your order. Please find your order details below</p>
+                            <div class="scroll-downs js-under">
+                                <a href="#under-slider" class="js-gounder">
+                                    <div class="mousey">
+                                        <div class="scroller"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +115,7 @@
 </section>
 <!-- END: slider  -->
 
-<section class="probootstrap-section" th:if="${orderId}!= null">
+<section class="probootstrap-section" th:if="${orderId}!= null" id="under-slider">
     <div class="container">
         <div class="row text-center probootstrap-animate">
             <h2>Order Details:</h2>

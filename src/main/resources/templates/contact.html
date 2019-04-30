@@ -81,6 +81,13 @@
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>Contact Us</h2>
                             <p>Want to get in touch with us? Send us a message by completing the form.</p>
+                            <div class="scroll-downs js-under">
+                                <a href="#under-slider" class="js-gounder">
+                                    <div class="mousey">
+                                        <div class="scroller"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +101,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 probootstrap-animate overlap">
-                <form th:object="${formDTO}" th:action="@{/}" method="post" class="probootstrap-form probootstrap-form-box mb60">
+                <form th:object="${formDTO}" th:action="@{/}" method="post" class="probootstrap-form probootstrap-form-box mb60"  id="under-slider">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">

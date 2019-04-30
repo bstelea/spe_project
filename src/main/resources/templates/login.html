@@ -80,6 +80,13 @@
                     <div class="col-md-12 text-center">
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>Log In</h2>
+                            <div class="scroll-downs js-under">
+                                <a href="#under-slider" class="js-gounder">
+                                    <div class="mousey">
+                                        <div class="scroller"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,7 +100,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-8 probootstrap-animate overlap">
-                <form th:action="@{/login}" method="post" class="probootstrap-form probootstrap-form-box mb60">
+                <form th:action="@{/login}" method="post" class="probootstrap-form probootstrap-form-box mb60" id="under-slider">
                     <label th:if="${successMessage}" th:text="*{successMessage}" class="alert alert-danger"></label>
                     <label th:if="${errorMessage}" th:text="*{errorMessage}" class="alert alert-danger"></label>
                     <div class="form-group">

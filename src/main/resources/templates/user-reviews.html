@@ -81,6 +81,13 @@
                         <div class="slides-text probootstrap-animate" data-animate-effect="fadeIn">
                             <h2>My reviews</h2>
                             <p>Post a review by completing the form below</p>
+                            <div class="scroll-downs js-under">
+                                <a href="#under-slider" class="js-gounder">
+                                    <div class="mousey">
+                                        <div class="scroller"></div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -94,7 +101,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-2 col-md-8 probootstrap-animate overlap">
-                <form th:action="@{/user-reviews/submit}" th:object="${review}" method="post" class="probootstrap-form probootstrap-form-box mb60">
+                <form th:action="@{/user-reviews/submit}" th:object="${review}" method="post" class="probootstrap-form probootstrap-form-box mb60" id="under-slider">
                     <div class="alert alert-info" th:if="${errorMessage}" th:utext="${errorMessage}"></div>
 
                     <div class="form-group">
