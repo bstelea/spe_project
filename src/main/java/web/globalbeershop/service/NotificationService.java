@@ -11,10 +11,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
-import web.globalbeershop.data.ActivationToken;
-import web.globalbeershop.data.Mail;
-import web.globalbeershop.data.ResetToken;
-import web.globalbeershop.data.User;
+import web.globalbeershop.data.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -48,18 +45,16 @@ public class NotificationService {
         javaMailSender.send(mail);
     }
 
-    public void sendActivationEmail(ActivationToken token) throws MessagingException {
+    public void sendOrderCompleteToGBSEmail(Order order) throws MessagingException {
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
-        User user = token.getUser();
 
-        String html = "<br><h4>Hi "+ user.getFirstName() +",</h4>" +
-                      "<br><a href=\"https://globalbeershop.spe.cs.bris.ac.uk/register/activate?token="+token.getToken()+"\">Click Here to activate your account</a>" +
-                      "<br><h4>Global Beer Shop</h4>";
+        String html = "<h1>New order as been placed</h1>" +
+                "       <p>A new order from " + order.getName() + " " + order.getLastName() + " has been placed</p>" ;
 
-        helper.setTo(user.getEmail());
+        helper.setTo("globalbeershopmail@gmail.com");
         helper.setText(html, true);
-        helper.setSubject("Global Beer Shop - Activate your account");
+        helper.setSubject("Global Beer Shop - New Order");
         helper.setFrom("globalbeershopmail@gmail.com");
 
         javaMailSender.send(message);

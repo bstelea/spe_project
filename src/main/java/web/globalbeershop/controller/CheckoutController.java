@@ -191,9 +191,12 @@ public class CheckoutController {
             //Send notification
             try {
                 notificationService.sendNotification(order.getEmail());
+                notificationService.sendOrderCompleteToGBSEmail(order);
             } catch (MailException e){
                 //catch error
                 System.out.println("Email didn't send. Error: " + e.getMessage());
+            } catch (MessagingException m) {
+                System.out.println("GBS Email didn't send" + m.getMessage());
             }
 
             //save order items
