@@ -33,11 +33,13 @@ The subjects in the interviews believed that the site enabled key use actions to
 
 #### Figure 1: Stress testing graph plotting virtual users with request rate and response time.
 
+![alt text](image/stress_test.jpg "Stress Test Results")
+
 #### Figure 2: All results collected from task based evaluation on 15 users
 
-**_2.1 Result Charts:**
+**_2.1 Result Charts:_**
 
-**_2.2 Written Responses:**
+**_2.2 Written Responses:_**
 
 Question: Would you like to make any comments on the current features?
 Answers:
@@ -62,9 +64,9 @@ promo codes, trustpilot reviews”
 
 #### Figure 3: Results from Walkthroughs and Interviews
 
-**_3.1 Data collected during Walkthroughs**
+**_3.1 Data collected during Walkthroughs_**
 
-**_3.2 Conclusions made from Interview**
+**_3.2 Conclusions made from Interview_**
 
 1. People don’t like the scrolling, it is confusing that the view returns to the top of the page and the header takes up the whole screen, something that we could improve on in the future.One user even said it would make him use another site. 
 1. This testing has included use on a computer, an ipad (tablet) and a phone.
