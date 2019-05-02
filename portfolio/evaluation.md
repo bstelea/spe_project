@@ -36,6 +36,9 @@ The subjects in the interviews believed that the site enabled key use actions to
 ![alt text](image/stress_test.jpg "Stress Test Results")
 
 #### Figure 2: All results collected from task based evaluation on 15 users
+
+**_2.1 Result Charts:_**
+
 |  |   |   |
 | --- | --- | --- |
 | ![Chart 1](image/chart.png "Chart 1") | ![alt text](image/chart2.png "Chart 2") |![alt text](image/chart3.png "Chart 3") |
@@ -47,8 +50,6 @@ The subjects in the interviews believed that the site enabled key use actions to
 | ![alt text](image/chart19.png "Chart 19") | ![alt text](image/chart20.png "Chart 20") |![alt text](image/chart21.png "Chart 21") |
  
 ![alt text](image/chartfinal.png "Final Results")
-
-**_2.1 Result Charts:_**
 
 **_2.2 Written Responses:_**
 
@@ -76,6 +77,8 @@ promo codes, trustpilot reviews”
 #### Figure 3: Results from Walkthroughs and Interviews
 
 **_3.1 Data collected during Walkthroughs_**
+
+![alt text](image/walkthrough.png "Walkthrough Data")
 
 **_3.2 Conclusions made from Interview_**
 
