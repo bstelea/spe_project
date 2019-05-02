@@ -32,9 +32,13 @@ The subjects in the interviews believed that the site enabled key use actions to
 ### Figures:
 
 #### Figure 1: Stress testing graph plotting virtual users with request rate and response time.
+
 #### Figure 2: All results collected from task based evaluation on 15 users
-**2.1 Result Charts:**
-**2.2 Written Responses:**
+
+**_2.1 Result Charts:**
+
+**_2.2 Written Responses:**
+
 Question: Would you like to make any comments on the current features?
 Answers:
 - “It could be more western”
@@ -44,7 +48,7 @@ Answers:
 - “N/A”
 - “looked great”
 - “UI a bit clunky- every page has a large image at the top so you have to scroll a lot”
-“Less scrolling please”
+- “Less scrolling please”
 
 Question: Can you think of any other useful features to add to Global Beer Shop? What are they?
 Answers:
@@ -57,20 +61,22 @@ promo codes, trustpilot reviews”
 - “Make a tab for the map in the menu”
 
 #### Figure 3: Results from Walkthroughs and Interviews
-**3.1 Data collected during Walkthroughs**
-**3.2 Conclusions made from Interview**
 
-People don’t like the scrolling, it is confusing that the view returns to the top of the page and the header takes up the whole screen, something that we could improve on in the future.One user even said it would make him use another site. 
-This testing has included use on a computer, an ipad (tablet) and a phone.
-Also some users had trouble with the adding to cart returning you back to the top of the screen. With lag this can cause confusion as to what people have put in their cart. 
-Prices don’t look legitimate. For example, £0.70 was shown as £.70 
-Graphics at the top of each page should be half the size and have a scroll down indicator.
-Would like icy mountain graphics
-Site didn’t remember payment details
-Final checkout button when purchasing should clarify that it needs to be pressed for the order to go through.
-Titles at the top of each page should be buttons.
-Add to cart button should redirect to shop page rather than checkout page.
-There should be a map tab. 
-Would like a sticky menu bar at the top (remains in place while scrolling) 
-Disliked the complicated password requirements
+**_3.1 Data collected during Walkthroughs**
+
+**_3.2 Conclusions made from Interview**
+
+1. People don’t like the scrolling, it is confusing that the view returns to the top of the page and the header takes up the whole screen, something that we could improve on in the future.One user even said it would make him use another site. 
+1. This testing has included use on a computer, an ipad (tablet) and a phone.
+1. Also some users had trouble with the adding to cart returning you back to the top of the screen. With lag this can cause confusion as to what people have put in their cart. 
+1. Prices don’t look legitimate. For example, £0.70 was shown as £.70 
+1. Graphics at the top of each page should be half the size and have a scroll down indicator.
+1. Would like icy mountain graphics
+1. Site didn’t remember payment details
+1. Final checkout button when purchasing should clarify that it needs to be pressed for the order to go through.
+1. Titles at the top of each page should be buttons.
+1. Add to cart button should redirect to shop page rather than checkout page.
+1. There should be a map tab. 
+1. Would like a sticky menu bar at the top (remains in place while scrolling) 
+1. Disliked the complicated password requirements
 
