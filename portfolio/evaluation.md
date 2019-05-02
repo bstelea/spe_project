@@ -37,7 +37,7 @@ The subjects in the interviews believed that the site enabled key use actions to
 
 #### Figure 2: All results collected from task based evaluation on 15 users
  | | |
- --- | --- | --- |
+ --- | --- | --- 
  ![alt text](image/chart.png "Chart 1") | ![alt text](image/chart2.png "Chart 2") |![alt text](image/chart3.png "Chart 3")
  ![alt text](image/chart4.png "Chart 4") | ![alt text](image/chart5.png "Chart 5") |![alt text](image/chart6.png "Chart 3")
  ![alt text](image/chart7.png "Chart 7") | ![alt text](image/chart8.png "Chart 8") |![alt text](image/chart9.png "Chart 3")
@@ -46,7 +46,7 @@ The subjects in the interviews believed that the site enabled key use actions to
  ![alt text](image/chart16.png "Chart 16") | ![alt text](image/chart17.png "Chart 17") |![alt text](image/chart18.png "Chart 18")
  ![alt text](image/chart19.png "Chart 19") | ![alt text](image/chart20.png "Chart 20") |![alt text](image/chart21.png "Chart 21")
  
- [alt text](image/chartfinal.png "Chart 19")
+ [alt text](image/chartfinal.jpg "Final Results")
 
 **_2.1 Result Charts:_**
 
