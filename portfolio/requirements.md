@@ -17,7 +17,7 @@ However, in the scope of our project, we will not interact with a majority of th
 
 The following use-case diagram highlights how these actors interact with each other to achieve their goals:
 
-![Use Case Goals](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/use_case.png "Use Case Goals")
+![Use Case Goals](image/use_case.png "Use Case Goals")
 
 The core goal in our system is for Global Beer Shop to sell beers (equivalently, users buying beers). These are some of the different flows broken down into steps that could occur on our system when a user attempts to purchase a beer:
 
