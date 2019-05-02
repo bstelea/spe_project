@@ -36,14 +36,14 @@ The subjects in the interviews believed that the site enabled key use actions to
 ![alt text](image/stress_test.jpg "Stress Test Results")
 
 #### Figure 2: All results collected from task based evaluation on 15 users
-| 1 |  2 |  3 |
+|  |   |   |
 | --- | --- | --- |
-| ![alt text](image/chart.png "Chart 1") | ![alt text](image/chart2.png "Chart 2") |![alt text](image/chart3.png "Chart 3") |
-| ![alt text](image/chart4.png "Chart 4") | ![alt text](image/chart5.png "Chart 5") |![alt text](image/chart6.png "Chart 3") |
-| ![alt text](image/chart7.png "Chart 7") | ![alt text](image/chart8.png "Chart 8") |![alt text](image/chart9.png "Chart 3") |
-| ![alt text](image/chart10.png "Chart 10") | ![alt text](image/chart11.png "Chart 11") |![alt text](image/chart12.png "Chart 12") |
-| ![alt text](image/chart13.png "Chart 13") | ![alt text](image/chart14.png "Chart 14") |![alt text](image/chart15.png "Chart 15") |
-| ![alt text](image/chart16.png "Chart 16") | ![alt text](image/chart17.png "Chart 17") |![alt text](image/chart18.png "Chart 18") |
+| ![Chart 1](image/chart.png "Chart 1") | ![alt text](image/chart2.png "Chart 2") |![alt text](image/chart3.png "Chart 3") |
+| ![Chart 1](image/chart4.png "Chart 4") | ![alt text](image/chart5.png "Chart 5") |![alt text](image/chart6.png "Chart 3") |
+| ![Chart 1](image/chart7.png "Chart 7") | ![alt text](image/chart8.png "Chart 8") |![alt text](image/chart9.png "Chart 3") |
+| ![Chart 1](image/chart10.png "Chart 10") | ![alt text](image/chart11.png "Chart 11") |![alt text](image/chart12.png "Chart 12") |
+| ![Chart 1](image/chart13.png "Chart 13") | ![alt text](image/chart14.png "Chart 14") |![alt text](image/chart15.png "Chart 15") |
+| ![Chart 1](image/chart16.png "Chart 16") | ![alt text](image/chart17.png "Chart 17") |![alt text](image/chart18.png "Chart 18") |
 | ![alt text](image/chart19.png "Chart 19") | ![alt text](image/chart20.png "Chart 20") |![alt text](image/chart21.png "Chart 21") |
  
  [alt text](image/chartfinal.jpg "Final Results")
