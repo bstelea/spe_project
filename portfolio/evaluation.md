@@ -46,7 +46,7 @@ The subjects in the interviews believed that the site enabled key use actions to
 | ![Chart 1](image/chart16.png "Chart 16") | ![alt text](image/chart17.png "Chart 17") |![alt text](image/chart18.png "Chart 18") |
 | ![alt text](image/chart19.png "Chart 19") | ![alt text](image/chart20.png "Chart 20") |![alt text](image/chart21.png "Chart 21") |
  
- [alt text](image/chartfinal.jpg "Final Results")
+ [alt text](image/chartfinal.png "Final Results")
 
 **_2.1 Result Charts:_**
 
