@@ -6,7 +6,7 @@ Irregardless of how we design the system, we know that it will use a database to
 
 By reading our system requirements, you can determine that our database will be required to store data of the beers and their stock; user shopping carts and their contents; and customer orders and items. To achieve this, we have create the following schema, following good practice, to be used in our databases:
 
-![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/db_schema.png "Database Schema Diagram")
+![alt text](/image/db_schema.png "Database Schema Diagram")
 
 ### High-Level Architecture
 
@@ -28,7 +28,7 @@ The Entities fetched by the Controller can be rendered onto a HTML page dynamica
 
 As these Entities need to correspond to the tables in our database, we can determine from the schema defined earlier that our Spring application will require the following beans with the following relationships:
 
-![alt text](https://github.com/bstelea/spe_project/blob/bogdanRefact/portfolio/image/entity_uml.png "Static UML Diagram")
+![alt text](/image/entity_uml.png "Static UML Diagram")
 
 Having modelled our database and entities in the previous diagrams will prove very beneficial to us in early development, as it will allow us to implement our data source and the object we use to interact with it early on - a crucial prerequisite for most of our requirements. The database schema can be directly expressed in SQL dialect, while we only need to add Getter and Setter methods on top of the attributes listed for the entities when we come to implement them - making these diagrams essentially complete models of what they represent.
 
