@@ -79,7 +79,7 @@ promo codes, trustpilot reviews”
 
 **_3.2 Conclusions made from Interview_**
 
-1. People don’t like the scrolling, it is confusing that the view returns to the top of the page and the header takes up the whole screen, something that we could improve on in the future.One user even said it would make him use another site. 
+1. People don’t like the scrolling, it is confusing that the view returns to the top of the page and the header takes up the whole screen. One user even said it would make him use another site. 
 1. This testing has included use on a computer, an ipad (tablet) and a phone.
 1. Also some users had trouble with the adding to cart returning you back to the top of the screen. With lag this can cause confusion as to what people have put in their cart. 
 1. Prices don’t look legitimate. For example, £0.70 was shown as £.70 
