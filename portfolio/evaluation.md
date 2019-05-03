@@ -83,12 +83,12 @@ promo codes, trustpilot reviews”
 **_3.2 Conclusions made from Interview_**
 
 1. People don’t like the scrolling, it is confusing that the view returns to the top of the page and the header takes up the whole screen, something that we could improve on in the future.One user even said it would make him use another site. 
-1. This testing has included use on a computer, an ipad (tablet) and a phone.
+1. This testing has included use on a computer, an iPad (tablet) and a phone.
 1. Also some users had trouble with the adding to cart returning you back to the top of the screen. With lag this can cause confusion as to what people have put in their cart. 
 1. Prices don’t look legitimate. For example, £0.70 was shown as £.70 
 1. Graphics at the top of each page should be half the size and have a scroll down indicator.
 1. Would like icy mountain graphics
-1. Site didn’t remember payment details
+1. Site did not remember payment details
 1. Final checkout button when purchasing should clarify that it needs to be pressed for the order to go through.
 1. Titles at the top of each page should be buttons.
 1. Add to cart button should redirect to shop page rather than checkout page.
