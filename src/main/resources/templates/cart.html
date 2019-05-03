@@ -150,7 +150,7 @@
                                             <form action="/cart/update" method="post">
                                                 <input type="hidden" name="id" th:value="${beer.getKey().id}"/>
                                                 Update: <br>
-                                                <input type="number" name="quantity" th:value="${beer.getValue()}" min="1" th:max="${beer.getKey().stock}"><span th:inline="text"> x £[[${#numbers.formatDecimal(beer.getKey().price, 0, 'COMMA', 2, 'POINT')}]]</span><br>
+                                                <input type="number" name="quantity" th:value="${beer.getValue()}" min="1" th:max="${beer.getKey().stock}"><span th:inline="text"> x £[[${#numbers.formatDecimal(beer.getKey().price, 1, 'COMMA', 2, 'POINT')}]]</span><br>
                                                 <button type="submit" class="btn btn-primary btns">
                                                     Update
                                                 </button>
@@ -187,8 +187,8 @@
                         <div class="probootstrap-card-heading mb0 wild-font">
                             <h3>SUMMARY</h3>
                         </div>
-                        <div class="summary-item"><span class="text">Subtotal: </span><span class="price" th:inline="text">£[[${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}]]</span></div>
-                        <div class="summary-item"><span class="text">Total: </span><span class="price" th:inline="text">£[[${#numbers.formatDecimal(total, 0, 'COMMA', 2, 'POINT')}]]</span></div>
+                        <div class="summary-item"><span class="text">Subtotal: </span><span class="price" th:inline="text">£[[${#numbers.formatDecimal(total, 1, 'COMMA', 2, 'POINT')}]]</span></div>
+                        <div class="summary-item"><span class="text">Total: </span><span class="price" th:inline="text">£[[${#numbers.formatDecimal(total, 1, 'COMMA', 2, 'POINT')}]]</span></div>
                         <form action="/cart/checkout" method="get">
                             <button type="submit" class="btn btn-default">Checkout</button>
                         </form>
